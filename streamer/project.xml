@@ -14,7 +14,7 @@
     </dependency>
     
      <dependency>
-      <groupId>geronimo</groupId>
+      <groupId>org.apache.geronimo.samples</groupId>
       <artifactId>daytrader-ejb</artifactId>
       <version>${pom.currentVersion}</version>
      <type>ejb</type>

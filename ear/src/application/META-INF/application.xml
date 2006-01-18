@@ -5,18 +5,18 @@
       <description>DayTrader Stock Trading Performance Benchmark Sample</description>
       <display-name>Trade</display-name>
       <module>
-         <java>daytrader-streamer-${daytrader_version}.jar</java>
+         <java>daytrader-streamer-${pom.currentVersion}.jar</java>
       </module>
       <module>
-         <java>daytrader-wsappclient-${daytrader_version}.jar</java>
+         <java>daytrader-wsappclient-${pom.currentVersion}.jar</java>
       </module>
       <module>
          <web>
-            <web-uri>daytrader-web-${daytrader_version}.war</web-uri>
+            <web-uri>daytrader-web-${pom.currentVersion}.war</web-uri>
             <context-root>/daytrader</context-root>
          </web>
       </module>
       <module>
-         <ejb>daytrader-ejb-${daytrader_version}.jar</ejb>
+         <ejb>daytrader-ejb-${pom.currentVersion}.jar</ejb>
       </module>
 </application>

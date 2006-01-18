@@ -9,7 +9,7 @@
   <description>Day Trader EJBs</description>
   <dependencies>
     <dependency>
-      <groupId>geronimo</groupId>
+      <groupId>org.apache.geronimo.samples</groupId>
       <artifactId>daytrader-wsappclient</artifactId>
       <version>${pom.currentVersion}</version>
     </dependency>
