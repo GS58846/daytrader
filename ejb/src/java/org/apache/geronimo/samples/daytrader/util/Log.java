@@ -28,6 +28,7 @@ public class Log {
 
 	public static void log(String message)
 	{
+        log.debug("DayTrader Log:" + new java.util.Date() + "------\n\t ");
 		log.debug(message);
 	}
 	public static void log(String msg1, String msg2)

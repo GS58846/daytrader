@@ -18,14 +18,14 @@
             <artifactId>log4j</artifactId>
             <version>${log4j_version}</version>
         </dependency>
-<!--        <dependency>
+        <dependency>
             <groupId>org.apache.geronimo.samples</groupId>
             <artifactId>daytrader-wsappclient</artifactId>
             <version>${pom.currentVersion}</version>
             <properties>
                 <ear.bundle>true</ear.bundle>
             </properties>
-        </dependency>  -->
+        </dependency>
         <dependency>
             <groupId>org.apache.geronimo.samples</groupId>
             <artifactId>daytrader-web</artifactId>
