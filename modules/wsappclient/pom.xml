@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.apache.geronimo.samples.daytrader</groupId>
+    <artifactId>daytrader</artifactId>
+    <version>1.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>daytrader-wsappclient</artifactId>
+  <name>DayTrader :: WS Application Client</name>
+  <packaging>jar</packaging>
+  <description>Client demonstrating Web Services</description>
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.geronimo.specs</groupId>
+      <artifactId>geronimo-j2ee_1.4_spec</artifactId>
+      <version>1.0</version>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-jar-plugin</artifactId>
+        <configuration>
+          <!-- Caveat: The wsappclient module currently has a cyclic dependency on the EJB module. Thus we are forced
+               to include a manual class-path entry pointing to the EJB module. When this is fixed
+               remove the manifestEntries section below and this comment. -->
+          <archive>
+            <manifestEntries>
+              <class-path>daytrader-ejb-${version}.jar</class-path>
+            </manifestEntries>
+            <manifest>
+              <main-class>org.apache.geronimo.samples.daytrader.client.ws.ClientApp</main-class>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+      <!-- Caveat: Need to be replaced with axis plugin by Jesse
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>wsdl2java-maven-plugin</artifactId>
+        <configuration>
+          <packageSpace>org.apache.geronimo.samples.daytrader.client.ws</packageSpace>
+	      <serverSide>true</serverSide>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>generate-sources</phase>
+	        <goals>
+	          <goal>generate</goal>
+  	        </goals>
+	      </execution>
+	    </executions>
+      </plugin>
+      -->
+    </plugins>
+  </build>
+</project>
