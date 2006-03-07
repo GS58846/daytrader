@@ -1,0 +1,74 @@
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.apache.geronimo.samples.daytrader</groupId>
+  <artifactId>daytrader</artifactId>
+  <name>DayTrader :: Performance Benchmark Sample</name>
+  <packaging>pom</packaging>
+  <version>1.1-SNAPSHOT</version>
+  <description>J2EE 1.4 Performance Benchmark Sample Application</description>
+  <inceptionYear>2005</inceptionYear>
+  <developers>
+    <developer>
+      <name>Matt Hogstrom</name>
+      <id>hogstrom</id>
+      <email>hogstrom@apache.org</email>
+      <organization>Apache Software Foundation</organization>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+      <timezone>+5</timezone>
+    </developer>
+    <developer>
+      <name>Vincent Massol</name>
+      <id>vmassol</id>
+      <email>vmassol@apache.org</email>
+      <organization>Apache Software Foundation</organization>
+      <roles>
+        <role>Build Engineer</role>
+      </roles>
+      <timezone>+1</timezone>
+    </developer>
+  </developers>
+  <contributors>
+    <contributor>
+      <name>Christopher Blythe</name>
+      <roles>
+        <role>Added code to improve stability and new features</role>
+      </roles>
+    </contributor>
+    <contributor>
+      <name>Stan Cox</name>
+      <roles>
+        <role>Original Developer</role>
+      </roles>
+      <timezone>+5</timezone>
+    </contributor>
+    <contributor>
+      <name>Andrew Spyker</name>
+      <roles>
+        <role>Added the WSAppClient</role>
+      </roles>
+      <timezone>+5</timezone>
+    </contributor>
+  </contributors>
+  <dependencies/>
+  <organization>
+    <name>Apache Software Foundation</name>
+    <url>http://www.apache.org/</url>
+  </organization>
+  <modules>
+    <module>modules/ejb</module>
+    <module>modules/web</module>
+    <module>modules/streamer</module>
+    <module>modules/wsappclient</module>
+    <module>modules/ear</module>
+  </modules>
+  <profiles>
+    <profile>
+      <id>test</id>
+      <modules>
+        <module>functional-tests</module>
+      </modules>
+    </profile>
+  </profiles>
+</project>
