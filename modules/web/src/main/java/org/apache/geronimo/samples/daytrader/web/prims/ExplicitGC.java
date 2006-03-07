@@ -86,11 +86,12 @@ public class ExplicitGC extends HttpServlet
 					+ "<br> Statistics before GC <br>"
 					+ "       Max Memory = " + maxMemoryBeforeGC + "<br>"
 					+ "      Free Memory = " + freeMemoryBeforeGC + "<br>"
+					+ "      Used Memory = " + (totalMemory - freeMemoryBeforeGC) + "<br>"
 					+ "<br> Statistics after GC <br>"
 					+ "       Max Memory = " + maxMemoryAfterGC + "<br>"
 					+ "      Free Memory = " + freeMemoryAfterGC + "<br>"
-					+ "      Used Memory = " + (totalMemory - freeMemoryAfterGC) + "<br>" +
-					+ " Total Time in GC = " + Float.toString(endTime - startTime / 1000) + "s"
+					+ "      Used Memory = " + (totalMemory - freeMemoryAfterGC) + "<br>"
+					+ " Total Time in GC = " + Float.toString((endTime - startTime) / 1000) + "s"
 					+ "</body></html>");
 		}
 		catch (Exception e)
