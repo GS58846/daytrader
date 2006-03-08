@@ -33,6 +33,24 @@
   <build>
     <plugins>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <configuration>
+          <filters>
+            <filter>${basedir}/src/main/webapp/WEB-INF/classes/build.properties</filter>
+          </filters>
+          <resources>
+            <resource implementation="org.apache.maven.model.Resource">
+              <filtering>true</filtering>
+              <directory>${basedir}/src/main/webapp/WEB-INF</directory>
+              <includes>
+                <include>web.xml</include>
+              </includes>
+            </resource>
+          </resources>
+        </configuration>
+      </plugin>
+      <plugin>
         <groupId>org.mortbay.jetty</groupId>
         <artifactId>maven-jetty6-plugin</artifactId>
         <configuration>
