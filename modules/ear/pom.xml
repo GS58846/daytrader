@@ -40,7 +40,7 @@
       <plugin>
         <artifactId>maven-ear-plugin</artifactId>
         <configuration>
-          <displayName>Trade</displayName>
+          <displayName>DayTrader 1.1</displayName>
           <description>DayTrader Stock Trading Performance Benchmark Sample</description>
           <version>1.4</version>
           <modules>
