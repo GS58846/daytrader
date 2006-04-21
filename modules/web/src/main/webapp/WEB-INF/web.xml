@@ -97,13 +97,13 @@
             <description>Sets the population of Trade users when driving
                 with TradeScenarioServlet.</description>
             <param-name>maxUsers</param-name>
-            <param-value>5</param-value>
+            <param-value>50</param-value>
          </init-param>
          <init-param>
             <description>Sets the population of Stock quotes used when
                 driving with TradeScenarioServlet.</description>
             <param-name>maxQuotes</param-name>
-            <param-value>10</param-value>
+            <param-value>100</param-value>
          </init-param>        
          <init-param>
             <description>Sets the number of iterations on web/ejb

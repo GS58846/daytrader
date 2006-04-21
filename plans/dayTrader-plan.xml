@@ -509,66 +509,6 @@
         </openejb-jar>
     </module>
 
-
-
-
-    <module>
-        <java>daytrader-streamer-1.1-SNAPSHOT.jar</java>
-        <application-client  xmlns="http://geronimo.apache.org/xml/ns/j2ee/application-client"
-            configId="foo"
-            clientConfigId="tradeStreamerAppclient">
-            <resource>
-                <!-- $MRH --> <external-rar>activemq/activemq-ra/3.2.1/rar</external-rar>
-                <connector xmlns="http://geronimo.apache.org/xml/ns/j2ee/connector"
-           configId="org/apache/geronimo/SystemJMS"
-           parentId="org/apache/geronimo/ActiveMQServer">
-                    <resourceadapter>
-                        <resourceadapter-instance>
-                            <resourceadapter-name>ActiveMQ RA</resourceadapter-name>
-                            <config-property-setting name="ServerUrl">tcp://localhost:61616</config-property-setting>
-                            <config-property-setting name="UserName">geronimo</config-property-setting>
-                            <config-property-setting name="Password">geronimo</config-property-setting>
-                            <workmanager>
-                                <gbean-link>DefaultWorkManager</gbean-link>
-                            </workmanager>
-                        </resourceadapter-instance>
-                        <outbound-resourceadapter>
-                            <connection-definition>
-                                <connectionfactory-interface>javax.jms.ConnectionFactory</connectionfactory-interface>
-                                <connectiondefinition-instance>
-                                    <name>jms/TopicConnectionFactory</name>
-                                    <implemented-interface>javax.jms.QueueConnectionFactory</implemented-interface>
-                                    <implemented-interface>javax.jms.TopicConnectionFactory</implemented-interface>
-                                    <connectionmanager>
-                                        <xa-transaction>
-                                            <transaction-caching/>
-                                        </xa-transaction>
-                                        <single-pool>
-                                            <max-size>10</max-size>
-                                            <blocking-timeout-milliseconds>5000</blocking-timeout-milliseconds>
-                                            <match-one/>
-                                        </single-pool>
-                                    </connectionmanager>
-                                </connectiondefinition-instance>
-                            </connection-definition>
-                        </outbound-resourceadapter>
-                    </resourceadapter>
-
-
-
-                    <adminobject>
-                        <adminobject-interface>javax.jms.Topic</adminobject-interface>
-                        <adminobject-class>org.codehaus.activemq.message.ActiveMQTopic</adminobject-class>
-                        <adminobject-instance>
-                            <message-destination-name>TradeStreamerTopic</message-destination-name>
-                            <config-property-setting name="PhysicalName">TradeStreamerTopic</config-property-setting>
-                        </adminobject-instance>
-                    </adminobject>
-
-                </connector>
-            </resource>
-        </application-client>
-    </module>
     <ext-module>
         <connector>TradeDataSource</connector>
         <external-path>tranql/tranql-connector-derby-embed-xa/1.1/rar</external-path>
@@ -593,7 +533,7 @@
                             <name>jdbc/TradeDataSource</name>
                             <config-property-setting name="UserName"></config-property-setting>
                             <config-property-setting name="Password"></config-property-setting>
-                            <config-property-setting name="DatabaseName">tradedb</config-property-setting>
+                            <config-property-setting name="DatabaseName">daytrader</config-property-setting>
                             <config-property-setting name="CreateDatabase">true</config-property-setting>
                             <connectionmanager>
                                 <xa-transaction>

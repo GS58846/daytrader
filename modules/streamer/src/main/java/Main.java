@@ -15,9 +15,11 @@
  *  limitations under the License.
  */
 
+/**
+ * Dummy Main module for Streamer client.
+ */
 public class Main {
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 	}
 
 	/* (non-Java-doc)

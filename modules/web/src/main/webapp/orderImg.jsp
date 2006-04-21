@@ -12,10 +12,12 @@
 <TABLE height="54">
   <TBODY>
     <TR>
-            <TD bgcolor="#8080c0" align="left" width="500" height="10" colspan="5"><FONT color="#ffffff"><B>Trade New Orders</B></FONT></TD>
-			<TD align="center" bgcolor="#ffffff" width="100" height="10"><IMG src="images/tradeLogo.gif" width="45" height="19" border="0"></TD>
+    			<TD bgcolor="#c93333" align="left" width="640" height="10" colspan=5><B><FONT
+				color="#ffffff">DayTrader New Orders</FONT></B></TD>
+			<TD align="center" bgcolor="#ffffff" width="100" height="10">
+			    <IMG src="images/spacer.gif" width="45" height="19" border="0"></TD>
 		</TR>
-        <TR align="center">
+        <TR align="left">
             <TD><A href="app?action=home"><IMG src="images/home.gif" width="80" height="20" border="0"></A></TD>
             <TD><A href="app?action=account"><IMG src="images/account.gif" width="80" height="20" border="0"></A></TD>
             <TD><B><A href="app?action=portfolio"><IMG src="images/portfolio.gif" width="80" height="20" border="0"></A> </B></TD>
@@ -158,15 +160,10 @@ if ( (closedOrders != null) && (closedOrders.size()>0) )
             </TD>
         </TR>
         <TR>
-            <TD bgcolor="#8080c0" align="left" width="500" height="10"><B><FONT color="#ffffff">Trade New Orders</FONT></B></TD>
-			<TD align="center" bgcolor="#ffffff" width="100" height="10"><IMG src="images/tradeLogo.gif" width="45" height="19" border="0"></TD>
-		</TR>
-        <TR>
-            <TD colspan="2" align="center">Apache Geronimo Performance Benchmark Sample DayTrader<BR>
-Copyright 2005, Apache Software Foundation</TD>
-                        <IMG src="images/GLogo_450x50.gif" width="150" height="21" border="0"><BR>
-			<BR>
-			<IMG src="images/ticker-anim.gif" width="385" height="22" border="0" align="middle"></TD>
+    			<TD bgcolor="#c93333" align="left" width="640" height="10"><B><FONT
+				color="#ffffff">DayTrader New Orders</FONT></B></TD>
+			<TD align="center" bgcolor="#ffffff" width="100" height="10">
+			    <IMG src="images/spacer.gif" width="45" height="19" border="0"></TD>
 		</TR>
     </TBODY>
 </TABLE>

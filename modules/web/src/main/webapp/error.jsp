@@ -5,8 +5,10 @@
 <TABLE>
   <TBODY>
     <TR>
-            <TD bgcolor="#ff0000" align="left" width="500" colspan="5" height="10"><FONT color="#ffffff"><B>Trade Error</B></FONT></TD>
-            <TD align="center" bgcolor="#000000" width="100" height="10"><FONT color="#ffffff"><B>Trade</B></FONT></TD>
+			<TD bgcolor="#c93333" align="left" width="640" height="10"><B><FONT
+				color="#ffffff">DayTrader Error</FONT></B></TD>
+			<TD align="center" bgcolor="#000000" width="100" height="10"><FONT
+				color="#ffffff"><B>DayTrader</B></FONT></TD>
         </TR>
 
 </TABLE>
@@ -22,9 +24,9 @@
         </TR>
     <TR>
             <TD bgcolor="#e7e4e7" rowspan="4" width="3"></TD>
-            <TD><B><FONT color="#000000">An Error has occured during Trade processing</FONT><FONT size="-2">.</FONT></B><BR>
+            <TD><B><FONT color="#000000">An Error has occured during DayTrader processing</FONT><FONT size="-2">.</FONT></B><BR>
             The stack trace detailing the error follows.
-            <p><b>Please consult the application server error logs (SystemOut.log/SystemErr.log/FFDC) for further details.</b></p>
+            <p><b>Please consult the application server error logs for further details.</b></p>
             </TD>
             <TD bgcolor="#e7e4e7" width="3" rowspan="4"></TD>
         </TR>
@@ -98,8 +100,10 @@
 <TABLE>
   <TBODY>
     <TR>
-            <TD bgcolor="#ff0000" align="left" width="500" colspan="5" height="10"><FONT color="#ffffff"><B>Trade Error</B></FONT></TD>
-            <TD align="center" bgcolor="#000000" width="100" height="10"><FONT color="#ffffff"><B>Trade</B></FONT></TD>
+			<TD bgcolor="#c93333" align="left" width="640" height="10"><B><FONT
+				color="#ffffff">DayTrader Error</FONT></B></TD>
+			<TD align="center" bgcolor="#000000" width="100" height="10"><FONT
+				color="#ffffff"><B>DayTrader</B></FONT></TD>
         </TR>
     </TBODY>
 </TABLE>

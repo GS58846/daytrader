@@ -26,7 +26,7 @@ import java.io.IOException;
 import org.apache.geronimo.samples.daytrader.*;
 
 /**
- * TradeConfigServlet provides a servlet interface to adjust Trade runtime parameters.
+ * TradeConfigServlet provides a servlet interface to adjust DayTrader runtime parameters.
  * TradeConfigServlet updates values in the {@link org.apache.geronimo.samples.daytrader.web.TradeConfig} JavaBean holding 
  * all configuration and runtime parameters for the Trade application
  *
@@ -334,13 +334,13 @@ public class TradeConfigServlet extends HttpServlet {
 			action = req.getParameter("action");
 			if (action == null)
 			{
-				doConfigDisplay(req, resp, result + "Current Trade Configuration:");
+				doConfigDisplay(req, resp, result + "<b><br>Current DayTrader Configuration:</br></b>");
 				return;
 			}
 			else if (action.equals("updateConfig"))
 			{
 				doConfigUpdate(req, resp);
-				result = "<B><BR>Trade Configuration Updated</BR></B>";
+				result = "<B><BR>DayTrader Configuration Updated</BR></B>";
 			}
 			else if (action.equals("resetTrade"))
 			{
@@ -351,9 +351,9 @@ public class TradeConfigServlet extends HttpServlet {
 			{
 				resp.setContentType("text/html");
                                 new TradeBuildDB(resp.getWriter());
-				result = "Trade Database Built - " + TradeConfig.getMAX_USERS() + "users created";
+				result = "DayTrader Database Built - " + TradeConfig.getMAX_USERS() + "users created";
 			}
-			doConfigDisplay(req, resp, result + "Current Trade Configuration:");
+			doConfigDisplay(req, resp, result + "Current DayTrader Configuration:");
 		}
 		catch (Exception e)
 		{

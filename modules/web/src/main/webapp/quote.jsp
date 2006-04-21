@@ -12,10 +12,12 @@
 <TABLE height="54">
   <TBODY>
     <TR>
-            <TD bgcolor="#8080c0" align="left" width="500" height="10" colspan="5"><FONT color="#ffffff"><B>Trade Quotes</B></FONT></TD>
-            <TD align="center" bgcolor="#000000" width="100" height="10"><FONT color="#ffffff"><B>Trade</B></FONT></TD>
+			<TD bgcolor="#c93333" align="left" width="640" height="10" colspan=5><B><FONT
+				color="#ffffff">DayTrader Quotes</FONT></B></TD>
+			<TD align="center" bgcolor="#000000" width="100" height="10"><FONT
+				color="#ffffff"><B>DayTrader</B></FONT></TD>
         </TR>
-        <TR align="center">
+        <TR align="left">
             <TD><B><A href="app?action=home">Home</A></B><B> </B></TD>
             <TD><B><A href="app?action=account">Account</A></B><B> </B></TD>
             <TD><B><A href="app?action=portfolio">Portfolio</A></B><B> </B></TD>
@@ -154,12 +156,10 @@ while (st.hasMoreElements())
             </TD>
         </TR>
         <TR>
-            <TD bgcolor="#8080c0" align="left" width="500" height="10"><B><FONT color="#ffffff">Trade Quotes</FONT></B></TD>
-            <TD align="center" bgcolor="#000000" width="100" height="10"><FONT color="#ffffff"><B>Trade</B></FONT></TD>
-        </TR>
-        <TR>
-            <TD colspan="2" align="center">Apache Geronimo Performance Benchmark Sample DayTrader<BR>
-Copyright 2005, Apache Software Foundation</TD>
+			<TD bgcolor="#c93333" align="left" width="640" height="10"><B><FONT
+				color="#ffffff">DayTrader Quotes</FONT></B></TD>
+			<TD align="center" bgcolor="#000000" width="100" height="10"><FONT
+				color="#ffffff"><B>DayTrader</B></FONT></TD>
         </TR>
     </TBODY>
 </TABLE>

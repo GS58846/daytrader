@@ -1130,9 +1130,9 @@ public class TradeBean implements SessionBean {
 			try
 			{
 				qConnFactory = (ConnectionFactory) ic.lookup("java:comp/env/jms/QueueConnectionFactory");
-				queue = (Queue) ic.lookup("java:comp/env/jms/TradeBrokerQueue");
-				tConnFactory = (ConnectionFactory) ic.lookup("java:comp/env/jms/TopicConnectionFactory");
+                 tConnFactory = (ConnectionFactory) ic.lookup("java:comp/env/jms/TopicConnectionFactory");
 				streamerTopic = (Topic) ic.lookup("java:comp/env/jms/TradeStreamerTopic");
+                 queue = (Queue) ic.lookup("java:comp/env/jms/TradeBrokerQueue");
 			}
 			catch (Exception e)
 			{

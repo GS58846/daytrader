@@ -14,7 +14,7 @@
       <email>hogstrom@apache.org</email>
       <organization>Apache Software Foundation</organization>
       <roles>
-        <role>Java Developer</role>
+        <role>Performance Analysis</role>
       </roles>
       <timezone>+5</timezone>
     </developer>
@@ -63,6 +63,48 @@
     <module>modules/wsappclient</module>
     <module>modules/ear</module>
   </modules>
+  <dependencyManagement>
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.geronimo.samples.daytrader</groupId>
+      <artifactId>daytrader-wsappclient</artifactId>
+      <version>1.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.geronimo.samples.daytrader</groupId>
+      <artifactId>daytrader-streamer</artifactId>
+      <version>1.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.geronimo.specs</groupId>
+      <artifactId>geronimo-j2ee_1.4_spec</artifactId>
+      <version>1.0</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>1.0.3</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.geronimo.samples.daytrader</groupId>
+      <artifactId>daytrader-ejb</artifactId>
+      <version>1.1-SNAPSHOT</version>
+      <type>ejb</type>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.geronimo.samples.daytrader</groupId>
+      <artifactId>daytrader-web</artifactId>
+      <version>1.1-SNAPSHOT</version>
+      <type>war</type>
+    </dependency>
+  </dependencies>
+  </dependencyManagement>
   <profiles>
     <profile>
       <id>test</id>

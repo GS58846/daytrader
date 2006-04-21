@@ -1427,7 +1427,7 @@ public class TradeDirect implements TradeServices
 
 			conn = getConn();
 
-			quoteData = getQuoteForUpdate(conn, symbol);		
+			quoteData = getQuoteForUpdate(conn, symbol);
 			BigDecimal oldPrice = quoteData.getPrice();
 			double newVolume = quoteData.getVolume() + sharesTraded;
 
@@ -2238,28 +2238,65 @@ public class TradeDirect implements TradeServices
 				Log.trace("TradeDirect: init");			
 			context = new InitialContext();
 			datasource = (DataSource) context.lookup(dsName);			
+        }
+        catch (Exception e)
+        {
+            Log.error("TradeDirect:init -- error on JNDI lookups of DataSource -- TradeDirect will not work", e);
+            return;
+        }           
 			
-			tradeHome = (TradeHome) ( javax.rmi.PortableRemoteObject.narrow(
+		try {
+
+             tradeHome = (TradeHome) ( javax.rmi.PortableRemoteObject.narrow(
 			context.lookup("java:comp/env/ejb/Trade"), TradeHome.class));
-			
-		}
-		catch (Exception e)
-		{
-			Log.error("TradeDirect:init -- error on JNDI lookups of DataSource -- TradeDirect will not work", e);
-			return;
-		}			
-		try
-		{
-			qConnFactory = (ConnectionFactory) context.lookup("java:comp/env/jms/QueueConnectionFactory");
-			queue = (Queue) context.lookup("java:comp/env/jms/TradeBrokerQueue");
-			tConnFactory = (ConnectionFactory) context.lookup("java:comp/env/jms/TopicConnectionFactory");
-			streamerTopic = (Topic) context.lookup("java:comp/env/jms/TradeStreamerTopic");
-		}
-		catch (Exception e)
-		{
-			Log.error("TradeDirect:init  Unable to lookup JMS Resources\n\t -- Asynchronous mode will not work correctly and Quote Price change publishing will be disabled",e);
-			publishQuotePriceChange = false;			
-		}		
+        }
+        catch (Exception e)
+        {
+            Log.error("TradeDirect:init -- error on JNDI lookup of Trade Session Bean -- TradeDirect will not work", e);
+            return;
+        }           
+        
+        try
+        {
+            qConnFactory = (ConnectionFactory) context.lookup("java:comp/env/jms/QueueConnectionFactory");
+        }
+        catch (Exception e)
+        {
+            Log.error("TradeDirect:init  Unable to locate QueueConnectionFactory.\n\t -- Asynchronous mode will not work correctly and Quote Price change publishing will be disabled");
+            publishQuotePriceChange = false;            
+        }       
+        
+        try
+        {
+            queue = (Queue) context.lookup("java:comp/env/jms/TradeBrokerQueue");
+        }
+        catch (Exception e)
+        {
+            Log.error("TradeDirect:init  Unable to locate TradeBrokerQueue.\n\t -- Asynchronous mode will not work correctly and Quote Price change publishing will be disabled");
+            publishQuotePriceChange = false;            
+        }       
+        
+        try
+        {
+            tConnFactory = (ConnectionFactory) context.lookup("java:comp/env/jms/TopicConnectionFactory");
+        }
+        catch (Exception e)
+        {
+            Log.error("TradeDirect:init  Unable to locate TopicConnectionFactory.\n\t -- Asynchronous mode will not work correctly and Quote Price change publishing will be disabled");
+            publishQuotePriceChange = false;            
+        }
+        
+        try
+        {
+            streamerTopic = (Topic) context.lookup("java:comp/env/jms/TradeStreamerTopic");
+        }
+        catch (Exception e)
+        {
+            Log.error("TradeDirect:init  Unable to locate TradeStreamerTopic.\n\t -- Asynchronous mode will not work correctly and Quote Price change publishing will be disabled");
+            publishQuotePriceChange = false;            
+        }       
+        
+        
 		try
 		{
 			tradeEJB = (Trade) tradeHome.create();					
