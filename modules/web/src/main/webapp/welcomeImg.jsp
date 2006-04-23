@@ -19,8 +19,7 @@
 <TABLE width="617" height="30">
 	<TBODY>
 		<TR>
-			<TD><IMG src="images/GLogo_450x50.gif" width="150" height="21"
-				border="0" alt=""></TD>
+			<TD width="150" height="21"></TD>
 			<TD><FONT color="#ff0033"><FONT color="#ff0033"><FONT color="#ff0033"><% String results;
 results = (String) request.getAttribute("results");
 if ( results != null )out.print(results);

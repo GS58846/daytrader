@@ -26,7 +26,7 @@ String results =   (String) request.getAttribute ( "results" );
 		</TR>
 	</TBODY>
 </TABLE>
-<TABLE width="610" height="30">
+<TABLE width="740" height="30">
 	<TBODY>
 		<TR>
 			<TD align="center"></TD>
@@ -36,7 +36,7 @@ String results =   (String) request.getAttribute ( "results" );
 		</TR>
 	</TBODY>
 </TABLE>
-<TABLE width="90%">
+<TABLE width="665">
 	<TBODY>
 		<TR>
 			<TD width="2%" bgcolor="#e7e4e7"></TD>
@@ -47,7 +47,7 @@ String results =   (String) request.getAttribute ( "results" );
 	</TBODY>
 </TABLE>
 <FORM action="app">
-<TABLE width="90%">
+<TABLE width="665">
 	<TBODY align="right">
 		<TR>
 			<TD width="2%" bgcolor="#e7e4e7" rowspan="11"></TD>
