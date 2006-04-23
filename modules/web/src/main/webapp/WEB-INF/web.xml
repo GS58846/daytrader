@@ -419,13 +419,13 @@
          <message-destination-ref-name>jms/TradeBrokerQueue</message-destination-ref-name>
          <message-destination-type>javax.jms.Queue</message-destination-type>
          <message-destination-usage>Produces</message-destination-usage>
-         <message-destination-link>daytrader-ejb-1.1-SNAPSHOT.jar#TradeBrokerQueue</message-destination-link>
+         <message-destination-link>ejb.jar#TradeBrokerQueue</message-destination-link>
       </message-destination-ref>
       <message-destination-ref>
          <message-destination-ref-name>jms/TradeStreamerTopic</message-destination-ref-name>
          <message-destination-type>javax.jms.Topic</message-destination-type>
          <message-destination-usage>Produces</message-destination-usage>
-         <message-destination-link>daytrader-ejb-1.1-SNAPSHOT.jar#TradeStreamerTopic</message-destination-link>
+         <message-destination-link>ejb.jar#TradeStreamerTopic</message-destination-link>
       </message-destination-ref>
       <service-ref>
         <description>WSDL Service Trade</description>

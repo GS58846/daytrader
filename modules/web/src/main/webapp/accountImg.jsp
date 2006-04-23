@@ -27,7 +27,7 @@
 				color="#ffffff"><B>DayTrader</B></FONT></TD>
 		</TR>
 		<TR align="left">
-			<TD><A href="app?action=home"><IMG src="images/home.gif" width="80"
+			<TD><A href="app?action=home"><IMG src="images/menuHome.gif" width="80"
 				height="20" border="0" alt=""></A></TD>
 			<TD><A href="app?action=account"><IMG src="images/account.gif"
 				width="80" height="20" border="0" alt=""></A></TD>
