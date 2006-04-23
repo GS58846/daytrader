@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.apache.geronimo.samples.daytrader</groupId>
@@ -40,34 +42,6 @@
 				<configuration>
 					<generateClient>true</generateClient>
 				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.cargo</groupId>
-				<artifactId>cargo-maven2-plugin</artifactId>
-				<configuration>
-					<container>
-						<containerId>jboss4x</containerId>
-						<zipUrlInstaller>
-							<url>
-								http://internap.dl.sourceforge.net/sourceforge/jboss/jboss-4.0.2.zip
-							</url>
-							<installDir>
-								${java.io.tmpdir}/cargo-installs
-							</installDir>
-						</zipUrlInstaller>
-					</container>
-					<configuration>
-						<dir>${project.build.directory}/jboss</dir>
-					</configuration>
-				</configuration>
-				<!-- Configuration to do hot deployment to a running JBoss container
-					<configuration>
-					<container>
-					<containerId>jboss4x</containerId>
-					<type>remote</type>
-					</container>
-					</configuration>
-				-->
 			</plugin>
 		</plugins>
 	</build>

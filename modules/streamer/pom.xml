@@ -34,8 +34,11 @@
         <artifactId>maven-jar-plugin</artifactId>
         <configuration>
           <archive>
+            <manifestEntries>
+              <class-path>ejb.jar</class-path>
+            </manifestEntries>
             <manifest>
-              <addClasspath>true</addClasspath>
+<!--              <addClasspath>true</addClasspath>  -->
               <main-class>org.apache.geronimo.samples.daytrader.client.TradeClient</main-class>
             </manifest>
           </archive>

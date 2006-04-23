@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-	     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
-                             http://maven.apache.org/maven-v4_0_0.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.apache.geronimo.samples.daytrader</groupId>
@@ -54,6 +53,34 @@
 							${basedir}/src/main/webapp/WEB-INF/classes/build.properties
 						</filter>
 					</filters>
+					<ejbModule>
+						<groupId>
+							org.apache.geronimo.samples.daytrader
+						</groupId>
+						<artifactId>daytrader-ejb</artifactId>
+						<bundleFileName>ejb.jar</bundleFileName>
+					</ejbModule>
+					<javaModule>
+						<groupId>
+							org.apache.geronimo.samples.daytrader
+						</groupId>
+						<artifactId>daytrader-streamer</artifactId>
+						<bundleFileName>
+							streamer.jar
+						</bundleFileName>
+					</javaModule>
+					<javaModule>
+						<groupId>
+							org.apache.geronimo.samples.daytrader
+						</groupId>
+						<artifactId>
+							daytrader-wsappclient
+						</artifactId>
+						<bundleFileName>
+							wsappclient.jar
+						</bundleFileName>
+					</javaModule>
+					
 					<resources>
 						<resource
 							implementation="org.apache.maven.model.Resource">
@@ -66,33 +93,6 @@
 							</includes>
 						</resource>
 					</resources>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.mortbay.jetty</groupId>
-				<artifactId>maven-jetty6-plugin</artifactId>
-				<configuration>
-					<scanIntervalSeconds>10</scanIntervalSeconds>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.cargo</groupId>
-				<artifactId>cargo-maven2-plugin</artifactId>
-				<configuration>
-					<container>
-						<containerId>tomcat5x</containerId>
-						<zipUrlInstaller>
-							<url>
-								http://www.apache.org/dist/jakarta/tomcat-5/v5.0.30/bin/jakarta-tomcat-5.0.30.zip
-							</url>
-							<installDir>
-								${java.io.tmpdir}/cargo-installs
-							</installDir>
-						</zipUrlInstaller>
-					</container>
-					<configuration>
-						<dir>${project.build.directory}/tomcat</dir>
-					</configuration>
 				</configuration>
 			</plugin>
 		</plugins>
