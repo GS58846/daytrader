@@ -35,7 +35,7 @@
         <configuration>
           <archive>
             <manifestEntries>
-              <class-path>ejb.jar</class-path>
+              <class-path>dt-ejb.jar</class-path>
             </manifestEntries>
             <manifest>
 <!--              <addClasspath>true</addClasspath>  -->

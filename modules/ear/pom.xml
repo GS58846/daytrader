@@ -60,7 +60,7 @@
 								geronimo
 							</groupId>
 							<artifactId>daytrader-ejb</artifactId>
-							<bundleFileName>ejb.jar</bundleFileName>
+							<bundleFileName>dt-ejb.jar</bundleFileName>
 						</ejbModule>
 						<javaModule>
 							<groupId>
