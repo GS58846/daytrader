@@ -13,6 +13,11 @@
 	<name>DayTrader :: Web Application</name>
 	<packaging>war</packaging>
 	<description>Daytrader Web</description>
+  <scm>
+    <connection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/modules/web</connection>
+    <developerConnection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/modules/web</developerConnection>
+    <url>http://svn.apache.org/viewcvs.cgi/geronimo/daytrader/trunk/modules/web</url>
+  </scm>
 	<dependencies>
 		<dependency>
 			<groupId>geronimo</groupId>

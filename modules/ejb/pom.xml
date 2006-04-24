@@ -13,6 +13,11 @@
 	<name>DayTrader :: EJBs</name>
 	<packaging>ejb</packaging>
 	<description>Daytrader EJBs</description>
+  <scm>
+    <connection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/modules/ejb</connection>
+    <developerConnection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/modules/ejb</developerConnection>
+    <url>http://svn.apache.org/viewcvs.cgi/geronimo/daytrader/trunk/modules/ejb</url>
+  </scm>
 	<dependencies>
 		<dependency>
 			<groupId>geronimo</groupId>

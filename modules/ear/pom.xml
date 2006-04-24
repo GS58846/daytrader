@@ -13,6 +13,11 @@
 	<name>DayTrader :: Enterprise Application</name>
 	<packaging>ear</packaging>
 	<description>Daytrader EAR</description>
+  <scm>
+    <connection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/modules/ear</connection>
+    <developerConnection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/modules/ear</developerConnection>
+    <url>http://svn.apache.org/viewcvs.cgi/geronimo/daytrader/trunk/modules/ear</url>
+  </scm>
 	<dependencies>
 		<dependency>
 			<groupId>geronimo</groupId>

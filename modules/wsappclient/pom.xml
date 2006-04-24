@@ -14,6 +14,11 @@
   <name>DayTrader :: WS Application Client</name>
   <packaging>jar</packaging>
   <description>Client demonstrating Web Services</description>
+  <scm>
+    <connection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/modules/wsappclient</connection>
+    <developerConnection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/modules/wsappclient</developerConnection>
+    <url>http://svn.apache.org/viewcvs.cgi/geronimo/daytrader/trunk/modules/wsappclient</url>
+  </scm>
   <dependencies>
     <dependency>
       <groupId>org.apache.geronimo.specs</groupId>
