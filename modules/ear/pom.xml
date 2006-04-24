@@ -96,12 +96,7 @@
           <execution>
             <goals>
               <goal>install-maven-one-repository</goal>
-              <goal>deploy-maven-one-repository</goal>
             </goals>
-            <configuration>
-              <remoteRepositoryId>geronimo</remoteRepositoryId>
-              <remoteRepositoryUrl>/Users/hogstrom/.maven/repository</remoteRepositoryUrl>
-            </configuration>
           </execution>
         </executions>
       </plugin>
