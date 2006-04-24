@@ -5,7 +5,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>org.apache.geronimo.samples.daytrader</groupId>
+		<groupId>geronimo</groupId>
 		<artifactId>daytrader</artifactId>
 		<version>1.1-SNAPSHOT</version>
 	</parent>
@@ -15,23 +15,23 @@
 	<description>Daytrader Web</description>
 	<dependencies>
 		<dependency>
-			<groupId>org.apache.geronimo.samples.daytrader</groupId>
+			<groupId>geronimo</groupId>
 			<artifactId>daytrader-ejb</artifactId>
 			<scope>provided</scope>
 			<type>ejb</type>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.geronimo.samples.daytrader</groupId>
+			<groupId>geronimo</groupId>
 			<artifactId>daytrader-wsappclient</artifactId>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.geronimo.samples.daytrader</groupId>
+			<groupId>geronimo</groupId>
 			<artifactId>daytrader-streamer</artifactId>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.geronimo.samples.daytrader</groupId>
+			<groupId>geronimo</groupId>
 			<artifactId>daytrader-ejb</artifactId>
 			<scope>provided</scope>
 			<type>ejb</type>
@@ -55,14 +55,14 @@
 					</filters>
 					<ejbModule>
 						<groupId>
-							org.apache.geronimo.samples.daytrader
+							geronimo
 						</groupId>
 						<artifactId>daytrader-ejb</artifactId>
 						<bundleFileName>ejb.jar</bundleFileName>
 					</ejbModule>
 					<javaModule>
 						<groupId>
-							org.apache.geronimo.samples.daytrader
+							geronimo
 						</groupId>
 						<artifactId>daytrader-streamer</artifactId>
 						<bundleFileName>
@@ -71,7 +71,7 @@
 					</javaModule>
 					<javaModule>
 						<groupId>
-							org.apache.geronimo.samples.daytrader
+							geronimo
 						</groupId>
 						<artifactId>
 							daytrader-wsappclient
