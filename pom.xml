@@ -6,6 +6,21 @@
   <packaging>pom</packaging>
   <version>1.1-SNAPSHOT</version>
   <description>J2EE 1.4 Performance Benchmark Sample Application</description>
+  <issueManagement>
+    <system>jira</system>
+    <url>http://issues.apache.org/jira/browse/GERONIMO</url>
+  </issueManagement>
+  <ciManagement>
+    <system>continuum</system>
+    <url>http://ci.gbuild.org/continuum</url>
+    <notifiers>
+      <notifier>
+        <configuration>
+          <address>scm@geronimo.apache.org</address>
+        </configuration>
+      </notifier>
+    </notifiers>
+  </ciManagement>
   <inceptionYear>2005</inceptionYear>
   <developers>
     <developer>
@@ -52,6 +67,11 @@
     </contributor>
   </contributors>
   <dependencies/>
+  <scm>
+    <connection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/</connection>
+    <developerConnection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/</developerConnection>
+    <url>http://svn.apache.org/viewcvs.cgi/geronimo/gbuild/trunk/</url>
+  </scm>
   <organization>
     <name>Apache Software Foundation</name>
     <url>http://www.apache.org/</url>
