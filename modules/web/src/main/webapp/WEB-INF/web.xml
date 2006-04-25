@@ -243,6 +243,9 @@
          <servlet-name>org_apache_geronimo_samples_daytrader_TradeWSAction</servlet-name>
          <servlet-class>org.apache.geronimo.samples.daytrader.TradeWSAction</servlet-class>
       </servlet>                  
+
+      <!-- [INSERT FRAGMENT HERE] -->
+
       <servlet-mapping>
          <servlet-name>TradeAppServlet</servlet-name>
          <url-pattern>/app</url-pattern>

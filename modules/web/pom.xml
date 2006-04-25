@@ -46,13 +46,39 @@
 			<artifactId>geronimo-j2ee_1.4_spec</artifactId>
 			<scope>provided</scope>
 		</dependency>
+        <dependency>
+            <groupId>taglibs</groupId>
+            <artifactId>standard</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>jspc-maven-plugin</artifactId>
+            <version>1.4.4</version>
+			<scope>provided</scope>
+        </dependency>
 	</dependencies>
 	<build>
 		<plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>jspc-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>jspc</id>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <configuration>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<configuration>
+                  <webXml>${basedir}/target/jspweb.xml</webXml>
 					<filters>
 						<filter>
 							${basedir}/src/main/webapp/WEB-INF/classes/build.properties
