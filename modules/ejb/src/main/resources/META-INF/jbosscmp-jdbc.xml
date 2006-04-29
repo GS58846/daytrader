@@ -4,7 +4,7 @@
 <jbosscmp-jdbc>
    <defaults>
    <datasource>jdbc/TradeDataSource</datasource>
-   <datasource-mapping>DB2</datasource-mapping>
+   <datasource-mapping>${jboss.mapping}</datasource-mapping>
    </defaults>
 
    <enterprise-beans>

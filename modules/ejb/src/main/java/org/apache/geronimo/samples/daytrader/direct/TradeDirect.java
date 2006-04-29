@@ -1852,7 +1852,7 @@ public class TradeDirect implements TradeServices
             rowCount = stmt.executeUpdate();
             stmt.close();
             
-            stmt = getStatement(conn, "delete from accountejb where accountejb.accountid in (select accountid from accountejb a where a.profile_userid like 'ru:%')");
+            stmt = getStatement(conn, "delete from accountejb where profile_userid like 'ru:%'");
             int newUserCount = stmt.executeUpdate();
             runStatsData.setNewUserCount(newUserCount);
             stmt.close();           
@@ -2093,17 +2093,17 @@ public class TradeDirect implements TradeServices
 
 	private static final String createAccountSQL =
 		"insert into accountejb " +
-		"( accountID, creationDate, openBalance, balance, lastLogin, loginCount, logoutCount, profile_userid) " +
+		"( accountid, creationDate, openBalance, balance, lastLogin, loginCount, logoutCount, profile_userid) " +
 		"VALUES (  ?  ,  ?  ,  ?  ,  ?  ,  ?  ,  ?  ,  ?  ,  ?  )";
 
 	private static final String createAccountProfileSQL =
 		"insert into accountprofileejb " +
-		"( userID, password, fullname, address, email, creditcard ) " +
+		"( userid, password, fullname, address, email, creditcard ) " +
 		"VALUES (  ?  ,  ?  ,  ?  ,  ?  ,  ?  ,  ?  )";
 
 	private static final String createHoldingSQL  = 
 		"insert into holdingejb " +
-		"( holdingID, purchaseDate, purchasePrice, quantity, quote_symbol, account_accountid ) " +
+		"( holdingid, purchaseDate, purchasePrice, quantity, quote_symbol, account_accountid ) " +
 		"VALUES (  ?  ,  ?  ,  ?  ,  ?  ,  ?  ,  ? )";
 
 	private static final String createOrderSQL = 
@@ -2112,7 +2112,7 @@ public class TradeDirect implements TradeServices
 		"VALUES (  ?  ,  ?  ,  ?  ,  ?  ,  ?  ,  ?  ,  ?  , ? , ? , ?)";
 
 	private static final String removeHoldingSQL  = 
-		"delete from holdingejb where holdingID = ?";
+		"delete from holdingejb where holdingid = ?";
 
 	private static final String removeHoldingFromOrderSQL  = 		
 		"update orderejb set holding_holdingid=null where holding_holdingid = ?";
@@ -2125,17 +2125,17 @@ public class TradeDirect implements TradeServices
 
 	private final static String loginSQL=
 		"update accountejb set lastLogin=?, logincount=logincount+1 " +
-		"where profile_userID=?";
+		"where profile_userid=?";
 
 	private static final String logoutSQL = 
 		"update accountejb set logoutcount=logoutcount+1 " +
 		"where profile_userid=?";
 	
 	private static final String getAccountSQL  = 
-		"select * from accountEJB a where a.accountid = ?";
+		"select * from accountejb a where a.accountid = ?";
 
 	private static final String getAccountForUpdateSQL  = 
-		"select * from accountEJB a where a.accountid = ? For Update";
+		"select * from accountejb a where a.accountid = ? for update";
 
 	private final static String getAccountProfileSQL = 
 		"select * from accountprofileejb ap where ap.userid = " + 
@@ -2143,15 +2143,15 @@ public class TradeDirect implements TradeServices
 
 	private final static String getAccountProfileForAccountSQL = 
 		"select * from accountprofileejb ap where ap.userid = " + 
-		"(select profile_userid from accountejb a where a.accountID=?)";
+		"(select profile_userid from accountejb a where a.accountid=?)";
 
 	private static final String getAccountForUserSQL  = 
-		"select * from accountEJB a where a.profile_userid = " +
+		"select * from accountejb a where a.profile_userid = " +
 		"( select userid from accountprofileejb ap where ap.userid = ?)";
 
 	private static final String getAccountForUserForUpdateSQL  = 
-		"select * from accountEJB a where a.profile_userid = " +
-		"( select userid from accountprofileejb ap where ap.userid = ?) For Update";
+		"select * from accountejb a where a.profile_userid = " +
+		"( select userid from accountprofileejb ap where ap.userid = ?) for update";
 
 	private static final String getHoldingSQL  = 
 		"select * from holdingejb h where h.holdingid = ?";

@@ -28,18 +28,12 @@
 		<dependency>
 			<groupId>geronimo</groupId>
 			<artifactId>daytrader-wsappclient</artifactId>
-			<scope>compile</scope>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>geronimo</groupId>
 			<artifactId>daytrader-streamer</artifactId>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>geronimo</groupId>
-			<artifactId>daytrader-ejb</artifactId>
 			<scope>provided</scope>
-			<type>ejb</type>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.geronimo.specs</groupId>
@@ -84,33 +78,11 @@
 							${basedir}/src/main/webapp/WEB-INF/classes/build.properties
 						</filter>
 					</filters>
-					<ejbModule>
-						<groupId>
-							geronimo
-						</groupId>
-						<artifactId>daytrader-ejb</artifactId>
-						<bundleFileName>dt-ejb.jar</bundleFileName>
-					</ejbModule>
-					<javaModule>
-						<groupId>
-							geronimo
-						</groupId>
-						<artifactId>daytrader-streamer</artifactId>
-						<bundleFileName>
-							streamer.jar
-						</bundleFileName>
-					</javaModule>
-					<javaModule>
-						<groupId>
-							geronimo
-						</groupId>
-						<artifactId>
-							daytrader-wsappclient
-						</artifactId>
-						<bundleFileName>
-							wsappclient.jar
-						</bundleFileName>
-					</javaModule>
+                    <archive>
+                        <manifestEntries>
+                            <Classpath>dt-ejb.jar streamer.jar wsappclient.jar</Classpath>
+                        </manifestEntries> 
+                    </archive>
 					
 					<resources>
 						<resource

@@ -1,85 +1,85 @@
---DROP TABLE HOLDINGEJB;
---DROP TABLE ACCOUNTPROFILEEJB;
---DROP TABLE QUOTEEJB;
---DROP TABLE KEYGENEJB;
---DROP TABLE ACCOUNTEJB;
---DROP TABLE ORDEREJB;
+--drop table holdingejb;
+--drop table accountprofileejb;
+--drop table quoteejb;
+--drop table keygenejb;
+--drop table accountejb;
+--drop table orderejb;
 
-CREATE TABLE HOLDINGEJB
-  (PURCHASEPRICE DECIMAL(10, 2),
-   HOLDINGID INTEGER NOT NULL,
-   QUANTITY DOUBLE NOT NULL,
-   PURCHASEDATE TIMESTAMP,
-   ACCOUNT_ACCOUNTID INTEGER,
-   QUOTE_SYMBOL VARCHAR(250));
+create table holdingejb
+  (purchaseprice decimal(10, 2),
+   holdingid integer not null,
+   quantity double not null,
+   purchasedate timestamp,
+   account_accountid integer,
+   quote_symbol varchar(250));
 
-ALTER TABLE HOLDINGEJB
-  ADD CONSTRAINT PK_HOLDINGEJB PRIMARY KEY (HOLDINGID);
+alter table holdingejb
+  add constraint pk_holdingejb primary key (holdingid);
 
-CREATE TABLE ACCOUNTPROFILEEJB
-  (ADDRESS VARCHAR(250),
-   PASSWORD VARCHAR(250),
-   USERID VARCHAR(250) NOT NULL,
-   EMAIL VARCHAR(250),
-   CREDITCARD VARCHAR(250),
-   FULLNAME VARCHAR(250));
+create table accountprofileejb
+  (address varchar(250),
+   password varchar(250),
+   userid varchar(250) not null,
+   email varchar(250),
+   creditcard varchar(250),
+   fullname varchar(250));
 
-ALTER TABLE ACCOUNTPROFILEEJB
-  ADD CONSTRAINT PK_ACCOUNTPROFILE2 PRIMARY KEY (USERID);
+alter table accountprofileejb
+  add constraint pk_accountprofile2 primary key (userid);
 
-CREATE TABLE QUOTEEJB
-  (LOW DECIMAL(10, 2),
-   OPEN1 DECIMAL(10, 2),
-   VOLUME DOUBLE NOT NULL,
-   PRICE DECIMAL(10, 2),
-   HIGH DECIMAL(10, 2),
-   COMPANYNAME VARCHAR(250),
-   SYMBOL VARCHAR(250) NOT NULL,
-   CHANGE1 DOUBLE NOT NULL);
+create table quoteejb
+  (low decimal(10, 2),
+   open1 decimal(10, 2),
+   volume double not null,
+   price decimal(10, 2),
+   high decimal(10, 2),
+   companyname varchar(250),
+   symbol varchar(250) not null,
+   change1 double not null);
 
-ALTER TABLE QUOTEEJB
-  ADD CONSTRAINT PK_QUOTEEJB PRIMARY KEY (SYMBOL);
+alter table quoteejb
+  add constraint pk_quoteejb primary key (symbol);
 
-CREATE TABLE KEYGENEJB
-  (KEYVAL INTEGER NOT NULL,
-   KEYNAME VARCHAR(250) NOT NULL);
+create table keygenejb
+  (keyval integer not null,
+   keyname varchar(250) not null);
 
-ALTER TABLE KEYGENEJB
-  ADD CONSTRAINT PK_KEYGENEJB PRIMARY KEY (KEYNAME);
+alter table keygenejb
+  add constraint pk_keygenejb primary key (keyname);
 
-CREATE TABLE ACCOUNTEJB
-  (CREATIONDATE TIMESTAMP,
-   OPENBALANCE DECIMAL(10, 2),
-   LOGOUTCOUNT INTEGER NOT NULL,
-   BALANCE DECIMAL(10, 2),
-   ACCOUNTID INTEGER NOT NULL,
-   LASTLOGIN TIMESTAMP,
-   LOGINCOUNT INTEGER NOT NULL,
+create table accountejb
+  (creationdate timestamp,
+   openbalance decimal(10, 2),
+   logoutcount integer not null,
+   balance decimal(10, 2),
+   accountid integer not null,
+   lastlogin timestamp,
+   logincount integer not null,
    PROFILE_USERID VARCHAR(250));
 
-ALTER TABLE ACCOUNTEJB
-  ADD CONSTRAINT PK_ACCOUNTEJB PRIMARY KEY (ACCOUNTID);
+alter table accountejb
+  add constraint pk_accountejb primary key (accountid);
 
-CREATE TABLE ORDEREJB
-  (ORDERFEE DECIMAL(10, 2),
-   COMPLETIONDATE TIMESTAMP,
-   ORDERTYPE VARCHAR(250),
-   ORDERSTATUS VARCHAR(250),
-   PRICE DECIMAL(10, 2),
-   QUANTITY DOUBLE NOT NULL,
-   OPENDATE TIMESTAMP,
-   ORDERID INTEGER NOT NULL,
-   ACCOUNT_ACCOUNTID INTEGER,
-   QUOTE_SYMBOL VARCHAR(250),
-   HOLDING_HOLDINGID INTEGER);
+create table orderejb
+  (orderfee decimal(10, 2),
+   completiondate timestamp,
+   ordertype varchar(250),
+   orderstatus varchar(250),
+   price decimal(10, 2),
+   quantity double not null,
+   opendate timestamp,
+   orderid integer not null,
+   account_accountid integer,
+   quote_symbol varchar(250),
+   holding_holdingid integer);
 
-ALTER TABLE ORDEREJB
-  ADD CONSTRAINT PK_ORDEREJB PRIMARY KEY (ORDERID);
+alter table orderejb
+  add constraint pk_orderejb primary key (orderid);
 
-CREATE INDEX profile_userid on accountejb(profile_userid);
-CREATE INDEX account_accountid on holdingejb(account_accountid);
-CREATE INDEX account_accountidt on orderejb(account_accountid);
-CREATE INDEX holding_holdingid on orderejb(holding_holdingid);
-CREATE INDEX orderstatus on orderejb(orderstatus);
-CREATE INDEX ordertype on orderejb(ordertype);
+create index profile_userid on accountejb(profile_userid);
+create index account_accountid on holdingejb(account_accountid);
+create index account_accountidt on orderejb(account_accountid);
+create index holding_holdingid on orderejb(holding_holdingid);
+create index orderstatus on orderejb(orderstatus);
+create index ordertype on orderejb(ordertype);
   
