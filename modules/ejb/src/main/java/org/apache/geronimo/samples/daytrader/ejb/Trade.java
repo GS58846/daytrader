@@ -19,6 +19,8 @@ package org.apache.geronimo.samples.daytrader.ejb;
 
 import javax.ejb.EJBObject;
 import java.rmi.Remote;
+import java.rmi.RemoteException;
+
 import org.apache.geronimo.samples.daytrader.*;
 
 public interface Trade extends EJBObject, TradeServices, Remote {
@@ -35,7 +37,7 @@ public interface Trade extends EJBObject, TradeServices, Remote {
 	 * @param orderID the Order being queued for processing
 	 * @return OrderDataBean providing the status of the completed order
 	 */
-	public void queueOrderOnePhase(Integer orderID) throws Exception;
+	public void queueOrderOnePhase(Integer orderID) throws RemoteException;
    /**
 	 * Complete the Order identified by orderID in a One Phase commit
 	 * 
@@ -50,7 +52,7 @@ public interface Trade extends EJBObject, TradeServices, Remote {
 	 * @param orderID the Order to complete
 	 * @return OrderDataBean providing the status of the completed order
 	 */
-	public OrderDataBean completeOrderOnePhase(Integer orderID) throws Exception;
+	public OrderDataBean completeOrderOnePhase(Integer orderID) throws RemoteException;
 	
    /**
 	 * Complete the Order identified by orderID in a One Phase commit
@@ -69,7 +71,7 @@ public interface Trade extends EJBObject, TradeServices, Remote {
 	 * @param orderID the Order to complete
 	 * @return OrderDataBean providing the status of the completed order
 	 */	
-    public OrderDataBean completeOrderOnePhaseDirect(Integer orderID) throws Exception;
+    public OrderDataBean completeOrderOnePhaseDirect(Integer orderID) throws RemoteException;
 
    /**
 	 * Cancel the Order identefied by orderID
@@ -83,7 +85,7 @@ public interface Trade extends EJBObject, TradeServices, Remote {
 	 * @param orderID the Order to complete
 	 * @return OrderDataBean providing the status of the completed order
 	 */
-	public void cancelOrderOnePhase(Integer orderID) throws Exception;
+	public void cancelOrderOnePhase(Integer orderID) throws RemoteException;
 
    /**
 	 * Cancel the Order identefied by orderID
@@ -100,7 +102,7 @@ public interface Trade extends EJBObject, TradeServices, Remote {
 	 * @param orderID the Order to complete
 	 * @return OrderDataBean providing the status of the completed order
 	 */
-	public void cancelOrderOnePhaseDirect(Integer orderID) throws Exception;
+	public void cancelOrderOnePhaseDirect(Integer orderID) throws RemoteException;
 	
    /**
 	 * Publish to the QuoteChange Message topic when a stock
@@ -114,7 +116,7 @@ public interface Trade extends EJBObject, TradeServices, Remote {
 	 * @param oldPrice - the price of the Quote before the update
 	 * @param sharesTraded - the quantity of sharesTraded
 	 */
-	public void publishQuotePriceChange(QuoteDataBean quoteData, java.math.BigDecimal oldPrice, java.math.BigDecimal changeFactor,  double sharesTraded) throws Exception;
+	public void publishQuotePriceChange(QuoteDataBean quoteData, java.math.BigDecimal oldPrice, java.math.BigDecimal changeFactor,  double sharesTraded) throws RemoteException;
 	
 	/**
 	 * provides a simple session method with no database access to test performance of a simple
@@ -123,7 +125,7 @@ public interface Trade extends EJBObject, TradeServices, Remote {
 	 * @param NetValue current value
 	 * @return return on investment as a percentage
 	 */
-	public double investmentReturn(double investment, double NetValue) throws Exception;	
+	public double investmentReturn(double investment, double NetValue) throws RemoteException;	
 
 	/**
 	 * This method provides a ping test for a 2-phase commit operation
@@ -131,6 +133,6 @@ public interface Trade extends EJBObject, TradeServices, Remote {
 	 * @param symbol to lookup
 	 * @return quoteData after sending JMS message
 	 */	
-	public QuoteDataBean pingTwoPhase(String symbol) throws Exception;
+	public QuoteDataBean pingTwoPhase(String symbol) throws RemoteException;
 
 }

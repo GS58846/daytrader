@@ -24,6 +24,7 @@ import javax.naming.*;
 import org.apache.geronimo.samples.daytrader.util.*;
 
 import java.math.BigDecimal;
+import java.rmi.RemoteException;
 import java.util.Collection;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -117,10 +118,14 @@ public class TradeBean implements SessionBean {
 	 */
 
 	public void queueOrderOnePhase(Integer orderID)
-	    	throws javax.jms.JMSException, Exception
+	    	throws RemoteException
 	{
+        try{
 		if (Log.doTrace() ) Log.trace("TradeBean:queueOrderOnePhase", orderID);
 		queueOrderInternal(orderID, false);
+        } catch (Exception e){
+            throw new RemoteException(e.getMessage(), e);
+        }
 	}
 	
 	class quotePriceComparator implements java.util.Comparator {
@@ -301,7 +306,7 @@ public class TradeBean implements SessionBean {
 	}
 	
 	public void publishQuotePriceChange(QuoteDataBean quoteData, BigDecimal oldPrice, BigDecimal changeFactor, double sharesTraded)
-	throws Exception
+	throws RemoteException
 	{
 		if ( publishQuotePriceChange == false)
 			return;
@@ -338,13 +343,17 @@ public class TradeBean implements SessionBean {
 		}
 		catch (Exception e)
 		{
-			throw e; // pass the exception back
+			throw new RemoteException(e.getMessage(),e); // pass the exception back
 		}	
 		finally {	
+            try{
 			if (conn != null)
 				conn.close();	
 			if (sess != null)
 			sess.close();		
+            }catch (Exception e){
+                throw new RemoteException(e.getMessage(),e); // pass the exception back
+            }
 		}
 	}	
 
@@ -574,9 +583,13 @@ public class TradeBean implements SessionBean {
 	//completeOrderOnePhase method is deployed w/ TXN_REQUIRES_NEW
 	//thus the completeOrder call from the MDB should not require a 2-phase commit
 	public OrderDataBean completeOrderOnePhase(Integer orderID)
-	throws Exception {
+	throws RemoteException {
+        try{
 		if (Log.doTrace()) Log.trace("TradeBean:completeOrderOnePhase", orderID);		
 		return completeOrderInternal(orderID);
+        }catch (Exception e){
+            throw new RemoteException(e.getMessage(),e);
+        }
 	}
 
 	private OrderDataBean completeOrderInternal(Integer orderID) 
@@ -687,16 +700,24 @@ public class TradeBean implements SessionBean {
 	// Basically these methods are deployed as txn requires new and invoke TradeDirect methods
 	// There is no mechanism outside of EJB to start a new transaction
     public OrderDataBean completeOrderOnePhaseDirect(Integer orderID)
-    throws Exception {
+    throws RemoteException {
+        try{
     	if (Log.doTrace())
     		Log.trace("TradeBean:completeOrderOnePhaseDirect -- completing order by calling TradeDirect orderID=" +orderID);
-    	return (new org.apache.geronimo.samples.daytrader.direct.TradeDirect()).completeOrderOnePhase(orderID);
+    	    return (new org.apache.geronimo.samples.daytrader.direct.TradeDirect()).completeOrderOnePhase(orderID);
+        } catch (Exception e){
+            throw new RemoteException(e.getMessage(),e);
+        }
     }
 	public void cancelOrderOnePhaseDirect(Integer orderID) 
-	throws Exception {
+	throws RemoteException {
+        try{
     	if (Log.doTrace())
     		Log.trace("TradeBean:cancelOrderOnePhaseDirect -- cancelling order by calling TradeDirect orderID=" +orderID);
 		(new org.apache.geronimo.samples.daytrader.direct.TradeDirect()).cancelOrderOnePhase(orderID);
+        } catch(Exception e){
+            throw new RemoteException(e.getMessage(),e);
+        }
 	}
 	
 	
@@ -717,9 +738,13 @@ public class TradeBean implements SessionBean {
 	//cancelOrderOnePhase method is deployed w/ TXN_REQUIRES_NEW
 	//thus the completeOrder call from the MDB should not require a 2-phase commit
 	public void cancelOrderOnePhase(Integer orderID)
-	throws Exception {
+	throws RemoteException {
+        try{
 		if (Log.doTrace()) Log.trace("TradeBean:cancelOrderOnePhase", orderID);		
 		cancelOrderInternal(orderID);
+        } catch (Exception e){
+            throw new RemoteException(e.getMessage(),e);
+        }
 	}
 	
 	
@@ -1045,7 +1070,7 @@ public class TradeBean implements SessionBean {
 	 * @return return on investment as a percentage
 	 */
 	public double investmentReturn(double investment, double NetValue)
-		throws Exception
+		throws RemoteException
 	{
 		if (Log.doTrace())
 			Log.trace("TradeBean:investmentReturn");
@@ -1063,8 +1088,9 @@ public class TradeBean implements SessionBean {
 	 * @return quoteData after sending JMS message
 	 */	
 	public QuoteDataBean pingTwoPhase(String symbol)
-	throws Exception
+	throws RemoteException
 	{
+        try{
 		if (Log.doTrace()) Log.trace("TradeBean:pingTwoPhase", symbol);
 		QuoteDataBean quoteData=null;
 		Connection conn = null;
@@ -1099,6 +1125,9 @@ public class TradeBean implements SessionBean {
 		}			
 		
 		return quoteData;
+        } catch (Exception e){
+            throw new RemoteException(e.getMessage(),e);
+        }
 	}	
 
 

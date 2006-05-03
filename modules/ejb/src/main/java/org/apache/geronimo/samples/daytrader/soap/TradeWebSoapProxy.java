@@ -119,7 +119,7 @@ public class TradeWebSoapProxy implements org.apache.geronimo.samples.daytrader.
 	/* (non-Javadoc)
 	 * @see org.apache.geronimo.samples.daytrader.TradeServices#getAccountData(java.lang.String)
 	 */
-	public AccountDataBean getAccountData(String userID) throws FinderException, Exception {
+	public AccountDataBean getAccountData(String userID) throws FinderException, RemoteException {
 		return convertAccountDataBean(getTrade().getAccountData(userID));
 	}
 

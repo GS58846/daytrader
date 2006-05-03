@@ -23,6 +23,7 @@ import org.apache.geronimo.samples.daytrader.direct.*;
 import org.apache.geronimo.samples.daytrader.ejb.*;
 import org.apache.geronimo.samples.daytrader.util.*;
 
+import java.rmi.RemoteException;
 import java.util.Collection;
 import java.math.BigDecimal;
 // import com.ibm.websphere.cache.*;
@@ -373,7 +374,7 @@ public class TradeAction implements TradeServices {
 	 *            the account userID to lookup
 	 * @return User account data in AccountDataBean
 	 */
-	public AccountDataBean getAccountData(String userID) throws javax.ejb.FinderException, Exception {
+	public AccountDataBean getAccountData(String userID) throws javax.ejb.FinderException, RemoteException {
 		if (Log.doActionTrace())
 			Log.trace("TradeAction:getAccountData", userID);
 		AccountDataBean accountData = null;

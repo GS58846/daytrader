@@ -30,6 +30,7 @@ import org.apache.geronimo.samples.daytrader.ejb.Trade;
 import org.apache.geronimo.samples.daytrader.ejb.TradeHome;
 import org.apache.geronimo.samples.daytrader.util.*;
 
+import java.rmi.RemoteException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -1001,8 +1002,9 @@ public class TradeDirect implements TradeServices
 	 * @see TradeServices#getAccountData(String)
 	 */
 	public AccountDataBean getAccountData(String userID)
-	throws Exception
+	throws RemoteException
 	{
+        try{
 		AccountDataBean accountData = null;
 		Connection conn=null;
 		try
@@ -1024,6 +1026,9 @@ public class TradeDirect implements TradeServices
 			releaseConn(conn);
 		}
 		return accountData;		
+        }catch (Exception e){
+           throw new RemoteException(e.getMessage(),e); 
+        }
 	}
 	private AccountDataBean getAccountData(Connection conn, String userID)
 	throws Exception
