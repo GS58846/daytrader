@@ -970,7 +970,7 @@ public class TradeBean implements SessionBean {
 	}
 
 	public AccountDataBean getAccountData(String userID)
-	throws FinderException, Exception {
+	throws FinderException, RemoteException {
 
 		if (Log.doTrace())
 			Log.trace("TradeBean:getAccountData", userID);
