@@ -32,7 +32,7 @@ String status;
 status = (String) request.getAttribute("status");
 if (status != null) {
 %>
-<TABLE width="100%" height="30">
+<TABLE width="640" height="30">
 	<TBODY>
 		<TR>
 			<TD></TD>
@@ -243,6 +243,16 @@ for (int i = 0; i < names.length; i++) {
 		</TR>
 		<TR>
 			<TD align="left"><INPUT type="checkbox"
+                <%=TradeConfig.getLongRun() ? "checked" : ""%>
+                name="EnableLongRun"> <B><FONT size="-1">Enable long run support</FONT></B><BR>
+            </TD>
+            <TD>
+                Enable long run support by disabling the show all orders query performed on the Account page.<BR>
+            </TD>
+        </TR>
+        <TR>
+            <TD align="left">
+            <INPUT type="checkbox"
 				<%=TradeConfig.getActionTrace() ? "checked" : ""%>
 				name="EnableActionTrace"> <B><FONT size="-1">Enable operation trace</FONT></B><BR>
 			<INPUT type="checkbox" <%=TradeConfig.getTrace() ? "checked" : ""%>
@@ -258,7 +268,7 @@ for (int i = 0; i < names.length; i++) {
 	</TBODY>
 </TABLE>
 
-<TABLE height="54" style="font-size: smaller">
+<TABLE width="640" height="54" style="font-size: smaller">
 	<TBODY>
 		<TR>
 			<TD colspan="2">

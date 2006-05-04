@@ -80,8 +80,8 @@ public class TradeServletAction {
             AccountDataBean accountData = tAction.getAccountData(userID);
             AccountProfileDataBean accountProfileData = tAction
                     .getAccountProfileData(userID);
-            Collection orderDataBeans = tAction.getOrders(userID);
-
+            ArrayList orderDataBeans = (TradeConfig.getLongRun() ? new ArrayList() : (ArrayList) tAction.getOrders(userID));
+            
             req.setAttribute("accountData", accountData);
             req.setAttribute("accountProfileData", accountProfileData);
             req.setAttribute("orderDataBeans", orderDataBeans);

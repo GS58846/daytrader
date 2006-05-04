@@ -318,6 +318,15 @@ public class TradeConfigServlet extends HttpServlet {
 		else 
 			Log.setActionTrace(false);						
 
+        String enableLongRun = req.getParameter("EnableLongRun");
+        
+        if (enableLongRun != null)
+            TradeConfig.setLongRun(true);
+        else 
+            TradeConfig.setLongRun(false);
+        currentConfigStr += "\t\tLong Run Enabled:\t\t" + TradeConfig.getLongRun()  + "\n";
+		
+		
 		System.out.println(currentConfigStr);
 
 	}
