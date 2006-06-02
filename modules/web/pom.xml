@@ -80,7 +80,7 @@
 					</filters>
                     <archive>
                         <manifestEntries>
-                            <Classpath>dt-ejb.jar streamer.jar wsappclient.jar</Classpath>
+                            <Class-Path>dt-ejb.jar streamer.jar wsappclient.jar</Class-Path>
                         </manifestEntries> 
                     </archive>
 					

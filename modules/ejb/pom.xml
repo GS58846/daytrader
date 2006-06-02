@@ -56,6 +56,11 @@
                 <artifactId>maven-ejb-plugin</artifactId>
                 <configuration>
                     <generateClient>true</generateClient>
+                    <archive>
+                        <manifestEntries>
+                            <Class-Path>wsappclient.jar</Class-Path>
+                        </manifestEntries>
+                    </archive>
                 </configuration>
             </plugin>
         </plugins>

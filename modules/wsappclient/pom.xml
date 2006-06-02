@@ -37,7 +37,7 @@
                remove the manifestEntries section below and this comment. -->
           <archive>
             <manifestEntries>
-              <class-path>ejb.jar</class-path>
+              <class-path>dt-ejb.jar</class-path>
             </manifestEntries>
             <manifest>
               <main-class>org.apache.geronimo.samples.daytrader.client.ws.ClientApp</main-class>
