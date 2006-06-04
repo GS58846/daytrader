@@ -32,7 +32,7 @@ String status;
 status = (String) request.getAttribute("status");
 if (status != null) {
 %>
-<TABLE width="640" height="30">
+<TABLE width="740" height="30">
 	<TBODY>
 		<TR>
 			<TD></TD>
@@ -48,7 +48,7 @@ if (status != null) {
 <FORM action="config" method="POST"><INPUT type="hidden" name="action"
 	value="updateConfig">
 
-<TABLE border="1" width="614">
+<TABLE border="1" width="740">
 	<TBODY>
 		<TR>
 			<TD colspan="2">The current DayTrader runtime configuration is
@@ -268,7 +268,7 @@ for (int i = 0; i < names.length; i++) {
 	</TBODY>
 </TABLE>
 
-<TABLE width="640" height="54" style="font-size: smaller">
+<TABLE width="740" height="54" style="font-size: smaller">
 	<TBODY>
 		<TR>
 			<TD colspan="2">

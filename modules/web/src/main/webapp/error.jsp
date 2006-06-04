@@ -2,7 +2,7 @@
 <%@ page import="java.io.*, java.lang.reflect.*" %>
 
 
-<TABLE>
+<TABLE width="740">
   <TBODY>
     <TR>
 			<TD bgcolor="#c93333" align="left" width="640" height="10"><B><FONT
@@ -13,7 +13,7 @@
 
 </TABLE>
 <DIV align="left"></DIV>
-<TABLE width="100%">
+<TABLE width="740">
   <TBODY>
     <TR>
             <TD width="3"></TD>
