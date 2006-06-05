@@ -93,16 +93,19 @@ public class PingServlet2MDBQueue extends HttpServlet {
                 int iter = TradeConfig.getPrimIterations();
                 for (int ii = 0; ii < iter; ii++) {
                     Session sess = conn.createSession(false, Session.AUTO_ACKNOWLEDGE);
-                    MessageProducer producer = sess.createProducer(queue);
+                    try {
+                        MessageProducer producer = sess.createProducer(queue);
 
-                    message = sess.createTextMessage();
+                        message = sess.createTextMessage();
 
-                    String command = "ping";
-                    message.setStringProperty("command", command);
-                    message.setLongProperty("publishTime", System.currentTimeMillis());
-                    message.setText("Ping message for queue java:comp/env/jms/TradeBrokerQueue sent from PingServlet2MDBQueue at " + new java.util.Date());
-                    producer.send(message);
-                    sess.close();
+                        String command = "ping";
+                        message.setStringProperty("command", command);
+                        message.setLongProperty("publishTime", System.currentTimeMillis());
+                        message.setText("Ping message for queue java:comp/env/jms/TradeBrokerQueue sent from PingServlet2MDBQueue at " + new java.util.Date());
+                        producer.send(message);
+                    } finally {
+                        sess.close();
+                    }
                 }
 
                 //write out the output
@@ -119,6 +122,8 @@ public class PingServlet2MDBQueue extends HttpServlet {
             catch (Exception e) {
                 Log.error("PingServlet2MDBQueue.doGet(...):exception posting message to TradeBrokerQueue destination ");
                 throw e;
+            } finally {
+                conn.close();
             }
         } //this is where I actually handle the exceptions
         catch (Exception e) {
