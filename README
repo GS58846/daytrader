@@ -2,7 +2,7 @@ The code in this directory contains the code for the benchmark sample called Day
 
 BUILD
 
-To build the dayTrader EAR, install maven and then type 'maven' from the dayTrader root directory (the directory containing this README).
+To build the dayTrader EAR, install Maven 2 (2.0.2 was used at the time of this writing) and then type 'mvn install' or 'mvn package' from the dayTrader root directory (the directory containing this README).  See the Maven 2 documentation for more information on building with Maven 2.
 
 This should build the daytrader-ear-1.0-SNAPSHOT.ear in the modules/ear/target directory.
 
