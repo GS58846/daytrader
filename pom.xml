@@ -1,10 +1,15 @@
-<project>
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
     <groupId>geronimo</groupId>
     <artifactId>daytrader</artifactId>
     <name>DayTrader :: Performance Benchmark Sample</name>
     <packaging>pom</packaging>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.2-SNAPSHOT</version>
     <description>J2EE 1.4 Performance Benchmark Sample Application</description>
     <issueManagement>
         <system>jira</system>
@@ -28,7 +33,7 @@
         | daytrader module versions
         |
         -->
-        <daytraderVersion>1.1-SNAPSHOT</daytraderVersion>
+        <daytraderVersion>1.2-SNAPSHOT</daytraderVersion>
     </properties>
 
     <developers>
@@ -107,12 +112,12 @@
             <dependency>
                 <groupId>geronimo</groupId>
                 <artifactId>daytrader-wsappclient</artifactId>
-                <version>1.1-SNAPSHOT</version>
+                <version>${daytraderVersion}</version>
             </dependency>
             <dependency>
                 <groupId>geronimo</groupId>
                 <artifactId>daytrader-streamer</artifactId>
-                <version>1.1-SNAPSHOT</version>
+                <version>${daytraderVersion}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.geronimo.specs</groupId>
@@ -136,54 +141,48 @@
                 <version>${daytraderVersion}</version>
                 <type>ejb</type>
             </dependency>
-            <!--dependency>
-            <groupId>geronimo</groupId>
-            <artifactId>daytrader-ejb</artifactId>
-            <version>1.1-SNAPSHOT</version>
-            <type>ejb-client</type>
-        </dependency-->
-        <dependency>
-            <groupId>geronimo</groupId>
-            <artifactId>daytrader-web</artifactId>
-            <version>1.1-SNAPSHOT</version>
-            <type>war</type>
-        </dependency>
-    </dependencies>
-</dependencyManagement>
-<profiles>
+            <dependency>
+                <groupId>geronimo</groupId>
+                <artifactId>daytrader-web</artifactId>
+                <version>${daytraderVersion}</version>
+                <type>war</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    <profiles>
 
-    <profile>
-        <id>db2</id>
-        <activation>
-            <activeByDefault>true</activeByDefault>
-            <property>
-                <name>database</name>
-                <value>db2</value>
-            </property>
-        </activation>
-        <properties>
-            <jboss.mapping>DB2</jboss.mapping>
-        </properties>
-    </profile>
+        <profile>
+            <id>db2</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+                <property>
+                    <name>database</name>
+                    <value>db2</value>
+                </property>
+            </activation>
+            <properties>
+                <jboss.mapping>DB2</jboss.mapping>
+            </properties>
+        </profile>
 
-    <profile>
-        <id>mysql</id>
-        <activation>
-            <property>
-                <name>database</name>
-                <value>mysql</value>
-            </property>
-        </activation>
-        <properties>
-            <jboss.mapping>mySQL</jboss.mapping>
-        </properties>
-    </profile>
+        <profile>
+            <id>mysql</id>
+            <activation>
+                <property>
+                    <name>database</name>
+                    <value>mysql</value>
+                </property>
+            </activation>
+            <properties>
+                <jboss.mapping>mySQL</jboss.mapping>
+            </properties>
+        </profile>
 
-    <profile>
-        <id>test</id>
-        <modules>
-            <module>functional-tests</module>
-        </modules>
-    </profile>
-</profiles>
+        <profile>
+            <id>test</id>
+            <modules>
+                <module>functional-tests</module>
+            </modules>
+        </profile>
+    </profiles>
 </project>
