@@ -227,6 +227,8 @@ public class TradeDirect implements TradeServices
 
 				cancelOrder(conn, orderData.getOrderID());	
 			}
+
+                        orderData = getOrderData(conn, orderData.getOrderID().intValue());
 			
 			if (txn != null) {
 				if ( Log.doTrace() )
@@ -329,6 +331,9 @@ public class TradeDirect implements TradeServices
 
 				cancelOrder(conn, orderData.getOrderID());	
 			}
+
+                        orderData = getOrderData(conn, orderData.getOrderID().intValue());
+
 			if (txn != null) {
 				if ( Log.doTrace() )
 					Log.trace("TradeDirect:sell committing global transaction");		
