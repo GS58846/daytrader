@@ -48,15 +48,18 @@
             <artifactId>standard</artifactId>
             <version>1.1.1</version>
         </dependency>
+        <!-- Removed per DAYTRADER-7 due to interop issues on commercial AppServers 
         <dependency>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>jspc-maven-plugin</artifactId>
             <version>1.4.4</version>
             <scope>provided</scope>
         </dependency>
+        -->
     </dependencies>
     <build>
         <plugins>
+            <!-- Removed per DATRADER-7 due to interop issues on commercial AppServers
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>jspc-maven-plugin</artifactId>
@@ -71,11 +74,12 @@
                     </execution>
                 </executions>
             </plugin>
+            -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <configuration>
-                    <webXml>${basedir}/target/jspweb.xml</webXml>
+                    <!-- <webXml>${basedir}/target/jspweb.xml</webXml> Removed per DATRADER-7 due to interop issues on commercial AppServers -->
                     <filters>
                         <filter>
                             ${basedir}/src/main/webapp/WEB-INF/classes/build.properties
