@@ -119,9 +119,15 @@ public class TradeDirect implements TradeServices
 			
 			stmt.close();
 			
+            BigDecimal TSIA = ZERO;
+            BigDecimal openTSIA = ZERO;
+            double volume=0.0;
+
+            if ( (topGainersData.size() > 0) || (topLosersData.size() > 0)){ 
+			
 			stmt = getStatement(conn, getTSIASQL);
 			rs = stmt.executeQuery();
-			BigDecimal TSIA=ZERO;
+
 			if (!rs.next() )  
 				Log.error("TradeDirect:getMarketSummary -- error w/ getTSIASQL -- no results");
 			else 
@@ -131,7 +137,7 @@ public class TradeDirect implements TradeServices
 			
 			stmt = getStatement(conn, getOpenTSIASQL);
 			rs = stmt.executeQuery();
-			BigDecimal openTSIA = ZERO;
+
 			if (!rs.next() )  
 				Log.error("TradeDirect:getMarketSummary -- error w/ getOpenTSIASQL -- no results");
 			else 
@@ -140,13 +146,13 @@ public class TradeDirect implements TradeServices
 
 			stmt = getStatement(conn, getTSIATotalVolumeSQL);
 			rs = stmt.executeQuery();
-			double volume=0.0;
+
 			if (!rs.next() ) 
 				Log.error("TradeDirect:getMarketSummary -- error w/ getTSIATotalVolumeSQL -- no results");
 			else 
 				volume = rs.getDouble("totalVolume");
 			stmt.close();
-			
+            }
 			commit(conn);
 				
 			marketSummaryData = new MarketSummaryDataBean(TSIA, openTSIA, volume, topGainersData, topLosersData);

@@ -169,15 +169,18 @@ public class TradeBean implements SessionBean {
 		    Object[] quoteArray = quotes.toArray();
 		    ArrayList topGainers = new ArrayList(5);
 		    ArrayList topLosers = new ArrayList(5);		    
-		    for (int i=0; i<5; i++) topGainers.add(quoteArray[i]);
-		    for (int i=quoteArray.length-1; i>=quoteArray.length-5; i--) topLosers.add(quoteArray[i]);
-		    
 			BigDecimal TSIA = FinancialUtils.ZERO;
 			BigDecimal openTSIA = FinancialUtils.ZERO;			
 			double totalVolume = 0.0;
-			for (int i=0; i<quoteArray.length; i++) 
-			{
-				LocalQuote quote = (LocalQuote)quoteArray[i];
+
+		   if (quoteArray.length > 5) {
+  			    for (int i = 0; i < 5; i++)
+					topGainers.add(quoteArray[i]);
+				for (int i = quoteArray.length - 1; i >= quoteArray.length - 5; i--)
+					topLosers.add(quoteArray[i]);
+ 
+  			   for (int i = 0; i < quoteArray.length; i++) {
+				LocalQuote quote = (LocalQuote) quoteArray[i];
 			  	BigDecimal price = quote.getPrice();
 			  	BigDecimal open  = quote.getOpen();
 			  	double volume = quote.getVolume();
@@ -185,9 +188,11 @@ public class TradeBean implements SessionBean {
 			  	openTSIA = openTSIA.add(open);			  	
 			  	totalVolume += volume;
 			}
-			TSIA = TSIA.divide(new BigDecimal(quoteArray.length), FinancialUtils.ROUND);
-			openTSIA = openTSIA.divide(new BigDecimal(quoteArray.length), FinancialUtils.ROUND);
-			
+				TSIA = TSIA.divide(new BigDecimal(quoteArray.length),
+						FinancialUtils.ROUND);
+				openTSIA = openTSIA.divide(new BigDecimal(quoteArray.length),
+						FinancialUtils.ROUND);
+			}
 			/* This is an alternate approach using ejbSelect methods
 			 *   In this approach an ejbSelect is used to select only the 
 			 *   current price and open price values for the TSIA
