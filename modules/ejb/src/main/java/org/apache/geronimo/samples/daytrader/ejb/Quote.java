@@ -17,10 +17,12 @@
 
 package org.apache.geronimo.samples.daytrader.ejb;
 
-import javax.ejb.*;
+import javax.ejb.EJBObject;
+import javax.ejb.FinderException;
 import java.math.BigDecimal;
 import org.apache.geronimo.samples.daytrader.*;
-import java.rmi.*;
+import java.rmi.Remote;
+import java.rmi.RemoteException;
 
 public interface Quote extends EJBObject, Remote
 {

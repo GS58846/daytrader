@@ -17,10 +17,13 @@
 
 package org.apache.geronimo.samples.daytrader.ejb;
 
-import javax.ejb.*;
+import javax.ejb.EJBHome;
+import javax.ejb.CreateException;
+import javax.ejb.FinderException;
 import java.util.Collection;
 import java.math.BigDecimal;
-import java.rmi.*;
+import java.rmi.Remote;
+import java.rmi.RemoteException;
 
 public interface QuoteHome extends EJBHome, Remote {
     
