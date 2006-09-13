@@ -17,24 +17,26 @@
 
 package org.apache.geronimo.samples.daytrader.client;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import javax.naming.InitialContext;
 import javax.rmi.PortableRemoteObject;
 
-import org.apache.geronimo.samples.daytrader.ejb.*;
+import org.apache.geronimo.samples.daytrader.QuoteDataBean;
+import org.apache.geronimo.samples.daytrader.ejb.Trade;
+import org.apache.geronimo.samples.daytrader.ejb.TradeHome;
 
-import org.apache.geronimo.samples.daytrader.*;
-
-public class TradeClient implements Runnable {
+public class TradeClient {
 
 	public static final int DEFAULT_UPDATE_INTERVAL = 2;
 	public static final int DEFAULT_MAX_PER_SECOND = 10;
 
 	// Various components
 	private TradeQuoteAuditStats auditStats;
-	private TradeClientMessageListener listener;
-	private TradeClientGUI gui;
-	private int maxPerSecond = DEFAULT_MAX_PER_SECOND;
+    private TradeClientGUI gui;
 
 	private static TradeClient tradeClient;
 
@@ -44,7 +46,9 @@ public class TradeClient implements Runnable {
 	private boolean useENC = true;
 
 	// Updater thread
-	private int updateInterval = DEFAULT_UPDATE_INTERVAL;
+    private final Timer timer = new Timer();
+    private TimerTask updater;
+    private int updateInterval = DEFAULT_UPDATE_INTERVAL;
 
 	public static void main(String[] args) {
 		try	{
@@ -61,7 +65,7 @@ public class TradeClient implements Runnable {
 
 			tradeClient = streamer;
 			streamer.startClient();
-		}
+        }
 		catch (Exception e)	{
 			System.err.println("Caught an unexpected exception!");
 			e.printStackTrace();
@@ -72,18 +76,15 @@ public class TradeClient implements Runnable {
 		return tradeClient;
 	}
 
-	public void startClient() throws Exception {
+	private void startClient() throws Exception {
 		auditStats = new TradeQuoteAuditStats();
 		setupEJB();
-		listener = new TradeClientMessageListener(this, useENC);
+		TradeClientMessageListener listener = new TradeClientMessageListener(this, useENC);
 		listener.subscribe();
 		resetStatsFromServer();
 		gui = new TradeClientGUI(this);
 		gui.show();
-		Thread t = new Thread(this);
-		t.setDaemon(true);
-		t.start();
-	}
+    }
 
 	public TradeQuoteAuditStats getAuditStats() {
 		return auditStats;
@@ -130,20 +131,20 @@ public class TradeClient implements Runnable {
 
 	public void setUpdateInterval(int updateInterval) {
 		this.updateInterval = updateInterval;
-	}
+        if (updater != null) {
+            updater.cancel();
+        }
+        updater = new TimerTask() {
+            public void run() {
+                auditStats.fireTableDataChanged();
+                System.out.println("Updating");
+            }
+        };
+        timer.scheduleAtFixedRate(updater, (long)updateInterval*1000, (long)updateInterval*1000);
+    }
 
 	public void closeClient() {
-		System.exit(1);
+        System.exit(1);
 	}
 
-	public void run() {
-		while(true) {
-			try {
-				Thread.sleep((long)updateInterval*1000);
-			}
-			catch (InterruptedException ie) {
-			}
-			auditStats.fireTableDataChanged();
-		}
-	}
 }

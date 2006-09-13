@@ -31,8 +31,8 @@ public class TradeClientGUI extends JFrame implements ActionListener, WindowList
 	private JLabel webLabel, ejbLabel;
 	private TradeClientGUIProperties props;
 
-	private static final String TRADELOGO_FILENAME = "/images/tradeLogoSmall.gif";
-	private static final String WEBSPHERELOGO_FILENAME = "/images/WEBSPHERE_18P_UNIX.GIF";
+	private static final String TRADELOGO_FILENAME = "/images/dayTraderLogo.gif";
+	private static final String WEBSPHERELOGO_FILENAME = "/images/copyRight.gif";
 
 	public TradeClientGUI(TradeClient client) {
 		this.client = client;
@@ -57,10 +57,10 @@ public class TradeClientGUI extends JFrame implements ActionListener, WindowList
 		JScrollPane scrollpane1 = new JScrollPane(auditTable);
 
 		ImageIcon iconTrade = new ImageIcon(this.getClass().getResource(TRADELOGO_FILENAME));
-		ImageIcon iconWS = new ImageIcon(this.getClass().getResource(WEBSPHERELOGO_FILENAME));
+//		ImageIcon iconWS = new ImageIcon(this.getClass().getResource(WEBSPHERELOGO_FILENAME));
 
 		topImagePanel.add(new JLabel(iconTrade), BorderLayout.WEST);
-		topImagePanel.add(new JLabel(iconWS), BorderLayout.EAST);
+//		topImagePanel.add(new JLabel(iconWS), BorderLayout.EAST);
 
 		streamerPanel.setLayout(new BorderLayout());
 		streamerPanel.add(topImagePanel, BorderLayout.NORTH);
