@@ -6,7 +6,7 @@
                                    http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>geronimo</groupId>
+        <groupId>org.apache.geronimo.daytrader</groupId>
         <artifactId>daytrader</artifactId>
         <version>1.2-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
@@ -14,7 +14,6 @@
 
     <artifactId>daytrader-streamer</artifactId>
     <name>DayTrader :: Quote Streamer</name>
-    <version>${daytraderVersion}</version>
     <packaging>jar</packaging>
     <description>Streamer Application for Day Trader</description>
     <scm>
@@ -25,16 +24,19 @@
     </scm>
     <dependencies>
         <dependency>
-            <groupId>geronimo</groupId>
+            <groupId>org.apache.geronimo.daytrader</groupId>
             <artifactId>daytrader-ejb</artifactId>
             <scope>provided</scope>
+            <version>${pom.version}</version>
             <type>ejb</type>
         </dependency>
         <dependency>
             <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-j2ee_1.4_spec</artifactId>
-            <version>1.0</version>
-            <scope>provided</scope>
+            <artifactId>geronimo-ejb_2.1_spec</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-jms_1.1_spec</artifactId>
         </dependency>
     </dependencies>
     <build>

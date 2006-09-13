@@ -6,14 +6,13 @@
                                    http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>geronimo</groupId>
+        <groupId>org.apache.geronimo.daytrader</groupId>
         <artifactId>daytrader</artifactId>
         <version>1.2-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <artifactId>daytrader-wsappclient</artifactId>
     <name>DayTrader :: WS Application Client</name>
-    <version>${daytraderVersion}</version>
     <packaging>jar</packaging>
     <description>Client demonstrating Web Services</description>
     <scm>
@@ -25,9 +24,11 @@
     <dependencies>
         <dependency>
             <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-j2ee_1.4_spec</artifactId>
-            <version>1.0</version>
-            <scope>provided</scope>
+            <artifactId>geronimo-jaxrpc_1.1_spec</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-qname_1.1_spec</artifactId>
         </dependency>
     </dependencies>
     <build>

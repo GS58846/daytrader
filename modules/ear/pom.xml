@@ -5,14 +5,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>geronimo</groupId>
+        <groupId>org.apache.geronimo.daytrader</groupId>
         <artifactId>daytrader</artifactId>
         <version>1.2-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <artifactId>daytrader-ear</artifactId>
     <name>DayTrader :: Enterprise Application</name>
-    <version>${daytraderVersion}</version>
     <packaging>ear</packaging>
     <description>Daytrader EAR</description>
     <scm>
@@ -23,24 +22,28 @@
     </scm>
     <dependencies>
         <dependency>
-            <groupId>geronimo</groupId>
+            <groupId>org.apache.geronimo.daytrader</groupId>
             <artifactId>daytrader-web</artifactId>
+            <version>${pom.version}</version>
             <type>war</type>
         </dependency>
         <dependency>
-            <groupId>geronimo</groupId>
+            <groupId>org.apache.geronimo.daytrader</groupId>
             <artifactId>daytrader-ejb</artifactId>
+            <version>${pom.version}</version>
             <type>ejb</type>
         </dependency>
         <dependency>
-            <groupId>geronimo</groupId>
+            <groupId>org.apache.geronimo.daytrader</groupId>
             <artifactId>daytrader-streamer</artifactId>
-            <scope>compile</scope>
+            <version>${pom.version}</version>
+            <!--<scope>compile</scope>-->
         </dependency>
         <dependency>
-            <groupId>geronimo</groupId>
+            <groupId>org.apache.geronimo.daytrader</groupId>
             <artifactId>daytrader-wsappclient</artifactId>
-            <scope>compile</scope>
+            <version>${pom.version}</version>
+            <!--<scope>compile</scope>-->
         </dependency>
     </dependencies>
     <build>
@@ -56,44 +59,29 @@
                     <version>1.4</version>
                     <modules>
                         <webModule>
-                            <groupId>
-                                geronimo
-                            </groupId>
+                            <groupId>org.apache.geronimo.daytrader</groupId>
                             <artifactId>daytrader-web</artifactId>
                             <contextRoot>/daytrader</contextRoot>
                             <bundleFileName>web.war</bundleFileName>
                         </webModule>
                         <ejbModule>
-                            <groupId>
-                                geronimo
-                            </groupId>
+                            <groupId>org.apache.geronimo.daytrader</groupId>
                             <artifactId>daytrader-ejb</artifactId>
                             <bundleFileName>dt-ejb.jar</bundleFileName>
                         </ejbModule>
                         <javaModule>
-                            <groupId>
-                                geronimo
-                            </groupId>
+                            <groupId>org.apache.geronimo.daytrader</groupId>
                             <artifactId>daytrader-streamer</artifactId>
-                            <bundleFileName>
-                                streamer.jar
-                            </bundleFileName>
+                            <bundleFileName>streamer.jar</bundleFileName>
                             <includeInApplicationXml>
                                 true
                             </includeInApplicationXml>
                         </javaModule>
                         <javaModule>
-                            <groupId>
-                                geronimo
-                            </groupId>
-                            <artifactId>
-                                daytrader-wsappclient
-                            </artifactId>
-                            <bundleFileName>
-                                wsappclient.jar
-                            </bundleFileName>
-                            <!-- <includeInApplicationXml>true</includeInApplicationXml> -->
-
+                            <groupId>org.apache.geronimo.daytrader</groupId>
+                            <artifactId>daytrader-wsappclient</artifactId>
+                            <bundleFileName>wsappclient.jar</bundleFileName>
+                            <includeInApplicationXml>true</includeInApplicationXml>
                         </javaModule>
                     </modules>
                 </configuration>
