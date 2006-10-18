@@ -30,8 +30,8 @@ public interface LocalAccountProfile extends EJBLocalObject {
 
 	public String	getUserID();				/* userID */
     //public void		setUserID(String userID);  
-    public String	getPassword();				/* password */
-    public void		setPassword(String password);
+    public String	getPasswd();				/* password */
+    public void		setPasswd(String password);
     public String	getFullName();				/* fullName */
     public void		setFullName(String fullName);  
     public String	getAddress();				/* address */

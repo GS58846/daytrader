@@ -163,7 +163,7 @@
                <sql-type>VARCHAR(250)</sql-type>
             </cmp-field>
             <cmp-field>
-               <field-name>password</field-name>
+               <field-name>passwd</field-name>
                <jdbc-type>VARCHAR</jdbc-type>
                <sql-type>VARCHAR(250)</sql-type>
             </cmp-field>

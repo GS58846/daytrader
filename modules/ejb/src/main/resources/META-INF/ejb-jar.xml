@@ -231,7 +231,7 @@
                 <field-name>address</field-name>
             </cmp-field>
             <cmp-field>
-                <field-name>password</field-name>
+                <field-name>passwd</field-name>
             </cmp-field>
             <cmp-field>
                 <field-name>userID</field-name>

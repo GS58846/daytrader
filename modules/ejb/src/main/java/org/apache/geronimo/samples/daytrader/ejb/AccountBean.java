@@ -67,11 +67,11 @@ public abstract class AccountBean
     public void login(String password)
     {
     	LocalAccountProfile profile = getProfile();
-    	if ( (profile==null) || (profile.getPassword().equals(password) == false) )
+    	if ( (profile==null) || (profile.getPasswd().equals(password) == false) )
     	{
     		String error = "AccountBean:Login failure for account: " + getAccountID() + 
     					( (profile==null)? "null AccountProfile" :
-    						"\n\tIncorrect password-->" + profile.getUserID() + ":" + profile.getPassword() );
+    						"\n\tIncorrect password-->" + profile.getUserID() + ":" + profile.getPasswd() );
     		throw new EJBException(error);
     	}
     	

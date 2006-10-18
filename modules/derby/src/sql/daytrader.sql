@@ -18,7 +18,7 @@ alter table holdingejb
 
 create table accountprofileejb
   (address varchar(250),
-   password varchar(250),
+   passwd varchar(250),
    userid varchar(250) not null,
    email varchar(250),
    creditcard varchar(250),

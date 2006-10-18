@@ -28,8 +28,8 @@ public abstract class AccountProfileBean
     /* Accessor methods for persistent fields */
 	public abstract String		getUserID();				/* userID */
     public abstract void		setUserID(String userID);  
-    public abstract String		getPassword();				/* password */
-    public abstract void		setPassword(String password);
+    public abstract String		getPasswd();				/* password */
+    public abstract void		setPasswd(String password);
     public abstract String		getFullName();				/* fullName */
     public abstract void		setFullName(String fullName);  
     public abstract String		getAddress();				/* address */
@@ -59,7 +59,7 @@ public abstract class AccountProfileBean
     
 	public AccountProfileDataBean updateAccountProfile(AccountProfileDataBean profileData)
 	{
-		setPassword(profileData.getPassword());    
+		setPasswd(profileData.getPassword());    
 		setFullName(profileData.getFullName());      
 		setAddress(profileData.getAddress());  
 		setEmail(profileData.getEmail());          
@@ -71,7 +71,7 @@ public abstract class AccountProfileBean
 	public AccountProfileDataBean getDataBean()
 	{
 		return new AccountProfileDataBean(getUserID(),
-									getPassword(),
+									getPasswd(),
 									getFullName(),
 									getAddress(),
 									getEmail(),
@@ -91,7 +91,7 @@ public abstract class AccountProfileBean
     throws CreateException {
 		
         setUserID(userID);
-        setPassword(password);
+        setPasswd(password);
         setFullName(fullname);
         setAddress(address);
         setEmail(email);

@@ -1564,7 +1564,7 @@ public class TradeDirect implements TradeServices
 				throw new javax.ejb.FinderException("Cannot find account for" + userID);
 			}
 				
-			String pw = rs.getString("password");
+			String pw = rs.getString("passwd");
 			stmt.close();
 	    	if ( (pw==null) || (pw.equals(password) == false) )
 	    	{
@@ -1736,7 +1736,7 @@ public class TradeDirect implements TradeServices
 		else			
 			accountProfileData = new AccountProfileDataBean(
 				rs.getString("userID"),
-				rs.getString("password"),
+				rs.getString("passwd"),
 				rs.getString("fullName"),
 				rs.getString("address"),
 				rs.getString("email"),
@@ -2115,7 +2115,7 @@ public class TradeDirect implements TradeServices
 
 	private static final String createAccountProfileSQL =
 		"insert into accountprofileejb " +
-		"( userid, password, fullname, address, email, creditcard ) " +
+		"( userid, passwd, fullname, address, email, creditcard ) " +
 		"VALUES (  ?  ,  ?  ,  ?  ,  ?  ,  ?  ,  ?  )";
 
 	private static final String createHoldingSQL  = 
@@ -2136,7 +2136,7 @@ public class TradeDirect implements TradeServices
 	
 	private final static String updateAccountProfileSQL = 
 		"update accountprofileejb set " +
-		"password = ?, fullname = ?, address = ?, email = ?, creditcard = ? " +
+		"passwd = ?, fullname = ?, address = ?, email = ?, creditcard = ? " +
 		"where userid = (select profile_userid from accountejb a " +
 		"where a.profile_userid=?)";
 

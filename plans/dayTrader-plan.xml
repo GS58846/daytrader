@@ -112,8 +112,8 @@
                         <table-column>address</table-column>
                     </cmp-field-mapping>
                     <cmp-field-mapping>
-                        <cmp-field-name>password</cmp-field-name>
-                        <table-column>password</table-column>
+                        <cmp-field-name>passwd</cmp-field-name>
+                        <table-column>passwd</table-column>
                     </cmp-field-mapping>
                     <cmp-field-mapping>
                         <cmp-field-name>userID</cmp-field-name>
