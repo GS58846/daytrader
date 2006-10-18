@@ -1576,11 +1576,12 @@ public class TradeDirect implements TradeServices
 	    	
 			stmt = getStatement(conn, loginSQL);
 			stmt.setTimestamp(1, new Timestamp(System.currentTimeMillis()));
-            stmt.setString(2, userID);
+                        stmt.setString(2, userID);
 
 			int rows = stmt.executeUpdate();
 			//?assert rows==1?
-			
+		        stmt.close();
+	
 			stmt = getStatement(conn, getAccountForUserSQL);
 			stmt.setString(1, userID);
 			rs = stmt.executeQuery();
