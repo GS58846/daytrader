@@ -398,6 +398,13 @@
          <ejb-link>TradeEJB</ejb-link>
       </ejb-ref>
       <ejb-ref>
+         <ejb-ref-name>ejb/TradeJPA</ejb-ref-name>
+         <ejb-ref-type>Session</ejb-ref-type>
+         <home>org.apache.geronimo.samples.daytrader.ejb.TradeHome</home>
+         <remote>org.apache.geronimo.samples.daytrader.ejb.Trade</remote>
+         <ejb-link>TradeJPA</ejb-link>
+      </ejb-ref>
+      <ejb-ref>
          <ejb-ref-name>ejb/Quote</ejb-ref-name>
          <ejb-ref-type>Entity</ejb-ref-type>
          <home>org.apache.geronimo.samples.daytrader.ejb.QuoteHome</home>

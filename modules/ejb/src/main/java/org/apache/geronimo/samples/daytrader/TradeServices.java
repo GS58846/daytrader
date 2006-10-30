@@ -18,9 +18,9 @@
 package org.apache.geronimo.samples.daytrader;
 
 
+import java.math.BigDecimal;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.math.BigDecimal;
 import java.util.Collection;
 
 /**
@@ -89,7 +89,8 @@ public interface TradeServices extends Remote {
 	 * @return OrderDataBean providing the status of the completed order
 	 */
 	public void queueOrder(Integer orderID, boolean twoPhase) throws Exception, RemoteException;
-   /**
+
+   /**
 	 * Complete the Order identefied by orderID
 	 * Orders are submitted through JMS to a Trading agent
 	 * and completed asynchronously. This method completes the order
@@ -133,7 +134,8 @@ public interface TradeServices extends Remote {
 	 * @return Collection OrderDataBeans providing detailed order information
 	 */
 	public Collection getOrders(String userID) throws Exception, RemoteException;
-   /**
+
+   /**
 	 * Get the collection of completed orders for a given account that need to be alerted to the user
 	 *
 	 * @param userID the customer account to retrieve orders for

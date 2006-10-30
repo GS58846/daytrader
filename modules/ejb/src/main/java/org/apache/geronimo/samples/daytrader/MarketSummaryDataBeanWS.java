@@ -17,12 +17,13 @@
 
 package org.apache.geronimo.samples.daytrader;
 
-import java.util.Collection;
-import java.math.BigDecimal;
-import java.util.Date;
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Collection;
+import java.util.Date;
 
-import org.apache.geronimo.samples.daytrader.util.*;
+import org.apache.geronimo.samples.daytrader.util.FinancialUtils;
+import org.apache.geronimo.samples.daytrader.util.Log;
 
 /**
  * 
@@ -33,7 +34,8 @@ import org.apache.geronimo.samples.daytrader.util.*;
  */
 public class MarketSummaryDataBeanWS implements Serializable
 {
-	private BigDecimal 	TSIA;			/* Trade Stock Index Average */
+
+	private BigDecimal 	TSIA;			/* Trade Stock Index Average */
 	private BigDecimal 	openTSIA;		/* Trade Stock Index Average at the open */	
 	private double  	volume; 		/* volume of shares traded */
 	private QuoteDataBean 	topGainers[];		/* Collection of top gaining stocks */

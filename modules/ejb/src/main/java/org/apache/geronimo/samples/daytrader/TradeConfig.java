@@ -17,12 +17,11 @@
 
 package org.apache.geronimo.samples.daytrader;
 
-import java.util.Random;
-import java.util.ArrayList;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Random;
 
-import org.apache.geronimo.samples.daytrader.soap.*;
-import org.apache.geronimo.samples.daytrader.util.*;
+import org.apache.geronimo.samples.daytrader.util.Log;
 
 
 /**
@@ -36,10 +35,11 @@ public class TradeConfig {
 	/* Trade Runtime Configuration Parameters */
 
 	/* Trade Runtime Mode parameters */
-	public static String[] runTimeModeNames = { "EJB", "Direct" };
+	public static String[] runTimeModeNames = { "EJB", "Direct", "JPA" };
 	public static final int EJB = 0;
 	public static final int DIRECT = 1;
-	public static int runTimeMode = DIRECT;
+	public static final int JPA = 2;
+	public static int runTimeMode = JPA;
 
 	public static String[] orderProcessingModeNames =
 		{ "Synchronous", "Asynchronous_1-Phase", "Asynchronous_2-Phase" };

@@ -50,6 +50,7 @@
         <plugins>
             <plugin>
                 <artifactId>maven-ear-plugin</artifactId>
+                <version>2.2</version>
                 <configuration>
                     <displayName>DayTrader 1.2</displayName>
                     <description>

@@ -26,7 +26,8 @@ public abstract class AccountProfileBean
     private EntityContext context;
 
     /* Accessor methods for persistent fields */
-	public abstract String		getUserID();				/* userID */
+
+	public abstract String		getUserID();				/* userID */
     public abstract void		setUserID(String userID);  
     public abstract String		getPasswd();				/* password */
     public abstract void		setPasswd(String password);
@@ -54,7 +55,7 @@ public abstract class AccountProfileBean
     /* Business methods */
     public LocalAccount getAccountForUpdate() /* Get ths profile's account with a lock */
     {
-    	 return getAccount();		
+    	 return getAccount();
     }
     
 	public AccountProfileDataBean updateAccountProfile(AccountProfileDataBean profileData)

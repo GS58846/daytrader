@@ -17,7 +17,7 @@
 
 package org.apache.geronimo.samples.daytrader;
 
-import java.math.*;
+import java.math.BigDecimal;
 import java.rmi.RemoteException;
 
 /**
