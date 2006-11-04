@@ -82,7 +82,8 @@ public class PingServlet2MDBQueue extends HttpServlet {
                 "<html><head><title>PingServlet2MDBQueue</title></head>"
                         + "<body><HR><FONT size=\"+2\" color=\"#000066\">PingServlet2MDBQueue<BR></FONT>"
                         + "<FONT size=\"-1\" color=\"#000066\">"
-                        + "Tests the basic operation of a servlet posting a message to an EJB MDB through a JMS Queue.");
+                        + "Tests the basic operation of a servlet posting a message to an EJB MDB through a JMS Queue.<BR>"
+			+ "<FONT color=\"red\"><B>Note:</B> Not intended for performance testing.</FONT>");
 
         try {
 

@@ -220,7 +220,8 @@
 			<TD><FONT size="-1">PingServlet2MDBQueue drives messages to a Queue
 			based Message Driven EJB (MDB).Each request to the servlet posts a
 			message to the Queue. The MDB receives the message asynchronously and
-			prints message delivery statistics on each 100th message.</FONT></TD>
+			prints message delivery statistics on each 100th message. <FONT color="red">
+			<B>Note:</B> Not intended for performance testing.</FONT></FONT></TD>
 		</TR>
 		<TR>
 			<TD align="center"><A href="servlet/PingServlet2MDBTopic"><FONT
@@ -230,7 +231,8 @@
 			servlet posts a message to the Topic. The TradeStreamMDB receives the
 			message asynchronously and prints message delivery statistics on each
 			100th message. Other subscribers to the Topic will also receive the
-			messages.</FONT></TD>
+			messages. <FONT color="red"><B>Note:</B> Not intended for performance 
+			testing.</FONT></FONT></TD>
 		</TR>
 		<TR>
 			<TD align="center"><A href="servlet/PingServlet2TwoPhase"><FONT

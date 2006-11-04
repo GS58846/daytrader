@@ -83,7 +83,8 @@ public class PingServlet2MDBTopic extends HttpServlet {
                 "<html><head><title>PingServlet2MDBTopic</title></head>"
                         + "<body><HR><FONT size=\"+2\" color=\"#000066\">PingServlet2MDBTopic<BR></FONT>"
                         + "<FONT size=\"-1\" color=\"#000066\">"
-                        + "Tests the basic operation of a servlet posting a message to an EJB MDB (and other subscribers) through a JMS Topic.");
+                        + "Tests the basic operation of a servlet posting a message to an EJB MDB (and other subscribers) through a JMS Topic.<BR>"
+                        + "<FONT color=\"red\"><B>Note:</B> Not intended for performance testing.</FONT>");
 
         //we only want to look up the JMS resources once
         try {
