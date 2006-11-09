@@ -505,10 +505,10 @@ public class TradeJPA implements SessionBean {
 
             //Get the primary keys for all the closed Orders for this account.
             Query query = entityManager.createNamedQuery("closedOrders");
-            query.setParameter("userId", userID);
+            query.setParameter("userID", userID);
             Collection results = query.getResultList();
             Query updateStatus = entityManager.createNamedQuery("completeClosedOrders");
-            updateStatus.setParameter("userId", userID);
+            updateStatus.setParameter("userID", userID);
             updateStatus.executeUpdate();
             return results;
 //            if (ordersKeys == null) return dataBeans;

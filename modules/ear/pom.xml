@@ -37,13 +37,11 @@
             <groupId>org.apache.geronimo.daytrader</groupId>
             <artifactId>daytrader-streamer</artifactId>
             <version>${pom.version}</version>
-            <!--<scope>compile</scope>-->
         </dependency>
         <dependency>
             <groupId>org.apache.geronimo.daytrader</groupId>
             <artifactId>daytrader-wsappclient</artifactId>
             <version>${pom.version}</version>
-            <!--<scope>compile</scope>-->
         </dependency>
     </dependencies>
     <build>
@@ -52,11 +50,8 @@
                 <artifactId>maven-ear-plugin</artifactId>
                 <version>2.2</version>
                 <configuration>
-                    <displayName>DayTrader 1.2</displayName>
-                    <description>
-                        DayTrader Stock Trading Performance Benchmark
-                        Sample
-                    </description>
+                    <displayName>DayTrader 2.0</displayName>
+                    <description>DayTrader Stock Trading Performance Benchmark Sample</description>
                     <version>1.4</version>
                     <modules>
                         <webModule>
@@ -74,9 +69,7 @@
                             <groupId>org.apache.geronimo.daytrader</groupId>
                             <artifactId>daytrader-streamer</artifactId>
                             <bundleFileName>streamer.jar</bundleFileName>
-                            <includeInApplicationXml>
-                                true
-                            </includeInApplicationXml>
+                            <includeInApplicationXml>true</includeInApplicationXml>
                         </javaModule>
                         <javaModule>
                             <groupId>org.apache.geronimo.daytrader</groupId>
@@ -86,17 +79,6 @@
                         </javaModule>
                     </modules>
                 </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-one-plugin</artifactId>
-                <version>1.0</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>install-maven-one-repository</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
