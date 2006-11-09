@@ -44,7 +44,7 @@ import org.apache.geronimo.samples.daytrader.util.Log;
         "                    o.orderStatus = 'closed' AND " +
         "                    o.account.profile.userID  = :userID"),
          @NamedQuery(name="completeClosedOrders",
-         query="UPDATE orderejb o SET o.orderStatus = completed' WHERE " +
+         query="UPDATE orderejb o SET o.orderStatus = 'completed' WHERE " +
         "                    o.orderStatus = 'closed' AND " +
         "                    o.account.profile.userID  = :userID")
         })
