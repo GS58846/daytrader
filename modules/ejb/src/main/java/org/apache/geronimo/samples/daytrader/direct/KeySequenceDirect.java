@@ -33,7 +33,7 @@ public class KeySequenceDirect {
 
 	private static HashMap keyMap = new HashMap();
 
-    public static synchronized Integer getNextID(Connection conn, String keyName, boolean inGlobalTxn)
+    public static synchronized Integer getNextID(Connection conn, String keyName, boolean inSession, boolean inGlobalTxn)
 	throws Exception
     {
 		Integer nextID = null;
@@ -42,25 +42,25 @@ public class KeySequenceDirect {
 		// Then verify the allocated block has not been depleted
 		// allocate a new block if necessary
 		if ( keyMap.containsKey(keyName) == false)
-			allocNewBlock(conn, keyName, inGlobalTxn);
+			allocNewBlock(conn, keyName, inSession, inGlobalTxn);
 		Collection block = 	(Collection) keyMap.get(keyName);
 		
 		Iterator ids = block.iterator();
 		if ( ids.hasNext() == false )
-			ids = allocNewBlock(conn, keyName, inGlobalTxn).iterator();
+			ids = allocNewBlock(conn, keyName, inSession, inGlobalTxn).iterator();
 		//get and return a new unique key
 		nextID = (Integer) ids.next();
 
-		if (Log.doTrace()) Log.trace("KeySequenceDirect:getNextID - return new PK ID for Entity type: " + keyName + " ID=" + nextID);
+		if (Log.doTrace()) Log.trace("KeySequenceDirect:getNextID inSession(" + inSession + ") - return new PK ID for Entity type: " + keyName + " ID=" + nextID);
 		return nextID;
 	}
 
-	private static Collection allocNewBlock(Connection conn, String keyName, boolean inGlobalTxn)  
+	private static Collection allocNewBlock(Connection conn, String keyName, boolean inSession, boolean inGlobalTxn)  
 	throws Exception
 	{
 		try 
 		{
-			if (inGlobalTxn == false) conn.commit();  // commit any pending txns
+			if (inGlobalTxn == false && !inSession) conn.commit();  // commit any pending txns
 			PreparedStatement stmt = conn.prepareStatement(getKeyForUpdateSQL);
 			stmt.setString(1, keyName);
 			ResultSet rs = stmt.executeQuery();
@@ -92,7 +92,7 @@ public class KeySequenceDirect {
 
 			Collection block = new KeyBlock(keyVal, keyVal+TradeConfig.KEYBLOCKSIZE-1);
 			keyMap.put(keyName, block);
-			if (inGlobalTxn == false) conn.commit();
+			if (inGlobalTxn == false && !inSession) conn.commit();
 			return block;			
 		}
 		catch (Exception e)

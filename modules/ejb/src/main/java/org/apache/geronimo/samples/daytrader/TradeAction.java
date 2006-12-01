@@ -25,9 +25,9 @@ import javax.naming.InitialContext;
 
 import org.apache.geronimo.samples.daytrader.direct.TradeDirect;
 import org.apache.geronimo.samples.daytrader.ejb.TradeHome;
+import org.apache.geronimo.samples.daytrader.session.TradeJDBCHome;
 import org.apache.geronimo.samples.daytrader.util.FinancialUtils;
 import org.apache.geronimo.samples.daytrader.util.Log;
-// import com.ibm.websphere.cache.*;
 
 /**
  * The TradeAction class provides the generic client side access to each of the
@@ -40,6 +40,7 @@ import org.apache.geronimo.samples.daytrader.util.Log;
 public class TradeAction implements TradeServices {
     private TradeServices trade = null;
     private static TradeHome tradeHome = null;
+    private static TradeJDBCHome tradeJDBCHome = null;
     private static TradeHome tradeHomeJPA = null;
 
 
@@ -98,6 +99,24 @@ public class TradeAction implements TradeServices {
             }
             catch (Exception e) {
                 Log.error("TradeAction:TradeAction() Creation of Trade Direct failed\n" + e);
+            }
+        } else if (TradeConfig.runTimeMode == TradeConfig.SESSION) {
+            try {
+                if (tradeHome == null) {
+                    InitialContext ic = new InitialContext();
+                    try {
+                        tradeJDBCHome = (TradeJDBCHome) (javax.rmi.PortableRemoteObject.narrow(ic.lookup("java:comp/env/ejb/TradeJDBC"), TradeJDBCHome.class));
+                    }
+                    catch (Exception e) {
+                        Log.log("TradeAction:createTrade lookup of java:comp/env/ejb/TradeJDBC failed. Reverting to JNDI lookup of Trade");
+                        tradeJDBCHome = (TradeJDBCHome) (javax.rmi.PortableRemoteObject.narrow(ic.lookup("TradeJDBC"), TradeJDBCHome.class));
+                    }
+                }
+                trade = tradeJDBCHome.create();
+            }
+            catch (Exception e) {
+                Log.error("TradeAction:TradeAction() Creation of Trade JDBC failed\n" + e);
+                e.printStackTrace();
             }
         }
     }

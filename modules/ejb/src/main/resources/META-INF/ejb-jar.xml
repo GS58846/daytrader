@@ -165,6 +165,20 @@
                 <use-caller-identity/>
             </security-identity>
         </session>
+        <session>
+            <description>Trade JDBC Session EJB manages all Trading services</description>
+            <display-name>TradeJDBC</display-name>
+            <ejb-name>TradeJDBC</ejb-name>
+            <home>org.apache.geronimo.samples.daytrader.session.TradeJDBCHome</home>
+            <remote>org.apache.geronimo.samples.daytrader.session.TradeJDBC</remote>
+            <ejb-class>org.apache.geronimo.samples.daytrader.session.TradeJDBCBean</ejb-class>
+            <session-type>Stateless</session-type>
+            <transaction-type>Container</transaction-type>
+            <security-identity>
+                <description/>
+                <use-caller-identity/>
+            </security-identity>
+        </session>
         <entity>
             <display-name>HoldingEJB</display-name>
             <ejb-name>HoldingEJB</ejb-name>
@@ -871,6 +885,10 @@
                 <ejb-name>TradeEJB</ejb-name>
                 <method-name>*</method-name>
             </method>
+            <method>
+                <ejb-name>TradeJDBC</ejb-name>
+                <method-name>*</method-name>
+            </method>
         </method-permission>
         <container-transaction>
             <method>
@@ -943,6 +961,41 @@
                     <method-param>java.lang.Integer</method-param>
                 </method-params>
             </method>
+            <method>
+        		<ejb-name>TradeJDBC</ejb-name>
+        		<method-intf>Remote</method-intf>
+        		<method-name>cancelOrderOnePhase</method-name>
+        		<method-params>
+        			<method-param>java.lang.Integer</method-param>
+        		</method-params>
+        	</method>
+        	<method>
+        		<ejb-name>TradeJDBC</ejb-name>
+        		<method-intf>Remote</method-intf>
+        		<method-name>completeOrderOnePhaseDirect</method-name>
+        		<method-params>
+        			<method-param>java.lang.Integer</method-param>
+        		</method-params>
+        	</method>
+        	<method>
+        		<ejb-name>TradeJDBC</ejb-name>
+        		<method-intf>Remote</method-intf>
+        		<method-name>publishQuotePriceChange</method-name>
+        		<method-params>
+        			<method-param>com.ibm.websphere.samples.trade.QuoteDataBean</method-param>
+        			<method-param>java.math.BigDecimal</method-param>
+        			<method-param>java.math.BigDecimal</method-param>
+        			<method-param>double</method-param>
+        		</method-params>
+        	</method>
+        	<method>
+        		<ejb-name>TradeJDBC</ejb-name>
+        		<method-intf>Remote</method-intf>
+        		<method-name>queueOrderOnePhase</method-name>
+        		<method-params>
+        			<method-param>java.lang.Integer</method-param>
+        		</method-params>
+        	</method>
             <trans-attribute>RequiresNew</trans-attribute>
         </container-transaction>
         <container-transaction>
@@ -994,6 +1047,30 @@
                     <method-param>boolean</method-param>
                 </method-params>
             </method>
+            <method>
+        		<ejb-name>TradeJDBC</ejb-name>
+        		<method-intf>Remote</method-intf>
+        		<method-name>cancelOrderOnePhaseDirect</method-name>
+        		<method-params>
+        			<method-param>java.lang.Integer</method-param>
+        		</method-params>
+        	</method>
+        	<method>
+        		<ejb-name>TradeJDBC</ejb-name>
+        		<method-intf>Remote</method-intf>
+        		<method-name>completeOrderOnePhaseDirect</method-name>
+        		<method-params>
+        			<method-param>java.lang.Integer</method-param>
+        		</method-params>
+        	</method>
+        	<method>
+        		<ejb-name>TradeJDBC</ejb-name>
+        		<method-intf>Remote</method-intf>
+        		<method-name>resetTrade</method-name>
+        		<method-params>
+        			<method-param>boolean</method-param>
+        		</method-params>
+        	</method>
             <trans-attribute>NotSupported</trans-attribute>
         </container-transaction>
         <container-transaction>
@@ -1041,6 +1118,10 @@
                 <ejb-name>TradeStreamerMDB</ejb-name>
                 <method-name>*</method-name>
             </method>
+            <method>
+        		<ejb-name>TradeJDBC</ejb-name>
+        		<method-name>*</method-name>
+        	</method>
             <trans-attribute>Required</trans-attribute>
         </container-transaction>
         <message-destination>

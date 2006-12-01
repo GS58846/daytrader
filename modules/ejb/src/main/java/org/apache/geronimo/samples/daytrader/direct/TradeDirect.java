@@ -61,12 +61,21 @@ public class TradeDirect implements TradeServices
 	private static DataSource datasource = null;
 	private static BigDecimal ZERO = new BigDecimal(0.0);
 	private boolean inGlobalTxn = false;
+	private boolean inSession = false;
+
 
 	/**
 	 * Zero arg constructor for TradeDirect
 	 */
 	public TradeDirect() {
 	    if (initialized==false) init();
+	}
+
+	public TradeDirect(boolean inSession) {
+		if (initialized == false)
+			init();
+
+		this.inSession = inSession;
 	}
 
 	/**
@@ -78,7 +87,7 @@ public class TradeDirect implements TradeServices
 		Connection conn=null;
 		try
 		{
-			if (Log.doTrace()) Log.trace("TradeDirect:getMarketSummary");
+			if (Log.doTrace()) Log.trace("TradeDirect:getMarketSummary - inSession(" + this.inSession + ")");
 			
 			conn = getConn();
             PreparedStatement stmt = getStatement(conn, getTSIAQuotesOrderByChangeSQL, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY );
@@ -191,9 +200,9 @@ public class TradeDirect implements TradeServices
 		try
 		{
 			if (Log.doTrace()) 
-				Log.trace("TradeDirect:buy", userID, symbol, new Double(quantity));
+				Log.trace("TradeDirect:buy - inSession(" + this.inSession + ")", userID, symbol, new Double(quantity));
 			
-			if ( orderProcessingMode == TradeConfig.ASYNCH_2PHASE )
+			if ( !inSession && orderProcessingMode == TradeConfig.ASYNCH_2PHASE )
 			{
 				if ( Log.doTrace() )
 					Log.trace("TradeDirect:buy create/begin global transaction");		
@@ -278,9 +287,9 @@ public class TradeDirect implements TradeServices
 		try
 		{
 			if (Log.doTrace()) 
-				Log.trace("TradeDirect:sell", userID, holdingID);
+				Log.trace("TradeDirect:sell - inSession(" + this.inSession + ")", userID, holdingID);
 
-			if ( orderProcessingMode == TradeConfig.ASYNCH_2PHASE )
+			if ( !inSession && orderProcessingMode == TradeConfig.ASYNCH_2PHASE )
 			{
 				if ( Log.doTrace() )
 					Log.trace("TradeDirect:sell create/begin global transaction");		
@@ -370,7 +379,7 @@ public class TradeDirect implements TradeServices
 	 */
 	public void queueOrder(Integer orderID, boolean twoPhase) throws Exception 
 	{
-		if (Log.doTrace() ) Log.trace("TradeDirect:queueOrder", orderID);
+		if (Log.doTrace() ) Log.trace("TradeDirect:queueOrder - inSession(" + this.inSession + ")", orderID);
 
 		javax.jms.Connection conn = null;	
 		Session sess = null;
@@ -427,8 +436,8 @@ public class TradeDirect implements TradeServices
 		try  //twoPhase
 		{
 
-			if (Log.doTrace()) Log.trace("TradeDirect:completeOrder", orderID);
-			setInGlobalTxn(twoPhase);
+			if (Log.doTrace()) Log.trace("TradeDirect:completeOrder - inSession(" + this.inSession + ")", orderID);
+			setInGlobalTxn(!inSession && twoPhase);
 			conn = getConn();
 			orderData = completeOrder(conn, orderID);
 			commit(conn);
@@ -454,7 +463,7 @@ public class TradeDirect implements TradeServices
 		Connection conn=null;
 		try
 		{
-			if (Log.doTrace()) Log.trace("TradeDirect:completeOrderOnePhase", orderID);
+			if (Log.doTrace()) Log.trace("TradeDirect:completeOrderOnePhase - inSession(" + this.inSession + ")", orderID);
 			setInGlobalTxn(false);
 			conn = getConn();
 			orderData = completeOrder(conn, orderID);
@@ -482,7 +491,7 @@ public class TradeDirect implements TradeServices
 	{
 			
 		OrderDataBean orderData = null;
-		if (Log.doTrace()) Log.trace("TradeDirect:completeOrderInternal", orderID);
+		if (Log.doTrace()) Log.trace("TradeDirect:completeOrderInternal - inSession(" + this.inSession + ")", orderID);
 
 		PreparedStatement stmt = getStatement(conn, getOrderSQL);
         stmt.setInt(1, orderID.intValue());
@@ -589,8 +598,8 @@ public class TradeDirect implements TradeServices
 		Connection conn=null;
 		try
 		{
-			if (Log.doTrace()) Log.trace("TradeDirect:cancelOrder", orderID);
-			setInGlobalTxn(twoPhase);
+			if (Log.doTrace()) Log.trace("TradeDirect:cancelOrder - inSession(" + this.inSession + ")", orderID);
+			setInGlobalTxn(!inSession && twoPhase);
 			conn = getConn();
 			cancelOrder(conn, orderID);
 			commit(conn);
@@ -613,7 +622,7 @@ public class TradeDirect implements TradeServices
 		Connection conn=null;
 		try
 		{
-			if (Log.doTrace()) Log.trace("TradeDirect:cancelOrderOnePhase", orderID);
+			if (Log.doTrace()) Log.trace("TradeDirect:cancelOrderOnePhase - inSession(" + this.inSession + ")", orderID);
 			setInGlobalTxn(false);
 			conn = getConn();
 			cancelOrder(conn, orderID);
@@ -652,7 +661,7 @@ public class TradeDirect implements TradeServices
 		Timestamp purchaseDate = new Timestamp(System.currentTimeMillis());
 		PreparedStatement stmt = getStatement(conn, createHoldingSQL);
 	
-		Integer holdingID = KeySequenceDirect.getNextID(conn, "holding", getInGlobalTxn());
+		Integer holdingID = KeySequenceDirect.getNextID(conn, "holding", inSession, getInGlobalTxn());
 		stmt.setInt(1, holdingID.intValue());
 		stmt.setTimestamp(2, purchaseDate);
 		stmt.setBigDecimal(3, purchasePrice);
@@ -694,7 +703,7 @@ public class TradeDirect implements TradeServices
 		PreparedStatement stmt = getStatement(conn, createOrderSQL);
 	
 
-		Integer orderID = KeySequenceDirect.getNextID(conn, "order", getInGlobalTxn());
+		Integer orderID = KeySequenceDirect.getNextID(conn, "order", inSession, getInGlobalTxn());
 		stmt.setInt(1, orderID.intValue());
 		stmt.setString(2, orderType);
 		stmt.setString(3, "open");
@@ -722,7 +731,7 @@ public class TradeDirect implements TradeServices
 		Connection conn=null;
 		try
 		{
-			if (Log.doTrace()) Log.trace("TradeDirect:getOrders", userID);
+			if (Log.doTrace()) Log.trace("TradeDirect:getOrders - inSession(" + this.inSession + ")", userID);
 			
 			conn = getConn();
             PreparedStatement stmt = getStatement(conn, getOrdersByUserSQL);
@@ -763,7 +772,7 @@ public class TradeDirect implements TradeServices
 		Connection conn=null;
 		try
 		{
-			if (Log.doTrace()) Log.trace("TradeDirect:getClosedOrders", userID);
+			if (Log.doTrace()) Log.trace("TradeDirect:getClosedOrders - inSession(" + this.inSession + ")", userID);
 			
 			conn = getConn();
             PreparedStatement stmt = getStatement(conn, getClosedOrdersSQL);
@@ -808,7 +817,7 @@ public class TradeDirect implements TradeServices
 		Connection conn=null;
 		try
 		{
-			if (Log.doTrace()) Log.traceEnter("TradeDirect:createQuote");
+			if (Log.doTrace()) Log.traceEnter("TradeDirect:createQuote - inSession(" + this.inSession + ")");
 			
 			price = price.setScale(FinancialUtils.SCALE, FinancialUtils.ROUND);
 			double volume=0.0, change=0.0;
@@ -852,7 +861,7 @@ public class TradeDirect implements TradeServices
 		UserTransaction txn = null;
 		try
 		{
-			if (Log.doTrace()) Log.trace("TradeDirect:getQuote", symbol);
+			if (Log.doTrace()) Log.trace("TradeDirect:getQuote - inSession(" + this.inSession + ")", symbol);
 
 			conn = getConn();
 			quoteData = getQuote(conn, symbol);			
@@ -951,7 +960,7 @@ public class TradeDirect implements TradeServices
 		Connection conn=null;
 		try
 		{
-			if (Log.doTrace()) Log.trace("TradeDirect:getHoldings", userID);
+			if (Log.doTrace()) Log.trace("TradeDirect:getHoldings - inSession(" + this.inSession + ")", userID);
 			
 			conn = getConn();
             PreparedStatement stmt = getStatement(conn, getHoldingsForUserSQL);
@@ -989,7 +998,7 @@ public class TradeDirect implements TradeServices
 		Connection conn=null;
 		try
 		{
-			if (Log.doTrace()) Log.trace("TradeDirect:getHolding", holdingID);
+			if (Log.doTrace()) Log.trace("TradeDirect:getHolding - inSession(" + this.inSession + ")", holdingID);
 			
 			conn = getConn();
 			holdingData = getHoldingData(holdingID.intValue());
@@ -1020,7 +1029,7 @@ public class TradeDirect implements TradeServices
 		Connection conn=null;
 		try
 		{
-			if (Log.doTrace()) Log.trace("TradeDirect:getAccountData", userID);
+			if (Log.doTrace()) Log.trace("TradeDirect:getAccountData - inSession(" + this.inSession + ")", userID);
 			
 			conn = getConn();
 			accountData = getAccountData(conn, userID);
@@ -1072,7 +1081,7 @@ public class TradeDirect implements TradeServices
 		Connection conn=null;
 		try
 		{
-			if (Log.doTrace()) Log.trace("TradeDirect:getAccountData", new Integer(accountID));
+			if (Log.doTrace()) Log.trace("TradeDirect:getAccountData - inSession(" + this.inSession + ")", new Integer(accountID));
 			
 			conn = getConn();
 			accountData = getAccountData(accountID, conn);
@@ -1236,7 +1245,7 @@ public class TradeDirect implements TradeServices
 	
 		try
 		{
-			if (Log.doTrace()) Log.trace("TradeDirect:getAccountProfileData", userID);
+			if (Log.doTrace()) Log.trace("TradeDirect:getAccountProfileData - inSession(" + this.inSession + ")", userID);
 			
 			conn = getConn();
 			accountProfileData = getAccountProfileData(conn, userID);
@@ -1316,7 +1325,7 @@ public class TradeDirect implements TradeServices
 	
 		try
 		{
-			if (Log.doTrace()) Log.trace("TradeDirect:updateAccountProfileData", profileData.getUserID());
+			if (Log.doTrace()) Log.trace("TradeDirect:updateAccountProfileData - inSession(" + this.inSession + ")", profileData.getUserID());
 			
 			conn = getConn();
 			updateAccountProfile(conn, profileData);	
@@ -1439,7 +1448,7 @@ public class TradeDirect implements TradeServices
 		UserTransaction txn = null;
 		try
 		{
-			if (Log.doTrace()) Log.trace("TradeDirect:updateQuotePriceVolume", symbol, changeFactor, new Double(sharesTraded));		
+			if (Log.doTrace()) Log.trace("TradeDirect:updateQuotePriceVolume - inSession(" + this.inSession + ")", symbol, changeFactor, new Double(sharesTraded));		
 
 			conn = getConn();
 
@@ -1551,7 +1560,7 @@ public class TradeDirect implements TradeServices
 		Connection conn=null;
 		try
 		{
-			if (Log.doTrace()) Log.trace("TradeDirect:login", userID, password);
+			if (Log.doTrace()) Log.trace("TradeDirect:login - inSession(" + this.inSession + ")", userID, password);
 			
 			conn = getConn();
             PreparedStatement stmt = getStatement(conn, getAccountProfileSQL);
@@ -1613,7 +1622,7 @@ public class TradeDirect implements TradeServices
 	 * @see TradeServices#logout(String)
 	 */
 	public void logout(String userID) throws Exception {
-		if (Log.doTrace()) Log.trace("TradeDirect:logout", userID);
+		if (Log.doTrace()) Log.trace("TradeDirect:logout - inSession(" + this.inSession + ")", userID);
 		Connection conn=null;
 		try
 		{		
@@ -1654,12 +1663,12 @@ public class TradeDirect implements TradeServices
 		Connection conn=null;
 		try
 		{
-			if (Log.doTrace()) Log.traceEnter("TradeDirect:register");
+			if (Log.doTrace()) Log.traceEnter("TradeDirect:register - inSession(" + this.inSession + ")");
 			
 			conn = getConn();
             PreparedStatement stmt = getStatement(conn, createAccountSQL);
 
-			Integer accountID = KeySequenceDirect.getNextID(conn, "account", getInGlobalTxn());
+			Integer accountID = KeySequenceDirect.getNextID(conn, "account", inSession, getInGlobalTxn());
 			BigDecimal balance = openBalance;
 			Timestamp creationDate = new Timestamp(System.currentTimeMillis());
 			Timestamp lastLogin  = creationDate;
@@ -2071,8 +2080,10 @@ public class TradeDirect implements TradeServices
 	private void commit(Connection conn)
 	throws Exception
 	{
-		if ( (getInGlobalTxn()==false) && (conn != null) )
-			conn.commit();
+		if (!inSession) {
+			if ( (getInGlobalTxn()==false) && (conn != null) )
+				conn.commit();
+		}
 	}
 	
 
@@ -2083,12 +2094,14 @@ public class TradeDirect implements TradeServices
    private void rollBack(Connection conn, Exception e) 
    throws Exception 
    {
-   		Log.log("TradeDirect:rollBack -- rolling back conn due to previously caught exception -- inGlobalTxn=" + getInGlobalTxn());
-		if ( (getInGlobalTxn()==false) && (conn != null) )
-	        conn.rollback();
-	    else
-	    	throw e;  // Throw the exception 
-	    			  // so the Global txn manager will rollBack
+		if (!inSession) {
+   			Log.log("TradeDirect:rollBack -- rolling back conn due to previously caught exception -- inGlobalTxn=" + getInGlobalTxn());
+			if ( (getInGlobalTxn()==false) && (conn != null) )
+	        	conn.rollback();
+	    	else
+	    		throw e;  // Throw the exception 
+	    				  // so the Global txn manager will rollBack
+   		} 	
    } 	
 	
    /*
