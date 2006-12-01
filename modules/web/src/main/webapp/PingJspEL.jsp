@@ -60,9 +60,9 @@ somefloat2 = <%= somefloat2 %><br/>
 
 <table border="1">
 	<thead>
-		<td><b>EL Type</b></td>
-		<td><b>EL Expressions</b></td>
-		<td><b>Result</b></td>
+		<th>EL Type</th>
+		<th>EL Expressions</th>
+		<th>Result</th>
 	</thead>
 	<tr>
 		<td>Integer Arithmetic</td>

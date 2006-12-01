@@ -217,7 +217,6 @@ while (it.hasNext()) {
 				</TBODY>
 			</TABLE>
 			<TABLE width="100%">
-				<FORM action=""></FORM>
 				<TBODY>
 					<TR>
 						<TD colspan="6" bgcolor="#cccccc"><B>Account Profile</B></TD>
@@ -273,7 +272,6 @@ while (it.hasNext()) {
 						<TD colspan="5"></TD>
 					</TR>
 				</TBODY>
-				<FORM action=""></FORM>
 			</TABLE>
 			</TD>
 		</TR>

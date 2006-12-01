@@ -7,7 +7,6 @@
 <title>PingJsp</title>
 </head>
 <BODY>
-<%@ page import="org.apache.geronimo.samples.daytrader.web.prims.PingBean" %>
 <%! String initTime = (new java.util.Date()).toString(); 
  %>
 <jsp:useBean id="ab" type="org.apache.geronimo.samples.daytrader.web.prims.PingBean" scope="request" />
