@@ -32,11 +32,14 @@ import org.apache.geronimo.samples.daytrader.util.*;
 
 import java.rmi.RemoteException;
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Timestamp;
 
-import org.apache.geronimo.samples.daytrader.*;
+import org.apache.geronimo.samples.daytrader.*;;
 
 /**
   * TradeDirect uses direct JDBC and JMS access to a <code>javax.sql.DataSource</code> to implement the business methods 
@@ -1807,7 +1810,72 @@ public class TradeDirect implements TradeServices
 		return orderData;
 	}
 	
-
+	public String checkDBProductName() throws Exception
+	{
+		Connection conn = null;
+		String dbProductName = null;
+		
+		try
+		{
+			if (Log.doTrace()) Log.traceEnter("TradeDirect:checkDBProductName");
+			
+			conn = getConn();
+			DatabaseMetaData dbmd = conn.getMetaData();
+			dbProductName = dbmd.getDatabaseProductName();
+		}
+		catch (SQLException e)
+		{
+			Log.error(e,"TradeDirect:checkDBProductName() -- Error checking the Daytrader Database Product Name");
+		}
+		finally
+		{
+			releaseConn(conn);
+		}
+		return dbProductName;
+	}
+	
+	public boolean recreateDBTables(Object[] sqlBuffer, java.io.PrintWriter out) throws Exception
+	{
+		//Clear MDB Statistics		
+		MDBStats.getInstance().reset();
+		
+		Connection conn = null;
+		boolean success = false;
+		try
+		{
+			if (Log.doTrace()) Log.traceEnter("TradeDirect:recreateDBTables");
+			
+			conn = getConn();
+			Statement stmt = conn.createStatement();
+			int bufferLength = sqlBuffer.length;
+			for (int i = 0; i< bufferLength; i++)
+			{
+				try
+				{
+					stmt.executeUpdate((String)sqlBuffer[i]);
+					//commit(conn);
+				}
+				catch(SQLException ex) 
+				{
+                	Log.error("TradeDirect:recreateDBTables SQL Exception thrown on executing the foll sql command: " + sqlBuffer[i], ex);
+                        out.println("<BR>SQL Exception thrown on executing the foll sql command: <I>" + sqlBuffer[i] + "</I> . Check log for details.</BR>");
+                }
+			}
+			stmt.close();
+            commit(conn);
+            success = true;
+		}
+		catch (Exception e)
+		{
+			Log.error(e,"TradeDirect:recreateDBTables() -- Error dropping and recreating the database tables");
+		}
+		finally
+		{
+			releaseConn(conn);
+		}
+		return success;
+	}
+	
 	public RunStatsDataBean resetTrade(boolean deleteAll)
 	throws Exception
 	{
@@ -1817,7 +1885,6 @@ public class TradeDirect implements TradeServices
 
 		RunStatsDataBean runStatsData = new RunStatsDataBean();
 		Connection conn=null;
-		UserTransaction txn = null;
 		try
 		{
 			if (Log.doTrace()) Log.traceEnter("TradeDirect:resetTrade deleteAll rows=" + deleteAll);
@@ -1994,7 +2061,7 @@ public class TradeDirect implements TradeServices
             stmt.close();
             rs.close();
         
-						commit(conn); 
+			commit(conn); 
    			
    			System.out.println("TradeDirect:reset Run stats data\n\n" + runStatsData);        
 		}

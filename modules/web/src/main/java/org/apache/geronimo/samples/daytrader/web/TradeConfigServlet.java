@@ -359,9 +359,15 @@ public class TradeConfigServlet extends HttpServlet {
 			else if (action.equals("buildDB"))
 			{
 				resp.setContentType("text/html");
-                                new TradeBuildDB(resp.getWriter());
+                                new TradeBuildDB(resp.getWriter(), null);
 				result = "DayTrader Database Built - " + TradeConfig.getMAX_USERS() + "users created";
 			}
+                        else if (action.equals("buildDBTables"))
+                        {
+ 
+                                resp.setContentType("text/html");
+                                new TradeBuildDB(resp.getWriter(), getServletConfig().getServletContext().getRealPath("/"));
+                        }
 			doConfigDisplay(req, resp, result + "Current DayTrader Configuration:");
 		}
 		catch (Exception e)

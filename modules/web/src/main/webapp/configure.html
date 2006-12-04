@@ -40,6 +40,17 @@
                 Password for a remote or protected database when using JDBC.</TD>
         </TR>
         <TR>
+            <TD><A href="config?action=buildDBTables" target="_blank"><FONT
+                    face="Times New Roman" size="-1">(Re)-create
+                &nbsp;DayTrader&nbsp;Database Tables and Indexes</FONT></A></TD>
+            <TD>This link is used to (a) initially create or (b) drop and re-create the
+                DayTrader tables. <b>A DayTrader database should exist before doing this action</b>, 
+                the existing DayTrader tables, if any, are dropped, then new
+                tables and indexes are created. <b>Please stop and re-start the Daytrader application 
+                (or your application server) after this action and then use the "Repopulate 
+                DayTrader Database" link below to repopulate the new database tables.</b></TD>
+        </TR>
+        <TR>
             <TD><A href="config?action=buildDB" target="_blank"><FONT
                     face="Times New Roman" size="-1">(Re)-populate
                 &nbsp;DayTrader&nbsp;Database</FONT></A></TD>
@@ -47,7 +58,8 @@
                 DayTrader database with fictitious users (uid:0, uid:1, ...) and
                 stocks (s:0, s:1, ...). First all existing users and stocks are
                 deleted (if any). The database is then populated with a new set of
-                DayTrader users and stocks.</TD>
+                DayTrader users and stocks. This option does not drop and recreate the 
+                Daytrader db tables.</TD>
         </TR>
         <TR>
             <TD><A href="scenario" target="_blank"><FONT face="Times New Roman"
