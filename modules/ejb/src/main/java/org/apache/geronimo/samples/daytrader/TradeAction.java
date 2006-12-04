@@ -102,7 +102,7 @@ public class TradeAction implements TradeServices {
             }
         } else if (TradeConfig.runTimeMode == TradeConfig.SESSION) {
             try {
-                if (tradeHome == null) {
+                if (tradeJDBCHome == null) {
                     InitialContext ic = new InitialContext();
                     try {
                         tradeJDBCHome = (TradeJDBCHome) (javax.rmi.PortableRemoteObject.narrow(ic.lookup("java:comp/env/ejb/TradeJDBC"), TradeJDBCHome.class));
