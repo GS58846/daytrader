@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Licensed to the Apache Software Foundation (ASF) under one or more
-  contributor license agreements.  See the NOTICE file distributed with
-  this work for additional information regarding copyright ownership.
-  The ASF licenses this file to You under the Apache License, Version 2.0
-  (the "License"); you may not use this file except in compliance with
-  the License.  You may obtain a copy of the License at
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
 
-      http://www.apache.org/licenses/LICENSE-2.0
+       http://www.apache.org/licenses/LICENSE-2.0
 
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
 -->
 
 <!-- $Rev$ $Date$ -->
@@ -22,7 +22,7 @@
     <environment>
         <moduleId>
             <groupId>org.apache.geronimo.daytrader</groupId>
-            <artifactId>daytrader-jetty</artifactId>
+            <artifactId>daytrader</artifactId>
             <version>1.2-SNAPSHOT</version>
             <type>car</type>
         </moduleId>
@@ -99,6 +99,7 @@
                 <session>
                     <ejb-name>KeySequenceEJB</ejb-name>
                     <jndi-name>ejb/KeySequenceEJB</jndi-name>
+                    <cache-size>100</cache-size>
                 </session>
 
 
@@ -571,7 +572,7 @@
             <client-environment xmlns="http://geronimo.apache.org/xml/ns/deployment-1.1">
                 <moduleId>
                     <groupId>org.apache.geronimo.daytrader</groupId>
-                    <artifactId>daytrader-jetty-streamer-client</artifactId>
+                    <artifactId>daytrader-streamer-client</artifactId>
                     <version>1.2-SNAPSHOT</version>
                     <type>car</type>
                 </moduleId>
@@ -579,7 +580,7 @@
             <server-environment xmlns="http://geronimo.apache.org/xml/ns/deployment-1.1">
                 <moduleId>
                     <groupId>org.apache.geronimo.daytrader</groupId>
-                    <artifactId>daytrader-jetty-streamer-client-server</artifactId>
+                    <artifactId>daytrader-streamer-client-server</artifactId>
                     <version>1.2-SNAPSHOT</version>
                     <type>car</type>
                 </moduleId>
@@ -640,7 +641,7 @@
             <client-environment xmlns="http://geronimo.apache.org/xml/ns/deployment-1.1">
                 <moduleId>
                     <groupId>org.apache.geronimo.daytrader</groupId>
-                    <artifactId>daytrader-jetty-ws-client</artifactId>
+                    <artifactId>daytrader-ws-client</artifactId>
                     <version>1.2-SNAPSHOT</version>
                     <type>car</type>
                 </moduleId>
@@ -648,7 +649,7 @@
             <server-environment xmlns="http://geronimo.apache.org/xml/ns/deployment-1.1">
                 <moduleId>
                     <groupId>org.apache.geronimo.daytrader</groupId>
-                    <artifactId>daytrader-jetty-ws-client-server</artifactId>
+                    <artifactId>daytrader-ws-client-server</artifactId>
                     <version>1.2-SNAPSHOT</version>
                     <type>car</type>
                 </moduleId>
@@ -788,13 +789,4 @@
 
         </connector>
     </ext-module>
-
-    <!--creates daytrader derby db -->
-    <gbean name="DaytraderResources" class="org.apache.geronimo.connector.DatabaseInitializationGBean">
-        <attribute name="testSQL">select * from holdingejb where 1 = 2</attribute>
-        <attribute name="path">META-INF/daytrader.sql</attribute>
-        <reference name="DataSource">
-            <name>jdbc/TradeDataSource</name>
-        </reference>
-    </gbean>
 </application>
