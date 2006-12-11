@@ -49,7 +49,7 @@ public interface TradeJDBC extends EJBObject, TradeServices, Remote {
 		 * @param orderID the Order to complete
 		 * @return OrderDataBean providing the status of the completed order
 		 */
-		public OrderDataBean completeOrderOnePhase(Integer orderID) throws Exception;
+		// public OrderDataBean completeOrderOnePhase(Integer orderID) throws Exception;
 		
 	   /**
 		 * Complete the Order identified by orderID in a One Phase commit
@@ -82,7 +82,7 @@ public interface TradeJDBC extends EJBObject, TradeServices, Remote {
 		 * @param orderID the Order to complete
 		 * @return OrderDataBean providing the status of the completed order
 		 */
-		public void cancelOrderOnePhase(Integer orderID) throws Exception;
+		// public void cancelOrderOnePhase(Integer orderID) throws Exception;
 
 	   /**
 		 * Cancel the Order identefied by orderID
@@ -113,7 +113,7 @@ public interface TradeJDBC extends EJBObject, TradeServices, Remote {
 		 * @param oldPrice - the price of the Quote before the update
 		 * @param sharesTraded - the quantity of sharesTraded
 		 */
-		public void publishQuotePriceChange(QuoteDataBean quoteData, java.math.BigDecimal oldPrice, java.math.BigDecimal changeFactor,  double sharesTraded) throws Exception;
+		// public void publishQuotePriceChange(QuoteDataBean quoteData, java.math.BigDecimal oldPrice, java.math.BigDecimal changeFactor,  double sharesTraded) throws Exception;
 		
 		/**
 		 * provides a simple session method with no database access to test performance of a simple
@@ -122,7 +122,7 @@ public interface TradeJDBC extends EJBObject, TradeServices, Remote {
 		 * @param NetValue current value
 		 * @return return on investment as a percentage
 		 */
-		public double investmentReturn(double investment, double NetValue) throws Exception;	
+		// public double investmentReturn(double investment, double NetValue) throws Exception;	
 
 		/**
 		 * This method provides a ping test for a 2-phase commit operation
