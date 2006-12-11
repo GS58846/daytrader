@@ -246,7 +246,6 @@ public class TradeAction implements TradeServices {
             Log.trace("TradeAction:orderCompleted", userID, orderID);
         if (Log.doTrace())
             Log.trace("OrderCompleted", userID, orderID);
-        trade.orderCompleted(userID, orderID);
     }
 
     /**
