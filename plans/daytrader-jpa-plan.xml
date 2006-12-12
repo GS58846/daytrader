@@ -556,7 +556,7 @@
                     <exclude-unlisted-classes/>
                     <properties>
                         <property name="openjpa.jdbc.DBDictionary" value="org.apache.openjpa.jdbc.sql.DerbyDictionary"/>
-                        <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)"/>
+                        <!--<property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)"/>-->
                         <property name="openjpa.Sequence" value="table(Table=OPENJPASEQ, Increment=100)"/>
                     </properties>
                 </persistence-unit>

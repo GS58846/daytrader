@@ -47,10 +47,10 @@ public class AccountProfileDataBean
     private String email;                /* email */
     @Column(length=250)
     private String creditCard;            /* creditCard */
-    @OneToOne
+    @OneToOne(mappedBy="profile")
     private AccountDataBean account;
-    @Version
-    private Integer optLock;
+//    @Version
+//    private Integer optLock;
 
     public AccountProfileDataBean() {
     }

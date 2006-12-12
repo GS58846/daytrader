@@ -29,6 +29,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Version;
 import javax.persistence.Table;
 import javax.persistence.Column;
+import javax.persistence.Transient;
 
 import org.apache.geronimo.samples.daytrader.util.Log;
 
@@ -49,15 +50,16 @@ public class HoldingDataBean
     private double quantity;            /* quantity */
     private BigDecimal purchasePrice;        /* purchasePrice */
     private Date purchaseDate;        /* purchaseDate */
-    @Column(length = 250)
+//    @Column(length = 250)
+    @Transient
     private String quoteID;            /* Holding(*)  ---> Quote(1) */
     @OneToOne
     private AccountDataBean account;
     @OneToOne
     private QuoteDataBean quote;
 
-    @Version
-    private Integer optLock;
+//    @Version
+//    private Integer optLock;
 
     public HoldingDataBean() {
     }

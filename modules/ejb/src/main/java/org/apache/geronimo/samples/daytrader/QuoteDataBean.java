@@ -52,8 +52,8 @@ public class QuoteDataBean implements Serializable {
     private BigDecimal low;     /* low price */
     private BigDecimal high;    /* high price */
     private double change1;     /* price change */
-    @Version
-    private Integer optLock;
+//    @Version
+//    private Integer optLock;
 
     /* Accessor methods for relationship fields are not kept in the DataBean */
     public QuoteDataBean() {

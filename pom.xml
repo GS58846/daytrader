@@ -160,6 +160,12 @@
                 <scope>provided</scope>
             </dependency>
             <dependency>
+                <groupId>org.apache.openjpa</groupId>
+                <artifactId>openjpa-all</artifactId>
+                <version>0.9.6-incubating</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
                 <groupId>commons-logging</groupId>
                 <artifactId>commons-logging</artifactId>
                 <version>1.0.3</version>

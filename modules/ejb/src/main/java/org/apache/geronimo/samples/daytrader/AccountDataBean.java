@@ -33,6 +33,7 @@ import javax.persistence.Version;
 import javax.persistence.Table;
 import javax.persistence.JoinColumn;
 import javax.persistence.Column;
+import javax.persistence.Transient;
 
 import org.apache.geronimo.samples.daytrader.util.Log;
 
@@ -53,14 +54,14 @@ public class AccountDataBean implements Serializable {
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     private Collection<OrderDataBean> orders;
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "PROFILE_USERID", referencedColumnName = "userID")
+    @JoinColumn(name = "PROFILE_USERID", referencedColumnName = "USERID")
     @Column(length = 250)
     private AccountProfileDataBean profile;
-    @Version
-    private Integer optLock;
+//    @Version
+//    private Integer optLock;
 
     /* Accessor methods for relationship fields are only included for the AccountProfile profileID */
-
+    @Transient
     private String profileID;
 
     public AccountDataBean() {

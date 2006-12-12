@@ -31,6 +31,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Version;
 import javax.persistence.Table;
 import javax.persistence.Column;
+import javax.persistence.Transient;
 
 import org.apache.geronimo.samples.daytrader.util.Log;
 
@@ -68,11 +69,12 @@ public class OrderDataBean implements Serializable
     private QuoteDataBean quote;
     @OneToOne
     private HoldingDataBean holding;
-    @Version
-    private Integer optLock;
+//    @Version
+//    private Integer optLock;
 
 
     /* Fields for relationship fields are not kept in the Data Bean */
+    @Transient
     private String 		symbol;
 
     public OrderDataBean() {}

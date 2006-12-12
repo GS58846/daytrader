@@ -22,6 +22,12 @@ DROP TABLE KEYGENEJB;
 DROP TABLE ACCOUNTEJB;
 DROP TABLE ORDEREJB;
 
+DROP TABLE OPENJPASEQ;
+
+create table OPENJPASEQ
+(id smallint not null primary key,
+sequence_value bigint);
+
 create table holdingejb
 (purchaseprice decimal(10, 2),
 holdingid integer not null,
