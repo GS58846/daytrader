@@ -21,6 +21,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
+    
+    <parent>
+        <groupId>org.apache.geronimo.genesis.config</groupId>
+        <artifactId>project-config</artifactId>
+        <version>1.1-SNAPSHOT</version>
+    </parent>
+    
     <groupId>org.apache.geronimo.daytrader</groupId>
     <artifactId>daytrader</artifactId>
     <name>DayTrader :: Performance Benchmark Sample</name>
@@ -239,6 +246,28 @@
             </plugin>
         </plugins>
     </build>
+    
+    <repositories>
+        <!--
+        NOTE: The default repositories are picked up by Genesis, but need to
+              specify where Genesis lives to pick it up + any additional repositories.
+        -->
+        <repository>
+            <id>apache-snapshots</id>
+            <name>Apache Snapshots Repository</name>
+            <url>http://people.apache.org/repo/m2-snapshot-repository</url>
+            <layout>default</layout>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+                <checksumPolicy>ignore</checksumPolicy>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </repository>
+    </repositories>
+    
     <profiles>
 
         <profile>
