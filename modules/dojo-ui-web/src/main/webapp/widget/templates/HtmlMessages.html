@@ -1,0 +1,29 @@
+<div dojoAttachPoint="messagesNode" class="daytrader-pane">
+	<div dojoAttachPoint="labelNode" class="daytrader-pane-header">
+		<table align="center" width="98%">
+			<tr>
+				<td class="title">${this.label}</td>
+				<td align="right">
+					<div dojoAttachPoint="paneControl" dojoAttachEvent="onclick: onLabelClick" class="daytrader-minimize-image"></div>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div dojoAttachPoint="containerNode" class="daytrader-pane-content">
+		<div style="height: 4px"></div>
+		<table align="center" width="96%">
+			<tr>
+				<td align="center"><div dojoAttachPoint="clearMsgButtonNode">Clear Messages</div></td>
+			</tr>
+		</table>
+				
+		<!-- <div style="height: 4px"></div> -->
+		<table align="center" width="96%" id="msgMessageTable" class="dt-table">
+			<tr>
+				<th width="100px">TimeStamp</th>
+				<th>Message</th>
+			</tr>
+		</table>
+		<div style="height: 4px"></div>
+	</div>
+</div>

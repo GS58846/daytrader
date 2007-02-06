@@ -1,0 +1,21 @@
+@CHARSET "ISO-8859-1";
+
+.progress-bar { 
+	font-family:verdana,arial,helvetica,sans-serif;
+	font-size: 12px;
+}
+
+.progress-bar td {
+	padding: 0px;	
+}
+
+.progress-bar .tickbox {
+	width: 6px;
+	height: 6px;
+}
+
+.progress-bar .update-text {
+	font-size: 0.8em; 
+	text-decoration: blink; 
+	visibility: hidden
+}

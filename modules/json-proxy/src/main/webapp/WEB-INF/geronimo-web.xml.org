@@ -1,0 +1,15 @@
+<web-app xmlns="http://geronimo.apache.org/xml/ns/j2ee/web-1.1" xmlns:nam="http://geronimo.apache.org/xml/ns/naming-1.1" xmlns:sec="http://geronimo.apache.org/xml/ns/security-1.1" xmlns:sys="http://geronimo.apache.org/xml/ns/deployment-1.1">
+    <sys:environment>
+        <sys:moduleId>
+            <sys:groupId>default</sys:groupId>
+            <sys:artifactId>daytrader-proxy-web</sys:artifactId>
+            <sys:version>1.1</sys:version>
+            <sys:type>car</sys:type>
+        </sys:moduleId>
+        <sys:dependencies/>
+        <sys:hidden-classes/>
+        <sys:non-overridable-classes/>
+    </sys:environment>
+    <context-root>/daytraderProxy</context-root>
+</web-app>
+

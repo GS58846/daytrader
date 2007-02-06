@@ -121,6 +121,9 @@
         <module>modules/streamer</module>
         <module>modules/wsappclient</module>
         <module>modules/ear</module>
+        <module>modules/json-proxy</module>
+        <module>modules/dojo-ui-web</module>
+        <module>modules/dojo-ui-ear</module>
     </modules>
     <dependencyManagement>
         <dependencies>

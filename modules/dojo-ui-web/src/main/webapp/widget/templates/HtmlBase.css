@@ -1,0 +1,110 @@
+@CHARSET "ISO-8859-1";
+
+/*--------------------------------------------------
+	Generic Daytrader pane rules
+--------------------------------------------------*/
+
+.daytrader-pane {
+	color:#000; 
+	font-family:verdana,arial,helvetica,sans-serif;
+	font-size: 11px;
+}
+
+.daytrader-pane-header {
+	background: #808080;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+}
+
+.daytrader-pane-header .title {
+	color: white; 
+	font-weight: bold; 
+	font-size: 1.4em;
+}
+
+.daytrader-pane-content {
+	background: #eeeeee;
+}
+
+.daytrader-maximize-image {
+	border: 1px solid #000; 
+	background : url(images/maximize-full.gif) no-repeat; 
+	width: 17px;
+	height: 17px;
+}
+
+.daytrader-minimize-image {
+	border: 1px solid #000;
+	background : url(images/minimize.gif) no-repeat;
+	width: 17px;
+	height: 17px;
+}
+
+/*--------------------------------------------------	
+	Generic Daytrader table rules
+--------------------------------------------------*/
+
+.dt-table table {
+	border: 0;
+}
+
+.dt-table th {
+	padding: 2px; 
+	background: #808080;
+	color: #fff;		
+}
+
+.dt-table td {
+	padding: 2px;
+}
+
+.dt-table-no-padding td, th {
+	padding: 0px;	
+}
+
+.dt-table .secondary-header {
+	font-weight: bold;
+	background: #69c;
+}
+
+.dt-table .data-indent {
+	padding: 0px 0px 0px 8px;
+}
+
+.dt-table .row-odd {
+	background: #fff;
+}
+
+.dt-table .row-even {
+	background: #ddd;
+}
+
+/*--------------------------------------------------	
+	General Daytrader image classes
+--------------------------------------------------*/
+
+.arrowdown {
+	background: url(images/arrowdown.gif) no-repeat;
+	width: 10px;
+	height: 10px;
+}
+
+.arrowup {
+	background: url(images/arrowup.gif) no-repeat;
+	width: 10px;
+	height: 10px;
+}
+
+/*--------------------------------------------------	
+	Some additions for the login pane
+--------------------------------------------------*/
+
+.login-pane {
+	background-color: #aaaaaa;
+	color: white;
+	font-weight: bold;
+}
+
+.error {
+	color: red;
+}

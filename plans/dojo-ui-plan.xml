@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application xmlns="http://geronimo.apache.org/xml/ns/j2ee/application-1.1">
+  <dep:environment xmlns:dep="http://geronimo.apache.org/xml/ns/deployment-1.1">
+    <dep:moduleId>
+      <dep:groupId>geronimo</dep:groupId>
+      <dep:artifactId>daytrader-dojo</dep:artifactId>
+      <dep:version>1.1</dep:version>
+      <dep:type>car</dep:type>
+    </dep:moduleId>
+    <dep:dependencies>
+      <dep:dependency>
+        <dep:groupId>org.apache.geronimo.configs</dep:groupId>
+        <dep:artifactId>j2ee-server</dep:artifactId>
+        <dep:type>car</dep:type>
+      </dep:dependency>
+      <dep:dependency>
+        <dep:groupId>org.apache.geronimo.configs</dep:groupId>
+        <dep:artifactId>system-database</dep:artifactId>
+        <dep:type>car</dep:type>
+      </dep:dependency>
+      <dep:dependency>
+        <dep:groupId>geronimo</dep:groupId>
+        <dep:artifactId>daytrader-derby-tomcat</dep:artifactId>
+        <dep:type>car</dep:type>
+      </dep:dependency>
+    </dep:dependencies>
+    <dep:hidden-classes/>
+    <dep:non-overridable-classes/>
+  </dep:environment>
+  <module>
+    <web>json-proxy.war</web>
+    <web-app xmlns="http://geronimo.apache.org/xml/ns/j2ee/web/tomcat-1.1">
+      <service-ref>
+        <service-ref-name>service/Trade</service-ref-name>
+        <port>
+          <port-name>TradeWSServices</port-name>
+          <protocol>http</protocol>
+          <host>localhost</host>
+          <port>8080</port>
+          <uri>/daytrader/services/TradeWSServices</uri>
+        </port>
+      </service-ref>
+    </web-app>
+  </module>
+  <module>
+    <web>dojo-ui.war</web>
+    <web-app xmlns="http://geronimo.apache.org/xml/ns/j2ee/web/tomcat-1.1">
+    </web-app>
+  </module>
+
+</application>
