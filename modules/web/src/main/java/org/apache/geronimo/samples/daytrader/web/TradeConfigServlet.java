@@ -306,6 +306,13 @@ public class TradeConfigServlet extends HttpServlet {
 			}
 		}
 
+		String enablePublishQuotePriceChange = req.getParameter("EnablePublishQuotePriceChange");
+		if (enablePublishQuotePriceChange != null)
+			TradeConfig.setPublishQuotePriceChange(true);
+		else 
+			TradeConfig.setPublishQuotePriceChange(false);
+		currentConfigStr += "\t\tTradeStreamer MDB Enabled:\t" + TradeConfig.getPublishQuotePriceChange() + "\n";
+		
 		String enableTrace = req.getParameter("EnableTrace");
 		if (enableTrace != null)
 			Log.setTrace(true);

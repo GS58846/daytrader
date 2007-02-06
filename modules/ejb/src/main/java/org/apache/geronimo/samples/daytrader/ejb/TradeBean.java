@@ -48,7 +48,6 @@ public class TradeBean implements SessionBean {
 	//Boolean to signify if the Order By clause is supported by the app server.
 	// This can be set to false by an env. variable
 	private boolean orderBySQLSupported = true;  
-	private boolean publishQuotePriceChange = true;  
 	private boolean updateQuotePrices = true;  
    
     private void queueOrderInternal(Integer orderID, boolean twoPhase)
@@ -312,7 +311,7 @@ public class TradeBean implements SessionBean {
 	public void publishQuotePriceChange(QuoteDataBean quoteData, BigDecimal oldPrice, BigDecimal changeFactor, double sharesTraded)
 	throws RemoteException
 	{
-		if ( publishQuotePriceChange == false)
+		if ( TradeConfig.getPublishQuotePriceChange() == false)
 			return;
 		if (Log.doTrace())
 			Log.trace("TradeBean:publishQuotePricePublishing -- quoteData = " + quoteData);		
@@ -1156,7 +1155,6 @@ public class TradeBean implements SessionBean {
 			keySequenceHome = (LocalKeySequenceHome) ic.lookup("java:comp/env/ejb/KeySequence");			
 
 			orderBySQLSupported = ( (Boolean) ic.lookup("java:comp/env/orderBySQLSupported") ).booleanValue();
-			publishQuotePriceChange  = ( (Boolean) ic.lookup("java:comp/env/publishQuotePriceChange") ).booleanValue();
 			updateQuotePrices  = ( (Boolean) ic.lookup("java:comp/env/updateQuotePrices") ).booleanValue();
 			TradeConfig.setUpdateQuotePrices(updateQuotePrices);
 
@@ -1174,7 +1172,7 @@ public class TradeBean implements SessionBean {
 					warnJMSFailure = false;
 					Log.error("TradeBean:ejbCreate  Unable to lookup JMS Resources\n\t -- Asynchronous mode will not work correctly and Quote Price change publishing will be disabled", e);
 				}				
-				publishQuotePriceChange = false;			
+				TradeConfig.setPublishQuotePriceChange(false);
 			}		
 			
 		} catch (Exception e) {

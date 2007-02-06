@@ -1427,7 +1427,7 @@ public class TradeDirect implements TradeServices
 	}
 
 	public QuoteDataBean updateQuotePriceVolume(String symbol, BigDecimal changeFactor, double sharesTraded) throws Exception {
-		return updateQuotePriceVolumeInt(symbol, changeFactor, sharesTraded, publishQuotePriceChange);
+		return updateQuotePriceVolumeInt(symbol, changeFactor, sharesTraded, TradeConfig.getPublishQuotePriceChange());
 	}
 
 	/**
@@ -2359,7 +2359,7 @@ public class TradeDirect implements TradeServices
         catch (Exception e)
         {
             Log.error("TradeDirect:init  Unable to locate QueueConnectionFactory.\n\t -- Asynchronous mode will not work correctly and Quote Price change publishing will be disabled");
-            publishQuotePriceChange = false;            
+            TradeConfig.setPublishQuotePriceChange(false);
         }       
         
         try
@@ -2369,7 +2369,7 @@ public class TradeDirect implements TradeServices
         catch (Exception e)
         {
             Log.error("TradeDirect:init  Unable to locate TradeBrokerQueue.\n\t -- Asynchronous mode will not work correctly and Quote Price change publishing will be disabled");
-            publishQuotePriceChange = false;            
+            TradeConfig.setPublishQuotePriceChange(false);
         }       
         
         try
@@ -2379,7 +2379,7 @@ public class TradeDirect implements TradeServices
         catch (Exception e)
         {
             Log.error("TradeDirect:init  Unable to locate TopicConnectionFactory.\n\t -- Asynchronous mode will not work correctly and Quote Price change publishing will be disabled");
-            publishQuotePriceChange = false;            
+            TradeConfig.setPublishQuotePriceChange(false);
         }
         
         try
@@ -2389,7 +2389,7 @@ public class TradeDirect implements TradeServices
         catch (Exception e)
         {
             Log.error("TradeDirect:init  Unable to locate TradeStreamerTopic.\n\t -- Asynchronous mode will not work correctly and Quote Price change publishing will be disabled");
-            publishQuotePriceChange = false;            
+            TradeConfig.setPublishQuotePriceChange(false);
         }       
         
         
@@ -2426,7 +2426,6 @@ public class TradeDirect implements TradeServices
 	private static ConnectionFactory tConnFactory;
 	private static Topic streamerTopic;
 	private static Trade tradeEJB;
-	private static boolean publishQuotePriceChange = true;
 	/**
 	 * Gets the inGlobalTxn
 	 * @return Returns a boolean

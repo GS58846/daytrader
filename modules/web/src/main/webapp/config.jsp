@@ -259,6 +259,15 @@ for (int i = 0; i < names.length; i++) {
 		</TR>
 		<TR>
 			<TD align="left"><INPUT type="checkbox"
+                <%=TradeConfig.getPublishQuotePriceChange() ? "checked" : ""%>
+                name="EnablePublishQuotePriceChange"> <B><FONT size="-1">Publish Quote Updates</FONT></B><BR>
+            </TD>
+            <TD>
+                Publish quote price changes to a JMS topic.<BR>
+            </TD>
+        </TR>
+		<TR>
+			<TD align="left"><INPUT type="checkbox"
                 <%=TradeConfig.getLongRun() ? "checked" : ""%>
                 name="EnableLongRun"> <B><FONT size="-1">Enable long run support</FONT></B><BR>
             </TD>

@@ -109,6 +109,7 @@ public class TradeConfig {
 	private static boolean updateQuotePrices = true;
 	private static int primIterations = 1;
 	private static boolean longRun = true;
+	private static boolean publishQuotePriceChange = false;
 
 	/*
 	 * Penny stocks is a problem where the random price change factor gets a stock
@@ -834,4 +835,14 @@ public class TradeConfig {
     public static void setLongRun(boolean longRun) {
         TradeConfig.longRun = longRun;
     }
+
+    public static void setPublishQuotePriceChange(boolean publishQuotePriceChange) {
+        TradeConfig.publishQuotePriceChange = publishQuotePriceChange;
+    }
+    
+    public static boolean getPublishQuotePriceChange() {
+        return publishQuotePriceChange;
+    }
+
+
 }
