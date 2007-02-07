@@ -23,7 +23,7 @@
         <moduleId>
             <groupId>org.apache.geronimo.daytrader</groupId>
             <artifactId>daytrader</artifactId>
-            <version>2.0-SNAPSHOT</version>
+            <version>1.2-SNAPSHOT</version>
             <type>car</type>
         </moduleId>
         <dependencies>
@@ -35,12 +35,6 @@
             <dependency>
                 <groupId>org.apache.geronimo.configs</groupId>
                 <artifactId>openjpa</artifactId>
-                <type>car</type>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.geronimo.configs</groupId>
-                <artifactId>j2ee-corba-yoko</artifactId>
-                <!-- version>1.2-SNAPSHOT</version -->
                 <type>car</type>
             </dependency>
         </dependencies>
@@ -579,7 +573,7 @@
                 <moduleId>
                     <groupId>org.apache.geronimo.daytrader</groupId>
                     <artifactId>daytrader-streamer-client</artifactId>
-                    <version>2.0-SNAPSHOT</version>
+                    <version>1.2-SNAPSHOT</version>
                     <type>car</type>
                 </moduleId>
             </client-environment>
@@ -587,12 +581,12 @@
                 <moduleId>
                     <groupId>org.apache.geronimo.daytrader</groupId>
                     <artifactId>daytrader-streamer-client-server</artifactId>
-                    <version>2.0-SNAPSHOT</version>
+                    <version>1.2-SNAPSHOT</version>
                     <type>car</type>
                 </moduleId>
             </server-environment>
             <resource>
-                <external-rar>org.apache.geronimo.modules/ge-activemq-rar/2.0-M1/rar</external-rar>
+                <external-rar>org.apache.geronimo.modules/ge-activemq-rar/1.2-SNAPSHOT/rar</external-rar>
                 <connector xmlns="http://geronimo.apache.org/xml/ns/j2ee/connector-1.1">
                     <resourceadapter>
                         <resourceadapter-instance>
@@ -648,7 +642,7 @@
                 <moduleId>
                     <groupId>org.apache.geronimo.daytrader</groupId>
                     <artifactId>daytrader-ws-client</artifactId>
-                    <version>2.0-SNAPSHOT</version>
+                    <version>1.2-SNAPSHOT</version>
                     <type>car</type>
                 </moduleId>
             </client-environment>
@@ -656,7 +650,7 @@
                 <moduleId>
                     <groupId>org.apache.geronimo.daytrader</groupId>
                     <artifactId>daytrader-ws-client-server</artifactId>
-                    <version>2.0-SNAPSHOT</version>
+                    <version>1.2-SNAPSHOT</version>
                     <type>car</type>
                 </moduleId>
             </server-environment>
@@ -665,7 +659,7 @@
 
     <ext-module>
         <connector>TradeDataSource</connector>
-        <external-path>org.tranql/tranql-connector-derby-embed-xa/1.2/rar</external-path>
+        <external-path>org.tranql/tranql-connector-derby-embed-xa/1.2-SNAPSHOT/rar</external-path>
         <connector xmlns="http://geronimo.apache.org/xml/ns/j2ee/connector-1.1">
 
 
@@ -718,7 +712,7 @@
 
     <ext-module>
         <connector>TradeJMS</connector>
-        <external-path>org.apache.geronimo.modules/ge-activemq-rar/2.0-M1/rar</external-path>
+        <external-path>org.apache.geronimo.modules/ge-activemq-rar/1.2-SNAPSHOT/rar</external-path>
         <connector xmlns="http://geronimo.apache.org/xml/ns/j2ee/connector-1.1">
 
             <resourceadapter>
