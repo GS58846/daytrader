@@ -409,8 +409,10 @@ public class TradeDirect implements TradeServices
 		
 		finally
 		{
-			if (sess != null)
+			if (sess != null)	
 				sess.close();
+			if (conn != null)
+				conn.close();
 		}
 	}
 
@@ -1483,10 +1485,10 @@ public class TradeDirect implements TradeServices
 		
 		finally
 		{
-			if (conn != null)
-				conn.close();
 			if (sess != null)	
-				sess.close();					
+				sess.close();
+			if (conn != null)
+				conn.close();					
 		}	
 	}		
 

@@ -79,10 +79,10 @@ public class TradeBean implements SessionBean {
 		}
 		
 		finally {
-			if (conn != null )
-				conn.close();
 			if (sess != null)
 				sess.close();
+			if (conn != null )
+				conn.close();
 		}
 	}
 	
@@ -312,10 +312,10 @@ public class TradeBean implements SessionBean {
 		}	
 		finally {	
             try{
-			if (conn != null)
-				conn.close();	
-			if (sess != null)
-			sess.close();		
+            	if (sess != null)
+        			sess.close();
+            	if (conn != null)
+    				conn.close();	
             }catch (Exception e){
                 throw new RemoteException(e.getMessage(),e); // pass the exception back
             }
