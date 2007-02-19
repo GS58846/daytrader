@@ -25,8 +25,6 @@ import javax.jms.*;
 
 import javax.sql.DataSource;
 
-import org.apache.geronimo.samples.daytrader.ejb.Trade;
-import org.apache.geronimo.samples.daytrader.ejb.TradeHome;
 import org.apache.geronimo.samples.daytrader.util.*;
 
 import java.rmi.RemoteException;
@@ -38,7 +36,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 
-import org.apache.geronimo.samples.daytrader.*;;
+import org.apache.geronimo.samples.daytrader.*;
 
 /**
   * TradeDirect uses direct JDBC and JMS access to a <code>javax.sql.DataSource</code> to implement the business methods 
@@ -232,9 +230,7 @@ public class TradeDirect implements TradeServices
 			try {
 				if (orderProcessingMode == TradeConfig.SYNCH) 
 					completeOrder(conn, orderData.getOrderID());
-				else if (orderProcessingMode == TradeConfig.ASYNCH)
-					queueOrder(orderData.getOrderID(), false);	// 1-phase commit
-				else //TradeConfig.ASYNC_2PHASE
+				else if (orderProcessingMode == TradeConfig.ASYNCH_2PHASE)
 					queueOrder(orderData.getOrderID(), true);	// 2-phase commit
 			}
 			catch (JMSException je)
@@ -336,9 +332,7 @@ public class TradeDirect implements TradeServices
 			try {
 				if (orderProcessingMode == TradeConfig.SYNCH) 
 					completeOrder(conn, orderData.getOrderID());
-				else if (orderProcessingMode == TradeConfig.ASYNCH)
-					queueOrder(orderData.getOrderID(), false);  // 1-phase commit
-				else //TradeConfig.ASYNC_2PHASE
+				else if (orderProcessingMode == TradeConfig.ASYNCH_2PHASE)
 					queueOrder(orderData.getOrderID(), true);      // 2-phase commit
 			}
 			catch (JMSException je)
@@ -428,13 +422,7 @@ public class TradeDirect implements TradeServices
 	{
 		OrderDataBean orderData = null;
 		Connection conn=null;
-
-		if (!twoPhase)
-		{
-			if (Log.doTrace())
-				Log.trace("TradeDirect:completeOrder -- completing order in 1-phase, calling tradeEJB to start new txn. orderID="+orderID);
-			return tradeEJB.completeOrderOnePhaseDirect(orderID);
-		}		
+		
 		try  //twoPhase
 		{
 
@@ -459,34 +447,7 @@ public class TradeDirect implements TradeServices
 		return orderData;         	
 		
 	}
-	public OrderDataBean completeOrderOnePhase(Integer orderID) throws Exception 
-	{
-		OrderDataBean orderData = null;
-		Connection conn=null;
-		try
-		{
-			if (Log.doTrace()) Log.trace("TradeDirect:completeOrderOnePhase - inSession(" + this.inSession + ")", orderID);
-			setInGlobalTxn(false);
-			conn = getConn();
-			orderData = completeOrder(conn, orderID);
-
-			commit(conn);
-
-		}
-		catch (Exception e)
-		{
-			Log.error("TradeDirect:completeOrderOnePhase -- error completing order", e);
-			rollBack(conn, e);
-			cancelOrder(orderID, false);
-		}
-		finally
-		{
-			releaseConn(conn);
-		}
-				
-		return orderData;         	
-		
-	}
+	
 
 	private OrderDataBean completeOrder(Connection conn, Integer orderID) 
 			throws Exception
@@ -617,30 +578,7 @@ public class TradeDirect implements TradeServices
 			releaseConn(conn);
 		}		
 	}
-	public void cancelOrderOnePhase(Integer orderID) 
-	throws Exception 
-	{
-		OrderDataBean orderData = null;
-		Connection conn=null;
-		try
-		{
-			if (Log.doTrace()) Log.trace("TradeDirect:cancelOrderOnePhase - inSession(" + this.inSession + ")", orderID);
-			setInGlobalTxn(false);
-			conn = getConn();
-			cancelOrder(conn, orderID);
-			commit(conn);
-
-		}
-		catch (Exception e)
-		{
-			Log.error("TradeDirect:cancelOrderOnePhase -- error cancelling order: "+orderID, e);
-			rollBack(conn, e);
-		}
-		finally
-		{
-			releaseConn(conn);
-		}		
-	}	
+	
 	private void cancelOrder(Connection conn, Integer orderID) 
 	throws Exception 
 	{
@@ -2326,7 +2264,6 @@ public class TradeDirect implements TradeServices
 	private static boolean initialized = false;
 	public static synchronized void init()	
 	{
-		TradeHome tradeHome=null;
 		if (initialized) return;
 		if (Log.doTrace())
 			Log.trace("TradeDirect:init -- *** initializing");		
@@ -2341,18 +2278,7 @@ public class TradeDirect implements TradeServices
         {
             Log.error("TradeDirect:init -- error on JNDI lookups of DataSource -- TradeDirect will not work", e);
             return;
-        }           
-			
-		try {
-
-             tradeHome = (TradeHome) ( javax.rmi.PortableRemoteObject.narrow(
-			context.lookup("java:comp/env/ejb/Trade"), TradeHome.class));
-        }
-        catch (Exception e)
-        {
-            Log.error("TradeDirect:init -- error on JNDI lookup of Trade Session Bean -- TradeDirect will not work", e);
-            return;
-        }           
+        }                     
         
         try
         {
@@ -2394,15 +2320,6 @@ public class TradeDirect implements TradeServices
             TradeConfig.setPublishQuotePriceChange(false);
         }       
         
-        
-		try
-		{
-			tradeEJB = (Trade) tradeHome.create();					
-		}
-		catch (Exception e)
-		{
-			Log.error("TradeDirect:init -- error looking up TradeEJB -- Asynchronous 1-phase will not work", e);
-		}					
 		if (Log.doTrace())		
 			Log.trace("TradeDirect:init -- +++ initialized");			
 		
@@ -2427,7 +2344,7 @@ public class TradeDirect implements TradeServices
 	private static Queue queue;
 	private static ConnectionFactory tConnFactory;
 	private static Topic streamerTopic;
-	private static Trade tradeEJB;
+	
 	/**
 	 * Gets the inGlobalTxn
 	 * @return Returns a boolean

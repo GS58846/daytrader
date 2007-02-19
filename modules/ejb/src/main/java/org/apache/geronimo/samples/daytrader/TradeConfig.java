@@ -42,10 +42,9 @@ public class TradeConfig {
 	public static int runTimeMode = JPA;
 
 	public static String[] orderProcessingModeNames =
-		{ "Synchronous", "Asynchronous_1-Phase", "Asynchronous_2-Phase" };
+		{ "Synchronous", "Asynchronous_2-Phase" };
 	public static final int SYNCH = 0;
-	public static final int ASYNCH = 1;
-	public static final int ASYNCH_2PHASE = 2;
+	public static final int ASYNCH_2PHASE = 1;
 	public static int orderProcessingMode = SYNCH;
 
 	public static String[] accessModeNames = { "Standard", "WebServices" };

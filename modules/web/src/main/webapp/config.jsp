@@ -128,12 +128,10 @@ for (int i = 0; i < names.length; i++) {
 			<TD><BR>
 			Order Processing Mode determines the mode for completing stock
 			purchase and sell operations. Synchronous mode completes the order
-			immediately. Asynchronous_1-phase mode uses MDB/JMS to queue the
-			order to a DayTrader broker agent to complete the order.
-			Asychronous_2-Phase performs a 2-phase commit over the EJB Entity/DB
-			and MDB/JMS transactions. See <A href="docs/tradeFAQ.html">DayTrader
-			FAQ</A> for details. <B></B><BR>
-			</TD>
+			immediately. Asychronous_2-Phase performs a 2-phase commit over the EJB Entity/DB
+ 			and MDB/JMS transactions. See <A href="docs/tradeFAQ.html">DayTrader
+ 			FAQ</A> for details. <B></B><BR>
+ 			</TD>
 		</TR>
 		<TR>
 			<TD align="left"><B>Access Mode </B>

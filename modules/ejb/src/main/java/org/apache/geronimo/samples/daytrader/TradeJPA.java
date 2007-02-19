@@ -60,9 +60,13 @@ public class TradeJPA implements SessionBean {
 
     private boolean publishQuotePriceChange = true;
 
-    private void queueOrderInternal(Integer orderID, boolean twoPhase)
-            throws javax.jms.JMSException {
-        if (Log.doTrace()) Log.trace("TradeBean:queueOrderInternal", orderID);
+    /**
+     * @see org.apache.geronimo.samples.daytrader.TradeServices#queueOrder(Integer, boolean)
+     */
+
+    public void queueOrder(Integer orderID, boolean twoPhase)
+            throws Exception {
+        if (Log.doTrace()) Log.trace("TradeBean:queueOrder", orderID);
 
         Connection conn = null;
         Session sess = null;
@@ -90,41 +94,6 @@ public class TradeJPA implements SessionBean {
                 conn.close();
             if (sess != null)
                 sess.close();
-        }
-    }
-
-    /**
-     * @see org.apache.geronimo.samples.daytrader.TradeServices#queueOrder(Integer, boolean)
-     */
-
-    public void queueOrder(Integer orderID, boolean twoPhase)
-            throws Exception {
-        if (Log.doTrace()) Log.trace("TradeBean:queueOrder", orderID, twoPhase);
-        if (twoPhase)
-            queueOrderInternal(orderID, true);
-        else {
-            // invoke the queueOrderOnePhase method -- which requires a new transaction
-            // the queueOrder will run in it's own transaction thus not requiring a
-            // 2-phase commit
-            ((Trade) context.getEJBObject()).queueOrderOnePhase(orderID);
-        }
-    }
-
-
-    /**
-     * @see Trade#queueOrderOnePhase(Integer)
-     *      Queue the Order identified by orderID to be processed in a One Phase commit
-     *      <p/>
-     *      In short, this method is deployed as TXN REQUIRES NEW to avoid a
-     *      2-phase commit transaction across Entity and MDB access
-     */
-
-    public void queueOrderOnePhase(Integer orderID) {
-        try {
-            if (Log.doTrace()) Log.trace("TradeBean:queueOrderOnePhase", orderID);
-            queueOrderInternal(orderID, false);
-        } catch (Exception e) {
-            throw new EJBException(e.getMessage(), e);
         }
     }
 
@@ -366,12 +335,8 @@ public class TradeJPA implements SessionBean {
             account.setBalance(balance.subtract(total));
 
             if (orderProcessingMode == TradeConfig.SYNCH)
-                completeOrderInternal(order.getOrderID());
-            else if (orderProcessingMode == TradeConfig.ASYNCH)
-                // Invoke the queueOrderOnePhase method w/ TXN requires new attribute
-                // to side-step a 2-phase commit across DB and JMS access
-                queueOrder(order.getOrderID(), false);
-            else //TradeConfig.ASYNC_2PHASE
+                completeOrder(order.getOrderID(), false);
+            else if (orderProcessingMode == TradeConfig.ASYNCH_2PHASE)
                 queueOrder(order.getOrderID(), true);
         }
         catch (Exception e) {
@@ -423,10 +388,8 @@ public class TradeJPA implements SessionBean {
             account.setBalance(balance.add(total));
 
             if (orderProcessingMode == TradeConfig.SYNCH)
-                completeOrderInternal(order.getOrderID());
-            else if (orderProcessingMode == TradeConfig.ASYNCH)
-                queueOrder(order.getOrderID(), false);
-            else //TradeConfig.ASYNC_2PHASE
+                completeOrder(order.getOrderID(), false);
+            else if (orderProcessingMode == TradeConfig.ASYNCH_2PHASE)
                 queueOrder(order.getOrderID(), true);
 
         }
@@ -533,34 +496,11 @@ public class TradeJPA implements SessionBean {
     public OrderDataBean completeOrder(Integer orderID, boolean twoPhase)
             throws Exception {
         if (Log.doTrace()) Log.trace("TradeBean:completeOrder", orderID + " twoPhase=" + twoPhase);
-        if (twoPhase)
-            return completeOrderInternal(orderID);
-        else {
-            // invoke the completeOrderOnePhase -- which requires a new transaction
-            // the completeOrder will run in it's own transaction thus not requiring a
-            // 2-phase commit
-            return ((Trade) context.getEJBObject()).completeOrderOnePhase(orderID);
-        }
-    }
-
-    //completeOrderOnePhase method is deployed w/ TXN_REQUIRES_NEW
-    //thus the completeOrder call from the MDB should not require a 2-phase commit
-    public OrderDataBean completeOrderOnePhase(Integer orderID) {
-        try {
-            if (Log.doTrace()) Log.trace("TradeBean:completeOrderOnePhase", orderID);
-            return completeOrderInternal(orderID);
-        } catch (Exception e) {
-            throw new EJBException(e.getMessage(), e);
-        }
-    }
-
-    private OrderDataBean completeOrderInternal(Integer orderID)
-            throws Exception {
-
-         OrderDataBean order = entityManager.find(OrderDataBean.class, orderID);
+        
+        OrderDataBean order = entityManager.find(OrderDataBean.class, orderID);
 
         if (order == null) {
-            Log.error("TradeBean:completeOrderInternal  -- Unable to find Order " + orderID + " FBPK returned " + order);
+            Log.error("TradeBean:completeOrder -- Unable to find Order " + orderID + " FBPK returned " + order);
             return null;
         }
 
@@ -609,7 +549,7 @@ public class TradeJPA implements SessionBean {
                 *	- deposit the Order proceeds to the Account balance
                 */
             if (holding == null) {
-                Log.error("TradeBean:completeOrderInternal -- Unable to sell order " + order.getOrderID() + " holding already sold");
+                Log.error("TradeBean:completeOrder -- Unable to sell order " + order.getOrderID() + " holding already sold");
                 order.cancel();
                 return order;
             } else {
@@ -648,62 +588,13 @@ public class TradeJPA implements SessionBean {
         return order;
     }
 
-
-    //These methods are used to provide the 1-phase commit runtime option for TradeDirect
-    // Basically these methods are deployed as txn requires new and invoke TradeDirect methods
-    // There is no mechanism outside of EJB to start a new transaction
-    public OrderDataBean completeOrderOnePhaseDirect(Integer orderID) {
-        try {
-            if (Log.doTrace())
-                Log.trace("TradeBean:completeOrderOnePhaseDirect -- completing order by calling TradeDirect orderID=" + orderID);
-            return (new org.apache.geronimo.samples.daytrader.direct.TradeDirect()).completeOrderOnePhase(orderID);
-        } catch (Exception e) {
-            throw new EJBException(e.getMessage(), e);
-        }
-    }
-
-    public void cancelOrderOnePhaseDirect(Integer orderID) {
-        try {
-            if (Log.doTrace())
-                Log.trace("TradeBean:cancelOrderOnePhaseDirect -- cancelling order by calling TradeDirect orderID=" + orderID);
-            (new org.apache.geronimo.samples.daytrader.direct.TradeDirect()).cancelOrderOnePhase(orderID);
-        } catch (Exception e) {
-            throw new EJBException(e.getMessage(), e);
-        }
-    }
-
-
     public void cancelOrder(Integer orderID, boolean twoPhase)
             throws Exception {
         if (Log.doTrace()) Log.trace("TradeBean:cancelOrder", orderID + " twoPhase=" + twoPhase);
-        if (twoPhase)
-            cancelOrderInternal(orderID);
-        else {
-            // invoke the cancelOrderOnePhase -- which requires a new transaction
-            // the completeOrder will run in it's own transaction thus not requiring a
-            // 2-phase commit
-            ((Trade) context.getEJBObject()).cancelOrderOnePhase(orderID);
-        }
-    }
-
-    //cancelOrderOnePhase method is deployed w/ TXN_REQUIRES_NEW
-    //thus the completeOrder call from the MDB should not require a 2-phase commit
-    public void cancelOrderOnePhase(Integer orderID) {
-        try {
-            if (Log.doTrace()) Log.trace("TradeBean:cancelOrderOnePhase", orderID);
-            cancelOrderInternal(orderID);
-        } catch (Exception e) {
-            throw new EJBException(e.getMessage(), e);
-        }
-    }
-
-
-    private void cancelOrderInternal(Integer orderID)
-            throws Exception {
+        
         OrderDataBean order = entityManager.find(OrderDataBean.class, orderID);
         order.cancel();
     }
-
 
     public void orderCompleted(String userID, Integer orderID)
             throws Exception {
