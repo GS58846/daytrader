@@ -128,6 +128,20 @@ public class TradeConfig {
 			BigDecimal.ROUND_HALF_UP);
 	}
 
+	/* CJB (DAYTRADER-25) - Also need to impose a ceiling on the quote price to ensure
+	 * prevent account and holding balances from exceeding the databases decimal precision.
+	 * At some point, this maximum value can be used to trigger a stock split.
+	 */
+
+	public static BigDecimal MAXIMUM_STOCK_PRICE;
+	public static BigDecimal MAXIMUM_STOCK_SPLIT_MULTIPLIER;
+	static {
+		MAXIMUM_STOCK_PRICE = new BigDecimal(400);
+		MAXIMUM_STOCK_PRICE.setScale(2, BigDecimal.ROUND_HALF_UP);
+		MAXIMUM_STOCK_SPLIT_MULTIPLIER = new BigDecimal(0.5);
+		MAXIMUM_STOCK_SPLIT_MULTIPLIER.setScale(2, BigDecimal.ROUND_HALF_UP);
+	}
+
 	/* Trade Scenario actions mixes. Each of the array rows represents a specific Trade Scenario Mix. 
 	   The columns give the percentages for each action in the column header. Note: "login" is always 0. 
 	   logout represents both login and logout (because each logout operation will cause a new login when
@@ -383,9 +397,13 @@ public class TradeConfig {
 	}
 	private final static BigDecimal ONE = new BigDecimal(1.0);
 	public static BigDecimal getRandomPriceChangeFactor() {
-		//stocks are equally likely to go up or down
-		double percentGain = rndFloat(1) + 0.5;
-		// change factor is between +/- 50%
+		// CJB (DAYTRADER-25) - Vary change factor between 1.2 and 0.8
+		double percentGain = rndFloat(1) * 0.2;
+		if (random() < .5)
+			percentGain *= -1;
+		percentGain += 1;
+
+		// change factor is between +/- 20%
 		BigDecimal percentGainBD =
 			(new BigDecimal(percentGain)).setScale(2, BigDecimal.ROUND_HALF_UP);
 		if (percentGainBD.doubleValue() <= 0.0)

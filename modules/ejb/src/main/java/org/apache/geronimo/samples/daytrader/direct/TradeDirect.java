@@ -1460,6 +1460,8 @@ public class TradeDirect implements TradeServices
 
 			if (oldPrice.equals(TradeConfig.PENNY_STOCK_PRICE)) {
 				changeFactor = TradeConfig.PENNY_STOCK_RECOVERY_MIRACLE_MULTIPLIER;
+			} else if (oldPrice.compareTo(TradeConfig.MAXIMUM_STOCK_PRICE) > 0) {
+				changeFactor = TradeConfig.MAXIMUM_STOCK_SPLIT_MULTIPLIER;
 			}
 
 			BigDecimal newPrice = changeFactor.multiply(oldPrice).setScale(2, BigDecimal.ROUND_HALF_UP);
