@@ -1,3 +1,4 @@
+#!/bin/bash
 #
 #   Licensed to the Apache Software Foundation (ASF) under one or more
 #   contributor license agreements.  See the NOTICE file distributed with
@@ -14,11 +15,16 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-export GERONIMO_HOME=~/geronimo/geronimo/modules/assembly/target/geronimo-1.0-SNAPSHOT
-rm  ${GERONIMO_HOME}/var/log/geronimo.log
+if [ "${JAVA_HOME}" = "" ]
+then
+  echo "Please define the JAVA_HOME environment variable."
+  exit
+fi
 
-java -Xdebug -Xnoagent -Xmx512m -Xms512m  -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005 -jar ${GERONIMO_HOME}/bin/server.jar $1
+if [ "${GERONIMO_HOME}" = "" ]
+then
+  echo "Please define the GERONIMO_HOME environment variable."
+  exit
+fi
 
-#java  -Xmx1024m -Xms1024m  -jar ${GERONIMO_HOME}/bin/server.jar org/apache/geronimo/DebugConsole
-
-# java  -Xmx1024m -Xms1024m  -jar ${GERONIMO_HOME}/bin/server.jar $1
+${JAVA_HOME}/bin/java -jar ${GERONIMO_HOME}/bin/deployer.jar --user system --password manager deploy daytrader-ear-1.2-SNAPSHOT.ear daytrader-1.2-beta-plan.xml

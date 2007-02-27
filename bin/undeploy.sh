@@ -15,6 +15,19 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-export GERONIMO_HOME=/home/hogstrom/geronimo/geronimo/modules/assembly/target/geronimo-1.0-SNAPSHOT
+if [ "${JAVA_HOME}" = "" ]
+then
+  echo "Please define the JAVA_HOME environment variable."
+  exit
+fi
 
-java -jar ${GERONIMO_HOME}/bin/deployer.jar --user system --password manager deploy dayTrader.ear dayTrader-plan-db2.xml
+if [ "${GERONIMO_HOME}" = "" ]
+then
+  echo "Please define the GERONIMO_HOME environment variable."
+  exit
+fi
+
+${JAVA_HOME}/bin/java -jar ${GERONIMO_HOME}/bin/deployer.jar --user system --password manager stop geronimo/daytrader/1.2-SNAPSHOT/car
+${JAVA_HOME}/bin/java -jar ${GERONIMO_HOME}/bin/deployer.jar --user system --password manager undeploy geronimo/daytrader/1.2-SNAPSHOT/car
+
+
