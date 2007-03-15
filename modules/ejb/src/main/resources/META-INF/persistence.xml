@@ -21,6 +21,7 @@
 
 
         <provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
+        <jta-data-source>jdbc/TradeDataSource</jta-data-source>
         <class>org.apache.geronimo.samples.daytrader.AccountDataBean</class>
         <class>org.apache.geronimo.samples.daytrader.AccountProfileDataBean</class>
         <class>org.apache.geronimo.samples.daytrader.HoldingDataBean</class>
@@ -31,6 +32,7 @@
             <property name="openjpa.jdbc.DBDictionary" value="org.apache.openjpa.jdbc.sql.DerbyDictionary"/>
             <!--<property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)"/>-->
             <!--<property name="openjpa.Sequence" value="table(Table=OPENJPASEQ, Increment=100)"/>-->
+            <!--<property name="openjpa.ConnectionDriverName" value="org.apache.derby.jdbc.EmbeddedDriver"/>-->
         </properties>
     </persistence-unit>
 </persistence>

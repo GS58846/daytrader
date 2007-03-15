@@ -16,10 +16,11 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 -->
-<web-app version="2.4"
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+<!--<web-app version="2.4"
 	xmlns="http://java.sun.com/xml/ns/j2ee"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">-->
 
       <display-name>DayTraderWeb</display-name>
       <filter>
@@ -270,7 +271,92 @@
          <display-name>org_apache_geronimo_samples_daytrader_TradeWSAction</display-name>
          <servlet-name>org_apache_geronimo_samples_daytrader_TradeWSAction</servlet-name>
          <servlet-class>org.apache.geronimo.samples.daytrader.TradeWSAction</servlet-class>
-      </servlet>                  
+      </servlet>
+      <servlet>
+        <servlet-name>PingSLSessionRemote</servlet-name>
+        <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.ejb3.PingSLSessionRemote</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PingSLSessionLocal</servlet-name>
+        <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.ejb3.PingSLSessionLocal</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PingSLSessionRemote2SLSessionLocal</servlet-name>
+        <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.ejb3.PingSLSessionLocal2SLSessionRemote</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PingSLSessionRemoteWithParameters</servlet-name>
+        <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.ejb3.PingSLSessionRemoteWithParameters</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PingSLSessionLocalWithParameters</servlet-name>
+        <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.ejb3.PingSLSessionLocalWithParameters</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PingSLSessionLocal2SLSessionRemote</servlet-name>
+        <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.ejb3.PingSLSessionLocal2SLSessionRemote</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PingSFSessionRemoteCreate</servlet-name>
+        <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.ejb3.PingSFSessionRemoteCreate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PingSFSessionRemoteUpdate</servlet-name>
+        <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.ejb3.PingSFSessionRemoteUpdate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PingSFSessionRemoteRemove</servlet-name>
+        <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.ejb3.PingSFSessionRemoteRemove</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PingServlet2Session2Entity</servlet-name>
+        <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.ejb3.PingServlet2Session2Entity</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PingServlet2Session2EntityOneToOneLazy</servlet-name>
+        <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.ejb3.PingServlet2Session2EntityOneToOneLazy</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PingServlet2Session2EntityOneToOneEager</servlet-name>
+        <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.ejb3.PingServlet2Session2EntityOneToOneEager</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PingServlet2Session2EntityOneToManyLazy</servlet-name>
+        <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.ejb3.PingServlet2Session2EntityOneToManyLazy</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PingServlet2Session2EntityOneToManyEager</servlet-name>
+        <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.ejb3.PingServlet2Session2EntityOneToManyEager</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PingServlet2Session2EntityOneToManyTrueEager</servlet-name>
+        <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.ejb3.PingServlet2Session2EntityOneToManyTrueEager</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PingServlet2Session2EntityOneToManyToOneLazy</servlet-name>
+        <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.ejb3.PingServlet2Session2EntityOneToManyToOneLazy</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PingServlet2Session2EntityOneToOneToMany</servlet-name>
+        <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.ejb3.PingServlet2Session2EntityOneToOneToMany</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PingServlet2Session2EntityOneToManyToOneEager</servlet-name>
+        <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.ejb3.PingServlet2Session2EntityOneToManyToOneEager</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PingServlet2Session2EJBCreate</servlet-name>
+        <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.ejb3.PingServlet2Session2EJBCreate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PingServlet2Session2EJBDestroy</servlet-name>
+        <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.ejb3.PingServlet2Session2EJBDestroy</servlet-class>
+    </servlet>
+    <servlet><servlet-name>PingServlet2Session2EJBUpdate</servlet-name><servlet-class>org.apache.geronimo.samples.daytrader.web.prims.ejb3.PingServlet2Session2EJBUpdate</servlet-class></servlet><servlet><servlet-name>PingServlet2UnmanagedEntity</servlet-name><servlet-class>org.apache.geronimo.samples.daytrader.web.prims.ejb3.PingServlet2UnmanagedEntity</servlet-class></servlet>
+    <servlet>
+        <servlet-name>PingServlet2Session2MDB</servlet-name>
+        <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.ejb3.PingServlet2Session2MDB</servlet-class>
+    </servlet>               
 
       <!-- [INSERT FRAGMENT HERE] -->
 
@@ -393,7 +479,96 @@
       <servlet-mapping>
          <servlet-name>PingServlet2Include</servlet-name>
          <url-pattern>/servlet/PingServlet2Include</url-pattern>
-      </servlet-mapping>                 
+      </servlet-mapping>
+      <servlet-mapping>
+        <servlet-name>PingSLSessionRemote</servlet-name>
+        <url-pattern>/PingSLSessionRemote</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PingSLSessionLocal</servlet-name>
+        <url-pattern>/PingSLSessionLocal</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PingSLSessionRemote2SLSessionLocal</servlet-name>
+        <url-pattern>/PingSLSessionRemote2SLSessionLocal</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PingSLSessionRemoteWithParameters</servlet-name>
+        <url-pattern>/PingSLSessionRemoteWithParameters</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PingSLSessionLocalWithParameters</servlet-name>
+        <url-pattern>/PingSLSessionLocalWithParameters</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PingSLSessionLocal2SLSessionRemote</servlet-name>
+        <url-pattern>/PingSLSessionLocal2SLSessionRemote</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PingSFSessionRemoteCreate</servlet-name>
+        <url-pattern>/PingSFSessionRemoteCreate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PingSFSessionRemoteUpdate</servlet-name>
+        <url-pattern>/PingSFSessionRemoteUpdate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PingSFSessionRemoteRemove</servlet-name>
+        <url-pattern>/PingSFSessionRemoteRemove</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PingServlet2Session2Entity</servlet-name>
+        <url-pattern>/PingServlet2Session2Entity</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PingServlet2Session2EntityOneToOneLazy</servlet-name>
+        <url-pattern>/PingServlet2Session2EntityOneToOneLazy</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PingServlet2Session2EntityOneToOneEager</servlet-name>
+        <url-pattern>/PingServlet2Session2EntityOneToOneEager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PingServlet2Session2EntityOneToManyLazy</servlet-name>
+        <url-pattern>/PingServlet2Session2EntityOneToManyLazy</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PingServlet2Session2EntityOneToManyEager</servlet-name>
+        <url-pattern>/PingServlet2Session2EntityOneToManyEager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PingServlet2Session2EntityOneToManyTrueEager</servlet-name>
+        <url-pattern>/PingServlet2Session2EntityOneToManyTrueEager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PingServlet2Session2EntityOneToManyToOneLazy</servlet-name>
+        <url-pattern>/PingServlet2Session2EntityOneToManyToOneLazy</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PingServlet2Session2EntityOneToOneToMany</servlet-name>
+        <url-pattern>/PingServlet2Session2EntityOneToOneToMany</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PingServlet2Session2EntityOneToManyToOneEager</servlet-name>
+        <url-pattern>/PingServlet2Session2EntityOneToManyToOneEager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PingServlet2Session2EJBCreate</servlet-name>
+        <url-pattern>/PingServlet2Session2EJBCreate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PingServlet2Session2EJBDestroy</servlet-name>
+        <url-pattern>/PingServlet2Session2EJBDestroy</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping><servlet-name>PingServlet2Session2EJBUpdate</servlet-name><url-pattern>/PingServlet2Session2EJBUpdate</url-pattern></servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PingServlet2UnmanagedEntity</servlet-name>
+        <url-pattern>/PingServlet2UnmanagedEntity</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PingServlet2Session2MDB</servlet-name>
+        <url-pattern>/PingServlet2Session2MDB</url-pattern>
+    </servlet-mapping>               
       <session-config>
          <session-timeout>30</session-timeout>
       </session-config>

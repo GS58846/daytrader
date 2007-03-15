@@ -18,33 +18,35 @@ package org.apache.geronimo.samples.daytrader;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Collection;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Version;
-import javax.persistence.Table;
-import javax.persistence.Column;
+import javax.persistence.*;
 
 import org.apache.geronimo.samples.daytrader.util.Log;
 
 @Entity(name = "quoteejb")
 @Table(name = "quoteejb")
 @NamedQueries({
-@NamedQuery(name = "allQuotes",
-        query = "SELECT q FROM quoteejb q"),
-@NamedQuery(name = "quotesByChange",
-        query = "SELECT q FROM quoteejb q WHERE q.symbol LIKE 's:1__' ORDER BY q.change1 DESC")
-        })
+    @NamedQuery(name = "allQuotes",query = "SELECT q FROM quoteejb q"),
+    @NamedQuery(name = "quotesByChange",query = "SELECT q FROM quoteejb q WHERE q.symbol LIKE 's:1__' ORDER BY q.change1 DESC"),
+    @NamedQuery(name = "quoteejb.findByLow", query = "SELECT q FROM quoteejb q WHERE q.low = :low"),
+    @NamedQuery(name = "quoteejb.findByOpen1", query = "SELECT q FROM quoteejb q WHERE q.open1 = :open1"),
+    @NamedQuery(name = "quoteejb.findByVolume", query = "SELECT q FROM quoteejb q WHERE q.volume = :volume"),
+    @NamedQuery(name = "quoteejb.findByPrice", query = "SELECT q FROM quoteejb q WHERE q.price = :price"),
+    @NamedQuery(name = "quoteejb.findByHigh", query = "SELECT q FROM quoteejb q WHERE q.high = :high"),
+    @NamedQuery(name = "quoteejb.findByCompanyname", query = "SELECT q FROM quoteejb q WHERE q.companyname = :companyname"),
+    @NamedQuery(name = "quoteejb.findBySymbol", query = "SELECT q FROM quoteejb q WHERE q.symbol = :symbol"),
+    @NamedQuery(name = "quoteejb.findByChange1", query = "SELECT q FROM quoteejb q WHERE q.change1 = :change1")
+})
+@NamedNativeQueries({
+    @NamedNativeQuery(name="quoteejb.quoteForUpdate", query="select * from quoteejb q where q.symbol=? for update",resultClass=org.apache.geronimo.samples.daytrader.QuoteDataBean.class)
+})
 public class QuoteDataBean implements Serializable {
 
     /* Accessor methods for persistent fields */
 
     @Id
-    @Column(length = 250)
     private String symbol;         /* symbol */
-    @Column(length = 250)
     private String companyName; /* companyName */
     private double volume;         /* volume */
     private BigDecimal price;     /* price */
@@ -52,6 +54,8 @@ public class QuoteDataBean implements Serializable {
     private BigDecimal low;     /* low price */
     private BigDecimal high;    /* high price */
     private double change1;     /* price change */
+    @OneToMany(mappedBy = "quote")
+    private Collection<OrderDataBean> orders;
 //    @Version
 //    private Integer optLock;
 

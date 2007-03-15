@@ -21,17 +21,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
-import javax.persistence.Version;
-import javax.persistence.Table;
-import javax.persistence.Column;
-import javax.persistence.Transient;
+import javax.persistence.*;
 
 import org.apache.geronimo.samples.daytrader.util.Log;
 
@@ -51,23 +41,35 @@ import org.apache.geronimo.samples.daytrader.util.Log;
 public class OrderDataBean implements Serializable
 {
 
-    @Id
-    @GeneratedValue
+    @TableGenerator(
+            name="orderIdGen",
+            table="KEYGENEJB",
+            pkColumnName="KEYNAME",
+            valueColumnName="KEYVAL",
+            pkColumnValue="order",
+            allocationSize=1000)
+   @Id
+   @GeneratedValue(strategy=GenerationType.TABLE,
+            generator="orderIdGen")
+    @Column(nullable = false)        
     private Integer		orderID;			/* orderID */
-    @Column(length=250)
     private String		orderType;			/* orderType (buy, sell, etc.) */
-    @Column(length=250)
     private String		orderStatus;		/* orderStatus (open, processing, completed, closed, cancelled) */
+    @Temporal(TemporalType.TIMESTAMP)
     private Date		openDate;			/* openDate (when the order was entered) */
+    @Temporal(TemporalType.TIMESTAMP)
     private Date		completionDate;		/* completionDate */
     private double	quantity;			/* quantity */
     private BigDecimal	price;				/* price */
     private BigDecimal	orderFee;			/* price */
     @ManyToOne
+    @JoinColumn(name="ACCOUNT_ACCOUNTID")
     private AccountDataBean account;
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name="QUOTE_SYMBOL")
     private QuoteDataBean quote;
     @OneToOne
+    @JoinColumn(name = "HOLDING_HOLDINGID")
     private HoldingDataBean holding;
 //    @Version
 //    private Integer optLock;

@@ -20,16 +20,8 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
-import javax.persistence.Version;
-import javax.persistence.Table;
-import javax.persistence.Column;
-import javax.persistence.Transient;
+import javax.persistence.*;
+
 
 import org.apache.geronimo.samples.daytrader.util.Log;
 
@@ -44,18 +36,30 @@ public class HoldingDataBean
 
     /* persistent/relationship fields */
 
+    @TableGenerator(
+            name="holdingIdGen",
+            table="KEYGENEJB",
+            pkColumnName="KEYNAME",
+            valueColumnName="KEYVAL",
+            pkColumnValue="holding",
+            allocationSize=1000)
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.TABLE,
+            generator="holdingIdGen")
+    @Column(nullable = false)
     private Integer holdingID;            /* holdingID */
     private double quantity;            /* quantity */
     private BigDecimal purchasePrice;        /* purchasePrice */
+    @Temporal(TemporalType.TIMESTAMP)
     private Date purchaseDate;        /* purchaseDate */
-//    @Column(length = 250)
     @Transient
     private String quoteID;            /* Holding(*)  ---> Quote(1) */
-    @OneToOne
+    
+    @ManyToOne
+    @JoinColumn(name="ACCOUNT_ACCOUNTID")
     private AccountDataBean account;
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "QUOTE_SYMBOL")
     private QuoteDataBean quote;
 
 //    @Version
