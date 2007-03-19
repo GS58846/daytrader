@@ -21,41 +21,54 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Date;
-
 import javax.ejb.EJBException;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Version;
-import javax.persistence.Table;
-import javax.persistence.JoinColumn;
-import javax.persistence.Column;
-import javax.persistence.Transient;
+
+import javax.persistence.*;
 
 import org.apache.geronimo.samples.daytrader.util.Log;
 
 @Entity(name = "accountejb")
 @Table(name = "accountejb")
+@NamedQueries( {
+        @NamedQuery(name = "accountejb.findByCreationdate", query = "SELECT a FROM accountejb a WHERE a.creationdate = :creationdate"),
+        @NamedQuery(name = "accountejb.findByOpenbalance", query = "SELECT a FROM accountejb a WHERE a.openbalance = :openbalance"),
+        @NamedQuery(name = "accountejb.findByLogoutcount", query = "SELECT a FROM accountejb a WHERE a.logoutcount = :logoutcount"),
+        @NamedQuery(name = "accountejb.findByBalance", query = "SELECT a FROM accountejb a WHERE a.balance = :balance"),
+        @NamedQuery(name = "accountejb.findByAccountid", query = "SELECT a FROM accountejb a WHERE a.accountid = :accountid"),
+        @NamedQuery(name = "accountejb.findByAccountid_eager", query = "SELECT a FROM accountejb a LEFT JOIN FETCH a.accountProfile WHERE a.accountid = :accountid"),
+        @NamedQuery(name = "accountejb.findByAccountid_eagerholdings", query = "SELECT a FROM accountejb a LEFT JOIN FETCH a.holdings WHERE a.accountid = :accountid"),
+        @NamedQuery(name = "accountejb.findByLastlogin", query = "SELECT a FROM accountejb a WHERE a.lastlogin = :lastlogin"),
+        @NamedQuery(name = "accountejb.findByLogincount", query = "SELECT a FROM accountejb a WHERE a.logincount = :logincount")
+    })
 public class AccountDataBean implements Serializable {
 
     /* Accessor methods for persistent fields */
+    @TableGenerator(
+            name="accountIdGen",
+            table="KEYGENEJB",
+            pkColumnName="KEYNAME",
+            valueColumnName="KEYVAL",
+            pkColumnValue="account",
+            allocationSize=1000)
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.TABLE,
+            generator="accountIdGen")
+    @Column(nullable = false)
     private Integer accountID;         /* accountID */
     private int loginCount;     /* loginCount */
     private int logoutCount;     /* logoutCount */
+    @Temporal(TemporalType.TIMESTAMP)
     private Date lastLogin;         /* lastLogin Date */
+    @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;     /* creationDate */
     private BigDecimal balance;         /* balance */
     private BigDecimal openBalance;     /* open balance */
-    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "account")
     private Collection<OrderDataBean> orders;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "PROFILE_USERID", referencedColumnName = "USERID")
-    @Column(length = 250)
+    @OneToMany(mappedBy = "account")
+    private Collection<HoldingDataBean> holdings;
+    @OneToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="PROFILE_USERID")
     private AccountProfileDataBean profile;
 //    @Version
 //    private Integer optLock;
@@ -301,6 +314,14 @@ public class AccountDataBean implements Serializable {
 
     public void setOrders(Collection<OrderDataBean> orders) {
         this.orders = orders;
+    }
+    
+    public Collection<HoldingDataBean> getHoldings() {
+        return holdings;
+    }
+
+    public void setHoldings(Collection<HoldingDataBean> holdings) {
+        this.holdings = holdings;
     }
 
     public AccountProfileDataBean getProfile() {

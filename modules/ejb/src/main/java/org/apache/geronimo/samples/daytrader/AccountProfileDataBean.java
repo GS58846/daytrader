@@ -16,36 +16,33 @@
  */
 package org.apache.geronimo.samples.daytrader;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Version;
-import javax.persistence.Table;
-import javax.persistence.Column;
+import javax.persistence.*;
 
 import org.apache.geronimo.samples.daytrader.util.Log;
 
 @Entity(name = "accountprofileejb")
 @Table(name = "accountprofileejb")
+@NamedQueries( {
+        @NamedQuery(name = "accountprofileejb.findByAddress", query = "SELECT a FROM accountprofileejb a WHERE a.address = :address"),
+        @NamedQuery(name = "accountprofileejb.findByPasswd", query = "SELECT a FROM accountprofileejb a WHERE a.passwd = :passwd"),
+        @NamedQuery(name = "accountprofileejb.findByUserid", query = "SELECT a FROM accountprofileejb a WHERE a.userid = :userid"),
+        @NamedQuery(name = "accountprofileejb.findByEmail", query = "SELECT a FROM accountprofileejb a WHERE a.email = :email"),
+        @NamedQuery(name = "accountprofileejb.findByCreditcard", query = "SELECT a FROM accountprofileejb a WHERE a.creditcard = :creditcard"),
+        @NamedQuery(name = "accountprofileejb.findByFullname", query = "SELECT a FROM accountprofileejb a WHERE a.fullname = :fullname")
+    })
 public class AccountProfileDataBean
         implements java.io.Serializable {
 
     /* Accessor methods for persistent fields */
 
     @Id
-    @GeneratedValue
-    @Column(length=250)
+    //@GeneratedValue
+    @Column(nullable = false)
     private String userID;                /* userID */
-    @Column(length=250)
     private String passwd;            /* password */
-    @Column(length=250)
     private String fullName;            /* fullName */
-    @Column(length=250)
     private String address;            /* address */
-    @Column(length=250)
     private String email;                /* email */
-    @Column(length=250)
     private String creditCard;            /* creditCard */
     @OneToOne(mappedBy="profile")
     private AccountDataBean account;
