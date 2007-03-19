@@ -25,7 +25,7 @@
     <parent>
         <groupId>org.apache.geronimo.genesis.config</groupId>
         <artifactId>project-config</artifactId>
-        <version>1.1-SNAPSHOT</version>
+        <version>1.1</version>
     </parent>
     
     <groupId>org.apache.geronimo.daytrader</groupId>
@@ -33,7 +33,7 @@
     <name>DayTrader :: Performance Benchmark Sample</name>
     <packaging>pom</packaging>
     <version>2.0-SNAPSHOT</version>
-    <description>J2EE 1.4 Performance Benchmark Sample Application</description>
+    <description>Java EE 5.0 Performance Benchmark Sample Application</description>
     <issueManagement>
         <system>jira</system>
         <url>http://issues.apache.org/jira/browse/GERONIMO</url>
@@ -53,6 +53,15 @@
 
     <developers>
         <developer>
+            <name>Christopher Blythe</name>
+            <id>chblythe</id>
+            <email>cjblythe@apache.org</email>
+            <roles>
+                <role>Developer of many features.</role>
+            </roles>
+            <timezone>-5</timezone>
+        </developer>
+        <developer>
             <name>Jeff Genender</name>
             <id>jgenender</id>
             <email>jgenender@apache.org</email>
@@ -60,7 +69,7 @@
             <roles>
                 <role>Development</role>
             </roles>
-            <timezone>+7</timezone>
+            <timezone>-7</timezone>
         </developer>
         <developer>
             <name>Matt Hogstrom</name>
@@ -70,7 +79,7 @@
             <roles>
                 <role>Performance Analysis</role>
             </roles>
-            <timezone>+5</timezone>
+            <timezone>-5</timezone>
         </developer>
         <developer>
             <name>Vincent Massol</name>
@@ -85,24 +94,18 @@
     </developers>
     <contributors>
         <contributor>
-            <name>Christopher Blythe</name>
-            <roles>
-                <role>Added code to improve stability and new features</role>
-            </roles>
-        </contributor>
-        <contributor>
             <name>Stan (John) Cox</name>
             <roles>
                 <role>Original Developer</role>
             </roles>
-            <timezone>+5</timezone>
+            <timezone>-5</timezone>
         </contributor>
         <contributor>
             <name>Andrew Spyker</name>
             <roles>
                 <role>Added the WSAppClient</role>
             </roles>
-            <timezone>+5</timezone>
+            <timezone>-5</timezone>
         </contributor>
     </contributors>
     <dependencies/>
