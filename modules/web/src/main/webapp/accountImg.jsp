@@ -232,6 +232,7 @@ while (it.hasNext()) {
 					</TR>
 				</TBODY>
 			</TABLE>
+            <FORM>
 			<TABLE width="100%">
 				<TBODY>
 					<TR>
@@ -289,6 +290,7 @@ while (it.hasNext()) {
 					</TR>
 				</TBODY>
 			</TABLE>
+            </FORM>
 			</TD>
 		</TR>
 	</TBODY>

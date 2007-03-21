@@ -221,6 +221,7 @@ Iterator it = closedOrders.iterator();
 					</TR>
 				</TBODY>
 			</TABLE>
+            <FORM>
 			<TABLE width="100%">
 				<TBODY>
 					<TR>
@@ -278,6 +279,7 @@ Iterator it = closedOrders.iterator();
 					</TR>
 				</TBODY>
 			</TABLE>
+            </FORM>
 			</TD>
 		</TR>
 	</TBODY>
