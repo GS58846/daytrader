@@ -23,7 +23,7 @@ public class PingServlet2Session2MDB extends HttpServlet {
     @EJB
     private LocalSLMDBTestRemote mdbTestRemote;
     
-    @Resource(mappedName="jms/TradeBrokerQCF")
+    @Resource(name="jms/TradeBrokerQCF")
     private QueueConnectionFactory queueConnectionFactory;
     
     static String html1 = "<html><head><title>Servlet PingServlet2Session2MDB</title><LINK href=\"prim.css\" rel=\"stylesheet\" type=\"text/css\" /></head><body><h1>Servlet PingSLSessionLocal</h1>";
