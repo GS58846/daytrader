@@ -14,7 +14,6 @@ import javax.servlet.http.*;
 
 /**
  *
- * @author jstecher
  * @version
  */
 public class PingServlet2Session2EntityOneToOneEager extends HttpServlet {

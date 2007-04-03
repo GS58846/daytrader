@@ -23,7 +23,6 @@ import javax.transaction.SystemException;
 
 /**
  *
- * @author jstecher
  * @version
  */
 public class PingServlet2Session2EntityOneToOneLazy extends HttpServlet {

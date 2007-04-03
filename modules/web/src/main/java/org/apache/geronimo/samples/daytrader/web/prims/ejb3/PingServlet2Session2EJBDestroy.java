@@ -11,7 +11,6 @@ import javax.servlet.http.*;
 
 /**
  *
- * @author Rob
  * @version
  */
 public class PingServlet2Session2EJBDestroy extends HttpServlet {

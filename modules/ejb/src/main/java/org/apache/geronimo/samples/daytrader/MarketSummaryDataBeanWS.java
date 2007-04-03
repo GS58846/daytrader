@@ -26,7 +26,6 @@ import org.apache.geronimo.samples.daytrader.util.Log;
 
 /**
  * 
- * @author aspyker
  *
  * This is a duplicate MarketSummaryDataBean to handle web service handling
  * of collections.  Instead this class uses typed arrays.

@@ -16,7 +16,6 @@ import javax.servlet.http.*;
 
 /**
  *
- * @author Administrator
  * @version
  */
 public class PingServlet2Session2MDB extends HttpServlet {

@@ -20,7 +20,6 @@ import java.math.BigDecimal;
 import java.rmi.RemoteException;
 
 /**
- * @author aspyker
  *
  * This is a TradeAction wrapper to handle web service handling
  * of collections.  Instead this class uses typed arrays.

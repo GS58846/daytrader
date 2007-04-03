@@ -8,7 +8,6 @@ import javax.ejb.Stateless;
 
 /**
  *
- * @author jstecher
  */
 @Stateless
 public class RemoteSLTestBean implements RemoteSLTestRemote {

@@ -1,10 +1,7 @@
 package org.apache.geronimo.samples.daytrader.ejb3.prims;
 
 import org.apache.geronimo.samples.daytrader.ejb3.Accountejb3;
-import org.apache.geronimo.samples.daytrader.ejb3.Holdingejb3;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Collection;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

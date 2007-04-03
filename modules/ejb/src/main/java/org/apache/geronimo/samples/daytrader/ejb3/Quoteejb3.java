@@ -10,7 +10,6 @@ import javax.persistence.Table;
 /**
  * Entity class Quoteejb3
  * 
- * @author Rob
  */
 @Entity
 @Table(name = "QUOTEEJB")

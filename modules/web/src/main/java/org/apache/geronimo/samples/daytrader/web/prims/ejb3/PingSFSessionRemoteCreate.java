@@ -13,7 +13,6 @@ import javax.servlet.http.*;
 
 /**
  *
- * @author jstecher
  * @version
  */
 //@EJB (beanInterface=LocalSFTestLocal.class, beanName="LocalSFTestBean", name="SFTestLocal")

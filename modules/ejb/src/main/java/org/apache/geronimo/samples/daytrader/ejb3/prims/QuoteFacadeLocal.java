@@ -7,7 +7,6 @@ import javax.ejb.Local;
 
 /**
  *
- * @author Rob
  */
 @Local
 public interface QuoteFacadeLocal {

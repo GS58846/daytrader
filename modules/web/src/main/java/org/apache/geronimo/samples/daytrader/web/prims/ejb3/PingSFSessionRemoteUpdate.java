@@ -10,7 +10,6 @@ import javax.servlet.http.*;
 
 /**
  *
- * @author jstecher
  * @version
  */
 public class PingSFSessionRemoteUpdate extends HttpServlet {

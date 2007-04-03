@@ -7,7 +7,6 @@ import javax.ejb.Stateless;
 
 /**
  *
- * @author jstecher
  */
 @Stateless
 public class LocalSLTestBean implements LocalSLTestLocal {

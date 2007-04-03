@@ -11,7 +11,6 @@ import javax.servlet.http.*;
 
 /**
  *
- * @author jstecher
  * @version
  */
 public class PingSLSessionLocal2SLSessionRemote extends HttpServlet {
