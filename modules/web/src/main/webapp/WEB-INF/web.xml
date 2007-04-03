@@ -424,7 +424,7 @@
 		</servlet-class>
 	</servlet>
 	<servlet>
-		<servlet-name>PingServlet2Session2Entity</servlet-name>
+		<servlet-name>PingServlet2Session2Entity3</servlet-name>
 		<servlet-class>
 			org.apache.geronimo.samples.daytrader.web.prims.ejb3.PingServlet2Session2Entity
 		</servlet-class>
@@ -607,6 +607,10 @@
 	<servlet-mapping>
 		<servlet-name>PingServlet2Session2Entity</servlet-name>
 		<url-pattern>/servlet/PingServlet2Session2Entity</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>PingServlet2Session2Entity3</servlet-name>
+		<url-pattern>/servlet/PingServlet2Session2Entity3</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>
