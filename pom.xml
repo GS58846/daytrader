@@ -21,13 +21,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    
+
     <parent>
         <groupId>org.apache.geronimo.genesis.config</groupId>
         <artifactId>project-config</artifactId>
-        <version>1.1</version>
+        <version>1.2-SNAPSHOT</version>
     </parent>
-    
+
     <groupId>org.apache.geronimo.daytrader</groupId>
     <artifactId>daytrader</artifactId>
     <name>DayTrader :: Performance Benchmark Sample</name>
@@ -194,20 +194,37 @@
 
         <plugins>
             <plugin>
-                <groupId>org.apache.geronimo.genesis.plugins</groupId>
-                <artifactId>tools-maven-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>validate-java-version</id>
                         <phase>validate</phase>
                         <goals>
-                            <goal>require-java-version</goal>
+                            <goal>enforce</goal>
                         </goals>
                         <configuration>
-                            <version>1.5*</version>
+                            <rules>
+                                <!-- Allow any Java >= 1.5, but not 1.6 or above -->
+                                <requireJavaVersion>
+                                    <version>[1.5,1.6)</version>
+                                </requireJavaVersion>
+
+                                <!-- Allow any Maven >= 2.0.5 -->
+                                <requireMavenVersion>
+                                    <version>[2.0.5,)</version>
+                                </requireMavenVersion>
+                            </rules>
                         </configuration>
                     </execution>
+                </executions>
+            </plugin>
 
+            <plugin>
+                <groupId>org.apache.geronimo.genesis.plugins</groupId>
+                <artifactId>tools-maven-plugin</artifactId>
+                <!-- Tools includes custom packagings, install as extension to pick them up -->
+                <extensions>true</extensions>
+                <executions>
                     <!--
                     NOTE: This will copy LICENSE.txt and NOTICE.txt to classes/META-INF.
 
@@ -221,6 +238,22 @@
                         <goals>
                             <goal>copy-legal-files</goal>
                         </goals>
+                        <configuration>
+                            <!-- Fail the build if no legal files were copied -->
+                            <strict>true</strict>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>verify-legal-files</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>verify-legal-files</goal>
+                        </goals>
+                        <!-- Do not Fail the build if no legal files were found
+                        <configuration>
+                            <strict>true</strict>
+                        </configuration>
+                        -->
                     </execution>
                 </executions>
             </plugin>
@@ -252,7 +285,7 @@
             </plugin>
         </plugins>
     </build>
-    
+
     <repositories>
         <!--
         NOTE: The default repositories are picked up by Genesis, but need to
@@ -273,7 +306,7 @@
             </releases>
         </repository>
     </repositories>
-    
+
     <profiles>
 
         <profile>
