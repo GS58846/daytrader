@@ -511,12 +511,12 @@
 			org.apache.geronimo.samples.daytrader.web.prims.ejb3.PingServlet2Session2EJBUpdate
 		</servlet-class>
 	</servlet>
-	<servlet>
+	<!--  servlet>
 		<servlet-name>PingServlet2UnmanagedEntity</servlet-name>
 		<servlet-class>
 			org.apache.geronimo.samples.daytrader.web.prims.ejb3.PingServlet2UnmanagedEntity
 		</servlet-class>
-	</servlet>
+	</servlet -->
 	<servlet>
 		<servlet-name>PingServlet2Session2MDB</servlet-name>
 		<servlet-class>
@@ -778,10 +778,10 @@
 		<servlet-name>PingServlet2Session2EJBUpdate</servlet-name>
 		<url-pattern>/PingServlet2Session2EJBUpdate</url-pattern>
 	</servlet-mapping>
-	<servlet-mapping>
+	<!--   servlet-mapping>
 		<servlet-name>PingServlet2UnmanagedEntity</servlet-name>
 		<url-pattern>/PingServlet2UnmanagedEntity</url-pattern>
-	</servlet-mapping>
+	</servlet-mapping -->
 	<servlet-mapping>
 		<servlet-name>PingServlet2Session2MDB</servlet-name>
 		<url-pattern>/PingServlet2Session2MDB</url-pattern>
