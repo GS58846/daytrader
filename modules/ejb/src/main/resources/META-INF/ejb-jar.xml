@@ -333,7 +333,7 @@
                 <description/>
                 <use-caller-identity/>
             </security-identity>
-            <query id="Query_5">
+            <query>
                 <description/>
                 <query-method>
                     <method-name>findAll</method-name>
@@ -398,7 +398,7 @@
                 <description/>
                 <use-caller-identity/>
             </security-identity>
-            <query id="Query_6">
+            <query>
                 <description/>
                 <query-method>
                     <method-name>findAll</method-name>
@@ -435,7 +435,7 @@
                 <result-type-mapping>Local</result-type-mapping>
                 <ejb-ql>SELECT OBJECT(q) FROM Quote q WHERE q.symbol LIKE 's:1__' ORDER BY q.change DESC</ejb-ql>
             </query>
-            <query id="Query_10">
+            <query>
                 <description/>
                 <query-method>
                     <method-name>ejbSelectTotalVolume</method-name>
