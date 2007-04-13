@@ -13,7 +13,7 @@ import javax.persistence.Query;
 @Stateless
 public class QuoteFacade implements QuoteFacadeLocal {
 
-    @PersistenceContext
+    @PersistenceContext(unitName="daytrader")
     private EntityManager em;
     
     /** Creates a new instance of QuoteDataBeanFacade */

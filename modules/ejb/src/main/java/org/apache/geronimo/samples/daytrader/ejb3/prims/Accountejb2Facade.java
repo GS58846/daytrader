@@ -10,7 +10,7 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class Accountejb2Facade implements Accountejb2FacadeLocal {
 
-    @PersistenceContext
+    @PersistenceContext(unitName="daytrader")
     private EntityManager em;
     
     /** Creates a new instance of Accountejb2Facade */
