@@ -20,7 +20,7 @@ public class LocalSLMDBTestBean implements LocalSLMDBTestLocal, LocalSLMDBTestRe
     @Resource(name = "jms/TradeBrokerQCF")
     private ConnectionFactory queueConnectionFactory;
     
-    @Resource(name = "jms/TradeBrokerQueue")
+    @Resource(name = "TradeBrokerQueue")
     private Queue tradeBrokerQueue;
 
     /** Creates a new instance of LocalSLMDBTestBean */
