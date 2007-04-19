@@ -16,13 +16,9 @@
 	See the License for the specific language governing permissions and
 	limitations under the License.
 -->
-<!-- web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" version="2.5"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" -->
-	<web-app version="2.4"
-		xmlns="http://java.sun.com/xml/ns/j2ee"
-		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-		xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
 	<display-name>DayTraderWeb</display-name>
 	<filter>
@@ -514,9 +510,9 @@
 	<!--  servlet>
 		<servlet-name>PingServlet2UnmanagedEntity</servlet-name>
 		<servlet-class>
-			org.apache.geronimo.samples.daytrader.web.prims.ejb3.PingServlet2UnmanagedEntity
+		org.apache.geronimo.samples.daytrader.web.prims.ejb3.PingServlet2UnmanagedEntity
 		</servlet-class>
-	</servlet -->
+		</servlet -->
 	<servlet>
 		<servlet-name>PingServlet2Session2MDB</servlet-name>
 		<servlet-class>
@@ -781,7 +777,7 @@
 	<!--   servlet-mapping>
 		<servlet-name>PingServlet2UnmanagedEntity</servlet-name>
 		<url-pattern>/PingServlet2UnmanagedEntity</url-pattern>
-	</servlet-mapping -->
+		</servlet-mapping -->
 	<servlet-mapping>
 		<servlet-name>PingServlet2Session2MDB</servlet-name>
 		<url-pattern>/PingServlet2Session2MDB</url-pattern>
