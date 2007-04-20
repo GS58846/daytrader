@@ -7,7 +7,8 @@ import javax.jms.MessageListener;
 
 @MessageDriven(name = "TradeBrokerQueue", activationConfig =  {
         @ActivationConfigProperty(propertyName = "acknowledgeMode", propertyValue = "Auto-acknowledge"),
-        @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue")
+        @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue"),
+        @ActivationConfigProperty(propertyName = "destination", propertyValue = "TradeBrokerQueue")
     })
 public class TestMDB implements MessageListener {
     
