@@ -378,6 +378,35 @@
                         </activation-config-property>
                     </activation-config>
                 </message-driven>
+                
+                
+
+                <message-driven>
+                    <ejb-name>TradeBrokerQueue</ejb-name>
+                    <resource-adapter>
+                        <!--<resource-link>TradeJMS</resource-link>-->
+                        <resource-link>TradeJMSResources</resource-link>
+                    </resource-adapter>
+                    <activation-config>
+                        <activation-config-property>
+                            <activation-config-property-name>destinationType</activation-config-property-name>
+                            <activation-config-property-value>javax.jms.Queue</activation-config-property-value>
+                        </activation-config-property>
+                        <activation-config-property>
+                            <activation-config-property-name>destination</activation-config-property-name>
+                            <activation-config-property-value>TradeBrokerQueue</activation-config-property-value>
+                        </activation-config-property>
+                        <activation-config-property>
+                            <activation-config-property-name>acknowledgeMode</activation-config-property-name>
+                            <activation-config-property-value>Auto-acknowledge</activation-config-property-value>
+                        </activation-config-property>
+                        <activation-config-property>
+                            <activation-config-property-name>SubscriptionDurability</activation-config-property-name>
+                            <activation-config-property-value>NonDurable</activation-config-property-value>
+                        </activation-config-property>
+                    </activation-config>
+                </message-driven>
+
             </enterprise-beans>
 
             <!--
