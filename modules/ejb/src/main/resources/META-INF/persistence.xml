@@ -17,7 +17,7 @@
 -->
 <persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
 
-    <persistence-unit transaction-type="JTA" name="persistence/daytrader">
+    <persistence-unit transaction-type="JTA" name="daytrader">
 
 
         <provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
