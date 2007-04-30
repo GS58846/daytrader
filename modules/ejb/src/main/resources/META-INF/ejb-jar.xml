@@ -998,7 +998,7 @@
         		<method-intf>Remote</method-intf>
         		<method-name>publishQuotePriceChange</method-name>
         		<method-params>
-        			<method-param>com.ibm.websphere.samples.trade.QuoteDataBean</method-param>
+        			<method-param>org.apache.geronimo.samples.daytrader.QuoteDataBean</method-param>
         			<method-param>java.math.BigDecimal</method-param>
         			<method-param>java.math.BigDecimal</method-param>
         			<method-param>double</method-param>
