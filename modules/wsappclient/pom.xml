@@ -56,9 +56,9 @@
             to include a manual class-path entry pointing to the EJB module. When this is fixed
             remove the manifestEntries section below and this comment. -->
                     <archive>
-                        <manifestEntries>
+                        <!-- manifestEntries>
                             <class-path>dt-ejb.jar</class-path>
-                        </manifestEntries>
+                        </manifestEntries -->
                         <manifest>
                             <main-class>org.apache.geronimo.samples.daytrader.client.ws.ClientApp</main-class>
                         </manifest>
