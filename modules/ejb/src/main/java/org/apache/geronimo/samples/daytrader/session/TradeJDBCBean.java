@@ -144,6 +144,6 @@ public class TradeJDBCBean implements SessionBean {
 	}
 
 	public RunStatsDataBean resetTrade(boolean deleteAll) throws Exception, RemoteException {
-		return (new TradeDirect(true)).resetTrade(deleteAll);
+		return (new TradeDirect(false)).resetTrade(deleteAll);
 	}
 }
