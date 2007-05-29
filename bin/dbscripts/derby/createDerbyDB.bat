@@ -26,10 +26,11 @@ if not "%GERONIMO_HOME%" == "" goto GERONIMO_OK
 :GERONIMO_OK
 
 set DERBY_PATH=%GERONIMO_HOME%\repository\org\apache\derby
-set CLASSPATH=%DERBY_PATH%\derby\10.1.3.1\derby-10.1.3.1.jar
-set CLASSPATH=%CLASSPATH%;%DERBY_PATH%\derbynet\10.1.3.1\derbynet-10.1.3.1.jar
-set CLASSPATH=%CLASSPATH%;%DERBY_PATH%\derbytools\10.1.3.1\derbytools-10.1.3.1.jar
-set CLASSPATH=%CLASSPATH%;%DERBY_PATH%\derbyclient\10.1.3.1\derbyclient-10.1.3.1.jar
+set DERBY_VER=10.2.2.0
+set CLASSPATH=%DERBY_PATH%\derby\%DERBY_VER%\derby-%DERBY_VER%.jar
+set CLASSPATH=%CLASSPATH%;%DERBY_PATH%\derbynet\%DERBY_VER%\derbynet-%DERBY_VER%.jar
+set CLASSPATH=%CLASSPATH%;%DERBY_PATH%\derbytools\%DERBY_VER%\derbytools-%DERBY_VER%.jar
+set CLASSPATH=%CLASSPATH%;%DERBY_PATH%\derbyclient\%DERBY_VER%\derbyclient-%DERBY_VER%.jar
 
 @echo "Invoking IJ command line tool to create the database and tables...please wait"
 
