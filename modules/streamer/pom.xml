@@ -63,7 +63,7 @@
         </dependency>
         <dependency>
             <groupId>org.apache.openjpa</groupId>
-            <artifactId>openjpa-all</artifactId>
+            <artifactId>openjpa</artifactId>
             <scope>provided</scope>
         </dependency>
     </dependencies>
