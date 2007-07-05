@@ -869,6 +869,7 @@
 		<ejb-link>AccountEJB</ejb-link>
 	</ejb-local-ref>
 	<message-destination-ref>
+	    <!--  This is the JNDI name of where the resource will appear -->
 		<message-destination-ref-name>
 			jms/TradeBrokerQueue
 		</message-destination-ref-name>
@@ -876,8 +877,9 @@
 			javax.jms.Queue
 		</message-destination-type>
 		<message-destination-usage>Produces</message-destination-usage>
+		<!--  Must match the message-destination defined later  -->
 		<message-destination-link>
-			dt-ejb.jar#TradeBrokerQueue
+			dt-ejb.jar#jms/TradeBrokerQueue
 		</message-destination-link>
 	</message-destination-ref>
 	<message-destination-ref>
@@ -889,7 +891,7 @@
 		</message-destination-type>
 		<message-destination-usage>Produces</message-destination-usage>
 		<message-destination-link>
-			dt-ejb.jar#TradeStreamerTopic
+			dt-ejb.jar#jms/TradeStreamerTopic
 		</message-destination-link>
 	</message-destination-ref>
 	<service-ref>

@@ -16,6 +16,7 @@
  */
 package org.apache.geronimo.samples.daytrader.ejb;
 
+import javax.annotation.Resource;
 import javax.ejb.*;
 import javax.jms.*;
 import javax.naming.*;
@@ -41,8 +42,13 @@ public class TradeBean implements SessionBean {
 	private LocalKeySequence keySequence;	
 	
 	private ConnectionFactory qConnFactory = null;
-	private Queue queue = null; 
+	
+	@Resource(name = "jms/TradeBrokerQueue") 
+	private Queue brokerQueue = null;
+	
 	private ConnectionFactory tConnFactory = null;
+	
+	@Resource(name = "jms/TradeStreamerTopic") 
 	private Topic streamerTopic = null; 
 
 	//Boolean to signify if the Order By clause is supported by the app server.
@@ -61,7 +67,7 @@ public class TradeBean implements SessionBean {
 		{
 			conn = qConnFactory.createConnection();                        
 			sess = conn.createSession(false, Session.AUTO_ACKNOWLEDGE);
-			MessageProducer msgProducer = sess.createProducer(queue);
+			MessageProducer msgProducer = sess.createProducer(brokerQueue);
 			TextMessage   message = sess.createTextMessage();
 
 			message.setStringProperty("command", "neworder");
@@ -984,7 +990,7 @@ public class TradeBean implements SessionBean {
 
 			conn = qConnFactory.createConnection();                        
 			sess = conn.createSession(false, Session.AUTO_ACKNOWLEDGE);
-			MessageProducer msgProducer = sess.createProducer(queue);
+			MessageProducer msgProducer = sess.createProducer(brokerQueue);
 			TextMessage   message = sess.createTextMessage();
 
 			String command= "ping";
@@ -1039,9 +1045,9 @@ public class TradeBean implements SessionBean {
 			try
 			{
 				qConnFactory = (ConnectionFactory) ic.lookup("java:comp/env/jms/QueueConnectionFactory");
-                 tConnFactory = (ConnectionFactory) ic.lookup("java:comp/env/jms/TopicConnectionFactory");
+                tConnFactory = (ConnectionFactory) ic.lookup("java:comp/env/jms/TopicConnectionFactory");
 				streamerTopic = (Topic) ic.lookup("java:comp/env/jms/TradeStreamerTopic");
-                 queue = (Queue) ic.lookup("java:comp/env/jms/TradeBrokerQueue");
+                brokerQueue = (Queue) ic.lookup("java:comp/env/jms/TradeBrokerQueue");
 			}
 			catch (Exception e)
 			{
@@ -1077,7 +1083,7 @@ public class TradeBean implements SessionBean {
 					"\n\t holdingHome="+ holdingHome+
 					"\n\t orderHome="+ orderHome+
 					"\n\t qConnFactory="+ qConnFactory+
-					"\n\t queue="+ queue+
+					"\n\t queue="+ brokerQueue+
 					"\n\t tConnFactory="+ tConnFactory+
 					"\n\t streamerTopic="+ streamerTopic;
 				Log.error(error);

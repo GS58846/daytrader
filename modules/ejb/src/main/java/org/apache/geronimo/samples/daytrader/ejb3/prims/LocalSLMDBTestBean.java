@@ -17,10 +17,10 @@ import javax.naming.NamingException;
 @Stateless
 public class LocalSLMDBTestBean implements LocalSLMDBTestLocal, LocalSLMDBTestRemote {
    
-    @Resource(name = "jms/TradeBrokerQCF")
+    @Resource(name = "jms/QueueConnectionFactory")
     private ConnectionFactory queueConnectionFactory;
     
-    @Resource(name = "TradeBrokerQueue")
+    @Resource(name = "jms/TradeBrokerQueue")
     private Queue tradeBrokerQueue;
 
     /** Creates a new instance of LocalSLMDBTestBean */
