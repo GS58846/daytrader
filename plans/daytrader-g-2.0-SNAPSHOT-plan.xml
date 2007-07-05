@@ -26,6 +26,14 @@
             <version>2.0-SNAPSHOT</version>
             <type>car</type>
         </moduleId>
+        <!--
+         **
+         ** The following section describes what other modules this application has dependencies on.  Since we will be 
+         ** accessing our tables using the internal Derby database we need the system-database dependency.  Also, JPA is 
+         ** used as a persistence mechanism so we have a dependency on the openjpa module as well.  
+         **
+         ** The dependency on Yoko is required but should be supplied by default.  This is just silly.
+        -->
         <dependencies>
             <dependency>
                 <groupId>org.apache.geronimo.configs</groupId>
@@ -40,7 +48,6 @@
             <dependency>
                 <groupId>org.apache.geronimo.configs</groupId>
                 <artifactId>j2ee-corba-yoko</artifactId>
-                <!-- version>1.2-SNAPSHOT</version -->
                 <type>car</type>
             </dependency>
         </dependencies>
@@ -73,7 +80,7 @@
     <module>
         <ejb>dt-ejb.jar</ejb>
         <!--  Note this must match the -->
-        <openejb-jar xmlns="http://www.openejb.org/xml/ns/openejb-jar-2.1">
+        <openejb-jar xmlns="http://openejb.apache.org/xml/ns/openejb-jar-2.2">
 
 
             <!--
@@ -86,14 +93,17 @@
             <cmp-connection-factory>
                 <resource-link>jdbc/TradeDataSource</resource-link>
             </cmp-connection-factory>
-            <!--            <ejb-ql-compiler-factory>com.tranql.sql.ejbcompiler.DB2EJBQLCompilerFactory</ejb-ql-compiler-factory>  -->
-            <!--            <db-syntax-factory>com.tranql.sql.db2.DB2DBSyntaxFactory</db-syntax-factory>  -->
 
             <enterprise-beans>
                 <session>
                     <ejb-name>TradeEJB</ejb-name>
                     <jndi-name>ejb/TradeEJB</jndi-name>
+                    <!-- resource-env-ref>
+                        <ref-name>jms/TradeBrokerQueue</ref-name>
+                        <message-destination-link>jms/TradeBrokerQueue</message-destination-link>
+                    </resource-env-ref -->
                 </session>
+                
                 <session>
                     <ejb-name>TradeJPA</ejb-name>
                     <persistence-context-ref>
@@ -102,6 +112,7 @@
                         <persistence-context-type>Transactional</persistence-context-type>
                     </persistence-context-ref>
                 </session>
+                
                 <session>
                     <ejb-name>KeySequenceEJB</ejb-name>
                     <jndi-name>ejb/KeySequenceEJB</jndi-name>
@@ -112,8 +123,6 @@
                 <!--
                 ##
                 ##  H o l d i n g E J B
-                ##
-                ##
                 ##
                 -->
                 <entity>
@@ -141,8 +150,6 @@
                 <!--
                 ##
                 ##  A c c o u n t P r o f i l e E J B
-                ##
-                ##
                 ##
                 -->
                 <entity>
@@ -178,8 +185,6 @@
                 <!--
                 ##
                 ##  Q u o t e E J B
-                ##
-                ##
                 ##
                 -->
                 <entity>
@@ -224,8 +229,6 @@
                 ##
                 ##  K e y G e n E J B
                 ##
-                ##
-                ##
                 -->
                 <entity>
                     <ejb-name>KeyGenEJB</ejb-name>
@@ -244,8 +247,6 @@
                 <!--
                 ##
                 ##  A c c o u n t E J B
-                ##
-                ##
                 ##
                 -->
                 <entity>
@@ -285,8 +286,6 @@
                 <!--
                 ##
                 ##  O r d e r E J B
-                ##
-                ##
                 ##
                 -->
                 <entity>
@@ -330,7 +329,6 @@
                 <message-driven>
                     <ejb-name>TradeStreamerMDB</ejb-name>
                     <resource-adapter>
-                        <!--<resource-link>TradeJMS</resource-link>-->
                         <resource-link>TradeJMSResources</resource-link>
                     </resource-adapter>
                     <activation-config>
@@ -340,7 +338,7 @@
                         </activation-config-property>
                         <activation-config-property>
                             <activation-config-property-name>destination</activation-config-property-name>
-                            <activation-config-property-value>TradeStreamerQueue</activation-config-property-value>
+                            <activation-config-property-value>jms/TradeStreamerTopic</activation-config-property-value>
                         </activation-config-property>
                         <activation-config-property>
                             <activation-config-property-name>acknowledgeMode</activation-config-property-name>
@@ -366,7 +364,7 @@
                         </activation-config-property>
                         <activation-config-property>
                             <activation-config-property-name>destination</activation-config-property-name>
-                            <activation-config-property-value>TradeBrokerQueue</activation-config-property-value>
+                            <activation-config-property-value>jms/TradeBrokerQueue</activation-config-property-value>
                         </activation-config-property>
                         <activation-config-property>
                             <activation-config-property-name>acknowledgeMode</activation-config-property-name>
@@ -378,35 +376,6 @@
                         </activation-config-property>
                     </activation-config>
                 </message-driven>
-                
-                
-
-                <message-driven>
-                    <ejb-name>TradeBrokerQueue</ejb-name>
-                    <resource-adapter>
-                        <!--<resource-link>TradeJMS</resource-link>-->
-                        <resource-link>TradeJMSResources</resource-link>
-                    </resource-adapter>
-                    <activation-config>
-                        <activation-config-property>
-                            <activation-config-property-name>destinationType</activation-config-property-name>
-                            <activation-config-property-value>javax.jms.Queue</activation-config-property-value>
-                        </activation-config-property>
-                        <activation-config-property>
-                            <activation-config-property-name>destination</activation-config-property-name>
-                            <activation-config-property-value>TradeBrokerQueue</activation-config-property-value>
-                        </activation-config-property>
-                        <activation-config-property>
-                            <activation-config-property-name>acknowledgeMode</activation-config-property-name>
-                            <activation-config-property-value>Auto-acknowledge</activation-config-property-value>
-                        </activation-config-property>
-                        <activation-config-property>
-                            <activation-config-property-name>SubscriptionDurability</activation-config-property-name>
-                            <activation-config-property-value>NonDurable</activation-config-property-value>
-                        </activation-config-property>
-                    </activation-config>
-                </message-driven>
-
             </enterprise-beans>
 
             <!--
@@ -741,26 +710,7 @@
                 </resourceadapter-instance>
                 <!-- defines a ConnectionFactory -->
                 <outbound-resourceadapter>
-                    <connection-definition>
-                        <connectionfactory-interface>javax.jms.ConnectionFactory</connectionfactory-interface>
-                        <connectiondefinition-instance>
-                            <name>jms/TradeBrokerQCF</name>
-                            <implemented-interface>javax.jms.QueueConnectionFactory</implemented-interface>
-                            <connectionmanager>
-                                <xa-transaction>
-                                    <transaction-caching/>
-                                </xa-transaction>
-                                <single-pool>
-                                    <max-size>50</max-size>
-                                    <min-size>0</min-size>
-                                    <blocking-timeout-milliseconds>5000</blocking-timeout-milliseconds>
-                                    <idle-timeout-minutes>0</idle-timeout-minutes>
-                                    <match-one/>
-                                </single-pool>
-                            </connectionmanager>
-                        </connectiondefinition-instance>
-                    </connection-definition>
-                    <connection-definition>
+	                    <connection-definition>
                         <connectionfactory-interface>javax.jms.ConnectionFactory</connectionfactory-interface>
                         <connectiondefinition-instance>
                             <name>jms/QueueConnectionFactory</name>
@@ -805,7 +755,7 @@
                 <adminobject-interface>javax.jms.Topic</adminobject-interface>
                 <adminobject-class>org.activemq.message.ActiveMQTopic</adminobject-class>
                 <adminobject-instance>
-                    <message-destination-name>TradeStreamerTopic</message-destination-name>
+                    <message-destination-name>jms/TradeStreamerTopic</message-destination-name>
                     <config-property-setting name="PhysicalName">TradeStreamerTopic</config-property-setting>
                 </adminobject-instance>
             </adminobject>
@@ -814,7 +764,7 @@
                 <adminobject-interface>javax.jms.Queue</adminobject-interface>
                 <adminobject-class>org.activemq.message.ActiveMQQueue</adminobject-class>
                 <adminobject-instance>
-                    <message-destination-name>TradeBrokerQueue</message-destination-name>
+                    <message-destination-name>jms/TradeBrokerQueue</message-destination-name>
                     <config-property-setting name="PhysicalName">TradeBrokerQueue</config-property-setting>
                 </adminobject-instance>
             </adminobject>
