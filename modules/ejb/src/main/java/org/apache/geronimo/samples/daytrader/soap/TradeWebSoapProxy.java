@@ -142,7 +142,7 @@ public class TradeWebSoapProxy implements org.apache.geronimo.samples.daytrader.
 	public Collection getClosedOrders(String userID) throws Exception, RemoteException {
 		Object[] orders = getTrade().getClosedOrders(userID);
 		ArrayList ordersRet = new ArrayList();
-		if (orders.length == 0) {
+		if (orders == null || orders.length == 0) {
 			return ordersRet;
 		}
 		for (int ii = 0; ii < orders.length; ii++) {
