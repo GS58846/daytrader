@@ -362,7 +362,7 @@
 			org_apache_geronimo_samples_daytrader_TradeWSAction
 		</servlet-name>
 		<servlet-class>
-			org.apache.geronimo.samples.daytrader.TradeWSAction
+			org.apache.geronimo.samples.daytrader.soap.TradeWSAction
 		</servlet-class>
 	</servlet>
 	<servlet>

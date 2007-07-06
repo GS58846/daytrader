@@ -28,7 +28,7 @@
 		<webservice-description-name>Trade</webservice-description-name>
 		<wsdl-file>WEB-INF/wsdl/TradeServices.wsdl</wsdl-file>
 		<jaxrpc-mapping-file>
-			WEB-INF/TradeServices_mapping.xml
+			WEB-INF/TradeServicesClient_mapping.xml
 		</jaxrpc-mapping-file>
 		<port-component>
 			<port-component-name>TradeWSServices</port-component-name>
@@ -37,7 +37,7 @@
 				pfx:TradeWSServices
 			</wsdl-port>
 			<service-endpoint-interface>
-				org.apache.geronimo.samples.daytrader.TradeWSServices
+                                org.apache.geronimo.samples.daytrader.client.ws.TradeWSServices
 			</service-endpoint-interface>
 			<service-impl-bean>
 				<servlet-link>
