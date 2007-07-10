@@ -1798,8 +1798,11 @@ public class TradeDirect implements TradeServices
 				}
 				catch(SQLException ex) 
 				{
-                	Log.error("TradeDirect:recreateDBTables SQL Exception thrown on executing the foll sql command: " + sqlBuffer[i], ex);
+					// Ignore DROP statements as tables won't always exist.
+					if (((String)sqlBuffer[i]).indexOf("DROP TABLE") < 0) { 
+                	    Log.error("TradeDirect:recreateDBTables SQL Exception thrown on executing the foll sql command: " + sqlBuffer[i], ex);
                         out.println("<BR>SQL Exception thrown on executing the foll sql command: <I>" + sqlBuffer[i] + "</I> . Check log for details.</BR>");
+					}
                 }
 			}
 			stmt.close();
