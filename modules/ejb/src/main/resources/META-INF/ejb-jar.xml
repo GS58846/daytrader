@@ -221,7 +221,7 @@
                 <use-caller-identity/>
             </security-identity>
             <persistence-context-ref>
-                <persistence-context-ref-name>jpa/daytrader</persistence-context-ref-name>
+                <persistence-context-ref-name>daytrader</persistence-context-ref-name>
                 <persistence-unit-name>daytrader</persistence-unit-name>
                 <persistence-context-type>Transactional</persistence-context-type>
             </persistence-context-ref>

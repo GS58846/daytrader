@@ -22,12 +22,13 @@
 
         <provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
         <jta-data-source>jdbc/TradeDataSource</jta-data-source>
+        <non-jta-data-source>jdbc/NoTxTradeDataSource</non-jta-data-source>
         <class>org.apache.geronimo.samples.daytrader.AccountDataBean</class>
         <class>org.apache.geronimo.samples.daytrader.AccountProfileDataBean</class>
         <class>org.apache.geronimo.samples.daytrader.HoldingDataBean</class>
         <class>org.apache.geronimo.samples.daytrader.OrderDataBean</class>
         <class>org.apache.geronimo.samples.daytrader.QuoteDataBean</class>
-        <exclude-unlisted-classes/>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="openjpa.jdbc.DBDictionary" value="org.apache.openjpa.jdbc.sql.DerbyDictionary"/>
             <!-- property name="openjpa.jdbc.DBDictionary" value="org.apache.openjpa.jdbc.sql.DB2Dictionary"/ -->

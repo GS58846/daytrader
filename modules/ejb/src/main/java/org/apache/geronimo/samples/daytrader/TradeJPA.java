@@ -938,7 +938,7 @@ public class TradeJPA implements SessionBean {
         context = sc;
         if (sc != null) {
         try {
-            entityManager = (EntityManager) new InitialContext().lookup("java:comp/env/jpa/daytrader");
+            entityManager = (EntityManager) new InitialContext().lookup("java:comp/env/daytrader");
         } catch (NamingException e) {
             throw new EJBException("could not get Naming Context", e);
         }
