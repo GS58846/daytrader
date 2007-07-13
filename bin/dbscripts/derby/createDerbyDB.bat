@@ -34,7 +34,7 @@ set CLASSPATH=%CLASSPATH%;%DERBY_PATH%\derbyclient\%DERBY_VER%\derbyclient-%DERB
 
 @echo "Invoking IJ command line tool to create the database and tables...please wait"
 
-%JAVA_HOME%\bin\java -Dij.driver=org.apache.derby.jdbc.ClientDriver -Dij.protocol=jdbc:derby://localhost:1527/ org.apache.derby.tools.ij < Table.ddl
+"%JAVA_HOME%\bin\java" -Dij.driver=org.apache.derby.jdbc.ClientDriver -Dij.protocol=jdbc:derby://localhost:1527/ org.apache.derby.tools.ij < Table.ddl
 
 @REM The following command launches the interactive ij command line utility
 @REM java -Dij.driver=org.apache.derby.jdbc.ClientDriver -Dij.protocol=jdbc:derby://localhost:1527/ org.apache.derby.tools.ij 
