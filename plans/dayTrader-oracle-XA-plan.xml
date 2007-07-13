@@ -668,8 +668,8 @@
                         <connectionfactory-interface>javax.sql.DataSource</connectionfactory-interface>
                         <connectiondefinition-instance>
                             <name>jdbc/TradeDataSource</name>
-                            <config-property-setting name="UserName">sa</config-property-setting>
-                            <config-property-setting name="Password">manager</config-property-setting>
+                            <config-property-setting name="UserName">trade</config-property-setting>
+                            <config-property-setting name="Password">trade</config-property-setting>
                             <config-property-setting name="DatabaseName">tradedb</config-property-setting>
                             <config-property-setting name="DataSourceName">TradeDataSource</config-property-setting>
                             <config-property-setting name="ServerName">localhost</config-property-setting>

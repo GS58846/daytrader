@@ -674,8 +674,8 @@
                         <connectionfactory-interface>javax.sql.DataSource</connectionfactory-interface>
                         <connectiondefinition-instance>
                             <name>jdbc/TradeDataSource</name>
-                            <config-property-setting name="UserName">db2inst1</config-property-setting>
-                            <config-property-setting name="Password">password</config-property-setting>
+                            <config-property-setting name="UserName">trade</config-property-setting>
+                            <config-property-setting name="Password">trade</config-property-setting>
                             <config-property-setting name="PortNumber">50001</config-property-setting>
                             <config-property-setting name="ServerName">localhost</config-property-setting>
                             <config-property-setting name="DatabaseName">tradedb</config-property-setting>
