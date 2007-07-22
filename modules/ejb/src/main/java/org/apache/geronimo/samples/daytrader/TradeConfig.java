@@ -72,8 +72,8 @@ public class TradeConfig {
 	public static int cachingType = NO_CACHING;
 	
 	/* Trade Database Scaling parameters*/
-	private static int MAX_USERS = 50;
-	private static int MAX_QUOTES = 100;
+	private static int MAX_USERS = 200;
+	private static int MAX_QUOTES = 400;
 
 	/* Trade Database specific paramters */
 	public static String JDBC_UID = null;
@@ -109,6 +109,7 @@ public class TradeConfig {
 	private static int primIterations = 1;
 	private static boolean longRun = true;
 	private static boolean publishQuotePriceChange = false;
+	private static long  marketSummaryInterval = 60000;
 
 	/*
 	 * Penny stocks is a problem where the random price change factor gets a stock
@@ -859,6 +860,14 @@ public class TradeConfig {
     
     public static boolean getPublishQuotePriceChange() {
         return publishQuotePriceChange;
+    }
+
+    public static void setMarketSummaryInterval(long millis) {
+        TradeConfig.marketSummaryInterval = millis;
+    }
+    
+    public static long getMarketSummaryInterval() {
+        return marketSummaryInterval;
     }
 
 
