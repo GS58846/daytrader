@@ -109,6 +109,14 @@ public class TradeConfig {
 	private static int primIterations = 1;
 	private static boolean longRun = true;
 	private static boolean publishQuotePriceChange = false;
+	
+	/**
+	 *   -1 means every operation
+	 *    0 means never perform a market summary
+	 *  > 0 means number of millseconds between summaries.  These will be
+	 *      synchronized so only one tran in this period will create a summary and will
+	 *      cache its results.
+	 */
 	private static long  marketSummaryInterval = 60000;
 
 	/*
