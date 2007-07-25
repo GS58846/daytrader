@@ -25,27 +25,37 @@ import org.apache.geronimo.samples.daytrader.util.Log;
 @NamedQueries( {
         @NamedQuery(name = "accountprofileejb.findByAddress", query = "SELECT a FROM accountprofileejb a WHERE a.address = :address"),
         @NamedQuery(name = "accountprofileejb.findByPasswd", query = "SELECT a FROM accountprofileejb a WHERE a.passwd = :passwd"),
-        @NamedQuery(name = "accountprofileejb.findByUserid", query = "SELECT a FROM accountprofileejb a WHERE a.userid = :userid"),
+        @NamedQuery(name = "accountprofileejb.findByUserid", query = "SELECT a FROM accountprofileejb a WHERE a.userID = :userid"),
         @NamedQuery(name = "accountprofileejb.findByEmail", query = "SELECT a FROM accountprofileejb a WHERE a.email = :email"),
-        @NamedQuery(name = "accountprofileejb.findByCreditcard", query = "SELECT a FROM accountprofileejb a WHERE a.creditcard = :creditcard"),
-        @NamedQuery(name = "accountprofileejb.findByFullname", query = "SELECT a FROM accountprofileejb a WHERE a.fullname = :fullname")
+        @NamedQuery(name = "accountprofileejb.findByCreditcard", query = "SELECT a FROM accountprofileejb a WHERE a.creditCard = :creditcard"),
+        @NamedQuery(name = "accountprofileejb.findByFullname", query = "SELECT a FROM accountprofileejb a WHERE a.fullName = :fullname")
     })
-public class AccountProfileDataBean
-        implements java.io.Serializable {
+public class AccountProfileDataBean implements java.io.Serializable {
 
     /* Accessor methods for persistent fields */
 
     @Id
-    //@GeneratedValue
-    @Column(nullable = false)
-    private String userID;                /* userID */
-    private String passwd;            /* password */
+    @Column(name = "USERID", nullable = false)
+    private String userID;              /* userID */
+    
+    @Column(name = "PASSWD")
+    private String passwd;              /* password */
+    
+    @Column(name = "FULLNAME")
     private String fullName;            /* fullName */
-    private String address;            /* address */
-    private String email;                /* email */
-    private String creditCard;            /* creditCard */
-    @OneToOne(mappedBy="profile")
+    
+    @Column(name = "ADDRESS")
+    private String address;             /* address */
+    
+    @Column(name = "EMAIL")
+    private String email;               /* email */
+    
+    @Column(name = "CREDITCARD")
+    private String creditCard;          /* creditCard */
+    
+    @OneToOne(mappedBy="profile", fetch=FetchType.LAZY)
     private AccountDataBean account;
+
 //    @Version
 //    private Integer optLock;
 
@@ -68,12 +78,12 @@ public class AccountProfileDataBean
 
     public static AccountProfileDataBean getRandomInstance() {
         return new AccountProfileDataBean(
-                TradeConfig.rndUserID(),            // userID
-                TradeConfig.rndUserID(),            // passwd
-                TradeConfig.rndFullName(),            // fullname
-                TradeConfig.rndAddress(),            // address
-                TradeConfig.rndEmail(TradeConfig.rndUserID()), //email
-                TradeConfig.rndCreditCard()          // creditCard
+                TradeConfig.rndUserID(),                        // userID
+                TradeConfig.rndUserID(),                        // passwd
+                TradeConfig.rndFullName(),                      // fullname
+                TradeConfig.rndAddress(),                       // address
+                TradeConfig.rndEmail(TradeConfig.rndUserID()),  //email
+                TradeConfig.rndCreditCard()                     // creditCard
         );
     }
 
@@ -101,110 +111,50 @@ public class AccountProfileDataBean
         Log.log(this.toString());
     }
 
-    /**
-     * Gets the userID
-     *
-     * @return Returns a String
-     */
     public String getUserID() {
         return userID;
     }
 
-    /**
-     * Sets the userID
-     *
-     * @param userID The userID to set
-     */
     public void setUserID(String userID) {
         this.userID = userID;
     }
 
-    /**
-     * Gets the passwd
-     *
-     * @return Returns a String
-     */
     public String getPassword() {
         return passwd;
     }
 
-    /**
-     * Sets the passwd
-     *
-     * @param password The passwd to set
-     */
     public void setPassword(String password) {
         this.passwd = password;
     }
 
-    /**
-     * Gets the fullName
-     *
-     * @return Returns a String
-     */
     public String getFullName() {
         return fullName;
     }
 
-    /**
-     * Sets the fullName
-     *
-     * @param fullName The fullName to set
-     */
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
 
-    /**
-     * Gets the address
-     *
-     * @return Returns a String
-     */
     public String getAddress() {
         return address;
     }
 
-    /**
-     * Sets the address
-     *
-     * @param address The address to set
-     */
     public void setAddress(String address) {
         this.address = address;
     }
 
-    /**
-     * Gets the email
-     *
-     * @return Returns a String
-     */
     public String getEmail() {
         return email;
     }
 
-    /**
-     * Sets the email
-     *
-     * @param email The email to set
-     */
     public void setEmail(String email) {
         this.email = email;
     }
 
-    /**
-     * Gets the creditCard
-     *
-     * @return Returns a String
-     */
     public String getCreditCard() {
         return creditCard;
     }
 
-    /**
-     * Sets the creditCard
-     *
-     * @param creditCard The creditCard to set
-     */
     public void setCreditCard(String creditCard) {
         this.creditCard = creditCard;
     }
@@ -215,5 +165,23 @@ public class AccountProfileDataBean
 
     public void setAccount(AccountDataBean account) {
         this.account = account;
+    }
+    
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (this.userID != null ? this.userID.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof AccountProfileDataBean)) {
+            return false;
+        }
+        AccountProfileDataBean other = (AccountProfileDataBean)object;
+        if (this.userID != other.userID && (this.userID == null || !this.userID.equals(other.userID))) return false;
+        return true;
     }
 }

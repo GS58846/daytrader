@@ -28,16 +28,21 @@ import org.apache.geronimo.samples.daytrader.util.Log;
 
 @Entity(name="orderejb")
 @Table(name = "orderejb")
-@NamedQueries({
-         @NamedQuery(name="closedOrders",
-         query="SELECT o FROM orderejb o WHERE " +
-        "                    o.orderStatus = 'closed' AND " +
-        "                    o.account.profile.userID  = :userID"),
-         @NamedQuery(name="completeClosedOrders",
-         query="UPDATE orderejb o SET o.orderStatus = 'completed' WHERE " +
-        "                    o.orderStatus = 'closed' AND " +
-        "                    o.account.profile.userID  = :userID")
-        })
+@NamedQueries( {
+    @NamedQuery(name = "orderejb.findByOrderfee", query = "SELECT o FROM orderejb o WHERE o.orderFee = :orderfee"),
+    @NamedQuery(name = "orderejb.findByCompletiondate", query = "SELECT o FROM orderejb o WHERE o.completionDate = :completiondate"),
+    @NamedQuery(name = "orderejb.findByOrdertype", query = "SELECT o FROM orderejb o WHERE o.orderType = :ordertype"),
+    @NamedQuery(name = "orderejb.findByOrderstatus", query = "SELECT o FROM orderejb o WHERE o.orderStatus = :orderstatus"),
+    @NamedQuery(name = "orderejb.findByPrice", query = "SELECT o FROM orderejb o WHERE o.price = :price"),
+    @NamedQuery(name = "orderejb.findByQuantity", query = "SELECT o FROM orderejb o WHERE o.quantity = :quantity"),
+    @NamedQuery(name = "orderejb.findByOpendate", query = "SELECT o FROM orderejb o WHERE o.openDate = :opendate"),
+    @NamedQuery(name = "orderejb.findByOrderid", query = "SELECT o FROM orderejb o WHERE o.orderID = :orderid"),
+    @NamedQuery(name = "orderejb.findByAccountAccountid", query = "SELECT o FROM orderejb o WHERE o.account.accountID = :accountAccountid"),
+    @NamedQuery(name = "orderejb.findByQuoteSymbol", query = "SELECT o FROM orderejb o WHERE o.quote.symbol = :quoteSymbol"),
+    @NamedQuery(name = "orderejb.findByHoldingHoldingid", query = "SELECT o FROM orderejb o WHERE o.holding.holdingID = :holdingHoldingid"),
+    @NamedQuery(name = "orderejb.closedOrders", query = "SELECT o FROM orderejb o WHERE o.orderStatus = 'closed' AND o.account.profile.userID  = :userID"),
+    @NamedQuery(name = "orderejb.completeClosedOrders", query = "UPDATE orderejb o SET o.orderStatus = 'completed' WHERE o.orderStatus = 'closed' AND o.account.profile.userID  = :userID")
+})
 public class OrderDataBean implements Serializable
 {
 
@@ -48,41 +53,56 @@ public class OrderDataBean implements Serializable
             valueColumnName="KEYVAL",
             pkColumnValue="order",
             allocationSize=1000)
-   @Id
-   @GeneratedValue(strategy=GenerationType.TABLE,
-            generator="orderIdGen")
-    @Column(nullable = false)        
-    private Integer		orderID;			/* orderID */
-    private String		orderType;			/* orderType (buy, sell, etc.) */
-    private String		orderStatus;		/* orderStatus (open, processing, completed, closed, cancelled) */
+    @Id
+    @GeneratedValue(strategy=GenerationType.TABLE, generator="orderIdGen")
+    @Column(name = "ORDERID", nullable = false)        
+    private Integer orderID;            /* orderID */
+    
+    @Column(name = "ORDERTYPE")
+    private String orderType;           /* orderType (buy, sell, etc.) */
+    
+    @Column(name = "ORDERSTATUS")
+    private String orderStatus;         /* orderStatus (open, processing, completed, closed, cancelled) */
+    
+    @Column(name = "OPENDATE")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date		openDate;			/* openDate (when the order was entered) */
+    private Date openDate;              /* openDate (when the order was entered) */
+    
+    @Column(name = "COMPLETIONDATE")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date		completionDate;		/* completionDate */
-    private double	quantity;			/* quantity */
-    private BigDecimal	price;				/* price */
-    private BigDecimal	orderFee;			/* price */
-    @ManyToOne
+    private Date completionDate;		/* completionDate */
+    
+    @Column(name = "QUANTITY", nullable = false)
+    private double quantity;			/* quantity */
+    
+    @Column(name = "PRICE")
+    private BigDecimal price;				/* price */
+    
+    @Column(name = "ORDERFEE")
+    private BigDecimal orderFee;			/* price */
+    
+    @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="ACCOUNT_ACCOUNTID")
     private AccountDataBean account;
-    @ManyToOne
+    
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="QUOTE_SYMBOL")
     private QuoteDataBean quote;
-    @OneToOne
+    
+    @OneToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "HOLDING_HOLDINGID")
     private HoldingDataBean holding;
+
 //    @Version
 //    private Integer optLock;
 
-
     /* Fields for relationship fields are not kept in the Data Bean */
     @Transient
-    private String 		symbol;
+    private String symbol;
 
-    public OrderDataBean() {}
-    /**
-     * OrderDataBean
-     */
+    public OrderDataBean() {        
+    }
+
     public OrderDataBean(Integer orderID,
                             String orderType,
                             String orderStatus,
@@ -92,8 +112,7 @@ public class OrderDataBean implements Serializable
                             BigDecimal price,
                             BigDecimal orderFee,
                             String symbol
-                            )
-    {
+                            ) {
         setOrderID(orderID);
         setOrderType(orderType);
         setOrderStatus(orderStatus);
@@ -104,6 +123,7 @@ public class OrderDataBean implements Serializable
         setOrderFee(orderFee);
         setSymbol(symbol);
     }
+    
     public OrderDataBean(String orderType,
             String orderStatus,
             Date openDate,
@@ -112,8 +132,7 @@ public class OrderDataBean implements Serializable
             BigDecimal price,
             BigDecimal orderFee,
             AccountDataBean account,
-            QuoteDataBean quote, HoldingDataBean holding)
-    {
+            QuoteDataBean quote, HoldingDataBean holding) {
         setOrderType(orderType);
         setOrderStatus(orderStatus);
         setOpenDate(openDate);
@@ -172,147 +191,78 @@ public class OrderDataBean implements Serializable
         Log.log( this.toString() );
     }
 
-    /**
-     * Gets the orderID
-     * @return Returns a Integer
-     */
     public Integer getOrderID() {
         return orderID;
     }
-    /**
-     * Sets the orderID
-     * @param orderID The orderID to set
-     */
+
     public void setOrderID(Integer orderID) {
         this.orderID = orderID;
     }
 
-
-    /**
-     * Gets the orderType
-     * @return Returns a String
-     */
     public String getOrderType() {
         return orderType;
     }
-    /**
-     * Sets the orderType
-     * @param orderType The orderType to set
-     */
+
     public void setOrderType(String orderType) {
         this.orderType = orderType;
     }
 
-
-    /**
-     * Gets the orderStatus
-     * @return Returns a String
-     */
     public String getOrderStatus() {
         return orderStatus;
     }
-    /**
-     * Sets the orderStatus
-     * @param orderStatus The orderStatus to set
-     */
+
     public void setOrderStatus(String orderStatus) {
         this.orderStatus = orderStatus;
     }
 
-
-    /**
-     * Gets the openDate
-     * @return Returns a Date
-     */
     public Date getOpenDate() {
         return openDate;
     }
-    /**
-     * Sets the openDate
-     * @param openDate The openDate to set
-     */
+
     public void setOpenDate(Date openDate) {
         this.openDate = openDate;
     }
 
-
-    /**
-     * Gets the completionDate
-     * @return Returns a Date
-     */
     public Date getCompletionDate() {
         return completionDate;
     }
-    /**
-     * Sets the completionDate
-     * @param completionDate The completionDate to set
-     */
+
     public void setCompletionDate(Date completionDate) {
         this.completionDate = completionDate;
     }
 
-
-    /**
-     * Gets the quantity
-     * @return Returns a BigDecimal
-     */
     public double getQuantity() {
         return quantity;
     }
-    /**
-     * Sets the quantity
-     * @param quantity The quantity to set
-     */
+
     public void setQuantity(double quantity) {
         this.quantity = quantity;
     }
 
 
-    /**
-     * Gets the price
-     * @return Returns a BigDecimal
-     */
     public BigDecimal getPrice() {
         return price;
     }
-    /**
-     * Sets the price
-     * @param price The price to set
-     */
+
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
-
-    /**
-     * Gets the orderFee
-     * @return Returns a BigDecimal
-     */
     public BigDecimal getOrderFee() {
         return orderFee;
     }
-    /**
-     * Sets the orderFee
-     * @param orderFee The orderFee to set
-     */
+
     public void setOrderFee(BigDecimal orderFee) {
         this.orderFee = orderFee;
     }
 
-    /**
-     * Gets the symbol
-     * @return Returns a String
-     */
     public String getSymbol() {
         if (quote != null) {
             return quote.getSymbol();
         }
         return symbol;
     }
-    /**
-     * Sets the symbol
-     * @param symbol The symbol to set
-     */
+
     public void setSymbol(String symbol) {
         this.symbol = symbol;
     }
@@ -390,5 +340,22 @@ public class OrderDataBean implements Serializable
 		setOrderStatus("cancelled");
 	}
 
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (this.orderID != null ? this.orderID.hashCode() : 0);
+        return hash;
+    }
+    
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof OrderDataBean)) {
+            return false;
+        }
+        OrderDataBean other = (OrderDataBean)object;
+        if (this.orderID != other.orderID && (this.orderID == null || !this.orderID.equals(other.orderID))) return false;
+        return true;
+    }
 }
 

@@ -149,19 +149,20 @@
                 <message-destination-ref-name>jms/TradeBrokerQueue</message-destination-ref-name>
                 <message-destination-type>javax.jms.Queue</message-destination-type>
                 <message-destination-usage>Produces</message-destination-usage>
-                <message-destination-link>jms/TradeBrokerQueue</message-destination-link>
+                <message-destination-link>TradeBrokerQueue</message-destination-link>
             </message-destination-ref>
             <message-destination-ref>
                 <message-destination-ref-name>jms/TradeStreamerTopic</message-destination-ref-name>
                 <message-destination-type>javax.jms.Topic</message-destination-type>
                 <message-destination-usage>Produces</message-destination-usage>
-                <message-destination-link>jms/TradeStreamerTopic</message-destination-link>
+                <message-destination-link>TradeStreamerTopic</message-destination-link>
             </message-destination-ref>
             <security-identity>
                 <description/>
                 <use-caller-identity/>
             </security-identity>
         </session>
+
 
         <!--
           **
@@ -208,13 +209,13 @@
                 <message-destination-ref-name>jms/TradeBrokerQueue</message-destination-ref-name>
                 <message-destination-type>javax.jms.Queue</message-destination-type>
                 <message-destination-usage>Produces</message-destination-usage>
-                <message-destination-link>jms/TradeBrokerQueue</message-destination-link>
+                <message-destination-link>TradeBrokerQueue</message-destination-link>
             </message-destination-ref>
             <message-destination-ref>
                 <message-destination-ref-name>jms/TradeStreamerTopic</message-destination-ref-name>
                 <message-destination-type>javax.jms.Topic</message-destination-type>
                 <message-destination-usage>Produces</message-destination-usage>
-                <message-destination-link>jms/TradeStreamerTopic</message-destination-link>
+                <message-destination-link>TradeStreamerTopic</message-destination-link>
             </message-destination-ref>
             <security-identity>
                 <description/>
@@ -778,9 +779,10 @@
             <display-name>TradeBrokerMDB</display-name>
             <ejb-name>TradeBrokerMDB</ejb-name>
             <ejb-class>org.apache.geronimo.samples.daytrader.ejb.TradeBrokerMDB</ejb-class>
-            <transaction-type>Container</transaction-type>
+            <messaging-type>javax.jms.MessageListener</messaging-type>
+			<transaction-type>Container</transaction-type>
             <message-destination-type>javax.jms.Queue</message-destination-type>
-            <message-destination-link>jms/TradeBrokerQueue</message-destination-link>
+            <message-destination-link>TradeBrokerQueue</message-destination-link>
             <env-entry>
                 <env-entry-name>statInterval</env-entry-name>
                 <env-entry-type>java.lang.Integer</env-entry-type>
@@ -803,9 +805,10 @@
         <message-driven>
             <ejb-name>TradeStreamerMDB</ejb-name>
             <ejb-class>org.apache.geronimo.samples.daytrader.ejb.TradeStreamerMDB</ejb-class>
+            <messaging-type>javax.jms.MessageListener</messaging-type>
             <transaction-type>Container</transaction-type>
             <message-destination-type>javax.jms.Topic</message-destination-type>
-            <message-destination-link>jms/TradeStreamerTopic</message-destination-link>
+            <message-destination-link>TradeStreamerTopic</message-destination-link>
             <env-entry>
                 <env-entry-name>statInterval</env-entry-name>
                 <env-entry-type>java.lang.Integer</env-entry-type>
@@ -1290,11 +1293,11 @@
          **
          -->
         <message-destination>
-            <message-destination-name>jms/TradeBrokerQueue</message-destination-name>
+            <message-destination-name>TradeBrokerQueue</message-destination-name>
         </message-destination>
 
         <message-destination>
-            <message-destination-name>jms/TradeStreamerTopic</message-destination-name>
+            <message-destination-name>TradeStreamerTopic</message-destination-name>
         </message-destination>
 
     </assembly-descriptor>

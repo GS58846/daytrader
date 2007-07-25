@@ -20,18 +20,20 @@ public class LocalSLMDBTestBean implements LocalSLMDBTestLocal, LocalSLMDBTestRe
     @Resource(name = "jms/QueueConnectionFactory")
     private ConnectionFactory queueConnectionFactory;
     
-    @Resource(name = "jms/TradeBrokerQueue")
+    @Resource(name = "TestQueue")
     private Queue tradeBrokerQueue;
 
     /** Creates a new instance of LocalSLMDBTestBean */
     public LocalSLMDBTestBean() {
     }
     
-    public Message publishToTradeBrokerQueue() {
-        Message message = null;
+    public String publishToTradeBrokerQueue() {
+        String message = null;
         
         try {
-            message = this.sendJMSMessageToTestMDB("Hello World from TradeBrokerQueue!");
+            Message tmp = this.sendJMSMessageToTestMDB("Hello World from TradeBrokerQueue!");
+            if (tmp != null)
+                message = tmp.toString();
         } catch (Exception ex) {
             ex.printStackTrace();
         }

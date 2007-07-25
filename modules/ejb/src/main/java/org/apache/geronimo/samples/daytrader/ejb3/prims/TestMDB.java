@@ -5,11 +5,11 @@ import javax.ejb.MessageDriven;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 
-//@MessageDriven(name = "ejb/TestMDB", activationConfig =  {
-//        @ActivationConfigProperty(propertyName = "acknowledgeMode", propertyValue = "Auto-acknowledge"),
-//        @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue"),
-//        @ActivationConfigProperty(propertyName = "destination", propertyValue = "jms/TradeBrokerQueue")
-//    })
+@MessageDriven(activationConfig =  {
+        @ActivationConfigProperty(propertyName = "acknowledgeMode", propertyValue = "Auto-acknowledge"),
+        @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue"),
+        @ActivationConfigProperty(propertyName = "destination", propertyValue = "TestQueue")
+    })
 public class TestMDB implements MessageListener {
     
     /** Creates a new instance of TradeTestMDB */

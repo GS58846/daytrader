@@ -10,5 +10,5 @@ import javax.jms.Message;
  */
 @Remote
 public interface LocalSLMDBTestRemote {
-    public Message publishToTradeBrokerQueue();
+    public String publishToTradeBrokerQueue();
 }

@@ -24,6 +24,7 @@ import javax.naming.InitialContext;
 
 import org.apache.geronimo.samples.daytrader.direct.TradeDirect;
 import org.apache.geronimo.samples.daytrader.ejb.TradeHome;
+import org.apache.geronimo.samples.daytrader.ejb3.TradeSLSBRemote;
 import org.apache.geronimo.samples.daytrader.session.TradeJDBCHome;
 import org.apache.geronimo.samples.daytrader.util.FinancialUtils;
 import org.apache.geronimo.samples.daytrader.util.Log;
@@ -37,7 +38,10 @@ import org.apache.geronimo.samples.daytrader.util.Log;
  * making calls to TradeAction methods to actually performance each operation.
  */
 public class TradeAction implements TradeServices {
-    private TradeServices trade = null;
+    // make this static so the trade impl can be cached
+    // - ejb3 mode is the only thing that really uses this
+    // - can go back and update other modes to take advantage (ie. TradeDirect)
+    private static TradeServices trade = null;
     private static TradeHome tradeHome = null;
     private static TradeJDBCHome tradeJDBCHome = null;
     private static TradeHome tradeHomeJPA = null;
@@ -74,7 +78,7 @@ public class TradeAction implements TradeServices {
                 Log.error("TradeAction:TradeAction() Creation of Trade EJB failed\n" + e);
                 e.printStackTrace();
             }
-        } else        if (TradeConfig.runTimeMode == TradeConfig.JPA) {
+        } else if (TradeConfig.runTimeMode == TradeConfig.JPA) {
             try {
                 if (tradeHomeJPA == null) {
                     InitialContext ic = new InitialContext();
@@ -92,7 +96,26 @@ public class TradeAction implements TradeServices {
                 Log.error("TradeAction:TradeAction() Creation of Trade JPA failed\n" + e);
                 e.printStackTrace();
             }
-        } else if (TradeConfig.runTimeMode == TradeConfig.DIRECT) {
+        } else if (TradeConfig.runTimeMode == TradeConfig.EJB3) {
+            try {
+                if (!(trade instanceof TradeSLSBRemote)) {
+                    TradeSLSBRemote tradeSLSB = null;
+                    InitialContext context = new InitialContext();
+                    try {
+                        tradeSLSB = (TradeSLSBRemote) context.lookup("java:comp/env/ejb/TradeSLSBBean");                
+                    } catch (Exception ex) {
+                        Log.error("TradeAction:createTrade - Lookup of TradeSLSBRemote failed!!!");
+                        tradeSLSB = (TradeSLSBRemote) context.lookup("TradeSLSBBean");
+                    }
+                
+                    trade = tradeSLSB;
+                }
+            }
+            catch (Exception e) {
+                Log.error("TradeAction:TradeAction() Creation of Trade JPA failed\n" + e);
+                e.printStackTrace();
+            }
+        }else if (TradeConfig.runTimeMode == TradeConfig.DIRECT) {
             try {
                 trade = new TradeDirect();
             }

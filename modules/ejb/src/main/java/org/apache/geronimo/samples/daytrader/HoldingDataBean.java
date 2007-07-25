@@ -27,12 +27,14 @@ import org.apache.geronimo.samples.daytrader.util.Log;
 
 @Entity(name = "holdingejb")
 @Table(name = "holdingejb")
-@NamedQueries({
-@NamedQuery(name = "holdingsByUserID",
-        query = "SELECT h FROM holdingejb h where h.account.profile.userID = :userID")
-        })
-public class HoldingDataBean
-        implements Serializable {
+@NamedQueries( {
+        @NamedQuery(name = "holdingejb.findByPurchaseprice", query = "SELECT h FROM holdingejb h WHERE h.purchasePrice = :purchaseprice"),
+        @NamedQuery(name = "holdingejb.findByHoldingid", query = "SELECT h FROM holdingejb h WHERE h.holdingID = :holdingid"),
+        @NamedQuery(name = "holdingejb.findByQuantity", query = "SELECT h FROM holdingejb h WHERE h.quantity = :quantity"),
+        @NamedQuery(name = "holdingejb.findByPurchasedate", query = "SELECT h FROM holdingejb h WHERE h.purchaseDate = :purchasedate"),
+        @NamedQuery(name = "holdingejb.holdingsByUserID", query = "SELECT h FROM holdingejb h where h.account.profile.userID = :userID")
+    })
+public class HoldingDataBean implements Serializable {
 
     /* persistent/relationship fields */
 
@@ -44,21 +46,28 @@ public class HoldingDataBean
             pkColumnValue="holding",
             allocationSize=1000)
     @Id
-    @GeneratedValue(strategy=GenerationType.TABLE,
-            generator="holdingIdGen")
-    @Column(nullable = false)
-    private Integer holdingID;            /* holdingID */
-    private double quantity;            /* quantity */
-    private BigDecimal purchasePrice;        /* purchasePrice */
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date purchaseDate;        /* purchaseDate */
-    @Transient
-    private String quoteID;            /* Holding(*)  ---> Quote(1) */
+    @GeneratedValue(strategy=GenerationType.TABLE, generator="holdingIdGen")
+    @Column(name = "HOLDINGID", nullable = false)
+    private Integer holdingID;              /* holdingID */
     
-    @ManyToOne
+    @Column(name = "QUANTITY", nullable = false)
+    private double quantity;                /* quantity */
+    
+    @Column(name = "PURCHASEPRICE")
+    private BigDecimal purchasePrice;       /* purchasePrice */
+    
+    @Column(name = "PURCHASEDATE")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date purchaseDate;              /* purchaseDate */
+    
+    @Transient
+    private String quoteID;                 /* Holding(*)  ---> Quote(1) */
+    
+    @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="ACCOUNT_ACCOUNTID")
     private AccountDataBean account;
-    @ManyToOne
+    
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "QUOTE_SYMBOL")
     private QuoteDataBean quote;
 
@@ -124,83 +133,38 @@ public class HoldingDataBean
         Log.log(this.toString());
     }
 
-    /**
-     * Gets the holdingID
-     *
-     * @return Returns a Integer
-     */
     public Integer getHoldingID() {
         return holdingID;
     }
 
-    /**
-     * Sets the holdingID
-     *
-     * @param holdingID The holdingID to set
-     */
     public void setHoldingID(Integer holdingID) {
         this.holdingID = holdingID;
     }
 
-    /**
-     * Gets the quantity
-     *
-     * @return Returns a BigDecimal
-     */
     public double getQuantity() {
         return quantity;
     }
 
-    /**
-     * Sets the quantity
-     *
-     * @param quantity The quantity to set
-     */
     public void setQuantity(double quantity) {
         this.quantity = quantity;
     }
 
-    /**
-     * Gets the purchasePrice
-     *
-     * @return Returns a BigDecimal
-     */
     public BigDecimal getPurchasePrice() {
         return purchasePrice;
     }
 
-    /**
-     * Sets the purchasePrice
-     *
-     * @param purchasePrice The purchasePrice to set
-     */
     public void setPurchasePrice(BigDecimal purchasePrice) {
         this.purchasePrice = purchasePrice;
     }
 
-    /**
-     * Gets the purchaseDate
-     *
-     * @return Returns a Date
-     */
     public Date getPurchaseDate() {
         return purchaseDate;
     }
 
-    /**
-     * Sets the purchaseDate
-     *
-     * @param purchaseDate The purchaseDate to set
-     */
     public void setPurchaseDate(Date purchaseDate) {
         this.purchaseDate = purchaseDate;
     }
 
-    /**
-     * Gets the quoteID
-     *
-     * @return Returns symbol for associated quote
-     */
     public String getQuoteID() {
         if (quote != null) {
             return quote.getSymbol();
@@ -208,11 +172,6 @@ public class HoldingDataBean
         return quoteID;
     }
 
-    /**
-     * Sets the quoteID
-     *
-     * @param quoteID The quoteID to set
-     */
     public void setQuoteID(String quoteID) {
         this.quoteID = quoteID;
     }
@@ -225,21 +184,35 @@ public class HoldingDataBean
         this.account = account;
     }
 
-    /**
-     * Gets the quoteID
-     *
-     * @return Returns a Integer
-     */
     /* Disabled for D185273
      public String getSymbol() {
          return getQuoteID();
      }
      */
+    
     public QuoteDataBean getQuote() {
         return quote;
     }
 
     public void setQuote(QuoteDataBean quote) {
         this.quote = quote;
+    }
+    
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (this.holdingID != null ? this.holdingID.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof HoldingDataBean)) {
+            return false;
+        }
+        HoldingDataBean other = (HoldingDataBean) object;
+        if (this.holdingID != other.holdingID && (this.holdingID == null || !this.holdingID.equals(other.holdingID))) return false;
+        return true;
     }
 }

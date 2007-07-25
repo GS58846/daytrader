@@ -119,7 +119,7 @@ public class TradeJPA implements SessionBean {
             //ordered by their change in value
             Collection quotes;
 //            if (orderBySQLSupported) {
-                Query query = entityManager.createNamedQuery("quotesByChange");
+                Query query = entityManager.createNamedQuery("quoteejb.quotesByChange");
                 quotes = query.getResultList();
 //            }
 //            else
@@ -212,7 +212,7 @@ public class TradeJPA implements SessionBean {
             throws Exception {
         if (Log.doTrace()) Log.trace("TradeBean:getAllQuotes");
 
-            Query query = entityManager.createNamedQuery("allQuotes");
+            Query query = entityManager.createNamedQuery("quoteejb.allQuotes");
             return query.getResultList();
     }
 
@@ -467,10 +467,10 @@ public class TradeJPA implements SessionBean {
             */
 
             //Get the primary keys for all the closed Orders for this account.
-            Query query = entityManager.createNamedQuery("closedOrders");
+            Query query = entityManager.createNamedQuery("orderejb.closedOrders");
             query.setParameter("userID", userID);
             Collection results = query.getResultList();
-            Query updateStatus = entityManager.createNamedQuery("completeClosedOrders");
+            Query updateStatus = entityManager.createNamedQuery("orderejb.completeClosedOrders");
             updateStatus.setParameter("userID", userID);
             updateStatus.executeUpdate();
             return results;
@@ -616,7 +616,7 @@ public class TradeJPA implements SessionBean {
             throws FinderException, Exception {
         if (Log.doTrace())
             Log.trace("TradeBean:getHoldings", userID);
-        Query query = entityManager.createNamedQuery("holdingsByUserID");
+        Query query = entityManager.createNamedQuery("holdingejb.holdingsByUserID");
         query.setParameter("userID", userID);
         return query.getResultList();
     }

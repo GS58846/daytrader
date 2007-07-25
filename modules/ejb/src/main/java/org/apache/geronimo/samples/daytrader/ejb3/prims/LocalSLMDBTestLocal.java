@@ -10,5 +10,5 @@ import javax.jms.Message;
  */
 @Local
 public interface LocalSLMDBTestLocal {
-    public Message publishToTradeBrokerQueue();
+    public String publishToTradeBrokerQueue();
 }

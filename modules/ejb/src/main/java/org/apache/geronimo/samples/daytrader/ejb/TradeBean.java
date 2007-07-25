@@ -43,12 +43,10 @@ public class TradeBean implements SessionBean {
 	
 	private ConnectionFactory qConnFactory = null;
 	
-	@Resource(name = "jms/TradeBrokerQueue") 
 	private Queue brokerQueue = null;
 	
 	private ConnectionFactory tConnFactory = null;
 	
-	@Resource(name = "jms/TradeStreamerTopic") 
 	private Topic streamerTopic = null; 
 
 	//Boolean to signify if the Order By clause is supported by the app server.

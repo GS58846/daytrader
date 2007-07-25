@@ -30,15 +30,15 @@ import org.apache.geronimo.samples.daytrader.util.Log;
 @Entity(name = "accountejb")
 @Table(name = "accountejb")
 @NamedQueries( {
-        @NamedQuery(name = "accountejb.findByCreationdate", query = "SELECT a FROM accountejb a WHERE a.creationdate = :creationdate"),
-        @NamedQuery(name = "accountejb.findByOpenbalance", query = "SELECT a FROM accountejb a WHERE a.openbalance = :openbalance"),
-        @NamedQuery(name = "accountejb.findByLogoutcount", query = "SELECT a FROM accountejb a WHERE a.logoutcount = :logoutcount"),
+        @NamedQuery(name = "accountejb.findByCreationdate", query = "SELECT a FROM accountejb a WHERE a.creationDate = :creationdate"),
+        @NamedQuery(name = "accountejb.findByOpenbalance", query = "SELECT a FROM accountejb a WHERE a.openBalance = :openbalance"),
+        @NamedQuery(name = "accountejb.findByLogoutcount", query = "SELECT a FROM accountejb a WHERE a.logoutCount = :logoutcount"),
         @NamedQuery(name = "accountejb.findByBalance", query = "SELECT a FROM accountejb a WHERE a.balance = :balance"),
-        @NamedQuery(name = "accountejb.findByAccountid", query = "SELECT a FROM accountejb a WHERE a.accountid = :accountid"),
-        @NamedQuery(name = "accountejb.findByAccountid_eager", query = "SELECT a FROM accountejb a LEFT JOIN FETCH a.accountProfile WHERE a.accountid = :accountid"),
-        @NamedQuery(name = "accountejb.findByAccountid_eagerholdings", query = "SELECT a FROM accountejb a LEFT JOIN FETCH a.holdings WHERE a.accountid = :accountid"),
-        @NamedQuery(name = "accountejb.findByLastlogin", query = "SELECT a FROM accountejb a WHERE a.lastlogin = :lastlogin"),
-        @NamedQuery(name = "accountejb.findByLogincount", query = "SELECT a FROM accountejb a WHERE a.logincount = :logincount")
+        @NamedQuery(name = "accountejb.findByAccountid", query = "SELECT a FROM accountejb a WHERE a.accountID = :accountid"),
+        @NamedQuery(name = "accountejb.findByAccountid_eager", query = "SELECT a FROM accountejb a LEFT JOIN FETCH a.profile WHERE a.accountID = :accountid"),
+        @NamedQuery(name = "accountejb.findByAccountid_eagerholdings", query = "SELECT a FROM accountejb a LEFT JOIN FETCH a.holdings WHERE a.accountID = :accountid"),
+        @NamedQuery(name = "accountejb.findByLastlogin", query = "SELECT a FROM accountejb a WHERE a.lastLogin = :lastlogin"),
+        @NamedQuery(name = "accountejb.findByLogincount", query = "SELECT a FROM accountejb a WHERE a.loginCount = :logincount")
     })
 public class AccountDataBean implements Serializable {
 
@@ -51,25 +51,40 @@ public class AccountDataBean implements Serializable {
             pkColumnValue="account",
             allocationSize=1000)
     @Id
-    @GeneratedValue(strategy=GenerationType.TABLE,
-            generator="accountIdGen")
-    @Column(nullable = false)
-    private Integer accountID;         /* accountID */
-    private int loginCount;     /* loginCount */
-    private int logoutCount;     /* logoutCount */
+    @GeneratedValue(strategy=GenerationType.TABLE, generator="accountIdGen")
+    @Column(name = "ACCOUNTID", nullable = false)
+    private Integer accountID;              /* accountID */
+    
+    @Column(name = "LOGINCOUNT", nullable = false)
+    private int loginCount;                 /* loginCount */
+    
+    @Column(name = "LOGOUTCOUNT", nullable = false)
+    private int logoutCount;                /* logoutCount */
+    
+    @Column(name = "LASTLOGIN")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date lastLogin;         /* lastLogin Date */
+    private Date lastLogin;                 /* lastLogin Date */
+    
+    @Column(name = "CREATIONDATE")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date creationDate;     /* creationDate */
-    private BigDecimal balance;         /* balance */
-    private BigDecimal openBalance;     /* open balance */
-    @OneToMany(mappedBy = "account")
+    private Date creationDate;              /* creationDate */
+    
+    @Column(name = "BALANCE")
+    private BigDecimal balance;             /* balance */
+    
+    @Column(name = "OPENBALANCE")
+    private BigDecimal openBalance;         /* open balance */
+    
+    @OneToMany(mappedBy = "account", fetch=FetchType.LAZY)
     private Collection<OrderDataBean> orders;
-    @OneToMany(mappedBy = "account")
+    
+    @OneToMany(mappedBy = "account", fetch=FetchType.LAZY)
     private Collection<HoldingDataBean> holdings;
+    
     @OneToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="PROFILE_USERID")
     private AccountProfileDataBean profile;
+
 //    @Version
 //    private Integer optLock;
 
@@ -154,160 +169,76 @@ public class AccountDataBean implements Serializable {
         Log.log(this.toString());
     }
 
-    /**
-     * Gets the accountID
-     *
-     * @return Returns a Integer
-     */
     public Integer getAccountID() {
         return accountID;
     }
 
-    /**
-     * Sets the accountID
-     *
-     * @param accountID The accountID to set
-     */
     public void setAccountID(Integer accountID) {
         this.accountID = accountID;
     }
 
-    /**
-     * Gets the loginCount
-     *
-     * @return Returns a int
-     */
     public int getLoginCount() {
         return loginCount;
     }
 
-    /**
-     * Sets the loginCount
-     *
-     * @param loginCount The loginCount to set
-     */
     public void setLoginCount(int loginCount) {
         this.loginCount = loginCount;
     }
 
-    /**
-     * Gets the logoutCount
-     *
-     * @return Returns a int
-     */
     public int getLogoutCount() {
         return logoutCount;
     }
 
-    /**
-     * Sets the logoutCount
-     *
-     * @param logoutCount The logoutCount to set
-     */
     public void setLogoutCount(int logoutCount) {
         this.logoutCount = logoutCount;
     }
 
-    /**
-     * Gets the lastLogin
-     *
-     * @return Returns a Date
-     */
     public Date getLastLogin() {
         return lastLogin;
     }
 
-    /**
-     * Sets the lastLogin
-     *
-     * @param lastLogin The lastLogin to set
-     */
     public void setLastLogin(Date lastLogin) {
         this.lastLogin = lastLogin;
     }
 
-    /**
-     * Gets the creationDate
-     *
-     * @return Returns a Date
-     */
     public Date getCreationDate() {
         return creationDate;
     }
 
-    /**
-     * Sets the creationDate
-     *
-     * @param creationDate The creationDate to set
-     */
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
 
-    /**
-     * Gets the balance
-     *
-     * @return Returns a BigDecimal
-     */
     public BigDecimal getBalance() {
         return balance;
     }
 
-    /**
-     * Sets the balance
-     *
-     * @param balance The balance to set
-     */
     public void setBalance(BigDecimal balance) {
         this.balance = balance;
     }
 
-    /**
-     * Gets the openBalance
-     *
-     * @return Returns a BigDecimal
-     */
     public BigDecimal getOpenBalance() {
         return openBalance;
     }
 
-    /**
-     * Sets the openBalance
-     *
-     * @param openBalance The openBalance to set
-     */
     public void setOpenBalance(BigDecimal openBalance) {
         this.openBalance = openBalance;
     }
 
-    /**
-     * Gets the profileID
-     *
-     * @return Returns a String
-     */
     public String getProfileID() {
         return profileID;
     }
 
-    /**
-     * Sets the profileID
-     *
-     * @param profileID The profileID to set
-     */
     public void setProfileID(String profileID) {
         this.profileID = profileID;
     }
 
-    /**
-     * Gets the profileID
-     *
-     * @return Returns a String
-     */
     /* Disabled for D185273
      public String getUserID() {
          return getProfileID();
      }
      */
+
     public Collection<OrderDataBean> getOrders() {
         return orders;
     }
@@ -349,4 +280,21 @@ public class AccountDataBean implements Serializable {
         setLogoutCount(getLogoutCount() + 1);
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (this.accountID != null ? this.accountID.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof AccountDataBean)) {
+            return false;
+        }
+        AccountDataBean other = (AccountDataBean)object;
+        if (this.accountID != other.accountID && (this.accountID == null || !this.accountID.equals(other.accountID))) return false;
+        return true;
+    }
 }

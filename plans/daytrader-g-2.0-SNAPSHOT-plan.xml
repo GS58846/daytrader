@@ -98,10 +98,6 @@
                 <session>
                     <ejb-name>TradeEJB</ejb-name>
                     <jndi-name>ejb/TradeEJB</jndi-name>
-                    <!-- resource-env-ref>
-                        <ref-name>jms/TradeBrokerQueue</ref-name>
-                        <message-destination-link>jms/TradeBrokerQueue</message-destination-link>
-                    </resource-env-ref -->
                 </session>
                 
                 <session>
@@ -334,11 +330,11 @@
                     <activation-config>
                         <activation-config-property>
                             <activation-config-property-name>destinationType</activation-config-property-name>
-                            <activation-config-property-value>javax.jms.Queue</activation-config-property-value>
+                            <activation-config-property-value>javax.jms.Topic</activation-config-property-value>
                         </activation-config-property>
                         <activation-config-property>
                             <activation-config-property-name>destination</activation-config-property-name>
-                            <activation-config-property-value>jms/TradeStreamerTopic</activation-config-property-value>
+                            <activation-config-property-value>TradeStreamerTopic</activation-config-property-value>
                         </activation-config-property>
                         <activation-config-property>
                             <activation-config-property-name>acknowledgeMode</activation-config-property-name>
@@ -364,7 +360,7 @@
                         </activation-config-property>
                         <activation-config-property>
                             <activation-config-property-name>destination</activation-config-property-name>
-                            <activation-config-property-value>jms/TradeBrokerQueue</activation-config-property-value>
+                            <activation-config-property-value>TradeBrokerQueue</activation-config-property-value>
                         </activation-config-property>
                         <activation-config-property>
                             <activation-config-property-name>acknowledgeMode</activation-config-property-name>
@@ -375,6 +371,27 @@
                             <activation-config-property-value>NonDurable</activation-config-property-value>
                         </activation-config-property>
                     </activation-config>
+                </message-driven>
+                
+                <message-driven>
+                    <ejb-name>TestMDB</ejb-name>
+                    <resource-adapter>
+                        <resource-link>TradeJMSResources</resource-link>
+                    </resource-adapter>
+                </message-driven>
+                
+                <message-driven>
+                    <ejb-name>DTBroker3MDB</ejb-name>
+                    <resource-adapter>
+                        <resource-link>TradeJMSResources</resource-link>
+                    </resource-adapter>
+                </message-driven>
+                
+                <message-driven>
+                    <ejb-name>DTStreamer3MDB</ejb-name>
+                    <resource-adapter>
+                        <resource-link>TradeJMSResources</resource-link>
+                    </resource-adapter>
                 </message-driven>
             </enterprise-beans>
 
@@ -771,7 +788,7 @@
                 <adminobject-interface>javax.jms.Topic</adminobject-interface>
                 <adminobject-class>org.activemq.message.ActiveMQTopic</adminobject-class>
                 <adminobject-instance>
-                    <message-destination-name>jms/TradeStreamerTopic</message-destination-name>
+                    <message-destination-name>TradeStreamerTopic</message-destination-name>
                     <config-property-setting name="PhysicalName">TradeStreamerTopic</config-property-setting>
                 </adminobject-instance>
             </adminobject>
@@ -780,8 +797,35 @@
                 <adminobject-interface>javax.jms.Queue</adminobject-interface>
                 <adminobject-class>org.activemq.message.ActiveMQQueue</adminobject-class>
                 <adminobject-instance>
-                    <message-destination-name>jms/TradeBrokerQueue</message-destination-name>
+                    <message-destination-name>TradeBrokerQueue</message-destination-name>
                     <config-property-setting name="PhysicalName">TradeBrokerQueue</config-property-setting>
+                </adminobject-instance>
+            </adminobject>
+            
+            <adminobject>
+                <adminobject-interface>javax.jms.Topic</adminobject-interface>
+                <adminobject-class>org.activemq.message.ActiveMQTopic</adminobject-class>
+                <adminobject-instance>
+                    <message-destination-name>DTStreamerTopic3</message-destination-name>
+                    <config-property-setting name="PhysicalName">DTStreamerTopic3</config-property-setting>
+                </adminobject-instance>
+            </adminobject>
+            
+            <adminobject>
+                <adminobject-interface>javax.jms.Queue</adminobject-interface>
+                <adminobject-class>org.activemq.message.ActiveMQQueue</adminobject-class>
+                <adminobject-instance>
+                    <message-destination-name>DTBrokerQueue3</message-destination-name>
+                    <config-property-setting name="PhysicalName">DTBrokerQueue3</config-property-setting>
+                </adminobject-instance>
+            </adminobject>
+            
+            <adminobject>
+                <adminobject-interface>javax.jms.Queue</adminobject-interface>
+                <adminobject-class>org.activemq.message.ActiveMQQueue</adminobject-class>
+                <adminobject-instance>
+                    <message-destination-name>TestQueue</message-destination-name>
+                    <config-property-setting name="PhysicalName">TestQueue</config-property-setting>
                 </adminobject-instance>
             </adminobject>
 

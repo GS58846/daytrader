@@ -27,14 +27,14 @@ import org.apache.geronimo.samples.daytrader.util.Log;
 @Entity(name = "quoteejb")
 @Table(name = "quoteejb")
 @NamedQueries({
-    @NamedQuery(name = "allQuotes",query = "SELECT q FROM quoteejb q"),
-    @NamedQuery(name = "quotesByChange",query = "SELECT q FROM quoteejb q WHERE q.symbol LIKE 's:1__' ORDER BY q.change1 DESC"),
+    @NamedQuery(name = "quoteejb.allQuotes",query = "SELECT q FROM quoteejb q"),
+    @NamedQuery(name = "quoteejb.quotesByChange",query = "SELECT q FROM quoteejb q WHERE q.symbol LIKE 's:1__' ORDER BY q.change1 DESC"),
     @NamedQuery(name = "quoteejb.findByLow", query = "SELECT q FROM quoteejb q WHERE q.low = :low"),
     @NamedQuery(name = "quoteejb.findByOpen1", query = "SELECT q FROM quoteejb q WHERE q.open1 = :open1"),
     @NamedQuery(name = "quoteejb.findByVolume", query = "SELECT q FROM quoteejb q WHERE q.volume = :volume"),
     @NamedQuery(name = "quoteejb.findByPrice", query = "SELECT q FROM quoteejb q WHERE q.price = :price"),
     @NamedQuery(name = "quoteejb.findByHigh", query = "SELECT q FROM quoteejb q WHERE q.high = :high"),
-    @NamedQuery(name = "quoteejb.findByCompanyname", query = "SELECT q FROM quoteejb q WHERE q.companyname = :companyname"),
+    @NamedQuery(name = "quoteejb.findByCompanyname", query = "SELECT q FROM quoteejb q WHERE q.companyName = :companyname"),
     @NamedQuery(name = "quoteejb.findBySymbol", query = "SELECT q FROM quoteejb q WHERE q.symbol = :symbol"),
     @NamedQuery(name = "quoteejb.findByChange1", query = "SELECT q FROM quoteejb q WHERE q.change1 = :change1")
 })
@@ -46,20 +46,38 @@ public class QuoteDataBean implements Serializable {
     /* Accessor methods for persistent fields */
 
     @Id
-    private String symbol;         /* symbol */
-    private String companyName; /* companyName */
-    private double volume;         /* volume */
-    private BigDecimal price;     /* price */
-    private BigDecimal open1;     /* open1 price */
-    private BigDecimal low;     /* low price */
-    private BigDecimal high;    /* high price */
-    private double change1;     /* price change */
-    @OneToMany(mappedBy = "quote")
-    private Collection<OrderDataBean> orders;
+    @Column(name = "SYMBOL", nullable = false)
+    private String symbol;          /* symbol */
+    
+    @Column(name = "COMPANYNAME")
+    private String companyName;     /* companyName */
+    
+    @Column(name = "VOLUME", nullable = false)
+    private double volume;          /* volume */
+    
+    @Column(name = "PRICE")
+    private BigDecimal price;       /* price */
+    
+    @Column(name = "OPEN1")
+    private BigDecimal open1;       /* open1 price */
+    
+    @Column(name = "LOW")
+    private BigDecimal low;         /* low price */
+    
+    @Column(name = "HIGH")
+    private BigDecimal high;        /* high price */
+    
+    @Column(name = "CHANGE1", nullable = false)
+    private double change1;         /* price change */
+    
+    /*@OneToMany(mappedBy = "quote")
+    private Collection<OrderDataBean> orders;*/
+    
 //    @Version
 //    private Integer optLock;
 
     /* Accessor methods for relationship fields are not kept in the DataBean */
+    
     public QuoteDataBean() {
     }
 
@@ -94,7 +112,6 @@ public class QuoteDataBean implements Serializable {
         setSymbol(symbol);
     }
 
-
     public String toString() {
         return "\n\tQuote Data for: " + getSymbol()
                 + "\n\t\t companyName: " + getCompanyName()
@@ -123,148 +140,85 @@ public class QuoteDataBean implements Serializable {
         Log.log(this.toString());
     }
 
-    /**
-     * Gets the symbol
-     *
-     * @return Returns a String
-     */
     public String getSymbol() {
         return symbol;
     }
 
-    /**
-     * Sets the symbol
-     *
-     * @param symbol The symbol to set
-     */
     public void setSymbol(String symbol) {
         this.symbol = symbol;
     }
 
-    /**
-     * Gets the companyName
-     *
-     * @return Returns a String
-     */
     public String getCompanyName() {
         return companyName;
     }
 
-    /**
-     * Sets the companyName
-     *
-     * @param companyName The companyName to set
-     */
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
     }
 
-    /**
-     * Gets the price
-     *
-     * @return Returns a BigDecimal
-     */
     public BigDecimal getPrice() {
         return price;
     }
 
-    /**
-     * Sets the price
-     *
-     * @param price The price to set
-     */
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
-    /**
-     * Gets the open1
-     *
-     * @return Returns a BigDecimal
-     */
     public BigDecimal getOpen() {
         return open1;
     }
 
-    /**
-     * Sets the open1
-     *
-     * @param open The open1 to set
-     */
     public void setOpen(BigDecimal open) {
         this.open1 = open;
     }
 
-    /**
-     * Gets the low
-     *
-     * @return Returns a BigDecimal
-     */
     public BigDecimal getLow() {
         return low;
     }
 
-    /**
-     * Sets the low
-     *
-     * @param low The low to set
-     */
     public void setLow(BigDecimal low) {
         this.low = low;
     }
 
-    /**
-     * Gets the high
-     *
-     * @return Returns a BigDecimal
-     */
     public BigDecimal getHigh() {
         return high;
     }
 
-    /**
-     * Sets the high
-     *
-     * @param high The high to set
-     */
     public void setHigh(BigDecimal high) {
         this.high = high;
     }
 
-    /**
-     * Gets the change1
-     *
-     * @return Returns a double
-     */
     public double getChange() {
         return change1;
     }
 
-    /**
-     * Sets the change1
-     *
-     * @param change The change1 to set
-     */
     public void setChange(double change) {
         this.change1 = change;
     }
 
-    /**
-     * Gets the volume
-     *
-     * @return Returns a BigDecimal
-     */
     public double getVolume() {
         return volume;
     }
 
-    /**
-     * Sets the volume
-     *
-     * @param volume The volume to set
-     */
     public void setVolume(double volume) {
         this.volume = volume;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (this.symbol != null ? this.symbol.hashCode() : 0);
+        return hash;
+    }
+    
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof QuoteDataBean)) {
+            return false;
+        }
+        QuoteDataBean other = (QuoteDataBean)object;
+        if (this.symbol != other.symbol && (this.symbol == null || !this.symbol.equals(other.symbol))) return false;
+        return true;
+    }
 }
