@@ -329,7 +329,7 @@
                         <method-param>java.lang.String</method-param>
                     </method-params>
                 </query-method>
-                <result-type-mapping>Local</result-type-mapping>
+                <!--<result-type-mapping>Local</result-type-mapping>-->
                 <ejb-ql>SELECT OBJECT(a) FROM Account a WHERE
                     a.profile.userID = ?1</ejb-ql>
             </query>
@@ -350,7 +350,7 @@
                         <method-param>java.lang.Integer</method-param>
                     </method-params>
                 </query-method>
-                <result-type-mapping>Local</result-type-mapping>
+                <!--<result-type-mapping>Local</result-type-mapping>-->
                 <ejb-ql>SELECT OBJECT(a) FROM Account a where
                     a.accountID = ?1</ejb-ql>
             </query>
@@ -400,7 +400,7 @@
                     <method-name>findAll</method-name>
                     <method-params/>
                 </query-method>
-                <result-type-mapping>Local</result-type-mapping>
+                <!--<result-type-mapping>Local</result-type-mapping>-->
                 <ejb-ql>SELECT OBJECT(a) FROM AccountProfile a</ejb-ql>
             </query>
             <query>
@@ -411,7 +411,7 @@
                         <method-param>java.lang.String</method-param>
                     </method-params>
                 </query-method>
-                <result-type-mapping>Local</result-type-mapping>
+                <!--<result-type-mapping>Local</result-type-mapping>-->
                 <ejb-ql>SELECT OBJECT(a) FROM AccountProfile a where
                     a.userID = ?1</ejb-ql>
             </query>
@@ -458,7 +458,7 @@
                         <method-param>java.lang.String</method-param>
                     </method-params>
                 </query-method>
-                <result-type-mapping>Local</result-type-mapping>
+                <!--<result-type-mapping>Local</result-type-mapping>-->
                 <ejb-ql>SELECT OBJECT(q) from Quote q WHERE q.symbol = ?1</ejb-ql>
             </query>
             <query>
@@ -467,7 +467,7 @@
                     <method-name>findAll</method-name>
                     <method-params/>
                 </query-method>
-                <result-type-mapping>Local</result-type-mapping>
+                <!--<result-type-mapping>Local</result-type-mapping>-->
                 <ejb-ql>SELECT OBJECT(h) from Holding h</ejb-ql>
             </query>
             <query>
@@ -478,7 +478,7 @@
                         <method-param>java.lang.String</method-param>
                     </method-params>
                 </query-method>
-                <result-type-mapping>Local</result-type-mapping>
+                <!--<result-type-mapping>Local</result-type-mapping>-->
                 <ejb-ql>SELECT OBJECT(h) FROM Holding h WHERE
                     h.account.profile.userID  = ?1</ejb-ql>
             </query>
@@ -490,7 +490,7 @@
                         <method-param>java.lang.Integer</method-param>
                     </method-params>
                 </query-method>
-                <result-type-mapping>Local</result-type-mapping>
+                <!--<result-type-mapping>Local</result-type-mapping>-->
                 <ejb-ql>SELECT OBJECT(h) FROM Holding h WHERE
                     h.account.accountID  = ?1</ejb-ql>
             </query>
@@ -501,7 +501,7 @@
                         <method-param>java.lang.Integer</method-param>
                     </method-params>
                 </query-method>
-                <result-type-mapping>Local</result-type-mapping>
+                <!--<result-type-mapping>Local</result-type-mapping>-->
                 <ejb-ql>SELECT OBJECT(h) FROM Holding h WHERE
                     h.holdingID = ?1</ejb-ql>
             </query>
@@ -561,7 +561,7 @@
                     <method-name>findAll</method-name>
                     <method-params/>
                 </query-method>
-                <result-type-mapping>Local</result-type-mapping>
+                <!--<result-type-mapping>Local</result-type-mapping>-->
                 <ejb-ql>SELECT OBJECT(q) FROM Quote q</ejb-ql>
             </query>
             <query>
@@ -572,7 +572,7 @@
                         <method-param>java.lang.String</method-param>
                     </method-params>
                 </query-method>
-                <result-type-mapping>Local</result-type-mapping>
+                <!--<result-type-mapping>Local</result-type-mapping>-->
                 <ejb-ql>SELECT OBJECT(q) FROM Quote q</ejb-ql>
             </query>
             <query>
@@ -581,7 +581,7 @@
                     <method-name>findOne</method-name>
                     <method-params/>
                 </query-method>
-                <result-type-mapping>Local</result-type-mapping>
+                <!--<result-type-mapping>Local</result-type-mapping>-->
                 <ejb-ql>SELECT OBJECT(q) FROM Quote q where q.symbol = 's:0'</ejb-ql>
             </query>
             <query>
@@ -589,7 +589,7 @@
                     <method-name>findTSIAQuotesOrderByChange</method-name>
                     <method-params/>
                 </query-method>
-                <result-type-mapping>Local</result-type-mapping>
+                <!--<result-type-mapping>Local</result-type-mapping>-->
                 <ejb-ql>SELECT OBJECT(q) FROM Quote q WHERE q.symbol LIKE 's:1__' ORDER BY q.change DESC</ejb-ql>
             </query>
             <query>
@@ -598,7 +598,7 @@
                     <method-name>ejbSelectTotalVolume</method-name>
                     <method-params/>
                 </query-method>
-                <result-type-mapping>Local</result-type-mapping>
+                <!--<result-type-mapping>Local</result-type-mapping>-->
                 <ejb-ql>SELECT q.volume FROM Quote q</ejb-ql>
             </query>
             <query>
@@ -606,7 +606,7 @@
                     <method-name>findTSIAQuotes</method-name>
                     <method-params/>
                 </query-method>
-                <result-type-mapping>Local</result-type-mapping>
+                <!--<result-type-mapping>Local</result-type-mapping>-->
                 <ejb-ql>SELECT OBJECT(q) FROM Quote q WHERE q.symbol LIKE 's:1__'</ejb-ql>
             </query>
             <query>
@@ -616,7 +616,7 @@
                         <method-param>java.lang.String</method-param>
                     </method-params>
                 </query-method>
-                <result-type-mapping>Local</result-type-mapping>
+                <!--<result-type-mapping>Local</result-type-mapping>-->
                 <ejb-ql>SELECT OBJECT(q) FROM Quote q where q.symbol = ?1</ejb-ql>
             </query>
         </entity>
@@ -655,7 +655,7 @@
                         <method-param>java.lang.String</method-param>
                     </method-params>
                 </query-method>
-                <result-type-mapping>Local</result-type-mapping>
+                <!--<result-type-mapping>Local</result-type-mapping>-->
                 <ejb-ql>SELECT OBJECT(kg) FROM KeyGen kg where
                     kg.keyName = ?1</ejb-ql>
             </query>
@@ -712,7 +712,7 @@
                     <method-name>findAll</method-name>
                     <method-params/>
                 </query-method>
-                <result-type-mapping>Local</result-type-mapping>
+                <!--<result-type-mapping>Local</result-type-mapping>-->
                 <ejb-ql>SELECT OBJECT(o) FROM Orders o</ejb-ql>
             </query>
             <query>
@@ -723,7 +723,7 @@
                         <method-param>java.lang.String</method-param>
                     </method-params>
                 </query-method>
-                <result-type-mapping>Local</result-type-mapping>
+                <!--<result-type-mapping>Local</result-type-mapping>-->
                 <ejb-ql>SELECT OBJECT(o) FROM Orders o WHERE
                     o.orderStatus = 'closed' AND
                     o.account.profile.userID  = ?1</ejb-ql>
@@ -736,7 +736,7 @@
                         <method-param>java.lang.String</method-param>
                     </method-params>
                 </query-method>
-                <result-type-mapping>Local</result-type-mapping>
+                <!--<result-type-mapping>Local</result-type-mapping>-->
                 <ejb-ql>SELECT OBJECT(o) FROM Orders o WHERE
                     o.account.profile.userID  = ?1 ORDER BY o.orderID DESC</ejb-ql>
             </query>
@@ -747,7 +747,7 @@
                         <method-param>java.lang.Integer</method-param>
                     </method-params>
                 </query-method>
-                <result-type-mapping>Local</result-type-mapping>
+                <!--<result-type-mapping>Local</result-type-mapping>-->
                 <ejb-ql>SELECT OBJECT(o) FROM Orders o WHERE o.orderID = ?1</ejb-ql>
             </query>
             <query>
@@ -757,7 +757,7 @@
                         <method-param>java.lang.String</method-param>
                     </method-params>
                 </query-method>
-                <result-type-mapping>Local</result-type-mapping>
+                <!--<result-type-mapping>Local</result-type-mapping>-->
                 <ejb-ql>SELECT OBJECT(o) FROM Orders o WHERE
                     o.orderStatus = 'closed' AND
                     o.account.profile.userID  = ?1</ejb-ql>
@@ -803,6 +803,7 @@
           ** 
          -->
         <message-driven>
+            <display-name>TradeStreamerMDB</display-name>
             <ejb-name>TradeStreamerMDB</ejb-name>
             <ejb-class>org.apache.geronimo.samples.daytrader.ejb.TradeStreamerMDB</ejb-class>
             <messaging-type>javax.jms.MessageListener</messaging-type>
@@ -1053,30 +1054,6 @@
                 </method-params>
             </method>
             <method>
-                <ejb-name>TradeEJB</ejb-name>
-                <method-intf>Remote</method-intf>
-                <method-name>cancelOrderOnePhase</method-name>
-                <method-params>
-                    <method-param>java.lang.Integer</method-param>
-                </method-params>
-            </method>
-            <method>
-                <ejb-name>TradeEJB</ejb-name>
-                <method-intf>Remote</method-intf>
-                <method-name>completeOrderOnePhaseDirect</method-name>
-                <method-params>
-                    <method-param>java.lang.Integer</method-param>
-                </method-params>
-            </method>
-            <method>
-                <ejb-name>TradeEJB</ejb-name>
-                <method-intf>Remote</method-intf>
-                <method-name>queueOrderOnePhase</method-name>
-                <method-params>
-                    <method-param>java.lang.Integer</method-param>
-                </method-params>
-            </method>
-            <method>
                 <ejb-name>TradeJPA</ejb-name>
                 <method-intf>Remote</method-intf>
                 <method-name>publishQuotePriceChange</method-name>
@@ -1087,46 +1064,6 @@
                     <method-param>double</method-param>
                 </method-params>
             </method>
-            <method>
-                <ejb-name>TradeJPA</ejb-name>
-                <method-intf>Remote</method-intf>
-                <method-name>cancelOrderOnePhase</method-name>
-                <method-params>
-                    <method-param>java.lang.Integer</method-param>
-                </method-params>
-            </method>
-            <method>
-                <ejb-name>TradeJPA</ejb-name>
-                <method-intf>Remote</method-intf>
-                <method-name>completeOrderOnePhaseDirect</method-name>
-                <method-params>
-                    <method-param>java.lang.Integer</method-param>
-                </method-params>
-            </method>
-            <method>
-                <ejb-name>TradeJPA</ejb-name>
-                <method-intf>Remote</method-intf>
-                <method-name>queueOrderOnePhase</method-name>
-                <method-params>
-                    <method-param>java.lang.Integer</method-param>
-                </method-params>
-            </method>
-            <method>
-        		<ejb-name>TradeJDBC</ejb-name>
-        		<method-intf>Remote</method-intf>
-        		<method-name>cancelOrderOnePhase</method-name>
-        		<method-params>
-        			<method-param>java.lang.Integer</method-param>
-        		</method-params>
-        	</method>
-        	<method>
-        		<ejb-name>TradeJDBC</ejb-name>
-        		<method-intf>Remote</method-intf>
-        		<method-name>completeOrderOnePhaseDirect</method-name>
-        		<method-params>
-        			<method-param>java.lang.Integer</method-param>
-        		</method-params>
-        	</method>
         	<method>
         		<ejb-name>TradeJDBC</ejb-name>
         		<method-intf>Remote</method-intf>
@@ -1136,14 +1073,6 @@
         			<method-param>java.math.BigDecimal</method-param>
         			<method-param>java.math.BigDecimal</method-param>
         			<method-param>double</method-param>
-        		</method-params>
-        	</method>
-        	<method>
-        		<ejb-name>TradeJDBC</ejb-name>
-        		<method-intf>Remote</method-intf>
-        		<method-name>queueOrderOnePhase</method-name>
-        		<method-params>
-        			<method-param>java.lang.Integer</method-param>
         		</method-params>
         	</method>
             <trans-attribute>RequiresNew</trans-attribute>
@@ -1158,41 +1087,9 @@
             <method>
                 <ejb-name>TradeEJB</ejb-name>
                 <method-intf>Remote</method-intf>
-                <method-name>cancelOrderOnePhaseDirect</method-name>
-                <method-params>
-                    <method-param>java.lang.Integer</method-param>
-                </method-params>
-            </method>
-            <method>
-                <ejb-name>TradeEJB</ejb-name>
-                <method-intf>Remote</method-intf>
-                <method-name>completeOrderOnePhaseDirect</method-name>
-                <method-params>
-                    <method-param>java.lang.Integer</method-param>
-                </method-params>
-            </method>
-            <method>
-                <ejb-name>TradeEJB</ejb-name>
-                <method-intf>Remote</method-intf>
                 <method-name>resetTrade</method-name>
                 <method-params>
                     <method-param>boolean</method-param>
-                </method-params>
-            </method>
-            <method>
-                <ejb-name>TradeJPA</ejb-name>
-                <method-intf>Remote</method-intf>
-                <method-name>cancelOrderOnePhaseDirect</method-name>
-                <method-params>
-                    <method-param>java.lang.Integer</method-param>
-                </method-params>
-            </method>
-            <method>
-                <ejb-name>TradeJPA</ejb-name>
-                <method-intf>Remote</method-intf>
-                <method-name>completeOrderOnePhaseDirect</method-name>
-                <method-params>
-                    <method-param>java.lang.Integer</method-param>
                 </method-params>
             </method>
             <method>
@@ -1203,22 +1100,6 @@
                     <method-param>boolean</method-param>
                 </method-params>
             </method>
-            <method>
-        		<ejb-name>TradeJDBC</ejb-name>
-        		<method-intf>Remote</method-intf>
-        		<method-name>cancelOrderOnePhaseDirect</method-name>
-        		<method-params>
-        			<method-param>java.lang.Integer</method-param>
-        		</method-params>
-        	</method>
-        	<method>
-        		<ejb-name>TradeJDBC</ejb-name>
-        		<method-intf>Remote</method-intf>
-        		<method-name>completeOrderOnePhaseDirect</method-name>
-        		<method-params>
-        			<method-param>java.lang.Integer</method-param>
-        		</method-params>
-        	</method>
         	<method>
         		<ejb-name>TradeJDBC</ejb-name>
         		<method-intf>Remote</method-intf>
