@@ -585,7 +585,11 @@
                 </moduleId>
             </server-environment>
             <resource>
-                <external-rar>org.apache.geronimo.modules/geronimo-activemq-ra/2.0-SNAPSHOT/rar</external-rar>
+                <external-rar xmlns:dep="http://geronimo.apache.org/xml/ns/deployment-1.2">
+                    <dep:groupId>org.apache.geronimo.modules</dep:groupId>
+                    <dep:artifactId>geronimo-activemq-ra</dep:artifactId>
+                    <dep:type>rar</dep:type>
+                </external-rar>
                 <connector xmlns="http://geronimo.apache.org/xml/ns/j2ee/connector-1.2">
                     <resourceadapter>
                         <resourceadapter-instance>
@@ -658,7 +662,11 @@
 
     <ext-module>
         <connector>TradeDataSource</connector>
-        <external-path>org.tranql/tranql-connector-oracle-xa/1.3/rar</external-path>
+        <external-path xmlns:dep="http://geronimo.apache.org/xml/ns/deployment-1.2">
+            <dep:groupId>org.tranql</dep:groupId>
+            <dep:artifactId>tranql-connector-oracle-xa</dep:artifactId>
+            <dep:type>rar</dep:type>
+        </external-path>
         <connector xmlns="http://geronimo.apache.org/xml/ns/j2ee/connector-1.2">
 
 
@@ -697,7 +705,11 @@
 
     <ext-module>
         <connector>TradeJMS</connector>
-        <external-path>org.apache.geronimo.modules/geronimo-activemq-ra/2.0-SNAPSHOT/rar</external-path>
+        <external-path xmlns:dep="http://geronimo.apache.org/xml/ns/deployment-1.2">
+            <dep:groupId>org.apache.geronimo.modules</dep:groupId>
+            <dep:artifactId>geronimo-activemq-ra</dep:artifactId>
+            <dep:type>rar</dep:type>
+        </external-path>
         <connector xmlns="http://geronimo.apache.org/xml/ns/j2ee/connector-1.2">
 
             <resourceadapter>
