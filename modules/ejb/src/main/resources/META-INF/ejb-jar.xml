@@ -163,70 +163,6 @@
             </security-identity>
         </session>
 
-
-        <!--
-          **
-          **  T r a d e J P A
-          ** 
-         -->
-        <session>
-            <description>Trade JPA Session EJB manages all Trading services</description>
-            <display-name>TradeJPA</display-name>
-            <ejb-name>TradeJPA</ejb-name>
-            <home>org.apache.geronimo.samples.daytrader.ejb.TradeHome</home>
-            <remote>org.apache.geronimo.samples.daytrader.ejb.Trade</remote>
-            <ejb-class>org.apache.geronimo.samples.daytrader.TradeJPA</ejb-class>
-            <session-type>Stateless</session-type>
-            <transaction-type>Container</transaction-type>
-            <env-entry>
-                <env-entry-name>orderBySQLSupported</env-entry-name>
-                <env-entry-type>java.lang.Boolean</env-entry-type>
-                <env-entry-value>true</env-entry-value>
-            </env-entry>
-            <env-entry>
-                <env-entry-name>updateQuotePrices</env-entry-name>
-                <env-entry-type>java.lang.Boolean</env-entry-type>
-                <env-entry-value>true</env-entry-value>
-            </env-entry>
-            <env-entry>
-                <env-entry-name>publishQuotePriceChange</env-entry-name>
-                <env-entry-type>java.lang.Boolean</env-entry-type>
-                <env-entry-value>false</env-entry-value>
-            </env-entry>
-            <resource-ref>
-                <res-ref-name>jms/QueueConnectionFactory</res-ref-name>
-                <res-type>javax.jms.QueueConnectionFactory</res-type>
-                <res-auth>Application</res-auth>
-                <res-sharing-scope>Shareable</res-sharing-scope>
-            </resource-ref>
-            <resource-ref>
-                <res-ref-name>jms/TopicConnectionFactory</res-ref-name>
-                <res-type>javax.jms.TopicConnectionFactory</res-type>
-                <res-auth>Application</res-auth>
-                <res-sharing-scope>Shareable</res-sharing-scope>
-            </resource-ref>
-            <message-destination-ref>
-                <message-destination-ref-name>jms/TradeBrokerQueue</message-destination-ref-name>
-                <message-destination-type>javax.jms.Queue</message-destination-type>
-                <message-destination-usage>Produces</message-destination-usage>
-                <message-destination-link>TradeBrokerQueue</message-destination-link>
-            </message-destination-ref>
-            <message-destination-ref>
-                <message-destination-ref-name>jms/TradeStreamerTopic</message-destination-ref-name>
-                <message-destination-type>javax.jms.Topic</message-destination-type>
-                <message-destination-usage>Produces</message-destination-usage>
-                <message-destination-link>TradeStreamerTopic</message-destination-link>
-            </message-destination-ref>
-            <security-identity>
-                <description/>
-                <use-caller-identity/>
-            </security-identity>
-            <persistence-context-ref>
-                <persistence-context-ref-name>daytrader</persistence-context-ref-name>
-                <persistence-unit-name>daytrader</persistence-unit-name>
-                <persistence-context-type>Transactional</persistence-context-type>
-            </persistence-context-ref>
-        </session>
         
         <!--
           **
@@ -1053,17 +989,6 @@
                     <method-param>double</method-param>
                 </method-params>
             </method>
-            <method>
-                <ejb-name>TradeJPA</ejb-name>
-                <method-intf>Remote</method-intf>
-                <method-name>publishQuotePriceChange</method-name>
-                <method-params>
-                    <method-param>org.apache.geronimo.samples.daytrader.QuoteDataBean</method-param>
-                    <method-param>java.math.BigDecimal</method-param>
-                    <method-param>java.math.BigDecimal</method-param>
-                    <method-param>double</method-param>
-                </method-params>
-            </method>
         	<method>
         		<ejb-name>TradeJDBC</ejb-name>
         		<method-intf>Remote</method-intf>
@@ -1086,14 +1011,6 @@
         <container-transaction>
             <method>
                 <ejb-name>TradeEJB</ejb-name>
-                <method-intf>Remote</method-intf>
-                <method-name>resetTrade</method-name>
-                <method-params>
-                    <method-param>boolean</method-param>
-                </method-params>
-            </method>
-            <method>
-                <ejb-name>TradeJPA</ejb-name>
                 <method-intf>Remote</method-intf>
                 <method-name>resetTrade</method-name>
                 <method-params>
@@ -1151,10 +1068,6 @@
             </method>
             <method>
                 <ejb-name>TradeEJB</ejb-name>
-                <method-name>*</method-name>
-            </method>
-            <method>
-                <ejb-name>TradeJPA</ejb-name>
                 <method-name>*</method-name>
             </method>
             <method>

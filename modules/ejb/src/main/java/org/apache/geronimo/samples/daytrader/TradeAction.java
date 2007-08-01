@@ -44,7 +44,6 @@ public class TradeAction implements TradeServices {
     private static TradeServices trade = null;
     private static TradeHome tradeHome = null;
     private static TradeJDBCHome tradeJDBCHome = null;
-    private static TradeHome tradeHomeJPA = null;
 
 
     public TradeAction() {
@@ -78,24 +77,6 @@ public class TradeAction implements TradeServices {
                 Log.error("TradeAction:TradeAction() Creation of Trade EJB failed\n" + e);
                 e.printStackTrace();
             }
-        } else if (TradeConfig.runTimeMode == TradeConfig.JPA) {
-            try {
-                if (tradeHomeJPA == null) {
-                    InitialContext ic = new InitialContext();
-                    try {
-                        tradeHomeJPA = (TradeHome) (javax.rmi.PortableRemoteObject.narrow(ic.lookup("java:comp/env/ejb/TradeJPA"), TradeHome.class));
-                    }
-                    catch (Exception e) {
-                        Log.log("TradeAction:createTrade lookup of java:comp/env/ejb/TradeJPA failed. Reverting to JNDI lookup of Trade");
-                        tradeHomeJPA = (TradeHome) (javax.rmi.PortableRemoteObject.narrow(ic.lookup("TradeJPA"), TradeHome.class));
-                    }
-                }
-                trade = tradeHomeJPA.create();
-            }
-            catch (Exception e) {
-                Log.error("TradeAction:TradeAction() Creation of Trade JPA failed\n" + e);
-                e.printStackTrace();
-            }
         } else if (TradeConfig.runTimeMode == TradeConfig.EJB3) {
             try {
                 if (!(trade instanceof TradeSLSBRemote)) {
@@ -112,7 +93,7 @@ public class TradeAction implements TradeServices {
                 }
             }
             catch (Exception e) {
-                Log.error("TradeAction:TradeAction() Creation of Trade JPA failed\n" + e);
+                Log.error("TradeAction:TradeAction() Creation of Trade EJB 3 failed\n" + e);
                 e.printStackTrace();
             }
         }else if (TradeConfig.runTimeMode == TradeConfig.DIRECT) {

@@ -112,15 +112,6 @@
                 </session>
                 
                 <session>
-                    <ejb-name>TradeJPA</ejb-name>
-                    <persistence-context-ref>
-                        <persistence-context-ref-name>daytrader</persistence-context-ref-name>
-                        <persistence-unit-name>daytrader</persistence-unit-name>
-                        <persistence-context-type>Transactional</persistence-context-type>
-                    </persistence-context-ref>
-                </session>
-                
-                <session>
                     <ejb-name>KeySequenceEJB</ejb-name>
                     <jndi-name>ejb/KeySequenceEJB</jndi-name>
                     <cache-size>100</cache-size>

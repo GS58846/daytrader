@@ -34,13 +34,12 @@ public class TradeConfig {
 	/* Trade Runtime Configuration Parameters */
 
 	/* Trade Runtime Mode parameters */
-	public static String[] runTimeModeNames = { "EJB", "Direct", "SessionDirect", "JPA", "EJB3" };
+	public static String[] runTimeModeNames = { "EJB", "Direct", "SessionDirect", "EJB3" };
 	public static final int EJB = 0;
 	public static final int DIRECT = 1;
 	public static final int SESSION = 2;
-	public static final int JPA = 3;
-    public static final int EJB3 = 4;
-	public static int runTimeMode = JPA;
+    public static final int EJB3 = 3;
+	public static int runTimeMode = DIRECT;
 
 	public static String[] orderProcessingModeNames =
 		{ "Synchronous", "Asynchronous_2-Phase" };
