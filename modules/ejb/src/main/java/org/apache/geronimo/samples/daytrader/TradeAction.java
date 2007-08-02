@@ -17,7 +17,6 @@
 package org.apache.geronimo.samples.daytrader;
 
 import java.math.BigDecimal;
-import java.rmi.RemoteException;
 import java.util.Collection;
 
 import javax.naming.InitialContext;
@@ -25,6 +24,7 @@ import javax.naming.InitialContext;
 import org.apache.geronimo.samples.daytrader.direct.TradeDirect;
 import org.apache.geronimo.samples.daytrader.ejb.TradeHome;
 import org.apache.geronimo.samples.daytrader.ejb3.TradeSLSBRemote;
+import org.apache.geronimo.samples.daytrader.ejb3.DirectSLSBRemote;
 import org.apache.geronimo.samples.daytrader.session.TradeJDBCHome;
 import org.apache.geronimo.samples.daytrader.util.FinancialUtils;
 import org.apache.geronimo.samples.daytrader.util.Log;
@@ -94,6 +94,25 @@ public class TradeAction implements TradeServices {
             }
             catch (Exception e) {
                 Log.error("TradeAction:TradeAction() Creation of Trade EJB 3 failed\n" + e);
+                e.printStackTrace();
+            }
+        } else if (TradeConfig.runTimeMode == TradeConfig.SESSION3) {
+            try {
+                if (!(trade instanceof DirectSLSBRemote)) {
+                    DirectSLSBRemote directSLSB = null;
+                    InitialContext context = new InitialContext();
+                    try {
+                        directSLSB = (DirectSLSBRemote) context.lookup("java:comp/env/ejb/DirectSLSBBean");                
+                    } catch (Exception ex) {
+                        Log.error("TradeAction:createTrade - Lookup of DirectSLSBRemote failed!!!");
+                        directSLSB = (DirectSLSBRemote) context.lookup("DirectSLSBBean");
+                    }
+                
+                    trade = directSLSB;
+                }
+            }
+            catch (Exception e) {
+                Log.error("TradeAction:TradeAction() Creation of Trade SESSION3 failed\n" + e);
                 e.printStackTrace();
             }
         }else if (TradeConfig.runTimeMode == TradeConfig.DIRECT) {
@@ -388,7 +407,7 @@ public class TradeAction implements TradeServices {
      * @param userID the account userID to lookup
      * @return User account data in AccountDataBean
      */
-    public AccountDataBean getAccountData(String userID) throws javax.ejb.FinderException, RemoteException {
+    public AccountDataBean getAccountData(String userID) throws Exception {
         if (Log.doActionTrace())
             Log.trace("TradeAction:getAccountData", userID);
         AccountDataBean accountData;

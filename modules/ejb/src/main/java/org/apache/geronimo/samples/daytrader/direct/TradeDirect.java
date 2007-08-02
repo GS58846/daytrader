@@ -953,7 +953,7 @@ public class TradeDirect implements TradeServices
 	/**
      * @see TradeServices#getAccountData(String)
      */
-	public AccountDataBean getAccountData(String userID) throws RemoteException {
+	public AccountDataBean getAccountData(String userID) throws Exception {
 		try {
 			AccountDataBean accountData = null;
 			Connection conn = null;
@@ -977,7 +977,7 @@ public class TradeDirect implements TradeServices
 			}
 			return accountData;
 		} catch (Exception e) {
-			throw new RemoteException(e.getMessage(), e);
+			throw new Exception(e.getMessage(), e);
 		}
 	}
 

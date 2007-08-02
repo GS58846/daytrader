@@ -202,7 +202,7 @@ public interface TradeServices extends Remote {
 	 * @return User account data in AccountDataBean
 	 */	
    public AccountDataBean getAccountData(String userID) 
-   		throws javax.ejb.FinderException, RemoteException;                              
+   		throws Exception, RemoteException;                              
 
 	/**
 	 * Return an AccountProfileDataBean for userID providing the users profile

@@ -19,8 +19,6 @@ package org.apache.geronimo.samples.daytrader.soap;
 import java.math.BigDecimal;
 import java.rmi.RemoteException;
 
-import javax.ejb.FinderException;
-
 import org.apache.geronimo.samples.daytrader.TradeAction;
 import org.apache.geronimo.samples.daytrader.client.ws.AccountDataBean;
 import org.apache.geronimo.samples.daytrader.client.ws.AccountProfileDataBean;
@@ -153,7 +151,7 @@ public class TradeWSAction implements TradeWSServices {
 	public AccountDataBean getAccountData(String userID) throws RemoteException {
 		try {
             return Convert.convertAccountDataBean(trade.getAccountData(userID));
-        } catch (FinderException e) {
+        } catch (Exception e) {
             throw new RemoteException("", e);
         }
 	}

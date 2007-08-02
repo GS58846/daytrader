@@ -26,6 +26,7 @@ import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.TextMessage;
 import org.apache.geronimo.samples.daytrader.TradeServices;
+import org.apache.geronimo.samples.daytrader.direct.TradeDirect;
 import org.apache.geronimo.samples.daytrader.util.Log;
 import org.apache.geronimo.samples.daytrader.util.MDBStats;
 import org.apache.geronimo.samples.daytrader.util.TimerStat;
@@ -141,9 +142,9 @@ public class DTBroker3MDB implements MessageListener {
     
     private TradeServices getTrade(boolean direct) throws Exception{
         TradeServices trade;
-        /*if (direct)
+        if (direct)
             trade = new TradeDirect();
-        else*/
+        else
             trade = tradeSLSB;
         
         return trade;
