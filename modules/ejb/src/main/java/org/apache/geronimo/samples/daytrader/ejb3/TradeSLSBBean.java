@@ -304,8 +304,8 @@ public class TradeSLSBBean implements TradeSLSBRemote, TradeSLSBLocal {
                     + "\n\t Quote info: " + quote 
                     + "\n\t Holding info: " + holding);
 
-        if (Log.doTrace())
-            Log.trace("Calling TradeAction:orderCompleted from Session EJB using Session Object");
+        //if (Log.doTrace())
+        //    Log.trace("Calling TradeAction:orderCompleted from Session EJB using Session Object");
         // FUTURE All getEJBObjects could be local -- need to add local I/F
 
         // commented out following call
@@ -461,6 +461,9 @@ public class TradeSLSBBean implements TradeSLSBRemote, TradeSLSBLocal {
          */
         AccountDataBean account = profile.getAccount();
         account.getProfile();
+        
+        // Added to populate transient field for account
+        account.setProfileID(profile.getUserID());
         return account;
     }
 
@@ -543,13 +546,11 @@ public class TradeSLSBBean implements TradeSLSBRemote, TradeSLSBLocal {
         return account;
     }
 
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     public RunStatsDataBean resetTrade(boolean deleteAll) throws Exception {
         if (Log.doTrace())
             Log.trace("TradeSLSBBean:resetTrade", deleteAll);
 
-        // Clear MDB Statistics
-        MDBStats.getInstance().reset();
-        // Reset Trade
         return new org.apache.geronimo.samples.daytrader.direct.TradeDirect(false).resetTrade(deleteAll);
     }
 
