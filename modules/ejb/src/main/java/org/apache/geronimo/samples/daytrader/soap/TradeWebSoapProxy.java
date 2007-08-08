@@ -164,7 +164,7 @@ public class TradeWebSoapProxy implements org.apache.geronimo.samples.daytrader.
 	public Collection getHoldings(String userID) throws Exception, RemoteException {
 		Object[] holdings = getTrade().getHoldings(userID);
 		ArrayList holdingsRet = new ArrayList();
-		if (holdings.length == 0) {
+		if (holdings == null || holdings.length == 0) {
 			return holdingsRet;
 		}
 		
@@ -187,7 +187,7 @@ public class TradeWebSoapProxy implements org.apache.geronimo.samples.daytrader.
 	public Collection getOrders(String userID) throws Exception, RemoteException {
 		Object[] orders = getTrade().getOrders(userID);
 		ArrayList ordersRet = new ArrayList();
-		if (orders.length == 0) {
+		if (orders == null || orders.length == 0) {
 			return ordersRet;
 		}
 		for (int ii = 0; ii < orders.length; ii++) {
@@ -293,7 +293,7 @@ public class TradeWebSoapProxy implements org.apache.geronimo.samples.daytrader.
 
 	private Collection convertQuoteDataBeanWSArrayToCollectionBase(Object[] quotes) {	
 		ArrayList quotesRet = new ArrayList();
-		if (quotes.length == 0) {
+		if (quotes == null || quotes.length == 0) {
 			return quotesRet;
 		}
 		for (int ii = 0; ii < quotes.length; ii++) {
