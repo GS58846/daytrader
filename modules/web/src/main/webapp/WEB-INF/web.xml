@@ -255,8 +255,58 @@
     <servlet>
         <display-name>PingServlet2IncludeRcv</display-name>
         <servlet-name>PingServlet2IncludeRcv</servlet-name>
-        <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.PingServlet2IncludeRcv</servlet-class>
+		<servlet-class>org.apache.geronimo.samples.daytrader.web.prims.PingServlet2IncludeRcv</servlet-class>
+	</servlet>
+    
+    <!-- EJB3-based primitives -->
+    
+    <servlet>
+        <servlet-name>ejb3.PingServlet2Session</servlet-name>
+        <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.ejb3.PingServlet2Session</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ejb3.PingServlet2Entity</servlet-name>
+        <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.ejb3.PingServlet2Entity</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ejb3.PingServlet2Session2Entity</servlet-name>
+        <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.ejb3.PingServlet2Session2Entity</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ejb3.PingServlet2Session2EntityCollection</servlet-name>
+        <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.ejb3.PingServlet2Session2EntityCollection</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ejb3.PingServlet2Session2CMROne2One</servlet-name>
+        <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.ejb3.PingServlet2Session2CMROne2One</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ejb3.PingServlet2Session2CMROne2Many</servlet-name>
+        <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.ejb3.PingServlet2Session2CMROne2Many</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ejb3.PingServlet2Session2JDBC</servlet-name>
+        <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.ejb3.PingServlet2Session2JDBC</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ejb3.PingServlet2Session2JDBCCollection</servlet-name>
+        <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.ejb3.PingServlet2Session2JDBCCollection</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ejb3.PingServlet2MDBQueue</servlet-name>
+        <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.ejb3.PingServlet2MDBQueue</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ejb3.PingServlet2MDBTopic</servlet-name>
+        <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.ejb3.PingServlet2MDBTopic</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ejb3.PingServlet2TwoPhase</servlet-name>
+        <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.ejb3.PingServlet2TwoPhase</servlet-class>
+    </servlet>
+
+    <!-- End of EJB3-based primitives -->
+    
     <servlet>
         <display-name>org_apache_geronimo_samples_daytrader_TradeWSAction</display-name>
         <servlet-name>org_apache_geronimo_samples_daytrader_TradeWSAction</servlet-name>
@@ -374,18 +424,67 @@
         <url-pattern>/servlet/PingServlet2MDBTopic</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>PingServlet2JNDI</servlet-name>
-        <url-pattern>/servlet/PingServlet2JNDI</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>PingServlet2TwoPhase</servlet-name>
-        <url-pattern>/servlet/PingServlet2TwoPhase</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>PingServlet2Include</servlet-name>
-        <url-pattern>/servlet/PingServlet2Include</url-pattern>
-    </servlet-mapping>
+		<servlet-name>PingServlet2JNDI</servlet-name>
+		<url-pattern>/servlet/PingServlet2JNDI</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>PingServlet2TwoPhase</servlet-name>
+		<url-pattern>/servlet/PingServlet2TwoPhase</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>PingServlet2Include</servlet-name>
+		<url-pattern>/servlet/PingServlet2Include</url-pattern>
+	</servlet-mapping>
 
+    
+    <!-- EJB3-based primitives -->   
+    <servlet-mapping>
+        <servlet-name>ejb3.PingServlet2Session</servlet-name>
+        <url-pattern>/ejb3/PingServlet2Session</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ejb3.PingServlet2Entity</servlet-name>
+        <url-pattern>/ejb3/PingServlet2Entity</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ejb3.PingServlet2Session2Entity</servlet-name>
+        <url-pattern>/ejb3/PingServlet2Session2Entity</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ejb3.PingServlet2Session2EntityCollection</servlet-name>
+        <url-pattern>/ejb3/PingServlet2Session2EntityCollection</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ejb3.PingServlet2Session2CMROne2One</servlet-name>
+        <url-pattern>/ejb3/PingServlet2Session2CMROne2One</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ejb3.PingServlet2Session2CMROne2Many</servlet-name>
+        <url-pattern>/ejb3/PingServlet2Session2CMROne2Many</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ejb3.PingServlet2Session2JDBC</servlet-name>
+        <url-pattern>/ejb3/PingServlet2Session2JDBC</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ejb3.PingServlet2Session2JDBCCollection</servlet-name>
+        <url-pattern>/ejb3/PingServlet2Session2JDBCCollection</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ejb3.PingServlet2MDBQueue</servlet-name>
+        <url-pattern>/ejb3/PingServlet2MDBQueue</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ejb3.PingServlet2MDBTopic</servlet-name>
+        <url-pattern>/ejb3/PingServlet2MDBTopic</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ejb3.PingServlet2TwoPhase</servlet-name>
+        <url-pattern>/ejb3/PingServlet2TwoPhase</url-pattern>
+    </servlet-mapping>
+    
+    <!-- End EJB3-based primitives -->
+    
 
     <session-config>
         <session-timeout>30</session-timeout>

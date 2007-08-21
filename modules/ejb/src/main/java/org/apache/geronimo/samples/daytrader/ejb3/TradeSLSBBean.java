@@ -626,6 +626,55 @@ public class TradeSLSBBean implements TradeSLSBRemote, TradeSLSBLocal {
         entityManager.persist(newHolding);
         return newHolding;
     }
+    
+    public double investmentReturn(double investment, double NetValue) throws Exception {
+        if (Log.doTrace()) Log.trace("TradeSLSBBean:investmentReturn");
+    
+        double diff = NetValue - investment;
+        double ir = diff / investment;
+        return ir;
+    }
+    
+    public QuoteDataBean pingTwoPhase(String symbol) throws Exception {
+        try{
+            if (Log.doTrace()) Log.trace("TradeSLSBBean:pingTwoPhase", symbol);
+            QuoteDataBean quoteData=null;
+            Connection conn = null;
+            Session sess = null;        
+            
+            try {
+
+                //Get a Quote and send a JMS message in a 2-phase commit
+                quoteData = entityManager.find(QuoteDataBean.class, symbol);
+
+                conn = queueConnectionFactory.createConnection();                        
+                sess = conn.createSession(false, Session.AUTO_ACKNOWLEDGE);
+                MessageProducer msgProducer = sess.createProducer(tradeBrokerQueue);
+                TextMessage message = sess.createTextMessage();
+
+                String command= "ping";
+                message.setStringProperty("command", command);
+                message.setLongProperty("publishTime", System.currentTimeMillis());         
+                message.setText("Ping message for queue java:comp/env/jms/DTBrokerQueue3 sent from TradeSLSBBean:pingTwoPhase at " + new java.util.Date());
+
+                msgProducer.send(message);  
+            } 
+            catch (Exception e) {
+                Log.error("TradeSLSBBean:pingTwoPhase -- exception caught",e);
+            }
+
+            finally {
+                if (conn != null)
+                    conn.close();   
+                if (sess != null)
+                    sess.close();
+            }           
+
+            return quoteData;
+        } catch (Exception e){
+            throw new Exception(e.getMessage(),e);
+        }
+    }
 
     class quotePriceComparator implements java.util.Comparator {
         public int compare(Object quote1, Object quote2) {

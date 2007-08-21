@@ -19,7 +19,11 @@ package org.apache.geronimo.samples.daytrader.ejb3;
 
 import javax.ejb.Remote;
 import org.apache.geronimo.samples.daytrader.TradeServices;
+import org.apache.geronimo.samples.daytrader.QuoteDataBean;
 
 @Remote
 public interface TradeSLSBRemote extends TradeServices {
+    public double investmentReturn(double investment, double NetValue) throws Exception;
+    
+    public QuoteDataBean pingTwoPhase(String symbol) throws Exception;
 }

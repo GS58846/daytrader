@@ -19,7 +19,11 @@ package org.apache.geronimo.samples.daytrader.ejb3;
 
 import javax.ejb.Local;
 import org.apache.geronimo.samples.daytrader.TradeServices;
+import org.apache.geronimo.samples.daytrader.QuoteDataBean;
 
 @Local
 public interface TradeSLSBLocal extends TradeServices {
+    public double investmentReturn(double investment, double NetValue) throws Exception;
+    
+    public QuoteDataBean pingTwoPhase(String symbol) throws Exception;
 }
