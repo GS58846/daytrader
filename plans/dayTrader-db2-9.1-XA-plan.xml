@@ -115,14 +115,14 @@
                 **
                 -->
 
-            <!--<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
+            <persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
                 <persistence-unit name="daytrader">
                     <properties>
                         <property name="openjpa.jdbc.DBDictionary" value="db2" />
-                        <property name="openjpa.jdbc.DBDictionary" value="derby" />
+                        <!--<property name="openjpa.jdbc.DBDictionary" value="derby" />-->
                     </properties>
                 </persistence-unit>
-            </persistence>-->
+            </persistence>
         </openejb-jar>
     </module>
 
