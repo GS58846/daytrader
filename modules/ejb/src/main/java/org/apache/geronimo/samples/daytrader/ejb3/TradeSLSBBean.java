@@ -63,10 +63,10 @@ public class TradeSLSBBean implements TradeSLSBRemote, TradeSLSBLocal {
     @Resource(name = "jms/TopicConnectionFactory")
     private TopicConnectionFactory topicConnectionFactory;
 
-    @Resource(name = "DTStreamerTopic3")
+    @Resource(name = "jms/DTStreamerTopic3")
     private Topic tradeStreamerTopic;
 
-    @Resource(name = "DTBrokerQueue3")
+    @Resource(name = "jms/DTBrokerQueue3")
     private Queue tradeBrokerQueue;
 
     @PersistenceContext

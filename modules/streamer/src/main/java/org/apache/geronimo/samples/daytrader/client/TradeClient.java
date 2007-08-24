@@ -23,10 +23,10 @@ import java.util.TimerTask;
 
 import javax.naming.InitialContext;
 import javax.rmi.PortableRemoteObject;
+import javax.ejb.EJB;
 
 import org.apache.geronimo.samples.daytrader.QuoteDataBean;
-import org.apache.geronimo.samples.daytrader.ejb.Trade;
-import org.apache.geronimo.samples.daytrader.ejb.TradeHome;
+import org.apache.geronimo.samples.daytrader.ejb3.TradeSLSBRemote;
 
 public class TradeClient {
 
@@ -41,8 +41,10 @@ public class TradeClient {
 
 	// EJB values
 	private InitialContext initial;
-	private Trade trade;
-	private boolean useENC = true;
+    private boolean waitForMain = false;
+    
+    @EJB
+    private static TradeSLSBRemote tradeSLSBRemote;
 
 	// Updater thread
     private final Timer timer = new Timer();
@@ -52,16 +54,14 @@ public class TradeClient {
 	public static void main(String[] args) {
 		try	{
 			TradeClient streamer  = new TradeClient();
-			if (args.length > 0) {
-				if (args[0].equals("-noENC")) {
-					streamer.useENC = false;
-				}
-				else {
-					System.out.println("Usage TradeClient [-noENC]");
-					System.exit(1);
-				}
-			}
-
+            if (args.length > 0) {
+                if (args[0].equals("-waitForMain")) {
+                    streamer.waitForMain = true;
+                } else {
+                    System.out.println("Usage TradeClient [-waitForMain]");
+                    System.exit(1);
+                }
+            }
 			tradeClient = streamer;
 			streamer.startClient();
         }
@@ -75,14 +75,25 @@ public class TradeClient {
 		return tradeClient;
 	}
 
-	private void startClient() throws Exception {
+	private void startClient() throws Exception { 
 		auditStats = new TradeQuoteAuditStats();
 		setupEJB();
-		TradeClientMessageListener listener = new TradeClientMessageListener(this, useENC);
+        TradeClientMessageListener listener = new TradeClientMessageListener(this);
 		listener.subscribe();
 		resetStatsFromServer();
 		gui = new TradeClientGUI(this);
 		gui.show();
+        
+        // Added the "waitForMain" flag to disable/enable the workaround below        
+        if (this.waitForMain) {
+            // Geronimo client terminates JVM process when Main completes (not sure why)
+            // even though client GUI is still active. For now, force Main to remain alive
+            // until GUI is closed.
+            
+            while (gui.isVisible())
+                Thread.sleep(5000);
+        }
+        
     }
 
 	public TradeQuoteAuditStats getAuditStats() {
@@ -95,7 +106,7 @@ public class TradeClient {
 
 	public void resetStatsFromServer() throws Exception {
 		auditStats.clearStats();
-		Collection quotes = trade.getAllQuotes();
+		Collection<QuoteDataBean> quotes = tradeSLSBRemote.getAllQuotes();
 
 		for (Iterator it = quotes.iterator(); it.hasNext(); ) {
 			QuoteDataBean bean = (QuoteDataBean)it.next();
@@ -113,15 +124,6 @@ public class TradeClient {
 
 	public void setupEJB() throws Exception {
 		initial = new InitialContext();
-		Object objref;
-		if (useENC) {
-			objref = initial.lookup("java:comp/env/ejb/Trade");
-		}
-		else {
-			objref = initial.lookup("ejb/TradeEJB");
-		}
-		TradeHome home = (TradeHome)PortableRemoteObject.narrow(objref, TradeHome.class);
-		trade = home.create();
 	}
 
 	public int getUpdateInterval() {

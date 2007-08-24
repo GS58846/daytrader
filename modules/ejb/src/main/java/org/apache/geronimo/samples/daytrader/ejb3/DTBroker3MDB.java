@@ -22,6 +22,10 @@ import javax.ejb.ActivationConfigProperty;
 import javax.ejb.EJB;
 import javax.ejb.MessageDriven;
 import javax.ejb.MessageDrivenContext;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionAttributeType;
+import javax.ejb.TransactionManagementType;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.TextMessage;
@@ -31,10 +35,13 @@ import org.apache.geronimo.samples.daytrader.util.Log;
 import org.apache.geronimo.samples.daytrader.util.MDBStats;
 import org.apache.geronimo.samples.daytrader.util.TimerStat;
 
+@TransactionAttribute(TransactionAttributeType.REQUIRED)
+@TransactionManagement(TransactionManagementType.CONTAINER)
 @MessageDriven(activationConfig =  {
         @ActivationConfigProperty(propertyName = "acknowledgeMode", propertyValue = "Auto-acknowledge"),
         @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue"),
-        @ActivationConfigProperty(propertyName = "destination", propertyValue = "DTBrokerQueue3")
+        @ActivationConfigProperty(propertyName = "destination", propertyValue = "DTBrokerQueue3"),
+        @ActivationConfigProperty(propertyName = "subscriptionDurability", propertyValue = "NonDurable")
     })
 public class DTBroker3MDB implements MessageListener {
     private MDBStats mdbStats;

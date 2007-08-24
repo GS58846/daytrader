@@ -45,30 +45,8 @@
             <type>ejb</type>
         </dependency>
         <dependency>
-            <groupId>org.apache.geronimo.daytrader</groupId>
-            <artifactId>daytrader-wsappclient</artifactId>
-            <version>${pom.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.geronimo.daytrader</groupId>
-            <artifactId>daytrader-streamer</artifactId>
-            <version>${pom.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-ejb_2.1_spec</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
             <groupId>org.apache.geronimo.specs</groupId>
             <artifactId>geronimo-jms_1.1_spec</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-servlet_2.4_spec</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>

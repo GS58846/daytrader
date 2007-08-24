@@ -19,6 +19,7 @@ package org.apache.geronimo.samples.daytrader.client;
 
 import javax.naming.InitialContext;
 import javax.jms.*;
+import javax.annotation.Resource;
 
 import org.apache.geronimo.samples.daytrader.util.*;
 
@@ -26,11 +27,12 @@ import java.math.*;
 
 public class TradeClientMessageListener implements MessageListener {
 	private TradeClient client;
-	private boolean useENC;
+    
+    private TopicConnectionFactory connFactory;
+    private Topic streamerTopic;
 
-	public TradeClientMessageListener(TradeClient client, boolean useENC) {
-		this.client = client;
-		this.useENC = useENC;
+    public TradeClientMessageListener(TradeClient client) {
+        this.client = client;
 	}
 
 	public void subscribe() {
@@ -40,20 +42,10 @@ public class TradeClientMessageListener implements MessageListener {
 			
 			Log.trace("TradeStreamer pub/sub JNDI starting");
 			ConnectionFactory connFactory;
-			if (useENC) {
-				connFactory = (ConnectionFactory) context.lookup("java:comp/env/jms/TopicConnectionFactory");
-			}
-			else {
-				connFactory = (ConnectionFactory) context.lookup("jms/TopicConnectionFactory");
-			}
+			connFactory = (ConnectionFactory) context.lookup("java:comp/env/jms/TopicConnectionFactory");
 
 			Topic streamerTopic;
-			if (useENC) {
-				streamerTopic = (Topic) context.lookup("java:comp/env/jms/TradeStreamerTopic");
-			}
-			else {
-				streamerTopic = (Topic) context.lookup("jms/TradeStreamerTopic");
-			}
+			streamerTopic = (Topic) context.lookup("java:comp/env/jms/DTStreamerTopic3");
 
 			Log.trace("TradeStreamer pub/sub JNDI ending");
 
@@ -70,9 +62,9 @@ public class TradeClientMessageListener implements MessageListener {
 			
 			consumer = sess.createConsumer(streamerTopic);
 			Log.trace("TradeStreamer pub/sub listener registered successfully");
-		}
-		catch (Exception e)	{
+        } catch (Exception e)	{
 			Log.error("TradeStreamer Subscribe Exception: " + e);
+            e.printStackTrace();
 		}
 	}
 

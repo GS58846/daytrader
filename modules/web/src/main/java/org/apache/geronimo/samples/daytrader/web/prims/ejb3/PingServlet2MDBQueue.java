@@ -54,7 +54,7 @@ public class PingServlet2MDBQueue extends HttpServlet {
     @Resource(name = "jms/QueueConnectionFactory")
     private ConnectionFactory queueConnectionFactory;
 
-    @Resource(name = "DTBrokerQueue3")
+    @Resource(name = "jms/DTBrokerQueue3")
     private Queue tradeBrokerQueue;
 
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {

@@ -22,10 +22,8 @@ import java.util.Collection;
 import javax.naming.InitialContext;
 
 import org.apache.geronimo.samples.daytrader.direct.TradeDirect;
-import org.apache.geronimo.samples.daytrader.ejb.TradeHome;
 import org.apache.geronimo.samples.daytrader.ejb3.TradeSLSBRemote;
 import org.apache.geronimo.samples.daytrader.ejb3.DirectSLSBRemote;
-import org.apache.geronimo.samples.daytrader.session.TradeJDBCHome;
 import org.apache.geronimo.samples.daytrader.util.FinancialUtils;
 import org.apache.geronimo.samples.daytrader.util.Log;
 
@@ -42,9 +40,6 @@ public class TradeAction implements TradeServices {
     // - ejb3 mode is the only thing that really uses this
     // - can go back and update other modes to take advantage (ie. TradeDirect)
     private static TradeServices trade = null;
-    private static TradeHome tradeHome = null;
-    private static TradeJDBCHome tradeJDBCHome = null;
-
 
     public TradeAction() {
         if (Log.doTrace())
@@ -59,25 +54,7 @@ public class TradeAction implements TradeServices {
     }
 
     private void createTrade() {
-        if (TradeConfig.runTimeMode == TradeConfig.EJB) {
-            try {
-                if (tradeHome == null) {
-                    InitialContext ic = new InitialContext();
-                    try {
-                        tradeHome = (TradeHome) (javax.rmi.PortableRemoteObject.narrow(ic.lookup("java:comp/env/ejb/Trade"), TradeHome.class));
-                    }
-                    catch (Exception e) {
-                        Log.log("TradeAction:createTrade lookup of java:comp/env/ejb/Trade failed. Reverting to JNDI lookup of Trade");
-                        tradeHome = (TradeHome) (javax.rmi.PortableRemoteObject.narrow(ic.lookup("Trade"), TradeHome.class));
-                    }
-                }
-                trade = tradeHome.create();
-            }
-            catch (Exception e) {
-                Log.error("TradeAction:TradeAction() Creation of Trade EJB failed\n" + e);
-                e.printStackTrace();
-            }
-        } else if (TradeConfig.runTimeMode == TradeConfig.EJB3) {
+        if (TradeConfig.runTimeMode == TradeConfig.EJB3) {
             try {
                 if (!(trade instanceof TradeSLSBRemote)) {
                     TradeSLSBRemote tradeSLSB = null;
@@ -121,24 +98,6 @@ public class TradeAction implements TradeServices {
             }
             catch (Exception e) {
                 Log.error("TradeAction:TradeAction() Creation of Trade Direct failed\n" + e);
-            }
-        } else if (TradeConfig.runTimeMode == TradeConfig.SESSION) {
-            try {
-                if (tradeJDBCHome == null) {
-                    InitialContext ic = new InitialContext();
-                    try {
-                        tradeJDBCHome = (TradeJDBCHome) (javax.rmi.PortableRemoteObject.narrow(ic.lookup("java:comp/env/ejb/TradeJDBC"), TradeJDBCHome.class));
-                    }
-                    catch (Exception e) {
-                        Log.log("TradeAction:createTrade lookup of java:comp/env/ejb/TradeJDBC failed. Reverting to JNDI lookup of Trade");
-                        tradeJDBCHome = (TradeJDBCHome) (javax.rmi.PortableRemoteObject.narrow(ic.lookup("TradeJDBC"), TradeJDBCHome.class));
-                    }
-                }
-                trade = tradeJDBCHome.create();
-            }
-            catch (Exception e) {
-                Log.error("TradeAction:TradeAction() Creation of Trade JDBC failed\n" + e);
-                e.printStackTrace();
             }
         }
     }

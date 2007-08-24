@@ -243,8 +243,8 @@ for (int i = 0; i < names.length; i++) {
 			<B>Trade Max Quotes</B><BR>
 			<INPUT size="25" type="text" name="MaxQuotes"
 				value="<%=TradeConfig.getMAX_QUOTES()%>"></TD>
-			<TD>By default the DayTrader database is populated with 50 users
-			(uid:0 - uid:49) and 100 quotes (s:0 - s:99). <BR>
+			<TD>By default the DayTrader database is populated with 200 users
+			(uid:0 - uid:199) and 400 quotes (s:0 - s:399). <BR>
 			</TD>
 		</TR>
 		<TR>

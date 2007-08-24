@@ -2206,10 +2206,10 @@ public class TradeDirect implements TradeServices
 
 		try {
 			queue = (Queue) context
-					.lookup("java:comp/env/jms/TradeBrokerQueue");
+					.lookup("java:comp/env/jms/DTBrokerQueue3");
 		} catch (Exception e) {
 			Log
-					.error("TradeDirect:init  Unable to locate TradeBrokerQueue.\n\t -- Asynchronous mode will not work correctly and Quote Price change publishing will be disabled");
+					.error("TradeDirect:init  Unable to locate DTBrokerQueue3.\n\t -- Asynchronous mode will not work correctly and Quote Price change publishing will be disabled");
 			TradeConfig.setPublishQuotePriceChange(false);
 		}
 
@@ -2224,10 +2224,10 @@ public class TradeDirect implements TradeServices
 
 		try {
 			streamerTopic = (Topic) context
-					.lookup("java:comp/env/jms/TradeStreamerTopic");
+					.lookup("java:comp/env/jms/DTStreamerTopic3");
 		} catch (Exception e) {
 			Log
-					.error("TradeDirect:init  Unable to locate TradeStreamerTopic.\n\t -- Asynchronous mode will not work correctly and Quote Price change publishing will be disabled");
+					.error("TradeDirect:init  Unable to locate DTStreamerTopic3.\n\t -- Asynchronous mode will not work correctly and Quote Price change publishing will be disabled");
 			TradeConfig.setPublishQuotePriceChange(false);
 		}
 

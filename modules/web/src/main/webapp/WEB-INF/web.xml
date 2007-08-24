@@ -19,7 +19,8 @@
 <web-app xmlns="http://java.sun.com/xml/ns/javaee" version="2.5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
-    <display-name>DayTraderWeb</display-name>
+    <display-name>DayTrader Web</display-name>
+    
     <filter>
         <display-name>OrdersAlertFilter</display-name>
         <filter-name>OrdersAlertFilter</filter-name>
@@ -29,25 +30,29 @@
         <filter-name>OrdersAlertFilter</filter-name>
         <servlet-name>TradeAppServlet</servlet-name>
     </filter-mapping>
+    
     <listener>
         <listener-class>org.apache.geronimo.samples.daytrader.web.TradeWebContextListener</listener-class>
     </listener>
+    
     <servlet>
         <display-name>TradeAppServlet</display-name>
         <servlet-name>TradeAppServlet</servlet-name>
         <servlet-class>org.apache.geronimo.samples.daytrader.web.TradeAppServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
-    <servlet>
-        <display-name>register</display-name>
-        <servlet-name>register</servlet-name>
-        <jsp-file>/register.jsp</jsp-file>
-    </servlet>
+    
     <servlet>
         <display-name>TestServlet</display-name>
         <servlet-name>TestServlet</servlet-name>
         <servlet-class>org.apache.geronimo.samples.daytrader.web.TestServlet</servlet-class>
     </servlet>
+    
+    <servlet>
+        <display-name>register</display-name>
+        <servlet-name>register</servlet-name>
+        <jsp-file>/register.jsp</jsp-file>
+    </servlet>   
     <servlet>
         <display-name>welcome</display-name>
         <servlet-name>welcome</servlet-name>
@@ -63,11 +68,13 @@
         <servlet-name>tradehome</servlet-name>
         <jsp-file>/tradehome.jsp</jsp-file>
     </servlet>
+    
     <servlet>
         <display-name>TradeConfigServlet</display-name>
         <servlet-name>TradeConfigServlet</servlet-name>
         <servlet-class>org.apache.geronimo.samples.daytrader.web.TradeConfigServlet</servlet-class>
     </servlet>
+    
     <servlet>
         <display-name>TradeScenarioServlet</display-name>
         <servlet-name>TradeScenarioServlet</servlet-name>
@@ -127,6 +134,14 @@
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
+    
+    <servlet>
+        <display-name>org_apache_geronimo_samples_daytrader_TradeWSAction</display-name>
+        <servlet-name>org_apache_geronimo_samples_daytrader_TradeWSAction</servlet-name>
+        <servlet-class>org.apache.geronimo.samples.daytrader.soap.TradeWSAction</servlet-class>
+    </servlet>
+    
+    <!-- Web container primitives -->
     <servlet>
         <display-name>ExplicitGC</display-name>
         <servlet-name>ExplicitGC</servlet-name>
@@ -183,69 +198,9 @@
         <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.PingJDBCWrite</servlet-class>
     </servlet>
     <servlet>
-        <display-name>PingServlet2Session</display-name>
-        <servlet-name>PingServlet2Session</servlet-name>
-        <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.PingServlet2Session</servlet-class>
-    </servlet>
-    <servlet>
-        <display-name>PingServlet2EntityLocal</display-name>
-        <servlet-name>PingServlet2EntityLocal</servlet-name>
-        <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.PingServlet2EntityLocal</servlet-class>
-    </servlet>
-    <servlet>
-        <display-name>PingServlet2EntityRemote</display-name>
-        <servlet-name>PingServlet2EntityRemote</servlet-name>
-        <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.PingServlet2EntityRemote</servlet-class>
-    </servlet>
-    <servlet>
-        <display-name>PingServlet2Session2Entity</display-name>
-        <servlet-name>PingServlet2Session2Entity</servlet-name>
-        <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.PingServlet2Session2Entity</servlet-class>
-    </servlet>
-    <servlet>
-        <display-name>PingServlet2Session2EntityCollection</display-name>
-        <servlet-name>PingServlet2Session2EntityCollection</servlet-name>
-        <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.PingServlet2Session2EntityCollection</servlet-class>
-    </servlet>
-    <servlet>
-        <display-name>PingServlet2Session2JDBC</display-name>
-        <servlet-name>PingServlet2Session2JDBC</servlet-name>
-        <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.PingServlet2Session2JDBC</servlet-class>
-    </servlet>
-    <servlet>
-        <display-name>PingServlet2Session2JDBCCollection</display-name>
-        <servlet-name>PingServlet2Session2JDBCCollection</servlet-name>
-        <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.PingServlet2Session2JDBCCollection</servlet-class>
-    </servlet>
-    <servlet>
-        <display-name>PingServlet2Session2CMROne2One</display-name>
-        <servlet-name>PingServlet2Session2CMROne2One</servlet-name>
-        <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.PingServlet2Session2CMROne2One</servlet-class>
-    </servlet>
-    <servlet>
-        <display-name>PingServlet2Session2CMROne2Many</display-name>
-        <servlet-name>PingServlet2Session2CMROne2Many</servlet-name>
-        <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.PingServlet2Session2CMROne2Many</servlet-class>
-    </servlet>
-    <servlet>
-        <display-name>PingServlet2MDBQueue</display-name>
-        <servlet-name>PingServlet2MDBQueue</servlet-name>
-        <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.PingServlet2MDBQueue</servlet-class>
-    </servlet>
-    <servlet>
-        <display-name>PingServlet2MDBTopic</display-name>
-        <servlet-name>PingServlet2MDBTopic</servlet-name>
-        <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.PingServlet2MDBTopic</servlet-class>
-    </servlet>
-    <servlet>
         <display-name>PingServlet2JNDI</display-name>
         <servlet-name>PingServlet2JNDI</servlet-name>
         <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.PingServlet2JNDI</servlet-class>
-    </servlet>
-    <servlet>
-        <display-name>PingServlet2TwoPhase</display-name>
-        <servlet-name>PingServlet2TwoPhase</servlet-name>
-        <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.PingServlet2TwoPhase</servlet-class>
     </servlet>
     <servlet>
         <display-name>PingServlet2Include</display-name>
@@ -257,9 +212,9 @@
         <servlet-name>PingServlet2IncludeRcv</servlet-name>
 		<servlet-class>org.apache.geronimo.samples.daytrader.web.prims.PingServlet2IncludeRcv</servlet-class>
 	</servlet>
+    <!-- End of Web container primitives -->
     
-    <!-- EJB3-based primitives -->
-    
+    <!-- EJB container primitives (EJB3) -->   
     <servlet>
         <servlet-name>ejb3.PingServlet2Session</servlet-name>
         <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.ejb3.PingServlet2Session</servlet-class>
@@ -304,16 +259,8 @@
         <servlet-name>ejb3.PingServlet2TwoPhase</servlet-name>
         <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.ejb3.PingServlet2TwoPhase</servlet-class>
     </servlet>
-
-    <!-- End of EJB3-based primitives -->
+    <!-- End of EJB container primitives (EJB3) -->
     
-    <servlet>
-        <display-name>org_apache_geronimo_samples_daytrader_TradeWSAction</display-name>
-        <servlet-name>org_apache_geronimo_samples_daytrader_TradeWSAction</servlet-name>
-        <servlet-class>org.apache.geronimo.samples.daytrader.soap.TradeWSAction</servlet-class>
-    </servlet>
-
-    <!-- [INSERT FRAGMENT HERE] -->
 
     <servlet-mapping>
         <servlet-name>TradeAppServlet</servlet-name>
@@ -335,6 +282,9 @@
         <servlet-name>org_apache_geronimo_samples_daytrader_TradeWSAction</servlet-name>
         <url-pattern>/services/TradeWSServices</url-pattern>
     </servlet-mapping>
+    
+    
+    <!-- Web container primitives (Servlet Mappings) -->
     <servlet-mapping>
         <servlet-name>ExplicitGC</servlet-name>
         <url-pattern>/servlet/ExplicitGC</url-pattern>
@@ -380,64 +330,17 @@
         <url-pattern>/servlet/PingJDBCWrite</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>PingServlet2Session</servlet-name>
-        <url-pattern>/servlet/PingServlet2Session</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>PingServlet2EntityLocal</servlet-name>
-        <url-pattern>/servlet/PingServlet2EntityLocal</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>PingServlet2EntityRemote</servlet-name>
-        <url-pattern>/servlet/PingServlet2EntityRemote</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>PingServlet2Session2Entity</servlet-name>
-        <url-pattern>/servlet/PingServlet2Session2Entity</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>PingServlet2Session2EntityCollection</servlet-name>
-        <url-pattern>/servlet/PingServlet2Session2EntityCollection</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>PingServlet2Session2JDBC</servlet-name>
-        <url-pattern>/servlet/PingServlet2Session2JDBC</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>PingServlet2Session2JDBCCollection</servlet-name>
-        <url-pattern>/servlet/PingServlet2Session2JDBCCollection</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>PingServlet2Session2CMROne2One</servlet-name>
-        <url-pattern>/servlet/PingServlet2Session2CMROne2One</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>PingServlet2Session2CMROne2Many</servlet-name>
-        <url-pattern>/servlet/PingServlet2Session2CMROne2Many</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>PingServlet2MDBQueue</servlet-name>
-        <url-pattern>/servlet/PingServlet2MDBQueue</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>PingServlet2MDBTopic</servlet-name>
-        <url-pattern>/servlet/PingServlet2MDBTopic</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
 		<servlet-name>PingServlet2JNDI</servlet-name>
 		<url-pattern>/servlet/PingServlet2JNDI</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>PingServlet2TwoPhase</servlet-name>
-		<url-pattern>/servlet/PingServlet2TwoPhase</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>PingServlet2Include</servlet-name>
 		<url-pattern>/servlet/PingServlet2Include</url-pattern>
 	</servlet-mapping>
+    <!-- End of Web container primitives (Servlet Mappings) -->
 
     
-    <!-- EJB3-based primitives -->   
+    <!-- EJB container primitives (Servlet Mappings) -->   
     <servlet-mapping>
         <servlet-name>ejb3.PingServlet2Session</servlet-name>
         <url-pattern>/ejb3/PingServlet2Session</url-pattern>
@@ -482,8 +385,7 @@
         <servlet-name>ejb3.PingServlet2TwoPhase</servlet-name>
         <url-pattern>/ejb3/PingServlet2TwoPhase</url-pattern>
     </servlet-mapping>
-    
-    <!-- End EJB3-based primitives -->
+    <!-- End of EJB container primitives (Servlet Mappings) -->
     
 
     <session-config>
@@ -500,6 +402,7 @@
         <error-code>500</error-code>
         <location>/error.jsp</location>
     </error-page>
+    
     <resource-ref>
         <res-ref-name>jdbc/TradeDataSource</res-ref-name>
         <res-type>javax.sql.DataSource</res-type>
@@ -518,13 +421,7 @@
         <res-auth>Application</res-auth>
         <res-sharing-scope>Shareable</res-sharing-scope>
     </resource-ref>
-    <ejb-ref>
-        <ejb-ref-name>ejb/Trade</ejb-ref-name>
-        <ejb-ref-type>Session</ejb-ref-type>
-        <home>org.apache.geronimo.samples.daytrader.ejb.TradeHome</home>
-        <remote>org.apache.geronimo.samples.daytrader.ejb.Trade</remote>
-        <ejb-link>TradeEJB</ejb-link>
-    </ejb-ref>
+    
     <ejb-ref>
         <ejb-ref-name>ejb/TradeSLSBBean</ejb-ref-name>
         <ejb-ref-type>Session</ejb-ref-type>
@@ -537,48 +434,20 @@
         <remote>org.apache.geronimo.samples.daytrader.ejb3.DirectSLSBRemote</remote>
         <ejb-link>DirectSLSBBean</ejb-link>
     </ejb-ref>
-    <ejb-ref>
-        <ejb-ref-name>ejb/TradeJDBC</ejb-ref-name>
-        <ejb-ref-type>Session</ejb-ref-type>
-        <home>org.apache.geronimo.samples.daytrader.session.TradeJDBCHome</home>
-        <remote>org.apache.geronimo.samples.daytrader.session.TradeJDBC</remote>
-        <ejb-link>TradeJDBC</ejb-link>
-    </ejb-ref>
-    <ejb-ref>
-        <ejb-ref-name>ejb/Quote</ejb-ref-name>
-        <ejb-ref-type>Entity</ejb-ref-type>
-        <home>org.apache.geronimo.samples.daytrader.ejb.QuoteHome</home>
-        <remote>org.apache.geronimo.samples.daytrader.ejb.Quote</remote>
-        <ejb-link>QuoteEJB</ejb-link>
-    </ejb-ref>
-    <ejb-local-ref>
-        <ejb-ref-name>ejb/LocalQuote</ejb-ref-name>
-        <ejb-ref-type>Entity</ejb-ref-type>
-        <local-home>org.apache.geronimo.samples.daytrader.ejb.LocalQuoteHome</local-home>
-        <local>org.apache.geronimo.samples.daytrader.ejb.LocalQuote</local>
-        <ejb-link>QuoteEJB</ejb-link>
-    </ejb-local-ref>
-    <ejb-local-ref>
-        <ejb-ref-name>ejb/LocalAccountHome</ejb-ref-name>
-        <ejb-ref-type>Entity</ejb-ref-type>
-        <local-home>org.apache.geronimo.samples.daytrader.ejb.LocalAccountHome</local-home>
-        <local>org.apache.geronimo.samples.daytrader.ejb.LocalAccount</local>
-        <ejb-link>AccountEJB</ejb-link>
-    </ejb-local-ref>
+
     <message-destination-ref>
-        <!--  This is the JNDI name of where the resource will appear -->
-        <message-destination-ref-name>jms/TradeBrokerQueue</message-destination-ref-name>
+        <message-destination-ref-name>jms/DTBrokerQueue3</message-destination-ref-name>
         <message-destination-type>javax.jms.Queue</message-destination-type>
         <message-destination-usage>Produces</message-destination-usage>
-        <!--  Must match the message-destination defined later  -->
-        <message-destination-link>dt-ejb.jar#TradeBrokerQueue</message-destination-link>
+        <message-destination-link>dt-ejb.jar#jms/DTBrokerQueue3</message-destination-link>
     </message-destination-ref>
     <message-destination-ref>
-        <message-destination-ref-name>jms/TradeStreamerTopic</message-destination-ref-name>
+        <message-destination-ref-name>jms/DTStreamerTopic3</message-destination-ref-name>
         <message-destination-type>javax.jms.Topic</message-destination-type>
         <message-destination-usage>Produces</message-destination-usage>
-        <message-destination-link>dt-ejb.jar#TradeStreamerTopic</message-destination-link>
+        <message-destination-link>dt-ejb.jar#jms/DTStreamerTopic3</message-destination-link>
     </message-destination-ref>
+    
     <service-ref>
         <description>WSDL Service Trade</description>
         <service-ref-name>service/Trade</service-ref-name>

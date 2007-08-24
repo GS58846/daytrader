@@ -21,6 +21,10 @@ import javax.annotation.Resource;
 import javax.ejb.ActivationConfigProperty;
 import javax.ejb.MessageDriven;
 import javax.ejb.MessageDrivenContext;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionAttributeType;
+import javax.ejb.TransactionManagementType;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.TextMessage;
@@ -28,11 +32,13 @@ import org.apache.geronimo.samples.daytrader.util.Log;
 import org.apache.geronimo.samples.daytrader.util.MDBStats;
 import org.apache.geronimo.samples.daytrader.util.TimerStat;
 
-
+@TransactionAttribute(TransactionAttributeType.REQUIRED)
+@TransactionManagement(TransactionManagementType.CONTAINER)
 @MessageDriven(activationConfig =  {
         @ActivationConfigProperty(propertyName = "acknowledgeMode", propertyValue = "Auto-acknowledge"),
         @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Topic"),
-        @ActivationConfigProperty(propertyName = "destination", propertyValue = "DTStreamerTopic3")
+        @ActivationConfigProperty(propertyName = "destination", propertyValue = "DTStreamerTopic3"),
+        @ActivationConfigProperty(propertyName = "subscriptionDurability", propertyValue = "NonDurable")
     })
 public class DTStreamer3MDB implements MessageListener {
     

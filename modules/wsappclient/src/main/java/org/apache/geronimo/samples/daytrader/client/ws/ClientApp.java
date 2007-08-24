@@ -106,9 +106,37 @@ public class ClientApp extends JFrame {
     private JProgressBar jProgressBar = null;
     private JButton jButton10 = null;
     private JPanel jPanel11 = null;
+    
+    
 
     public static void main(String[] args) {
-        new ClientApp();
+        boolean waitForMain = false;
+        
+        try {
+            if (args.length > 0) {
+                if (args[0].equals("-waitForMain")) {
+                    waitForMain = true;
+                } else {
+                    System.out.println("Usage ClientApp [-waitForMain]");
+                    System.exit(1);
+                }
+            }
+            
+            ClientApp wsapp = new ClientApp();
+        
+            // Added the "waitForMain" flag to disable/enable the workaround below        
+            if (waitForMain) {
+                // Geronimo client terminates JVM process when Main completes (not sure why)
+                // even though client GUI is still active. For now, force Main to remain alive
+                // until GUI is closed.
+                
+                while (wsapp.isVisible())
+                    Thread.sleep(5000);
+            }
+        } catch (Exception e) {
+            System.err.println("Caught an unexpected exception!");
+            e.printStackTrace();
+        }
     }
 
     public ClientApp() {

@@ -77,7 +77,7 @@ public class PingServlet2TwoPhase extends HttpServlet {
             }
 
             output.append("<HR>initTime: " + initTime).append("<BR>Hit Count: " + hitCount++);
-            output.append("<HR>Two phase ping selected a quote and sent a message to TradeBrokerQueue JMS queue<BR>Quote Information<BR><BR>" + quoteData.toHTML());
+            output.append("<HR>Two phase ping selected a quote and sent a message to DTBrokerQueue3 JMS queue<BR>Quote Information<BR><BR>" + quoteData.toHTML());
             out.println(output.toString());
 
         } catch (Exception e) {

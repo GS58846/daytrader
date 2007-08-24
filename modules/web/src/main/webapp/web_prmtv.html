@@ -177,87 +177,80 @@
 		</TR>
 		<TR>
 			<TD colspan="2" bgcolor="#c93333" align="center"><B><FONT
-				color="#FFFFFF">EJB Container ping suite</FONT></B></TD>
+				color="#FFFFFF">EJB 3 Container ping suite</FONT></B></TD>
 		</TR>
 
 		<TR>
-			<TD align="center"><A href="servlet/PingServlet2Session"><FONT
-				size="-1">PingServlet2SessionEJB</FONT></A><FONT COLOR="#FF0000">*</FONT></TD>
-			<TD><FONT size="-1">PingServlet2SessionEJB tests key function of a
-			servlet call to a stateless SessionEJB. The SessionEJB performs a
+			<TD align="center"><A href="ejb3/PingServlet2Session"><FONT
+				size="-1">PingServlet2Session</FONT></A><FONT COLOR="#FF0000">*</FONT></TD>
+			<TD><FONT size="-1">PingServlet2Session tests key function of a
+			servlet call to a stateless Session EJB. The Session EJB performs a
 			simple calculation and returns the result</FONT></TD>
 		</TR>
 		<TR>
-			<TD align="center"><A href="servlet/PingServlet2EntityLocal"><FONT
-				size="-1">PingServlet2EntityEJBLocal</FONT></A><FONT COLOR="#FF0000">*</FONT><BR>
-			<BR>
-			<A href="servlet/PingServlet2EntityRemote"><FONT size="-1">PingServlet2EntityEJBRemote</FONT></A><FONT
-				COLOR="#FF0000">*</FONT></TD>
-			<TD><FONT size="-1">PingServlet2EntityEJB tests key function of a
-			servlet call to an EJB 2.0 Container Managed Entity. In this test the
-			EJB entity represents a single row in the database table. The <B>Local
-			version</B> uses the EJB Local interface while the <B>Remote version</B>
-			uses the Remote EJB interface. (Note: PingServlet2EntityEJBLocal will
-			fail in a multi-tier setup where the Trade Web and EJB apps are
-			seperated.)</FONT></TD>
+			<TD align="center"><A href="ejb3/PingServlet2Entity"><FONT
+				size="-1">PingServlet2Entity</FONT></A><FONT COLOR="#FF0000">*</FONT><BR></TD>
+			<TD><FONT size="-1">PingServlet2Entity tests key function of a
+			servlet call to an EJB 3.0 Container Managed Entity. In this test the
+			EJB entity represents a single row in the database table.</FONT></TD>
 		</TR>
 		<TR>
-			<TD align="center"><A href="servlet/PingServlet2Session2Entity"><FONT
+			<TD align="center"><A href="ejb3/PingServlet2Session2Entity"><FONT
 				size="-1">PingServlet2Session2Entity</FONT></A><FONT COLOR="#FF0000">*</FONT></TD>
 			<TD><FONT size="-1">This tests the full servlet to Session EJB to
 			Entity EJB path to retrieve a single row from the database.</FONT></TD>
 		</TR>
 		<TR>
 			<TD align="center"><A
-				href="servlet/PingServlet2Session2EntityCollection"><FONT size="-1">PingServlet2Session2<BR>
+				href="ejb3/PingServlet2Session2EntityCollection"><FONT size="-1">PingServlet2Session2<BR>
 			EntityCollection</FONT></A><FONT COLOR="#FF0000">*</FONT></TD>
 			<TD><FONT size="-1">This test extends the previous EJB Entity test by
 			calling a Session EJB which uses a finder method on the Entity that
 			returns a collection of Entity objects. Each object is displayed by
-			the servlet</FONT></TD>
+			the servlet.</FONT></TD>
 		</TR>
 		<TR>
-			<TD align="center"><A href="servlet/PingServlet2Session2CMROne2One"><FONT
+			<TD align="center"><A href="ejb3/PingServlet2Session2CMROne2One"><FONT
 				size="-1">PingServlet2Session2CMROne2One</FONT></A><FONT
 				COLOR="#FF0000">*</FONT></TD>
 			<TD><FONT size="-1">This test drives an Entity EJB to get another
-			Entity EJB's data through an EJB 2.0 CMR One to One relationship </FONT></TD>
+			Entity EJB's data through an EJB 3.0 CMR One to One relationship.</FONT></TD>
 		</TR>
 		<TR>
-			<TD align="center"><A href="servlet/PingServlet2Session2CMROne2Many"><FONT
+			<TD align="center"><A href="ejb3/PingServlet2Session2CMROne2Many"><FONT
 				size="-1">PingServlet2Session2CMROne2Many</FONT></A><FONT
 				COLOR="#FF0000">*</FONT></TD>
 			<TD><FONT size="-1">This test drives an Entity EJB to get another
-			Entity EJB's data through an EJB 2.0 CMR One to Many relationship </FONT></TD>
+			Entity EJB's data through an EJB 3.0 CMR One to Many relationship.</FONT></TD>
 		</TR>
 		<TR>
-			<TD align="center"><A href="servlet/PingServlet2Session2JDBC"><FONT
+			<TD align="center"><A href="ejb3/PingServlet2Session2JDBC"><FONT
 				size="-1">PingServlet2Session2JDBC</FONT></A><FONT COLOR="#FF0000">*</FONT></TD>
 			<TD><FONT size="-1">This tests the full servlet to Session EJB to
 			JDBC path to retrieve a single row from the database.</FONT></TD>
 		</TR>
 		<TR>
 			<TD align="center"><A
-				href="servlet/PingServlet2Session2JDBCCollection"><FONT size="-1">PingServlet2Session2<BR>
+				href="ejb3/PingServlet2Session2JDBCCollection"><FONT size="-1">PingServlet2Session2<BR>
 			JDBCCollection</FONT></A><FONT COLOR="#FF0000">*</FONT></TD>
 			<TD><FONT size="-1">This test extends the previous JDBC test by
 			calling a Session EJB to JDBC path which returns multiple rows
 			from the database.</FONT></TD>
 		</TR>
 		<TR>
-			<TD align="center"><A href="servlet/PingServlet2MDBQueue"><FONT
+			<TD align="center"><A href="ejb3/PingServlet2MDBQueue"><FONT
 				size="-1">PingServlet2MDBQueue</FONT></A><FONT COLOR="#FF0000">*</FONT></TD>
 			<TD><FONT size="-1">PingServlet2MDBQueue drives messages to a Queue
-			based Message Driven EJB (MDB).Each request to the servlet posts a
+			based Message Driven EJB (MDB). Each request to the servlet posts a
 			message to the Queue. The MDB receives the message asynchronously and
 			prints message delivery statistics on each 100th message. <FONT color="red">
 			<B>Note:</B> Not intended for performance testing.</FONT></FONT></TD>
 		</TR>
 		<TR>
-			<TD align="center"><A href="servlet/PingServlet2MDBTopic"><FONT
+			<TD align="center"><A href="ejb3/PingServlet2MDBTopic"><FONT
 				size="-1">PingServlet2MDBTopic</FONT></A><FONT COLOR="#FF0000">*</FONT></TD>
 			<TD><FONT size="-1">PingServlet2MDBTopic drives messages to a Topic
-			based Publish/Subscribe Message Driven EJB (MDB).Each request to the
+			based Publish/Subscribe Message Driven EJB (MDB). Each request to the
 			servlet posts a message to the Topic. The TradeStreamMDB receives the
 			message asynchronously and prints message delivery statistics on each
 			100th message. Other subscribers to the Topic will also receive the
@@ -265,7 +258,7 @@
 			testing.</FONT></FONT></TD>
 		</TR>
 		<TR>
-			<TD align="center"><A href="servlet/PingServlet2TwoPhase"><FONT
+			<TD align="center"><A href="ejb3/PingServlet2TwoPhase"><FONT
 				size="-1">PingServlet2TwoPhase</FONT></A><FONT COLOR="#FF0000">*</FONT></TD>
 			<TD><FONT size="-1">PingServlet2TwoPhase drives a Session EJB which
 			invokes an Entity EJB with findByPrimaryKey (DB Access) followed by
@@ -273,54 +266,6 @@
 			These operations are wrapped in a global 2-phase transaction and
 			commit.</FONT></TD>
 		</TR>
-
-        <TR>
-            <TD colspan="2" bgcolor="#c93333" align="center"><B><FONT color="#FFFFFF">EJB 3 Container ping suite</FONT></B></TD>
-        </TR>
-        <TR>
-            <TD align="center"><A href="ejb3/PingServlet2Session"><FONT size="-1">PingServlet2Session</FONT></A><FONT COLOR="#FF0000">*</FONT></TD>
-            <TD><FONT size="-1">Ping Servlet to Stateless Session Remote</FONT></TD>
-        </TR>
-        <TR>
-            <TD align="center"><A href="ejb3/PingServlet2Entity"><FONT size="-1">PingServlet2Entity</FONT></A><FONT COLOR="#FF0000">*</FONT></TD>
-            <TD><FONT size="-1">Ping Servlet to Entity Bean</FONT></TD>
-        </TR>
-        <TR>
-            <TD align="center"><A href="ejb3/PingServlet2Session2Entity"><FONT size="-1">PingServlet2Session2Entity</FONT></A><FONT COLOR="#FF0000">*</FONT></TD>
-            <TD><FONT size="-1">Ping Servlet to Session 2 Entity Bean</FONT></TD>
-        </TR>
-        <TR>
-            <TD align="center"><A href="ejb3/PingServlet2Session2EntityCollection"><FONT size="-1">PingServlet2Session2EntityCollection</FONT></A><FONT COLOR="#FF0000">*</FONT></TD>
-            <TD><FONT size="-1">Ping Servlet to Session 2 Entity Collection</FONT></TD>
-        </TR>
-        <TR>
-            <TD align="center"><A href="ejb3/PingServlet2Session2CMROne2One"><FONT size="-1">PingServlet2Session2CMROne2One</FONT></A><FONT COLOR="#FF0000">*</FONT></TD>
-            <TD><FONT size="-1">Ping Servlet to Session 2 CMR One to One</FONT></TD>
-        </TR>
-        <TR>
-            <TD align="center"><A href="ejb3/PingServlet2Session2CMROne2Many"><FONT size="-1">PingServlet2Session2CMROne2Many</FONT></A><FONT COLOR="#FF0000">*</FONT></TD>
-            <TD><FONT size="-1">Ping Servlet to Session 2 CMR One to Many</FONT></TD>
-        </TR>
-        <TR>
-            <TD align="center"><A href="ejb3/PingServlet2Session2CMROne2Many"><FONT size="-1">PingServlet2Session2JDBC</FONT></A><FONT COLOR="#FF0000">*</FONT></TD>
-            <TD><FONT size="-1">Ping Servlet to Session 2 JDBC</FONT></TD>
-        </TR>
-        <TR>
-            <TD align="center"><A href="ejb3/PingServlet2Session2JDBCCollection"><FONT size="-1">PingServlet2Session2JDBCCollection</FONT></A><FONT COLOR="#FF0000">*</FONT></TD>
-            <TD><FONT size="-1">Ping Servlet to Session 2 JDBC Collection</FONT></TD>
-        </TR>
-        <TR>
-            <TD align="center"><A href="ejb3/PingServlet2MDBQueue"><FONT size="-1">PingServlet2MDBQueue</FONT></A><FONT COLOR="#FF0000">*</FONT></TD>
-            <TD><FONT size="-1">Ping Servlet to MDB Queue</FONT></TD>
-        </TR>
-        <TR>
-            <TD align="center"><A href="ejb3/PingServlet2MDBTopic"><FONT size="-1">PingServlet2MDBTopic</FONT></A><FONT COLOR="#FF0000">*</FONT></TD>
-            <TD><FONT size="-1">Ping Servlet to MDB Topic</FONT></TD>
-        </TR>
-        <TR>
-            <TD align="center"><A href="ejb3/PingServlet2TwoPhase"><FONT size="-1">PingServlet2TwoPhase</FONT></A><FONT COLOR="#FF0000">*</FONT></TD>
-            <TD><FONT size="-1">Ping Servlet to Two Phase</FONT></TD>
-        </TR>
 	</TBODY>
 </TABLE>
 </BODY>

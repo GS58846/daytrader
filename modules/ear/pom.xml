@@ -68,7 +68,7 @@
                 <configuration>
                     <displayName>DayTrader 2.0</displayName>
                     <description>DayTrader Stock Trading Performance Benchmark Sample</description>
-                    <version>1.4</version>
+                    <version>5</version>
                     <modules>
                         <webModule>
                             <groupId>org.apache.geronimo.daytrader</groupId>

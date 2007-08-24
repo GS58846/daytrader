@@ -54,7 +54,7 @@ public class PingServlet2MDBTopic extends HttpServlet {
     @Resource(name = "jms/TopicConnectionFactory")
     private ConnectionFactory topicConnectionFactory;
 
-    @Resource(name = "DTStreamerTopic3")
+    @Resource(name = "jms/DTStreamerTopic3")
     private Topic tradeStreamerTopic;
 
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
