@@ -252,6 +252,28 @@
                                 </single-pool>
                             </connectionmanager>
                         </connectiondefinition-instance>
+                        <connectiondefinition-instance>
+                            <name>jdbc/NoTxTradeDataSource</name>
+                            <config-property-setting name="UserName">trade</config-property-setting>
+                            <config-property-setting name="Password">trade</config-property-setting>
+                            <config-property-setting name="DatabaseName">tradedb</config-property-setting>
+                            <config-property-setting name="DataSourceName">TradeDataSource</config-property-setting>
+                            <config-property-setting name="ServerName">localhost</config-property-setting>
+                            <config-property-setting name="PortNumber">1160</config-property-setting>
+                            <config-property-setting name="DriverType">thin</config-property-setting>
+                            <connectionmanager>
+                                <xa-transaction>
+                                    <transaction-caching/>
+                                </xa-transaction>
+                                <single-pool>
+                                    <max-size>10</max-size>
+                                    <min-size>0</min-size>
+                                    <blocking-timeout-milliseconds>5000</blocking-timeout-milliseconds>
+                                    <idle-timeout-minutes>30</idle-timeout-minutes>
+                                    <match-one/>
+                                </single-pool>
+                            </connectionmanager>
+                        </connectiondefinition-instance>
                     </connection-definition>
                 </outbound-resourceadapter>
             </resourceadapter>
@@ -326,7 +348,7 @@
                 <adminobject-interface>javax.jms.Topic</adminobject-interface>
                 <adminobject-class>org.activemq.message.ActiveMQTopic</adminobject-class>
                 <adminobject-instance>
-                    <message-destination-name>DTStreamerTopic3</message-destination-name>
+                    <message-destination-name>jms/DTStreamerTopic3</message-destination-name>
                     <config-property-setting name="PhysicalName">DTStreamerTopic3</config-property-setting>
                 </adminobject-instance>
             </adminobject>
@@ -335,7 +357,7 @@
                 <adminobject-interface>javax.jms.Queue</adminobject-interface>
                 <adminobject-class>org.activemq.message.ActiveMQQueue</adminobject-class>
                 <adminobject-instance>
-                    <message-destination-name>DTBrokerQueue3</message-destination-name>
+                    <message-destination-name>jms/DTBrokerQueue3</message-destination-name>
                     <config-property-setting name="PhysicalName">DTBrokerQueue3</config-property-setting>
                 </adminobject-instance>
             </adminobject>
