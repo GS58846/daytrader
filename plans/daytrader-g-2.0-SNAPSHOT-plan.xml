@@ -181,8 +181,8 @@
                         <adminobject-interface>javax.jms.Topic</adminobject-interface>
                         <adminobject-class>org.activemq.message.ActiveMQTopic</adminobject-class>
                         <adminobject-instance>
-                            <message-destination-name>jms/DTStreamerTopic3</message-destination-name>
-                            <config-property-setting name="PhysicalName">DTStreamerTopic3</config-property-setting>
+                            <message-destination-name>jms/TradeStreamerTopic</message-destination-name>
+                            <config-property-setting name="PhysicalName">TradeStreamerTopic</config-property-setting>
                         </adminobject-instance>
                     </adminobject>
                 </connector>
@@ -333,8 +333,8 @@
                 <adminobject-interface>javax.jms.Topic</adminobject-interface>
                 <adminobject-class>org.activemq.message.ActiveMQTopic</adminobject-class>
                 <adminobject-instance>
-                    <message-destination-name>jms/DTStreamerTopic3</message-destination-name>
-                    <config-property-setting name="PhysicalName">DTStreamerTopic3</config-property-setting>
+                    <message-destination-name>jms/TradeStreamerTopic</message-destination-name>
+                    <config-property-setting name="PhysicalName">TradeStreamerTopic</config-property-setting>
                 </adminobject-instance>
             </adminobject>
             
@@ -342,8 +342,8 @@
                 <adminobject-interface>javax.jms.Queue</adminobject-interface>
                 <adminobject-class>org.activemq.message.ActiveMQQueue</adminobject-class>
                 <adminobject-instance>
-                    <message-destination-name>jms/DTBrokerQueue3</message-destination-name>
-                    <config-property-setting name="PhysicalName">DTBrokerQueue3</config-property-setting>
+                    <message-destination-name>jms/TradeBrokerQueue</message-destination-name>
+                    <config-property-setting name="PhysicalName">TradeBrokerQueue</config-property-setting>
                 </adminobject-instance>
             </adminobject>
         </connector>

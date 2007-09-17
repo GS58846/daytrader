@@ -37,7 +37,7 @@ import org.apache.geronimo.samples.daytrader.util.TimerStat;
 @MessageDriven(activationConfig =  {
         @ActivationConfigProperty(propertyName = "acknowledgeMode", propertyValue = "Auto-acknowledge"),
         @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Topic"),
-        @ActivationConfigProperty(propertyName = "destination", propertyValue = "DTStreamerTopic3"),
+        @ActivationConfigProperty(propertyName = "destination", propertyValue = "TradeStreamerTopic"),
         @ActivationConfigProperty(propertyName = "subscriptionDurability", propertyValue = "NonDurable")
     })
 public class DTStreamer3MDB implements MessageListener {

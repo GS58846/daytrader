@@ -63,10 +63,10 @@ public class TradeSLSBBean implements TradeSLSBRemote, TradeSLSBLocal {
     @Resource(name = "jms/TopicConnectionFactory")
     private TopicConnectionFactory topicConnectionFactory;
 
-    @Resource(name = "jms/DTStreamerTopic3")
+    @Resource(name = "jms/TradeStreamerTopic")
     private Topic tradeStreamerTopic;
 
-    @Resource(name = "jms/DTBrokerQueue3")
+    @Resource(name = "jms/TradeBrokerQueue")
     private Queue tradeBrokerQueue;
 
     @PersistenceContext
@@ -655,7 +655,7 @@ public class TradeSLSBBean implements TradeSLSBRemote, TradeSLSBLocal {
                 String command= "ping";
                 message.setStringProperty("command", command);
                 message.setLongProperty("publishTime", System.currentTimeMillis());         
-                message.setText("Ping message for queue java:comp/env/jms/DTBrokerQueue3 sent from TradeSLSBBean:pingTwoPhase at " + new java.util.Date());
+                message.setText("Ping message for queue java:comp/env/jms/TradeBrokerQueue sent from TradeSLSBBean:pingTwoPhase at " + new java.util.Date());
 
                 msgProducer.send(message);  
             } 

@@ -28,9 +28,9 @@
 		<res-sharing-scope>Shareable</res-sharing-scope>
 	</resource-ref>
 	<message-destination-ref>
-        <message-destination-ref-name>jms/DTStreamerTopic3</message-destination-ref-name>
+        <message-destination-ref-name>jms/TradeStreamerTopic</message-destination-ref-name>
         <message-destination-type>javax.jms.Topic</message-destination-type>
         <message-destination-usage>Produces</message-destination-usage>
-        <message-destination-link>jms/DTStreamerTopic3</message-destination-link>
+        <message-destination-link>jms/TradeStreamerTopic</message-destination-link>
     </message-destination-ref>
 </application-client>

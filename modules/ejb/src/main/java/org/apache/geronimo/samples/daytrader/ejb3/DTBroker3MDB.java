@@ -40,7 +40,7 @@ import org.apache.geronimo.samples.daytrader.util.TimerStat;
 @MessageDriven(activationConfig =  {
         @ActivationConfigProperty(propertyName = "acknowledgeMode", propertyValue = "Auto-acknowledge"),
         @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue"),
-        @ActivationConfigProperty(propertyName = "destination", propertyValue = "DTBrokerQueue3"),
+        @ActivationConfigProperty(propertyName = "destination", propertyValue = "TradeBrokerQueue"),
         @ActivationConfigProperty(propertyName = "subscriptionDurability", propertyValue = "NonDurable")
     })
 public class DTBroker3MDB implements MessageListener {

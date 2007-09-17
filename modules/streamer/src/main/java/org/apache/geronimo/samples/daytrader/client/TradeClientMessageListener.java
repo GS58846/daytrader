@@ -45,7 +45,7 @@ public class TradeClientMessageListener implements MessageListener {
 			connFactory = (ConnectionFactory) context.lookup("java:comp/env/jms/TopicConnectionFactory");
 
 			Topic streamerTopic;
-			streamerTopic = (Topic) context.lookup("java:comp/env/jms/DTStreamerTopic3");
+			streamerTopic = (Topic) context.lookup("java:comp/env/jms/TradeStreamerTopic");
 
 			Log.trace("TradeStreamer pub/sub JNDI ending");
 

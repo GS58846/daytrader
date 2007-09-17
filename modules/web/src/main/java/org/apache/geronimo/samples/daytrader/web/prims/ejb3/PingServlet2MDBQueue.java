@@ -54,7 +54,7 @@ public class PingServlet2MDBQueue extends HttpServlet {
     @Resource(name = "jms/QueueConnectionFactory")
     private ConnectionFactory queueConnectionFactory;
 
-    @Resource(name = "jms/DTBrokerQueue3")
+    @Resource(name = "jms/TradeBrokerQueue")
     private Queue tradeBrokerQueue;
 
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -86,7 +86,7 @@ public class PingServlet2MDBQueue extends HttpServlet {
                         String command = "ping";
                         message.setStringProperty("command", command);
                         message.setLongProperty("publishTime", System.currentTimeMillis());
-                        message.setText("Ping message for queue java:comp/env/jms/DTBrokerQueue3 sent from PingServlet2MDBQueue at " + new java.util.Date());
+                        message.setText("Ping message for queue java:comp/env/jms/TradeBrokerQueue sent from PingServlet2MDBQueue at " + new java.util.Date());
                         producer.send(message);
                     } finally {
                         sess.close();
@@ -96,14 +96,14 @@ public class PingServlet2MDBQueue extends HttpServlet {
                 // write out the output
                 output.append("<HR>initTime: ").append(initTime);
                 output.append("<BR>Hit Count: ").append(hitCount++);
-                output.append("<HR>Posted Text message to java:comp/env/jms/DTBrokerQueue3 destination");
+                output.append("<HR>Posted Text message to java:comp/env/jms/TradeBrokerQueue destination");
                 output.append("<BR>Message: ").append(message);
                 output.append("<BR><BR>Message text: ").append(message.getText());
                 output.append("<BR><HR></FONT></BODY></HTML>");
                 out.println(output.toString());
 
             } catch (Exception e) {
-                Log.error("PingServlet2MDBQueue.doGet(...):exception posting message to DTBrokerQueue3 destination ");
+                Log.error("PingServlet2MDBQueue.doGet(...):exception posting message to TradeBrokerQueue destination ");
                 throw e;
             } finally {
                 conn.close();

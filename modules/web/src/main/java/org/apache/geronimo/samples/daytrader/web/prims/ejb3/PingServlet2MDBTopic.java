@@ -54,7 +54,7 @@ public class PingServlet2MDBTopic extends HttpServlet {
     @Resource(name = "jms/TopicConnectionFactory")
     private ConnectionFactory topicConnectionFactory;
 
-    @Resource(name = "jms/DTStreamerTopic3")
+    @Resource(name = "jms/TradeStreamerTopic")
     private Topic tradeStreamerTopic;
 
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -87,7 +87,7 @@ public class PingServlet2MDBTopic extends HttpServlet {
                         String command = "ping";
                         message.setStringProperty("command", command);
                         message.setLongProperty("publishTime", System.currentTimeMillis());
-                        message.setText("Ping message for topic java:comp/env/jms/DTStreamerTopic3 sent from PingServlet2MDBTopic at " + new java.util.Date());
+                        message.setText("Ping message for topic java:comp/env/jms/TradeStreamerTopic sent from PingServlet2MDBTopic at " + new java.util.Date());
 
                         producer.send(message);
                     } finally {
@@ -98,14 +98,14 @@ public class PingServlet2MDBTopic extends HttpServlet {
                 // write out the output
                 output.append("<HR>initTime: ").append(initTime);
                 output.append("<BR>Hit Count: ").append(hitCount++);
-                output.append("<HR>Posted Text message to java:comp/env/jms/DTStreamerTopic3 topic");
+                output.append("<HR>Posted Text message to java:comp/env/jms/TradeStreamerTopic topic");
                 output.append("<BR>Message: ").append(message);
                 output.append("<BR><BR>Message text: ").append(message.getText());
                 output.append("<BR><HR></FONT></BODY></HTML>");
                 out.println(output.toString());
 
             } catch (Exception e) {
-                Log.error("PingServlet2MDBTopic.doGet(...):exception posting message to DTStreamerTopic3 topic");
+                Log.error("PingServlet2MDBTopic.doGet(...):exception posting message to TradeStreamerTopic topic");
                 throw e;
             } finally {
                 conn.close();
