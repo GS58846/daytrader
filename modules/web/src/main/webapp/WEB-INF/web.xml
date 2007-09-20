@@ -168,6 +168,16 @@
         <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.PingServlet2ServletRcv</servlet-class>
     </servlet>
     <servlet>
+        <display-name>PingServlet2Include</display-name>
+        <servlet-name>PingServlet2Include</servlet-name>
+        <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.PingServlet2Include</servlet-class>
+    </servlet>
+    <servlet>
+        <display-name>PingServlet2IncludeRcv</display-name>
+        <servlet-name>PingServlet2IncludeRcv</servlet-name>
+        <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.PingServlet2IncludeRcv</servlet-class>
+    </servlet>
+    <servlet>
         <display-name>PingServlet2Jsp</display-name>
         <servlet-name>PingServlet2Jsp</servlet-name>
         <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.PingServlet2Jsp</servlet-class>
@@ -202,16 +212,6 @@
         <servlet-name>PingServlet2JNDI</servlet-name>
         <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.PingServlet2JNDI</servlet-class>
     </servlet>
-    <servlet>
-        <display-name>PingServlet2Include</display-name>
-        <servlet-name>PingServlet2Include</servlet-name>
-        <servlet-class>org.apache.geronimo.samples.daytrader.web.prims.PingServlet2Include</servlet-class>
-    </servlet>
-    <servlet>
-        <display-name>PingServlet2IncludeRcv</display-name>
-        <servlet-name>PingServlet2IncludeRcv</servlet-name>
-		<servlet-class>org.apache.geronimo.samples.daytrader.web.prims.PingServlet2IncludeRcv</servlet-class>
-	</servlet>
     <!-- End of Web container primitives -->
     
     <!-- EJB container primitives (EJB3) -->   
@@ -306,6 +306,14 @@
         <url-pattern>/servlet/PingServlet2ServletRcv</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>PingServlet2Include</servlet-name>
+        <url-pattern>/servlet/PingServlet2Include</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PingServlet2IncludeRcv</servlet-name>
+        <url-pattern>/servlet/PingServlet2IncludeRcv</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>PingServlet2Jsp</servlet-name>
         <url-pattern>/servlet/PingServlet2Jsp</url-pattern>
     </servlet-mapping>
@@ -332,10 +340,6 @@
     <servlet-mapping>
 		<servlet-name>PingServlet2JNDI</servlet-name>
 		<url-pattern>/servlet/PingServlet2JNDI</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>PingServlet2Include</servlet-name>
-		<url-pattern>/servlet/PingServlet2Include</url-pattern>
 	</servlet-mapping>
     <!-- End of Web container primitives (Servlet Mappings) -->
 
