@@ -43,7 +43,7 @@
                     <description>
                         Dojo User Interface for Daytrader
                     </description>
-                    <version>1.4</version>
+                    <version>5</version>
                     <modules>
                         <webModule>
                             <groupId>org.apache.geronimo.daytrader</groupId>
