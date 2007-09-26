@@ -170,6 +170,16 @@ public class TradeSLSBBean implements TradeSLSBRemote, TradeSLSBLocal {
             AccountProfileDataBean profile = entityManager.find(AccountProfileDataBean.class, userID);
             AccountDataBean account = profile.getAccount();
             HoldingDataBean holding = entityManager.find(HoldingDataBean.class, holdingID);
+            
+            if (holding == null) {
+                Log.error("TradeSLSBBean:sell User " + userID + " attempted to sell holding " + holdingID + " which has already been sold");
+                
+                OrderDataBean orderData = new OrderDataBean();
+                orderData.setOrderStatus("cancelled");
+                entityManager.persist(orderData);
+                
+                return orderData;
+            }            
 
             QuoteDataBean quote = holding.getQuote();
             double quantity = holding.getQuantity();
