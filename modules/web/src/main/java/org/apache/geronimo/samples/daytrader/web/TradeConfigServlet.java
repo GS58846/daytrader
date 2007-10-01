@@ -291,6 +291,22 @@ public class TradeConfigServlet extends HttpServlet {
 		currentConfigStr += "\t\t#Trade  Users:\t\t" + TradeConfig.getMAX_USERS()  + "\n";		
 		currentConfigStr += "\t\t#Trade Quotes:\t\t" + TradeConfig.getMAX_QUOTES()  + "\n";		
 		
+                parm = req.getParameter("marketSummaryInterval");
+                if ((parm != null) && (parm.length() > 0)) {
+                        try {
+                                TradeConfig.setMarketSummaryInterval(Integer.parseInt(parm));
+                        }
+                        catch (Exception e) {
+                                Log.error(
+                                        e, 
+                                        "TradeConfigServlet: minor exception caught", 
+                                        "trying to set marketSummaryInterval, error on parsing int " + parm, 
+                                        "reverting to current value " + TradeConfig.getMarketSummaryInterval());
+
+                        }
+                }
+                currentConfigStr += "\t\tMarket Summary Interval:\t\t" + TradeConfig.getMarketSummaryInterval()  + "\n";
+		
 		parm = req.getParameter("primIterations");
 		if ((parm != null) && (parm.length() > 0)) {
 			try {
@@ -305,8 +321,10 @@ public class TradeConfigServlet extends HttpServlet {
 
 			}
 		}
-
+		currentConfigStr += "\t\tPrimitive Iterations:\t\t" + TradeConfig.getPrimIterations()  + "\n";
+                
 		String enablePublishQuotePriceChange = req.getParameter("EnablePublishQuotePriceChange");
+		
 		if (enablePublishQuotePriceChange != null)
 			TradeConfig.setPublishQuotePriceChange(true);
 		else 

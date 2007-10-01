@@ -59,6 +59,10 @@ import org.apache.geronimo.samples.daytrader.*;
 public class TradeDirect implements TradeServices
 
 {
+	// This lock is used to serialize market summary operations.
+	private static Integer marketSummaryLock = new Integer(0);
+	private static long nextMarketSummary = 0;
+	private static MarketSummaryDataBean cachedMSDB = MarketSummaryDataBean.getRandomInstance();
 
 	private static String dsName = TradeConfig.DATASOURCE;
 
@@ -89,6 +93,38 @@ public class TradeDirect implements TradeServices
      * @see TradeServices#getMarketSummary()
      */
 	public MarketSummaryDataBean getMarketSummary() throws Exception {
+		boolean fetch = false;
+		if (TradeConfig.getMarketSummaryInterval() == 0) return getMarketSummaryInternal();
+		if (TradeConfig.getMarketSummaryInterval() < 0) return cachedMSDB;
+		
+		/**
+		 * This is a little funky.  If its time to fetch a new Market summary then we'll synchronize
+		 * access to make sure only one requester does it.  Others will merely return the old copy until
+		 * the new MarketSummary has been executed.
+		 */
+		if (System.currentTimeMillis() > nextMarketSummary) {
+			synchronized (marketSummaryLock) {
+				if (System.currentTimeMillis() > nextMarketSummary)  fetch = true;
+				if (nextMarketSummary == 0) nextMarketSummary = System.currentTimeMillis();
+				nextMarketSummary += TradeConfig.getMarketSummaryInterval()*1000;
+			}
+
+			/**
+			 * If we're the lucky one reset the trap and get a new MarketSummaryObject.
+			 */
+			if (fetch) {
+				fetch = false;
+				cachedMSDB = getMarketSummaryInternal();
+			}
+		}
+		return cachedMSDB;
+	}
+
+
+	/**
+     * @see TradeServices#getMarketSummary()
+     */
+	public MarketSummaryDataBean getMarketSummaryInternal() throws Exception {
 
 		MarketSummaryDataBean marketSummaryData = null;
 		Connection conn = null;

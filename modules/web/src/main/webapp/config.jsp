@@ -248,6 +248,14 @@ for (int i = 0; i < names.length; i++) {
 			</TD>
 		</TR>
 		<TR>
+			<TD align="left"><B>Market Summary Interval</B><BR>
+			<INPUT size="25" type="text" name="marketSummaryInterval"
+				value="<%=TradeConfig.getMarketSummaryInterval()%>"></TD>
+			<TD>&lt; 0 Do not perform Market Summary Operations.
+			<br>= 0 Perform market Summary on every request.</br>
+			<br>&gt; 0 number of seconds between Market Summary Operations</br></TD>
+		</TR>
+		<TR>
 			<TD align="left"><B>Primitive Iteration</B><BR>
 			<INPUT size="25" type="text" name="primIterations"
 				value="<%=TradeConfig.getPrimIterations()%>"></TD>

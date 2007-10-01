@@ -112,11 +112,11 @@ public class TradeConfig {
 	/**
 	 *   -1 means every operation
 	 *    0 means never perform a market summary
-	 *  > 0 means number of millseconds between summaries.  These will be
-	 *      synchronized so only one tran in this period will create a summary and will
-	 *      cache its results.
+	 *  > 0 means number of seconds between summaries.  These will be
+	 *      synchronized so only one tran in this period will create a summary and 
+	 *      will cache its results.
 	 */
-	private static long  marketSummaryInterval = 60000;
+	private static int  marketSummaryInterval = 60;
 
 	/*
 	 * Penny stocks is a problem where the random price change factor gets a stock
@@ -869,12 +869,12 @@ public class TradeConfig {
         return publishQuotePriceChange;
     }
 
-    public static void setMarketSummaryInterval(long millis) {
-        TradeConfig.marketSummaryInterval = millis;
+    public static void setMarketSummaryInterval(int seconds) {
+        TradeConfig.marketSummaryInterval = seconds;
     }
     
-    public static long getMarketSummaryInterval() {
-        return marketSummaryInterval;
+    public static  int getMarketSummaryInterval() {
+        return TradeConfig.marketSummaryInterval;
     }
 
 
