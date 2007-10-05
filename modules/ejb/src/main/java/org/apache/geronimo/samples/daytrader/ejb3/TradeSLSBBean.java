@@ -538,21 +538,36 @@ public class TradeSLSBBean implements TradeSLSBRemote, TradeSLSBLocal {
         AccountProfileDataBean profile = entityManager.find(AccountProfileDataBean.class, userID);
         AccountDataBean account = profile.getAccount();
 
+        account.logout();
+        
         if (Log.doTrace())
             Log.trace("TradeSLSBBean:logout(" + userID + ") success");
-        account.logout();
     }
 
     public AccountDataBean register(String userID, String password, String fullname, String address, String email, String creditcard, BigDecimal openBalance) {
-        AccountDataBean account = new AccountDataBean(0, 0, null, new Timestamp(System.currentTimeMillis()), openBalance, openBalance, userID);
-        AccountProfileDataBean profile = new AccountProfileDataBean(userID, password, fullname, address, email, creditcard);
-        account.setProfile(profile);
-        // are both of these necessary?
-        profile.setAccount(account);
-        // this should save the linked profile as well?
-        entityManager.persist(account);
-        // apparently doesn't??
-        entityManager.persist(profile);
+        AccountDataBean account = null;
+        AccountProfileDataBean profile = null;
+        
+        if (Log.doTrace())
+            Log.trace("TradeSLSBBean:register", userID, password, fullname, address, email, creditcard, openBalance);
+
+        // Check to see if a profile with the desired userID already exists
+        profile = entityManager.find(AccountProfileDataBean.class, userID);
+
+        if (profile != null) {
+            Log.error("Failed to register new Account - AccountProfile with userID(" + userID + ") already exists");
+            return null;
+        } else {
+            profile = new AccountProfileDataBean(userID, password, fullname, address, email, creditcard);
+            account = new AccountDataBean(0, 0, null, new Timestamp(System.currentTimeMillis()), openBalance, openBalance, userID);
+
+            profile.setAccount(account);
+            account.setProfile(profile);
+
+            entityManager.persist(profile); 
+            entityManager.persist(account);
+        }
+        
         return account;
     }
 
