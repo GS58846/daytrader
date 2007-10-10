@@ -113,10 +113,10 @@ public class TradeConfig {
 	 *   -1 means every operation
 	 *    0 means never perform a market summary
 	 *  > 0 means number of seconds between summaries.  These will be
-	 *      synchronized so only one tran in this period will create a summary and 
+	 *      synchronized so only one transaction in this period will create a summary and 
 	 *      will cache its results.
 	 */
-	private static int  marketSummaryInterval = 60;
+	private static int  marketSummaryInterval = 20;
 
 	/*
 	 * Penny stocks is a problem where the random price change factor gets a stock
