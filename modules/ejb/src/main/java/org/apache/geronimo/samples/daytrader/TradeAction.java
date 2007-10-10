@@ -36,6 +36,11 @@ import org.apache.geronimo.samples.daytrader.util.Log;
  * making calls to TradeAction methods to actually performance each operation.
  */
 public class TradeAction implements TradeServices {
+    // This lock is used to serialize market summary operations.
+    private static final Integer marketSummaryLock = new Integer(0);
+    private static long nextMarketSummary = System.currentTimeMillis();
+    private static MarketSummaryDataBean cachedMSDB = MarketSummaryDataBean.getRandomInstance();
+    
     // make this static so the trade impl can be cached
     // - ejb3 mode is the only thing that really uses this
     // - can go back and update other modes to take advantage (ie. TradeDirect)
@@ -102,6 +107,67 @@ public class TradeAction implements TradeServices {
         }
     }
 
+
+    /**
+     * Market Summary is inherently a heavy database operation.  For servers that have a caching
+     * story this is a great place to cache data that is good for a period of time.  In order to
+     * provide a flexible framework for this we allow the market summary operation to be
+     * invoked on every transaction, time delayed or never.  This is configurable in the 
+     * configuration panel.  
+     *
+     * @return An instance of the market summary
+     */
+    public MarketSummaryDataBean getMarketSummary() throws Exception {
+    
+        if (Log.doActionTrace()) {
+            Log.trace("TradeAction:getMarketSummary()");
+        }
+    
+        if (TradeConfig.getMarketSummaryInterval() == 0) return getMarketSummaryInternal();
+        if (TradeConfig.getMarketSummaryInterval() < 0) return cachedMSDB;
+    
+        /**
+         * This is a little funky.  If its time to fetch a new Market summary then we'll synchronize
+         * access to make sure only one requester does it.  Others will merely return the old copy until
+         * the new MarketSummary has been executed.
+         */
+         long currentTime = System.currentTimeMillis();
+         
+         if (currentTime > nextMarketSummary) {
+             long oldNextMarketSummary = nextMarketSummary;
+             boolean fetch = false;
+
+             synchronized (marketSummaryLock) {
+                 /**
+                  * Is it still ahead or did we miss lose the race?  If we lost then let's get out
+                  * of here as the work has already been done.
+                  */
+                 if (oldNextMarketSummary == nextMarketSummary) {
+                     fetch = true;
+                     nextMarketSummary += TradeConfig.getMarketSummaryInterval()*1000;
+                     
+                     /** 
+                      * If the server has been idle for a while then its possible that nextMarketSummary
+                      * could be way off.  Rather than try and play catch up we'll simply get in sync with the 
+                      * current time + the interval.
+                      */ 
+                     if (nextMarketSummary < currentTime) {
+                         nextMarketSummary = currentTime + TradeConfig.getMarketSummaryInterval()*1000;
+                     }
+                 }
+             }
+
+            /**
+             * If we're the lucky one then let's update the MarketSummary
+             */
+            if (fetch) {
+                cachedMSDB = getMarketSummaryInternal();
+            }
+        }
+         
+        return cachedMSDB;
+    }
+
     /**
      * Compute and return a snapshot of the current market conditions This
      * includes the TSIA - an index of the price of the top 100 Trade stock
@@ -110,9 +176,9 @@ public class TradeAction implements TradeServices {
      *
      * @return A snapshot of the current market summary
      */
-    public MarketSummaryDataBean getMarketSummary() throws Exception {
+    public MarketSummaryDataBean getMarketSummaryInternal() throws Exception {
         if (Log.doActionTrace()) {
-            Log.trace("TradeAction:getMarketSummary()");
+            Log.trace("TradeAction:getMarketSummaryInternal()");
         }
         MarketSummaryDataBean marketSummaryData = null;
         marketSummaryData = trade.getMarketSummary();
