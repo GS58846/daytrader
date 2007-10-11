@@ -226,7 +226,7 @@
         <connector>TradeDataSource</connector>
         <external-path xmlns:dep="http://geronimo.apache.org/xml/ns/deployment-1.2">
             <dep:groupId>org.tranql</dep:groupId>
-            <dep:artifactId>tranql-connector-db2-embed-xa</dep:artifactId>
+            <dep:artifactId>tranql-connector-db2-xa</dep:artifactId>
             <dep:type>rar</dep:type>
         </external-path>
         <connector xmlns="http://geronimo.apache.org/xml/ns/j2ee/connector-1.2">
