@@ -184,7 +184,7 @@
                         <adminobject-interface>javax.jms.Topic</adminobject-interface>
                         <adminobject-class>org.activemq.message.ActiveMQTopic</adminobject-class>
                         <adminobject-instance>
-                            <message-destination-name>TradeStreamerTopic</message-destination-name>
+                            <message-destination-name>jms/TradeStreamerTopic</message-destination-name>
                             <config-property-setting name="PhysicalName">TradeStreamerTopic</config-property-setting>
                         </adminobject-instance>
                     </adminobject>
