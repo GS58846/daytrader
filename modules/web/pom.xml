@@ -53,7 +53,7 @@
             <groupId>org.apache.geronimo.specs</groupId>
             <artifactId>geronimo-servlet_2.5_spec</artifactId>
             <scope>provided</scope>
-            <version>1.1-M1</version>
+            <version>1.1</version>
         </dependency>
         <dependency>
             <groupId>org.apache.geronimo.specs</groupId>
@@ -79,13 +79,13 @@
         <dependency>
             <groupId>org.apache.geronimo.specs</groupId>
             <artifactId>geronimo-jta_1.1_spec</artifactId>
-            <version>1.0-M1</version>
+            <version>1.1</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
     		<groupId>org.apache.geronimo.specs</groupId>
     		<artifactId>geronimo-annotation_1.0_spec</artifactId>
-    		<version>1.0-M1</version>
+    		<version>1.1</version>
     		<scope>provided</scope>
 		</dependency>
         <!-- Removed per DAYTRADER-7 due to interop issues on commercial AppServers 
