@@ -51,7 +51,7 @@
         <jasperDeployer>org.apache.geronimo.configs/jasper-deployer/${geronimoVersion}/car</jasperDeployer>
         <jpaDeployer>org.apache.geronimo.configs/persistence-jpa10-deployer/${geronimoVersion}/car</jpaDeployer>
     </properties>
-    
+
     <issueManagement>
         <system>jira</system>
         <url>http://issues.apache.org/jira/browse/GERONIMO</url>
@@ -145,11 +145,11 @@
         <module>modules/json-proxy</module>
         <module>modules/dojo-ui-web</module>
         <module>modules/dojo-ui-ear</module>
-    <module>daytrader-derby-datasource</module>
-    <module>daytrader-jms</module>
-    <module>daytrader-jetty</module>
-    <module>daytrader-tomcat</module>
-  </modules>
+        <module>daytrader-derby-datasource</module>
+        <module>daytrader-jms</module>
+        <module>daytrader-jetty</module>
+        <module>daytrader-tomcat</module>
+    </modules>
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -168,17 +168,149 @@
     </dependencyManagement>
     <build>
         <pluginManagement>
-          <plugins>
-            <plugin>
-              <groupId>org.apache.geronimo.buildsupport</groupId>
-              <artifactId>car-maven-plugin</artifactId>
-              <version>${geronimoVersion}</version>
-              <extensions>true</extensions>
-              <configuration>
-                <category>Daytrader</category>
-              </configuration>
-            </plugin>
-          </plugins>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.geronimo.buildsupport</groupId>
+                    <artifactId>car-maven-plugin</artifactId>
+                    <version>${geronimoVersion}</version>
+                    <extensions>true</extensions>
+                    <configuration>
+                        <category>Daytrader</category>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.geronimo.buildsupport</groupId>
+                    <artifactId>geronimo-maven-plugin</artifactId>
+                    <version>2.2-SNAPSHOT</version>
+                    <!--<version>${geronimoVersion}</version>-->
+
+                    <configuration>
+                        <assemblies>
+                            <assembly>
+                                <id>jetty</id>
+                                <groupId>org.apache.geronimo.assemblies</groupId>
+                                <artifactId>geronimo-jetty6-javaee5</artifactId>
+                                <version>${geronimoVersion}</version>
+                                <classifier>bin</classifier>
+                                <type>zip</type>
+                            </assembly>
+
+                            <assembly>
+                                <id>jetty-minimal</id>
+                                <groupId>org.apache.geronimo.assemblies</groupId>
+                                <artifactId>geronimo-jetty6-minimal</artifactId>
+                                <version>${geronimoVersion}</version>
+                                <classifier>bin</classifier>
+                                <type>zip</type>
+                            </assembly>
+
+                            <assembly>
+                                <id>tomcat</id>
+                                <groupId>org.apache.geronimo.assemblies</groupId>
+                                <artifactId>geronimo-tomcat6-javaee5</artifactId>
+                                <version>${geronimoVersion}</version>
+                                <classifier>bin</classifier>
+                                <type>zip</type>
+                            </assembly>
+
+                            <assembly>
+                                <id>tomcat-minimal</id>
+                                <groupId>org.apache.geronimo.assemblies</groupId>
+                                <artifactId>geronimo-tomcat6-minimal</artifactId>
+                                <version>${geronimoVersion}</version>
+                                <classifier>bin</classifier>
+                                <type>zip</type>
+                            </assembly>
+
+                            <assembly>
+                                <id>framework</id>
+                                <groupId>org.apache.geronimo.assemblies</groupId>
+                                <artifactId>geronimo-framework</artifactId>
+                                <version>${geronimoVersion}</version>
+                                <classifier>bin</classifier>
+                                <type>zip</type>
+                            </assembly>
+                        </assemblies>
+
+                        <defaultAssemblyId>framework</defaultAssemblyId>
+
+                        <optionSets>
+                            <optionSet>
+                                <id>morememory</id>
+                                <options>
+                                    <option>-Xmx512m</option>
+                                    <option>-XX:MaxPermSize=128m</option>
+                                </options>
+                            </optionSet>
+
+                            <optionSet>
+                                <id>debug</id>
+                                <options>
+                                    <option>-Xdebug</option>
+                                    <option>-Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=n</option>
+                                </options>
+                            </optionSet>
+                        </optionSets>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>start</id>
+                            <phase>pre-integration-test</phase>
+                            <goals>
+                                <goal>start-server</goal>
+                            </goals>
+                            <configuration>
+                                <assemblyId>${it-server}</assemblyId>
+                                <logOutput>true</logOutput>
+                                <background>true</background>
+                                <verifyTimeout>300</verifyTimeout>
+                                <refresh>true</refresh>
+                                <optionSets>
+                                    <optionSet>
+                                        <id>default</id>
+                                        <options>
+                                            <option>-XX:MaxPermSize=128m</option>
+                                        </options>
+                                    </optionSet>
+
+                                    <optionSet>
+                                        <id>morememory</id>
+                                        <options>
+                                            <option>-Xmx512m</option>
+                                            <option>-XX:MaxPermSize=128m</option>
+                                        </options>
+                                    </optionSet>
+
+                                    <optionSet>
+                                        <id>debug</id>
+                                        <options>
+                                            <option>-Xdebug</option>
+                                            <option>-Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=n</option>
+                                        </options>
+                                    </optionSet>
+                                </optionSets>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>install-plugin</id>
+                            <phase>install</phase>
+                            <goals>
+                                <goal>install-plugin</goal>
+                            </goals>
+                            <!--<configuration>-->
+                            <!--<defaultGeronimoRepository>http://geronimo.apache.org/plugins/geronimo-${geronimoVersion}/</defaultGeronimoRepository>-->
+                            <!--</configuration>-->
+                        </execution>
+                        <execution>
+                            <id>stop</id>
+                            <phase>install</phase>
+                            <goals>
+                                <goal>stop-server</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
         </pluginManagement>
 
         <plugins>
