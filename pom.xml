@@ -146,6 +146,9 @@
         <module>modules/dojo-ui-web</module>
         <module>modules/dojo-ui-ear</module>
         <module>daytrader-derby-datasource</module>
+        <!-- see profiles -->
+        <!--<module>daytrader-db2-datasource</module>-->
+        <!--<module>daytrader-oracle-datasource</module>-->
         <module>daytrader-jms</module>
         <module>daytrader-jetty</module>
         <module>daytrader-tomcat</module>
@@ -385,7 +388,7 @@
     <profiles>
 
         <profile>
-            <id>db2</id>
+            <id>jboss-db2</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
                 <property>
@@ -399,7 +402,7 @@
         </profile>
 
         <profile>
-            <id>mysql</id>
+            <id>jboss-mysql</id>
             <activation>
                 <property>
                     <name>database</name>
@@ -415,6 +418,19 @@
             <id>test</id>
             <modules>
                 <module>functional-tests</module>
+            </modules>
+        </profile>
+
+        <profile>
+            <id>db2</id>
+            <modules>
+                <module>daytrader-db2-datasource</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>oracle</id>
+            <modules>
+                <module>daytrader-oracle-datasource</module>
             </modules>
         </profile>
     </profiles>
