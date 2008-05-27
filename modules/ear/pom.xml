@@ -63,8 +63,47 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-remote-resources-plugin</artifactId>
+                <version>1.0</version>
+                <executions>
+                  <execution>
+                    <goals>
+                      <goal>process</goal>
+                    </goals>
+                    <configuration>
+                      <properties>
+                        <projectName>Apache Geronimo Daytrader</projectName>
+                      </properties>
+                      <resourceBundles>
+                        <resourceBundle>org.apache:apache-jar-resource-bundle:1.4</resourceBundle>
+                      </resourceBundles>
+                    </configuration>
+                  </execution>
+                </executions>
+              </plugin>
+            <plugin>
+                <groupId>org.apache.geronimo.genesis.plugins</groupId>
+                <artifactId>tools-maven-plugin</artifactId>
+                <!-- Tools includes custom packagings, install as extension to pick them up -->
+                <extensions>true</extensions>
+                <executions>
+                    <execution>
+                        <id>verify-legal-files</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>verify-legal-files</goal>
+                        </goals>
+                        <!-- Do not Fail the build if no legal files were found-->
+                        <configuration>
+                            <strict>false</strict>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <artifactId>maven-ear-plugin</artifactId>
-                <version>2.3</version>
+                <version>2.3.1</version>
                 <configuration>
                     <displayName>DayTrader 2.0</displayName>
                     <description>DayTrader Stock Trading Performance Benchmark Sample</description>

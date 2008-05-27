@@ -37,6 +37,25 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.apache.geronimo.genesis.plugins</groupId>
+                <artifactId>tools-maven-plugin</artifactId>
+                <!-- Tools includes custom packagings, install as extension to pick them up -->
+                <extensions>true</extensions>
+                <executions>
+                    <execution>
+                        <id>verify-legal-files</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>verify-legal-files</goal>
+                        </goals>
+                        <!-- Do not Fail the build if no legal files were found-->
+                        <configuration>
+                            <strict>false</strict>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <artifactId>maven-ear-plugin</artifactId>
                 <configuration>
                     <displayName>DayTrader Dojo UI</displayName>
