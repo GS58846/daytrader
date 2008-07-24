@@ -76,9 +76,9 @@ After this you can go to 'Go Trade!' to begin trading.
 
 There are two application clients you can run, the streamer client and web services client.  To run these (from the geronimo bin directory):
    TradeStreamerAppClient:
-      java -jar client.jar tradeStreamerAppclient
+      client.[bat|sh] org.apache.geronimo.daytrader/daytrader-streamer-client/2.0-SNAPSHOT/car -waitForMain
    wsappclient:
-      java -jar client.jar Trade/daytrader-wsappclient-2.0-SNAPSHOT
+      client.[bat|sh] org.apache.geronimo.daytrader/daytrader-ws-client/2.0-SNAPSHOT/car -waitForMain
 
 
 UNINSTALL
