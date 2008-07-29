@@ -8,6 +8,8 @@
   <groupId>org.apache.geronimo.daytrader</groupId>
   <artifactId>daytrader-jms</artifactId>
   <packaging>car</packaging>
+  <name>Daytrader :: JMS Resource</name>
+
     <dependencies>
         <dependency>
             <groupId>org.apache.geronimo.modules</groupId>

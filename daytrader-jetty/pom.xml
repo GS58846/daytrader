@@ -9,6 +9,7 @@
     <groupId>org.apache.geronimo.daytrader</groupId>
     <artifactId>daytrader-jetty</artifactId>
     <packaging>car</packaging>
+    <name>Daytrader :: Jetty</name>
 
 
     <dependencies>
