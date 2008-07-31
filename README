@@ -10,62 +10,25 @@ To build the dayTrader EAR, you need to have Maven 2.0.5 or later installed.   T
 
         mvn install
 
-This should build the daytrader-ear-2.0-SNAPSHOT.ear in the modules/ear/target directory.
+This should build the daytrader-ear-2.2-SNAPSHOT.ear in the modules/ear/target directory.
 
-Note: You may have to run the build at least 6 times or more to get all of the prereq files, due to heavy load on the ibiblio or apache Maven repos servers.
+This will also build the daytrader-jms, daytrader-derby-datasource, daytrader-jetty and daytrader-tomcat plugins.
 
 
 INSTALL
--------
-Before installing the EAR, you will need to create the database and populate the initial data into the database.  Make sure Geronimo is started and the GERONIMO_HOME environment variable is defined.
+--------
 
-1. If you want to use the embedded Cloudscape database:
-   cd into the bin\dbscripts\derby directory.
-   Run the following that will create the "DaytraderDatabase" database and its tables:
-      createDerbyDB.[bat|sh]
+After building daytrader, you can go to admin console to install the daytrader-jms, daytrader-derby-datasource, daytrader-jetty or daytrader-tomcat as plugins.   
 
-   To install the EAR, run the following from the dayTrader root directory:
-      ${GERONIMO_HOME}\bin\deploy.[bat|sh] deploy modules\ear\target\daytrader-ear-2.0-SNAPSHOT.ear plans\daytrader-g-2.0-SNAPSHOT-plan.xml
+Setup Databases:
 
+You will need to create the database and populate the initial data into the database.  Make sure Geronimo is started and the GERONIMO_HOME environment variable is defined.
 
-2. If you want to use a DB2 database as a back-end database provider, please perform the following steps to deploy and execute the sample app:
+1. If you want to use the embedded Cloudscape database, you can populate tables and data by visiting http://localhost:8080/daytrader/ in your browser.
 
-   1) Use the following set of instructions to create the Trade database tables:
-      a. Set up a database or reuse an existing database. For this example, a database called "tradedb" is used.
-      b. Create a user with a user name of trade and a password of trade.   Grant appropriate permissions to user trade.
-      c. Load the database schema for the trade user by running the following at the db2 command window:
-            db2 connect to tradedb
-            db2 -tvf bin\dbscripts\db2\Table.ddl
-      d. Grant these users privileges that allow the user to create tables and indexes within their respective schemas.
+2. If you want to use a DB2 database as a back-end database provider, please copy DB2 jdbc drivers to server's repository and use the daytrader-db2-datasource plugin instead.    
 
-   2) Use the TranQL DB2 vendor specific XA resource adapter, which should be built from source and placed in %GERONIMO_HOME%\repository\org\tranql\tranql-connector-db2-xa\{version}\tranql-connector-db2-xa-{version}.rar
-        -For DB2 v8.2 use dayTrader-db2-XA-plan.xml
-        -For DB2 v9.1, use dayTrader-db2-9.1-XA-plan.xml
-        -If you use a different level of DB2 JDBC driver than v8.2 or v9.1, then modify the DB2 JDBC driver version information within the dependency tags in dayTrader-db2-XA-plan.xml.  If your level of DB2 JDBC driver isn't provided in the repository, you'll also need to install it.
-        -Modify the selected XA resource adapter configuration plan above for your database environment. For example, update the following values - User, Password, PortNumber, DatabaseName, ServerName.
-        -Deploy daytrader-ear-2.0-SNAPSHOT.ear file using the admin console or command line deployer.
-         To use the command line deployer, from the Geronimo home directory, type:
-            ${GERONIMO_HOME}\bin\deploy.[bat|sh] deploy modules\ear\target\daytrader-ear-2.0-SNAPSHOT.ear plans\dayTrader-db2-XA-plan.xml
-
-
-3. If you want to use an Oracle database as a back-end database provider, please copy the ojdbc14.jar file from your oracle server to %GERONIMO_HOME%\repository\oracle\ojdbc14\10g and rename the ojdbc14.jar to a maven-recognizable format like ojdbc14-10g.jar.
-   Please perform the following steps to deploy and execute the sample app:
-
-   1) Use the following set of instructions to create the Trade database tables:
-      a. Set up a database or reuse an existing database. For this example, a database SID of tradedb is used.
-      b. Create a user with a user name of trade and a password of trade.   Grant appropriate permissions to user trade.
-      c. Load the database schema for the trade user by running the following command:
-            sqlplus trade/trade@tradedb @bin\dbscripts\oracle\Table.ddl
-      d. Grant these users privileges that allow the user to create tables and indexes within their respective schemas.
-
-   2) Modify the database resource adapter configuration to your database environment.   For example, UserName, Password, ConnectionURL.
-      Deploy daytrader-ear-2.0-SNAPSHOT.ear file using the admin console or command line deployer.
-      To use the command line deployer, from your Geronimo home directory, type:
-            ${GERONIMO_HOME}\bin\deploy.[bat|sh] deploy modules\ear\target\daytrader-ear-2.0-SNAPSHOT.ear plans\dayTrader-oracle-XA-plan.xml
-
-      NOTE: dayTrader-oracle-plan.xml is the daytrader deployment plan for oracle database.
-      You will need to change the dayTrader-oracle-plan.xml with your oracle userid and password if you don't use the same user/password as specified above.
-
+3. If you want to use an Oracle database as a back-end database provider, please copy the ojdbc14.jar file from your oracle server to %GERONIMO_HOME%\repository\oracle\ojdbc14\10g and rename the ojdbc14.jar to a maven-recognizable format like ojdbc14-10g.jar.   PLease use the daytrader-oracle-datasource plugin instead.
 
 RUN
 ---
@@ -76,15 +39,15 @@ After this you can go to 'Go Trade!' to begin trading.
 
 There are two application clients you can run, the streamer client and web services client.  To run these (from the geronimo bin directory):
    TradeStreamerAppClient:
-      client.[bat|sh] org.apache.geronimo.daytrader/daytrader-streamer-client/2.0-SNAPSHOT/car -waitForMain
+      client.[bat|sh] org.apache.geronimo.daytrader/daytrader-streamer-client/2.2-SNAPSHOT/car -waitForMain
    wsappclient:
-      client.[bat|sh] org.apache.geronimo.daytrader/daytrader-ws-client/2.0-SNAPSHOT/car -waitForMain
+      client.[bat|sh] org.apache.geronimo.daytrader/daytrader-ws-client/2.2-SNAPSHOT/car -waitForMain
 
 
 UNINSTALL
 ---------
 To uninstall daytrader, issue the following commands:
-        ${GERONIMO_HOME}\bin\deploy.[bat|sh] --user %user% --password %password% undeploy org.apache.geronimo.daytrader/daytrader/2.0-SNAPSHOT/car
+        ${GERONIMO_HOME}\bin\deploy.[bat|sh] --user %user% --password %password% undeploy org.apache.geronimo.daytrader/daytrader/2.2-SNAPSHOT/car
 
 
 ACKNOWLEDGEMENTS
