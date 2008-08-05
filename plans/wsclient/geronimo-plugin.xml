@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<geronimo-plugin xmlns="http://geronimo.apache.org/xml/ns/plugins-1.3" xmlns:ns2="http://geronimo.apache.org/xml/ns/attributes-1.2">
+    <name>Daytrader :: WS Client</name>
+    <category>Daytrader</category>
+    <description>Java EE 5.0 Performance Benchmark Sample Application :: Daytrader-WS-Client</description>
+    <url>http://www.apache.org/</url>
+    <author>Apache Software Foundation</author>
+    <license osi-approved="true">The Apache Software License, Version 2.0</license>
+    <plugin-artifact>
+        <module-id>
+            <groupId>org.apache.geronimo.daytrader</groupId>
+            <artifactId>daytrader-ws-client</artifactId>
+            <version>2.2-SNAPSHOT</version>
+            <type>car</type>
+        </module-id>
+        <geronimo-version>2.2-SNAPSHOT</geronimo-version>
+        <jvm-version>1.5</jvm-version>
+        <jvm-version>1.6</jvm-version>
+        <dependency start="true">
+            <groupId>org.apache.geronimo.configs</groupId>
+            <artifactId>client</artifactId>
+            <version>2.2-SNAPSHOT</version>
+            <type>car</type>
+        </dependency>
+        <dependency start="true">
+            <groupId>org.apache.geronimo.configs</groupId>
+            <artifactId>axis</artifactId>
+            <version>2.2-SNAPSHOT</version>
+            <type>car</type>
+        </dependency>
+
+        <config-xml-content load="false"/>
+    </plugin-artifact>
+</geronimo-plugin>
