@@ -65,11 +65,11 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-    		<groupId>org.apache.geronimo.specs</groupId>
-    		<artifactId>geronimo-annotation_1.0_spec</artifactId>
-    		<version>1.1</version>
-    		<scope>provided</scope>
-		</dependency>
+    	    <groupId>org.apache.geronimo.specs</groupId>
+    	    <artifactId>geronimo-annotation_1.0_spec</artifactId>
+    	    <version>1.1</version>
+    	    <scope>provided</scope>
+	</dependency>
         <dependency>
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
@@ -102,9 +102,10 @@
         <dependency>
             <groupId>org.apache.geronimo.specs</groupId>
             <artifactId>geronimo-jta_1.1_spec</artifactId>
-            <version>1.1.2-SNAPSHOT</version>
+            <version>1.1.1</version>
             <scope>provided</scope>
-        </dependency>    </dependencies>
+        </dependency>    
+    </dependencies>
     <build>
         <resources>
             <resource>
