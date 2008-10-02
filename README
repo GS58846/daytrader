@@ -8,19 +8,24 @@ BUILD
 -----
 To build the dayTrader EAR, you need to have Maven 2.0.5 or later installed.   This can be found at http://maven.apache.org.  Once installed you can build DayTrader by executing the following command from the dayTrader root directory (the directory containing this README).:
 
-        mvn install
+        mvn clean install
 
-This should build the daytrader-ear-2.2-SNAPSHOT.ear in the modules/ear/target directory.
-
-This will also build the daytrader-jms, daytrader-derby-datasource, daytrader-jetty and daytrader-tomcat plugins.
-
+This will build the daytrader-jms, daytrader-derby-datasource, daytrader-jetty and daytrader-tomcat plugins.
 
 INSTALL
 --------
 
-After building daytrader, you can go to admin console to install the daytrader-jms, daytrader-derby-datasource, daytrader-jetty or daytrader-tomcat as plugins.   
+After building daytrader, you can go to admin console to install the daytrader-jms, daytrader-derby-datasource, daytrader-jetty or daytrader-tomcat  plugins.   Alternatively, you can install them via the "deploy install-plugin" command, for example:
 
-Setup Databases:
+deploy[bat|sh] install-plugin DAYTRADER_HOME/daytrader-jms/target/daytrader-jms-2.2-SNAPSHOT.car
+deploy[bat|sh] install-plugin DAYTRADER_HOME/daytrader-derby-datasource/target/daytrader-derby-datasource-2.2-SNAPSHOT.car
+deploy[bat|sh] install-plugin DAYTRADER_HOME/daytrader-tomcat/target/daytrader-tomcat-2.2-SNAPSHOT.car 
+
+For app clients, you'll have to install them using deploy install-plugin commands for now, before we publish the app client plugins on a public repo, for example: 
+
+deploy[bat|sh] install-plugin DAYTRADER_HOME/daytrader-tomcat/target/daytrader-ws-client-2.2-SNAPSHOT.car
+deploy[bat|sh] install-plugin DAYTRADER_HOME/daytrader-tomcat/target/daytrader-streamer-client-2.2-SNAPSHOT.car 
+
 
 You will need to create the database and populate the initial data into the database.  Make sure Geronimo is started and the GERONIMO_HOME environment variable is defined.
 
