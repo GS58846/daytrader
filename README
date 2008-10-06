@@ -15,16 +15,14 @@ This will build the daytrader-jms, daytrader-derby-datasource, daytrader-jetty a
 INSTALL
 --------
 
-After building daytrader, you can go to admin console to install the daytrader-jms, daytrader-derby-datasource, daytrader-jetty or daytrader-tomcat  plugins.   Alternatively, you can install them via the "deploy install-plugin" command, for example:
+After building daytrader, you can go to admin console to install the daytrader-jetty or daytrader-tomcat plugin. Alternatively, you can install them via the "deploy install-plugin" command, for example:
 
-deploy[bat|sh] install-plugin DAYTRADER_HOME/daytrader-jms/target/daytrader-jms-2.2-SNAPSHOT.car
-deploy[bat|sh] install-plugin DAYTRADER_HOME/daytrader-derby-datasource/target/daytrader-derby-datasource-2.2-SNAPSHOT.car
-deploy[bat|sh] install-plugin DAYTRADER_HOME/daytrader-tomcat/target/daytrader-tomcat-2.2-SNAPSHOT.car 
+gsh deploy/list-plugins -u system -w manager -r file:/<your-local-maven-repo> org.apache.geronimo.daytrader/daytrader-tomcat/2.2-SNAPSHOT/car
 
 For app clients, you'll have to install them using deploy install-plugin commands for now, before we publish the app client plugins on a public repo, for example: 
 
-deploy[bat|sh] install-plugin DAYTRADER_HOME/daytrader-tomcat/target/daytrader-ws-client-2.2-SNAPSHOT.car
-deploy[bat|sh] install-plugin DAYTRADER_HOME/daytrader-tomcat/target/daytrader-streamer-client-2.2-SNAPSHOT.car 
+./gsh deploy/install-plugin -u system -w manager $DAYTRADER_HOME/daytrader-tomcat/target/daytrader-ws-client-2.2-SNAPSHOT.car
+./gsh deploy/install-plugin -u system -w manager $DAYTRADER_HOME/daytrader-tomcat/target/daytrader-streamer-client-2.2.car 
 
 
 You will need to create the database and populate the initial data into the database.  Make sure Geronimo is started and the GERONIMO_HOME environment variable is defined.
