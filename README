@@ -15,7 +15,7 @@ This will build the daytrader-jms, daytrader-derby-datasource, daytrader-jetty a
 INSTALL
 --------
 
-After building daytrader, you can go to admin console to install the daytrader-jetty or daytrader-tomcat plugin. Alternatively, you can install them via the "deploy install-plugin" command, for example:
+After building daytrader, you can go to admin console to install the daytrader-jetty or daytrader-tomcat plugin. Alternatively, you can install them via the "deploy/list-plugins" command, for example:
 
 gsh deploy/list-plugins -u system -w manager -r file:/<your-local-maven-repo> org.apache.geronimo.daytrader/daytrader-tomcat/2.2-SNAPSHOT/car
 
