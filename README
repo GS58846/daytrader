@@ -1,4 +1,4 @@
-(C) Copyright 2006,2007 The Apache Software Foundation.
+(C) Copyright 2006,2008 The Apache Software Foundation.
 ----------------------------------------------------------------------
 
 The code in this directory contains the code for the benchmark sample called Day Trader.  This sample was contributed by IBM to the Apache Geronimo project under the ASF license to further functional and performance testing of Geronimo.  
@@ -6,7 +6,7 @@ The code in this directory contains the code for the benchmark sample called Day
 
 BUILD
 -----
-To build the dayTrader EAR, you need to have Maven 2.0.5 or later installed.   This can be found at http://maven.apache.org.  Once installed you can build DayTrader by executing the following command from the dayTrader root directory (the directory containing this README).:
+To build the dayTrader EAR, you need to have Maven 2.0.9 or later installed.   This can be found at http://maven.apache.org.  Once installed you can build DayTrader by executing the following command from the dayTrader root directory (the directory containing this README).:
 
         mvn clean install
 
@@ -22,12 +22,12 @@ gsh deploy/list-plugins -u system -w manager -r file:/<your-local-maven-repo> or
 For app clients, you'll have to install them using deploy install-plugin commands for now, before we publish the app client plugins on a public repo, for example: 
 
 ./gsh deploy/install-plugin -u system -w manager $DAYTRADER_HOME/daytrader-tomcat/target/daytrader-ws-client-2.2-SNAPSHOT.car
-./gsh deploy/install-plugin -u system -w manager $DAYTRADER_HOME/daytrader-tomcat/target/daytrader-streamer-client-2.2.car 
+./gsh deploy/install-plugin -u system -w manager $DAYTRADER_HOME/daytrader-tomcat/target/daytrader-streamer-client-2.2-SNAPSHOT.car 
 
 
 You will need to create the database and populate the initial data into the database.  Make sure Geronimo is started and the GERONIMO_HOME environment variable is defined.
 
-1. If you want to use the embedded Cloudscape database, you can populate tables and data by visiting http://localhost:8080/daytrader/ in your browser.
+1. If you want to use the embedded Apache Derby database, you can populate tables and data by visiting http://localhost:8080/daytrader/ in your browser.
 
 2. If you want to use a DB2 database as a back-end database provider, please copy DB2 jdbc drivers to server's repository and use the daytrader-db2-datasource plugin instead.    
 

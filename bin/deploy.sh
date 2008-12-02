@@ -27,4 +27,4 @@ then
   exit
 fi
 
-${JAVA_HOME}/bin/java -jar ${GERONIMO_HOME}/bin/deployer.jar --user system --password manager deploy daytrader-ear-1.2-SNAPSHOT.ear daytrader-1.2-beta-plan.xml
+${JAVA_HOME}/bin/java -jar ${GERONIMO_HOME}/bin/deployer.jar --user system --password manager deploy daytrader-ear-2.2-SNAPSHOT.ear dayTrader-derby-plan.xml

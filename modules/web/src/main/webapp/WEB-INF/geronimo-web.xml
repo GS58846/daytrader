@@ -17,8 +17,8 @@
     limitations under the License.
 -->
 
-    <web-app xmlns="http://geronimo.apache.org/xml/ns/web"
-        xmlns:naming="http://geronimo.apache.org/xml/ns/naming"
+    <web-app xmlns="http://geronimo.apache.org/xml/ns/j2ee/web-2.0.1"
+        xmlns:naming="http://geronimo.apache.org/xml/ns/naming-1.2"
         configId="TradeWeb" parentId="Trade">
     
     <context-priority-classloader>false</context-priority-classloader>

@@ -25,7 +25,6 @@
         <groupId>org.apache.geronimo.daytrader</groupId>
         <artifactId>daytrader</artifactId>
         <version>2.2-SNAPSHOT</version>
-        <relativePath>../../pom.xml</relativePath>
     </parent>
     <artifactId>daytrader-wsappclient</artifactId>
     <name>DayTrader :: WS Application Client</name>

@@ -18,12 +18,12 @@
 
 <!-- $Rev$ $Date$ -->
 
-<application xmlns="http://geronimo.apache.org/xml/ns/j2ee/application-1.2">
+<application xmlns="http://geronimo.apache.org/xml/ns/j2ee/application-2.0">
     <environment>
         <moduleId>
             <groupId>org.apache.geronimo.daytrader</groupId>
             <artifactId>daytrader</artifactId>
-            <version>2.0-SNAPSHOT</version>
+            <version>2.2-SNAPSHOT</version>
             <type>car</type>
         </moduleId>
         <!--
@@ -60,7 +60,7 @@
     -->
     <module>
         <web>web.war</web>
-        <web-app xmlns="http://geronimo.apache.org/xml/ns/j2ee/web-1.2">
+        <web-app xmlns="http://geronimo.apache.org/xml/ns/j2ee/web-2.0.1">
             <service-ref>
                 <service-ref-name>service/Trade</service-ref-name>
                 <port>
@@ -121,12 +121,12 @@
 
     <module>
         <java>streamer.jar</java>
-        <application-client xmlns="http://geronimo.apache.org/xml/ns/j2ee/application-client-1.2">
+        <application-client xmlns="http://geronimo.apache.org/xml/ns/j2ee/application-client-2.0">
             <client-environment xmlns="http://geronimo.apache.org/xml/ns/deployment-1.2">
                 <moduleId>
                     <groupId>org.apache.geronimo.daytrader</groupId>
                     <artifactId>daytrader-streamer-client</artifactId>
-                    <version>2.0-SNAPSHOT</version>
+                    <version>2.2-SNAPSHOT</version>
                     <type>car</type>
                 </moduleId>
             </client-environment>
@@ -134,7 +134,7 @@
                 <moduleId>
                     <groupId>org.apache.geronimo.daytrader</groupId>
                     <artifactId>daytrader-streamer-client-server</artifactId>
-                    <version>2.0-SNAPSHOT</version>
+                    <version>2.2-SNAPSHOT</version>
                     <type>car</type>
                 </moduleId>
             </server-environment>
@@ -181,7 +181,7 @@
                         <adminobject-interface>javax.jms.Topic</adminobject-interface>
                         <adminobject-class>org.activemq.message.ActiveMQTopic</adminobject-class>
                         <adminobject-instance>
-                            <message-destination-name>TradeStreamerTopic</message-destination-name>
+                            <message-destination-name>jms/TradeStreamerTopic</message-destination-name>
                             <config-property-setting name="PhysicalName">TradeStreamerTopic</config-property-setting>
                         </adminobject-instance>
                     </adminobject>
@@ -192,12 +192,12 @@
 
     <module>
         <java>wsappclient.jar</java>
-        <application-client xmlns="http://geronimo.apache.org/xml/ns/j2ee/application-client-1.2">
+        <application-client xmlns="http://geronimo.apache.org/xml/ns/j2ee/application-client-2.0">
             <client-environment xmlns="http://geronimo.apache.org/xml/ns/deployment-1.2">
                 <moduleId>
                     <groupId>org.apache.geronimo.daytrader</groupId>
                     <artifactId>daytrader-ws-client</artifactId>
-                    <version>2.0-SNAPSHOT</version>
+                    <version>2.2-SNAPSHOT</version>
                     <type>car</type>
                 </moduleId>
             </client-environment>
@@ -205,7 +205,7 @@
                 <moduleId>
                     <groupId>org.apache.geronimo.daytrader</groupId>
                     <artifactId>daytrader-ws-client-server</artifactId>
-                    <version>2.0-SNAPSHOT</version>
+                    <version>2.2-SNAPSHOT</version>
                     <type>car</type>
                 </moduleId>
             </server-environment>
@@ -333,16 +333,8 @@
                 <adminobject-interface>javax.jms.Topic</adminobject-interface>
                 <adminobject-class>org.activemq.message.ActiveMQTopic</adminobject-class>
                 <adminobject-instance>
-                    <message-destination-name>TradeStreamerTopic</message-destination-name>
+                    <message-destination-name>jms/TradeStreamerTopic</message-destination-name>
                     <config-property-setting name="PhysicalName">TradeStreamerTopic</config-property-setting>
-                </adminobject-instance>
-            </adminobject>
-            <adminobject>
-                <adminobject-interface>javax.jms.Topic</adminobject-interface>
-                <adminobject-class>org.activemq.message.ActiveMQTopic</adminobject-class>
-                <adminobject-instance>
-                    <message-destination-name>DTStreamerTopic3</message-destination-name>
-                    <config-property-setting name="PhysicalName">DTStreamerTopic3</config-property-setting>
                 </adminobject-instance>
             </adminobject>
 
@@ -350,24 +342,8 @@
                 <adminobject-interface>javax.jms.Queue</adminobject-interface>
                 <adminobject-class>org.activemq.message.ActiveMQQueue</adminobject-class>
                 <adminobject-instance>
-                    <message-destination-name>TradeBrokerQueue</message-destination-name>
+                    <message-destination-name>jms/TradeBrokerQueue</message-destination-name>
                     <config-property-setting name="PhysicalName">TradeBrokerQueue</config-property-setting>
-                </adminobject-instance>
-            </adminobject>
-            <adminobject>
-                <adminobject-interface>javax.jms.Queue</adminobject-interface>
-                <adminobject-class>org.activemq.message.ActiveMQQueue</adminobject-class>
-                <adminobject-instance>
-                    <message-destination-name>DTBrokerQueue3</message-destination-name>
-                    <config-property-setting name="PhysicalName">DTBrokerQueue3</config-property-setting>
-                </adminobject-instance>
-            </adminobject>
-            <adminobject>
-                <adminobject-interface>javax.jms.Queue</adminobject-interface>
-                <adminobject-class>org.activemq.message.ActiveMQQueue</adminobject-class>
-                <adminobject-instance>
-                    <message-destination-name>TestQueue</message-destination-name>
-                    <config-property-setting name="PhysicalName">TestQueue</config-property-setting>
                 </adminobject-instance>
             </adminobject>
         </connector>

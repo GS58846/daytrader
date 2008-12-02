@@ -27,7 +27,7 @@
     -->
     <module>
         <web>web.war</web>
-        <web-app xmlns="http://geronimo.apache.org/xml/ns/j2ee/web-1.2">
+        <web-app xmlns="http://geronimo.apache.org/xml/ns/j2ee/web-2.0.1">
             <service-ref>
                 <service-ref-name>service/Trade</service-ref-name>
                 <port>
@@ -88,7 +88,7 @@
 
     <module>
         <java>streamer.jar</java>
-        <application-client xmlns="http://geronimo.apache.org/xml/ns/j2ee/application-client-1.2">
+        <application-client xmlns="http://geronimo.apache.org/xml/ns/j2ee/application-client-2.0">
             <client-environment xmlns="http://geronimo.apache.org/xml/ns/deployment-1.2">
                 <moduleId>
                     <groupId>org.apache.geronimo.daytrader</groupId>
@@ -159,7 +159,7 @@
 
     <module>
         <java>wsappclient.jar</java>
-        <application-client xmlns="http://geronimo.apache.org/xml/ns/j2ee/application-client-1.2">
+        <application-client xmlns="http://geronimo.apache.org/xml/ns/j2ee/application-client-2.0">
             <client-environment xmlns="http://geronimo.apache.org/xml/ns/deployment-1.2">
                 <moduleId>
                     <groupId>org.apache.geronimo.daytrader</groupId>

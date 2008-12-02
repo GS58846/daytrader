@@ -24,7 +24,6 @@
         <groupId>org.apache.geronimo.daytrader</groupId>
         <artifactId>daytrader</artifactId>
         <version>2.2-SNAPSHOT</version>
-        <relativePath>../../pom.xml</relativePath>
     </parent>
     <artifactId>daytrader-web</artifactId>
     <name>DayTrader :: Web Application</name>
@@ -53,7 +52,6 @@
             <groupId>org.apache.geronimo.specs</groupId>
             <artifactId>geronimo-servlet_2.5_spec</artifactId>
             <scope>provided</scope>
-            <version>1.1</version>
         </dependency>
         <dependency>
             <groupId>org.apache.geronimo.specs</groupId>
@@ -61,9 +59,9 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>taglibs</groupId>
-            <artifactId>standard</artifactId>
-            <version>1.1.1</version>
+            <groupId>jstl</groupId>
+            <artifactId>jstl</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.geronimo.specs</groupId>
@@ -73,19 +71,16 @@
         <dependency>
             <groupId>org.apache.geronimo.specs</groupId>
             <artifactId>geronimo-ejb_3.0_spec</artifactId>
-            <version>1.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.geronimo.specs</groupId>
             <artifactId>geronimo-jta_1.1_spec</artifactId>
-            <version>1.1</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
     		<groupId>org.apache.geronimo.specs</groupId>
     		<artifactId>geronimo-annotation_1.0_spec</artifactId>
-    		<version>1.1</version>
     		<scope>provided</scope>
 		</dependency>
         <!-- Removed per DAYTRADER-7 due to interop issues on commercial AppServers 
@@ -130,7 +125,6 @@
                             <Class-Path>dt-ejb.jar streamer.jar wsappclient.jar</Class-Path>
                         </manifestEntries>
                     </archive>
-
                     <resources>
                         <resource
                                 implementation="org.apache.maven.model.Resource">
@@ -143,6 +137,22 @@
                             </includes>
                         </resource>
                     </resources>
+                    <!--                        
+                    HACK: Include legal files explicity, otherwise they will
+                          end up in the wrong path
+                          or in another jar file in the war.    
+                    NOTE: targetPath is broken for webResources (as documented)
+                    -->
+                    <webResources>
+                        <resource>
+                            <directory>${project.build.outputDirectory}</directory>
+                            <includes>
+                                <include>META-INF/LICENSE*</include>
+                                <include>META-INF/NOTICE*</include>
+                                <include>META-INF/DISCLAIMER*</include>
+                            </includes>
+                        </resource>
+                    </webResources>
                 </configuration>
             </plugin>
         </plugins>
