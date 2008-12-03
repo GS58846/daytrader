@@ -23,7 +23,7 @@
     <parent>
         <groupId>org.apache.geronimo.daytrader</groupId>
         <artifactId>daytrader</artifactId>
-        <relativePath>../../pom.xml</relativePath>
+        <version>2.2-SNAPSHOT</version>
     </parent>
     <artifactId>daytrader-ejb</artifactId>
     <name>DayTrader :: EJBs</name>
@@ -39,7 +39,7 @@
         <dependency>
             <groupId>org.apache.geronimo.daytrader</groupId>
             <artifactId>daytrader-wsappclient</artifactId>
-            <version>${pom.version}</version>
+            <version>${version}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>

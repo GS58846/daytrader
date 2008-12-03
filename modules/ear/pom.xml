@@ -39,24 +39,24 @@
         <dependency>
             <groupId>org.apache.geronimo.daytrader</groupId>
             <artifactId>daytrader-web</artifactId>
-            <version>${pom.version}</version>
+            <version>${version}</version>
             <type>war</type>
         </dependency>
         <dependency>
             <groupId>org.apache.geronimo.daytrader</groupId>
             <artifactId>daytrader-ejb</artifactId>
-            <version>${pom.version}</version>
+            <version>${version}</version>
             <type>ejb</type>
         </dependency>
         <dependency>
             <groupId>org.apache.geronimo.daytrader</groupId>
             <artifactId>daytrader-streamer</artifactId>
-            <version>${pom.version}</version>
+            <version>${version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.geronimo.daytrader</groupId>
             <artifactId>daytrader-wsappclient</artifactId>
-            <version>${pom.version}</version>
+            <version>${version}</version>
         </dependency>
     </dependencies>
     <build>
