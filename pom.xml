@@ -36,6 +36,9 @@
         <!-- This property is required by the car:package mojo -->
         <geronimoVersion>2.2-SNAPSHOT</geronimoVersion>
 
+        <!-- set siteId to artifactId for any "top level" project rooting a website -->
+        <siteId>daytrader</siteId>
+
         <gbeanDeployerBootstrap>org.apache.geronimo.framework/geronimo-gbean-deployer-bootstrap/${geronimoVersion}/car</gbeanDeployerBootstrap>
         <gbeanDeployer>org.apache.geronimo.framework/geronimo-gbean-deployer/${geronimoVersion}/car</gbeanDeployer>
         <j2eeDeployer>org.apache.geronimo.configs/j2ee-deployer/${geronimoVersion}/car</j2eeDeployer>
@@ -136,6 +139,7 @@
         <name>Apache Software Foundation</name>
         <url>http://www.apache.org/</url>
     </organization>
+
     <modules>
         <module>repository</module>
         <module>modules/ejb</module>
@@ -155,6 +159,7 @@
         <module>daytrader-jetty</module>
         <module>daytrader-tomcat</module>
     </modules>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -204,6 +209,7 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
     <build>
         <pluginManagement>
             <plugins>
@@ -413,7 +419,6 @@
     </repositories>
 
     <profiles>
-
         <profile>
             <id>jboss-db2</id>
             <activation>
