@@ -1,3 +1,6 @@
+(C) Copyright 2006,2008 The Apache Software Foundation.
+----------------------------------------------------------------------
+
 These are instructions for building and useing daytrader with JBoss:
 
 First create a $JBOSS_SERVER_HOME/deploy/jms/daytrader-destinations-service.xml

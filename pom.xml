@@ -130,7 +130,7 @@
     <scm>
         <connection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/</connection>
         <developerConnection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/</developerConnection>
-        <url>http://svn.apache.org/viewcvs.cgi/geronimo/gbuild/trunk/</url>
+        <url>http://svn.apache.org/viewcvs.cgi/geronimo/daytrader/trunk/</url>
     </scm>
     <organization>
         <name>Apache Software Foundation</name>
