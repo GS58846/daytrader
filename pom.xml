@@ -162,9 +162,18 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- Import Geronimo Server used dependency versions -->
             <dependency>
                 <groupId>org.apache.geronimo</groupId>
                 <artifactId>geronimo</artifactId>
+                <version>${geronimoVersion}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- Import ActiveMQ dependency versions -->
+            <dependency>
+                <groupId>org.apache.geronimo.plugins</groupId>
+                <artifactId>activemq</artifactId>
                 <version>${geronimoVersion}</version>
                 <type>pom</type>
                 <scope>import</scope>
@@ -173,39 +182,6 @@
                 <groupId>commons-logging</groupId>
                 <artifactId>commons-logging</artifactId>
                 <version>1.0.4</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.activemq</groupId>
-                <artifactId>activemq-core</artifactId>
-                <version>4.1.2-G647819</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>commons-logging</groupId>
-                        <artifactId>commons-logging</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.apache.geronimo.specs</groupId>
-                        <artifactId>geronimo-j2ee-management_1.0_spec</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-
-            <dependency>
-                <groupId>org.apache.activemq</groupId>
-                <artifactId>activemq-ra</artifactId>
-                <version>4.1.2</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.apache.activemq</groupId>
-                <artifactId>activeio-core</artifactId>
-                <version>3.0.1</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>commons-logging</groupId>
-                        <artifactId>commons-logging</artifactId>
-                    </exclusion>
-                </exclusions>
             </dependency>
         </dependencies>
     </dependencyManagement>
