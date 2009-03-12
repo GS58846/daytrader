@@ -125,6 +125,28 @@ public class TradeConfigServlet extends HttpServlet {
 		}
 		currentConfigStr += "\t\tRunTimeMode:\t\t" + TradeConfig.runTimeModeNames[TradeConfig.runTimeMode] + "\n";
 		
+		/* Add JPA layer choice to avoid some ugly Hibernate bugs */
+		String jpaLayerStr = req.getParameter("JPALayer");
+		if (jpaLayerStr != null)
+		{
+			try
+			{
+				int i = Integer.parseInt(jpaLayerStr);
+				if ((i >= 0)
+					&& (i < TradeConfig.jpaLayerNames.length)) //Input validation
+					TradeConfig.jpaLayer = i;
+			}
+			catch (Exception e)
+			{				
+				Log.error(
+					e, 
+					"TradeConfigServlet.doConfigUpdate(..): minor exception caught", 
+					"trying to set JPALayer to " + jpaLayerStr, 
+					"reverting to current value");
+
+			} // If the value is bad, simply revert to current
+		}
+		currentConfigStr += "\t\tJPALayer:\t\t" + TradeConfig.jpaLayerNames[TradeConfig.jpaLayer] + "\n";
 
 		String orderProcessingModeStr = req.getParameter("OrderProcessingMode");
 		if (orderProcessingModeStr != null)

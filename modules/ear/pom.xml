@@ -98,6 +98,7 @@
                     HACK: Include legal muck from maven-remote-resources-plugin
                     -->
                     <resourcesDir>${project.build.outputDirectory}</resourcesDir>
+                    <earSourceDirectory>${basedir}/src/main/resources</earSourceDirectory>
                 </configuration>
             </plugin>
         </plugins>

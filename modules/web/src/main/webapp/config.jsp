@@ -105,6 +105,32 @@ for (int i = 0; i < names.length; i++) {
 			FAQ</A> for details.<BR>
 			</TD>
 		</TR>
+		
+		
+		<TR>
+			<TD align="left"><B>JPA Layer</B>
+			<P align="left"><%configParm = "JPALayer";
+names = TradeConfig.jpaLayerNames;
+index = TradeConfig.jpaLayer;
+for (int i = 0; i < names.length; i++) {
+	out.print(
+		"<INPUT type=\"radio\" name=\""
+			+ configParm
+			+ "\" value=\""
+			+ i
+			+ "\" ");
+	if (index == i)
+		out.print("checked");
+	out.print("> " + names[i] + "<BR>");
+}
+%></P>
+			</TD>
+			<TD><BR>
+			JPA Layer determines what kind of JPA Implementation Daytrader 
+			EJB classes use. Typically, Apache Geronimo uses OpenJPA, and RedHat
+			JBoss 5 uses Hibernate.<BR>
+			</TD>
+		</TR>
 
 
 		<TR>

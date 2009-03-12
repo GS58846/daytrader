@@ -367,9 +367,35 @@ public class TradeSLSBBean implements TradeSLSBRemote, TradeSLSBLocal {
                 thisOrder.getQuote();
             }
             
-            Query updateStatus = entityManager.createNamedQuery("orderejb.completeClosedOrders");
-            updateStatus.setParameter("userID", userID);
-            updateStatus.executeUpdate();
+            /* Add logic to do update orders operation, because JBoss5' Hibernate 3.3.1GA DB2Dialect 
+             * and MySQL5Dialect do not work with annotated query "orderejb.completeClosedOrders"
+             * defined in OrderDatabean 
+             */
+            if (TradeConfig.jpaLayer == TradeConfig.OPENJPA) {
+                Query updateStatus = entityManager.createNamedQuery("orderejb.completeClosedOrders");
+                updateStatus.setParameter("userID", userID);
+                updateStatus.executeUpdate();
+                }
+                
+            if (TradeConfig.jpaLayer == TradeConfig.HIBERNATE) {
+                Query findaccountid = entityManager.createNativeQuery("select "+
+                                                                          "a.ACCOUNTID, "+
+                                                                          "a.LOGINCOUNT, "+
+                                                                          "a.LOGOUTCOUNT, "+
+                                                                          "a.LASTLOGIN, "+
+                                                                          "a.CREATIONDATE, "+
+                                                                          "a.BALANCE, "+
+                                                                          "a.OPENBALANCE, "+
+                                                                          "a.PROFILE_USERID "+
+                                                                          "from accountejb a where a.profile_userid = ?", org.apache.geronimo.samples.daytrader.AccountDataBean.class);
+                findaccountid.setParameter(1, userID);
+                AccountDataBean account = (AccountDataBean)findaccountid.getSingleResult();                
+                Integer accountid = account.getAccountID();
+                Query updateStatus = entityManager.createNativeQuery("UPDATE orderejb o SET o.orderStatus = 'completed' WHERE o.orderStatus = 'closed' AND o.ACCOUNT_ACCOUNTID  = ?");
+                updateStatus.setParameter(1, accountid.intValue());
+                updateStatus.executeUpdate();
+                }
+                
             return results;
         } catch (Exception e) {
             Log.error("TradeSLSBBean.getClosedOrders", e);
@@ -412,10 +438,20 @@ public class TradeSLSBBean implements TradeSLSBRemote, TradeSLSBLocal {
         if (Log.doTrace())
             Log.trace("TradeSLSBBean:updateQuote", symbol, changeFactor);
 
-        // QuoteDataBean quote = entityManager.find(QuoteDataBean.class, symbol);
-        Query q = entityManager.createNamedQuery("quoteejb.quoteForUpdate");
-        q.setParameter(1, symbol);
-        QuoteDataBean quote = (QuoteDataBean) q.getSingleResult();
+        /* Add logic to determine JPA layer, because JBoss5' Hibernate 3.3.1GA DB2Dialect 
+         * and MySQL5Dialect do not work with annotated query "quoteejb.quoteForUpdate"
+         * defined in QuoteDatabean 
+          */    
+        QuoteDataBean quote = new QuoteDataBean();
+        if (TradeConfig.jpaLayer == TradeConfig.HIBERNATE) {
+            quote = entityManager.find(QuoteDataBean.class, symbol);
+           }
+           
+        if (TradeConfig.jpaLayer == TradeConfig.OPENJPA) {
+            Query q = entityManager.createNamedQuery("quoteejb.quoteForUpdate");
+            q.setParameter(1, symbol);
+            quote = (QuoteDataBean) q.getSingleResult();
+           }       
 
         BigDecimal oldPrice = quote.getPrice();
 

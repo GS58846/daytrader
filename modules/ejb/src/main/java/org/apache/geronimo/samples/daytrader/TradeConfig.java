@@ -39,6 +39,12 @@ public class TradeConfig {
     public static final int DIRECT = 1;
     public static final int SESSION3 = 2;
 	public static int runTimeMode = DIRECT;
+	
+    /* Trade JPA Layer parameters */
+	public static String[] jpaLayerNames = {"OpenJPA", "Hibernate"};
+	public static final int OPENJPA = 0;
+	public static final int HIBERNATE = 1;
+	public static int jpaLayer = OPENJPA;
 
 	public static String[] orderProcessingModeNames =
 		{ "Synchronous", "Asynchronous_2-Phase" };
@@ -876,6 +882,14 @@ public class TradeConfig {
     public static  int getMarketSummaryInterval() {
         return TradeConfig.marketSummaryInterval;
     }
-
+    
+    /**
+	 * Return the list of JPA Layer names
+	 * Creation date: (01/10/2009)
+	 * @return java.lang.String[]
+	 */
+	public static java.lang.String[] getJPALayerNames() {
+		return jpaLayerNames;
+    }
 
 }
