@@ -39,7 +39,8 @@ import org.apache.geronimo.samples.daytrader.util.Log;
     @NamedQuery(name = "orderejb.findByOrderid", query = "SELECT o FROM orderejb o WHERE o.orderID = :orderid"),
     @NamedQuery(name = "orderejb.findByAccountAccountid", query = "SELECT o FROM orderejb o WHERE o.account.accountID = :accountAccountid"),
     @NamedQuery(name = "orderejb.findByQuoteSymbol", query = "SELECT o FROM orderejb o WHERE o.quote.symbol = :quoteSymbol"),
-    @NamedQuery(name = "orderejb.findByHoldingHoldingid", query = "SELECT o FROM orderejb o WHERE o.holding.holdingID = :holdingHoldingid"),
+    // Never used query related to FK constraint on holdingejb. the FK constraint will cause EJB3 runtime mode failure. So comment it.
+    //@NamedQuery(name = "orderejb.findByHoldingHoldingid", query = "SELECT o FROM orderejb o WHERE o.holding.holdingID = :holdingHoldingid"),
     @NamedQuery(name = "orderejb.closedOrders", query = "SELECT o FROM orderejb o WHERE o.orderStatus = 'closed' AND o.account.profile.userID  = :userID"),
     @NamedQuery(name = "orderejb.completeClosedOrders", query = "UPDATE orderejb o SET o.orderStatus = 'completed' WHERE o.orderStatus = 'closed' AND o.account.profile.userID  = :userID")
 })
@@ -89,8 +90,11 @@ public class OrderDataBean implements Serializable
     @JoinColumn(name="QUOTE_SYMBOL")
     private QuoteDataBean quote;
     
-    @OneToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name = "HOLDING_HOLDINGID")
+    // Cause sell operation failed, see JIRA DAYTRADER-63 for details.
+    //@OneToOne(fetch=FetchType.LAZY)
+    //@JoinColumn(name = "HOLDING_HOLDINGID")
+    // Cause sell operation failed, see JIRA DAYTRADER-63 for details.
+    @Transient    
     private HoldingDataBean holding;
 
 //    @Version
