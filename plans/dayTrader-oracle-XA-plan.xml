@@ -262,9 +262,7 @@
                             <config-property-setting name="PortNumber">1160</config-property-setting>
                             <config-property-setting name="DriverType">thin</config-property-setting>
                             <connectionmanager>
-                                <xa-transaction>
-                                    <transaction-caching/>
-                                </xa-transaction>
+                                <no-transaction/>
                                 <single-pool>
                                     <max-size>10</max-size>
                                     <min-size>0</min-size>
