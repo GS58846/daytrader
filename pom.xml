@@ -392,6 +392,22 @@
                 <enabled>true</enabled>
             </releases>
         </repository>
+
+        <!-- Apache Nexus Snapshot repo -->
+        <repository>
+            <id>apache.nexus.snapshots</id>
+            <name>Apache Nexus Repository</name>
+            <url>https://repository.apache.org/content/repositories/snapshots</url>
+            <layout>default</layout>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+                <checksumPolicy>ignore</checksumPolicy>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </repository>
     </repositories>
 
     <profiles>
