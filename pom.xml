@@ -158,6 +158,7 @@
         <module>daytrader-jms</module>
         <module>daytrader-jetty</module>
         <module>daytrader-tomcat</module>
+        <module>daytrader-webonly</module>
     </modules>
 
     <dependencyManagement>
