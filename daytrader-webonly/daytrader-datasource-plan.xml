@@ -22,7 +22,7 @@
 
   <dep:environment>
     <dep:moduleId>
-      <dep:groupId>org.apache.geronimo.samples</dep:groupId>
+      <dep:groupId>org.apache.geronimo.daytrader</dep:groupId>
       <dep:artifactId>daytrader-datasource</dep:artifactId>
       <dep:version>1.0</dep:version>
       <dep:type>car</dep:type>

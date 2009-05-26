@@ -31,7 +31,7 @@
         
             <sys:dependencies>
                 <sys:dependency>
-                    <sys:groupId>org.apache.geronimo.samples</sys:groupId>
+                    <sys:groupId>org.apache.geronimo.daytrader</sys:groupId>
                     <sys:artifactId>daytrader-datasource</sys:artifactId>
                 </sys:dependency>
            

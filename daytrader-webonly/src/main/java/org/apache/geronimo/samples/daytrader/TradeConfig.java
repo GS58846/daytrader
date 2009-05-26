@@ -90,7 +90,7 @@ public class TradeConfig {
 		"http://localhost:8080/daytrader/services/TradeWSServices";
 
 	/*Trade XA Datasource specific parameters */
-	public static boolean JDBCDriverNeedsGlobalTransation = false;
+	public static boolean JDBCDriverNeedsGlobalTransaction = false;
 
 	/* Trade Config Miscellaneous itmes */
 	public static String DATASOURCE = "java:comp/env/jdbc/TradeDataSource";
@@ -805,16 +805,16 @@ public class TradeConfig {
 	 * to cause the direct mode to start a user transaction.
 	 * @return Returns a boolean
 	 */
-	public static boolean getJDBCDriverNeedsGlobalTransation() {
-		return JDBCDriverNeedsGlobalTransation;
+	public static boolean getJDBCDriverNeedsGlobalTransaction() {
+		return JDBCDriverNeedsGlobalTransaction;
 	}
 
 	/**
 	 * Sets the jdbc driver needs global transaction
-	 * @param JDBCDriverNeedsGlobalTransationVal the value
+         * @param JDBCDriverNeedsGlobalTransactionVal the value
 	 */
-	public static void setJDBCDriverNeedsGlobalTransation(boolean JDBCDriverNeedsGlobalTransationVal) {
-		JDBCDriverNeedsGlobalTransation = JDBCDriverNeedsGlobalTransationVal;
+	public static void setJDBCDriverNeedsGlobalTransaction(boolean JDBCDriverNeedsGlobalTransactionVal) {
+		JDBCDriverNeedsGlobalTransaction = JDBCDriverNeedsGlobalTransactionVal;
 	}
 
 	/**
