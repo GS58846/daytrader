@@ -141,7 +141,6 @@
     </organization>
 
     <modules>
-        <module>repository</module>
         <module>modules/ejb</module>
         <module>modules/web</module>
         <module>modules/streamer</module>
