@@ -115,11 +115,6 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <configuration>
                     <!-- <webXml>${basedir}/target/jspweb.xml</webXml> Removed per DATRADER-7 due to interop issues on commercial AppServers -->
-                    <filters>
-                        <filter>
-                            ${basedir}/src/main/webapp/WEB-INF/classes/build.properties
-                        </filter>
-                    </filters>
                     <archive>
                         <manifestEntries>
                             <Class-Path>dt-ejb.jar streamer.jar wsappclient.jar</Class-Path>
