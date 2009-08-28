@@ -31,10 +31,11 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>daytrader-web-jdbc</module>
-<!--
-        <module>daytrader-web-jpa</module>
+        <module>daytrader-web-ejb</module>
         <module>daytrader-javaee</module>
+<!--
+        <module>daytrader-web-jdbc</module>
+        <module>daytrader-web-jpa</module>
 -->
     </modules>
 

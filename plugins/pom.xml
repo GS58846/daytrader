@@ -27,7 +27,7 @@
 
     <groupId>org.apache.geronimo.daytrader</groupId>
     <artifactId>plugins</artifactId>
-    <name>DayTrader :: Geronimo Plugins</name>
+    <name>DayTrader :: Plugins</name>
     <packaging>pom</packaging>
 
     <modules>

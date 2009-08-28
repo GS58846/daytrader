@@ -29,9 +29,8 @@
 
     <groupId>org.apache.geronimo.daytrader.plugins</groupId>
     <artifactId>daytrader-jms</artifactId>
-    <name>Daytrader :: JMS Resource</name>
+    <name>Daytrader :: Plugins - JMS Resource</name>
     <packaging>car</packaging>
-    <version>2.2-SNAPSHOT</version>
 
     <dependencies>
         <dependency>
@@ -69,33 +68,34 @@
             <version>${geronimoVersion}</version>
         </dependency>
     </dependencies>
-  <build>
-      <plugins>
-          <plugin>
-              <groupId>org.apache.geronimo.buildsupport</groupId>
-              <artifactId>car-maven-plugin</artifactId>
-              <!-- Install as extention to allow 'car' packaging to be used. -->
-              <extensions>true</extensions>
-              <configuration>
-                  <archive>
-                      <!-- Do not include META-INF/maven to avoid long file problems on windows -->
-                       <addMavenDescriptor>false</addMavenDescriptor>
-                   </archive>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.geronimo.buildsupport</groupId>
+                <artifactId>car-maven-plugin</artifactId>
+                <!-- Install as extention to allow 'car' packaging to be used. -->
+                <extensions>true</extensions>
+                <configuration>
+                    <archive>
+                        <!-- Do not include META-INF/maven to avoid long file problems on windows -->
+                        <addMavenDescriptor>false</addMavenDescriptor>
+                    </archive>
                     <osiApproved>true</osiApproved>
                     <useMavenDependencies>
                         <value>true</value>
                         <includeVersion>true</includeVersion>
                     </useMavenDependencies>
-              <deploymentConfigs>
-                  <deploymentConfig>${gbeanDeployer}</deploymentConfig>
-                  <deploymentConfig>${j2eeDeployer}</deploymentConfig>
-                  <deploymentConfig>${connectorDeployer}</deploymentConfig>
-              </deploymentConfigs>
-              <module>
-                  <groupId>org.apache.geronimo.modules</groupId>
-                  <artifactId>geronimo-activemq-ra</artifactId>
-                  <type>rar</type>
-              </module>
+                    <deploymentConfigs>
+                        <deploymentConfig>${gbeanDeployer}</deploymentConfig>
+                        <deploymentConfig>${j2eeDeployer}</deploymentConfig>
+                        <deploymentConfig>${connectorDeployer}</deploymentConfig>
+                    </deploymentConfigs>
+                    <module>
+                        <groupId>org.apache.geronimo.modules</groupId>
+                        <artifactId>geronimo-activemq-ra</artifactId>
+                        <type>rar</type>
+                    </module>
                     <commonInstance>
                         <plugin-artifact>
                             <geronimo-version>${geronimoVersion}</geronimo-version>
@@ -113,9 +113,9 @@
                             <obsoletes>org.apache.geronimo.daytrader.plugins/daytrader-jms//car</obsoletes>
                             -->
                         </plugin-artifact>
-              </instance>
-          </configuration>
-      </plugin>
-    </plugins>
-  </build>
+                    </instance>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

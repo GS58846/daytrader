@@ -17,7 +17,7 @@
 -->
 
 <!-- $Rev$ $Date$ -->
-<project>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
         <groupId>org.apache.geronimo.daytrader</groupId>
         <artifactId>plugins</artifactId>
@@ -27,12 +27,12 @@
     <groupId>org.apache.geronimo.daytrader.plugins</groupId>
     <artifactId>daytrader-tomcat</artifactId>
     <packaging>car</packaging>
-    <name>Daytrader :: Tomcat</name>
+    <name>Daytrader :: Plugins - Tomcat</name>
 
     <dependencies>
         <dependency>
-            <groupId>org.apache.geronimo.daytrader</groupId>
-            <artifactId>daytrader-ear</artifactId>
+            <groupId>org.apache.geronimo.daytrader.assemblies</groupId>
+            <artifactId>daytrader-javaee</artifactId>
             <version>${version}</version>
             <type>ear</type>
             <scope>provided</scope>
