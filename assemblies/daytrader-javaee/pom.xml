@@ -114,7 +114,7 @@
                             <groupId>org.apache.geronimo.daytrader.modules</groupId>
                             <artifactId>core</artifactId>
                             <bundleFileName>core.jar</bundleFileName>
-                            <includeInApplicationXml>true</includeInApplicationXml>
+                            <includeInApplicationXml>false</includeInApplicationXml>
                         </javaModule>
                         <javaModule>
                             <groupId>org.apache.geronimo.daytrader.modules</groupId>

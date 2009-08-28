@@ -2,12 +2,15 @@
 ----------------------------------------------------------------------
 
 This is a version of daytrader which is able to running on Tomcat 6. 
-By default, it uses Derby database. You can change src/main/webapp/META-INF/context.xml
-to use other database vendor. Remember that copying database jdbc drivers to tomcat lib
-directory.
+By default, it uses a Derby database. You can change  -
+    src/main/webapp/META-INF/context.xml
+to use another database vendor. Remember to copy the database jdbc drivers 
+to the Tomcat lib directory.
 
-After building, just deploy the .war in the target directory to tomcat with context root /daytrader.
+After building, just deploy the .war in the target directory to Tomcat with
+context root /daytrader.
 
-Of course, it works as well as on Little-G with Tomcat 6. Before deploying it 
-to Little-G, you need to deploy a datasource first. Refer to daytrader-datasource-plan.xml
-for an example.
+Of course, it works as well on the Geronimo Minimal Jetty or Tomcat assemblies.
+Before deploying it, you will need to deploy the datasource in -
+    daytrader-derby-datasource-plan.xml
+

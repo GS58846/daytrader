@@ -28,7 +28,7 @@
     <groupId>org.apache.geronimo.daytrader.assemblies</groupId>
     <artifactId>daytrader-web-jdbc</artifactId>    
     <packaging>war</packaging>
-    <name>DayTrader :: Web + JDBC Assembly</name>
+    <name>DayTrader :: Assemblies - Web + Direct JDBC</name>
     <description>A version of Daytrader for basic Web constainers</description>
     
     <dependencies>
@@ -42,10 +42,20 @@
             <artifactId>web</artifactId>
             <version>${version}</version>
         </dependency>
+        <dependency>
+            <!-- we need to include this in the image for logging to work -->
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.apache.geronimo.specs</groupId>
             <artifactId>geronimo-jms_1.1_spec</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-jpa_3.0_spec</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -62,17 +72,6 @@
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-jpa_3.0_spec</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
-            <!-- we need to include this in the image for logging to work -->
-            <!-- <scope>provided</scope> -->
         </dependency>
         <dependency>
             <groupId>junit</groupId>

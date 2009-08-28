@@ -27,7 +27,7 @@
     <groupId>org.apache.geronimo.daytrader.modules</groupId>
     <artifactId>wsappclient</artifactId>
     <packaging>jar</packaging>
-    <name>DayTrader :: WS Application Client</name>
+    <name>DayTrader :: Modules - WS Application Client</name>
     <description>Client demonstrating Web Services</description>
 
     <scm>
@@ -53,9 +53,9 @@
             to include a manual class-path entry pointing to the EJB module. When this is fixed
             remove the manifestEntries section below and this comment. -->
                     <archive>
-                        <!-- manifestEntries>
-                            <class-path>dt-ejb.jar</class-path>
-                        </manifestEntries -->
+                        <manifestEntries>
+                            <class-path>core.jar web.jar soap.jar dt-ejb.jar</class-path>
+                        </manifestEntries>
                         <manifest>
                             <main-class>org.apache.geronimo.samples.daytrader.client.ws.ClientApp</main-class>
                         </manifest>

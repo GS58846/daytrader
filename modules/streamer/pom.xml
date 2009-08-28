@@ -80,7 +80,7 @@
                 <configuration>
                     <archive>
                         <manifestEntries>
-                            <class-path>dt-ejb.jar</class-path>
+                            <class-path>core.jar web.jar dt-ejb.jar</class-path>
                         </manifestEntries>
                         <manifest>
                             <main-class>org.apache.geronimo.samples.daytrader.client.TradeClient</main-class>

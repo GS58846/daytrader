@@ -141,7 +141,6 @@
             <groupId>org.apache.activemq</groupId>
             <artifactId>activemq-ra</artifactId>
         </dependency>
-
     </dependencies>
 
     <build>
