@@ -141,16 +141,12 @@
     </organization>
 
     <modules>
+        <!-- Daytrader application -->
         <module>modules</module>
-        <!-- c-m-p built plugins -->
-        <module>daytrader-derby-datasource</module>
-        <!-- see profiles -->
-        <!--<module>daytrader-db2-datasource</module>-->
-        <!--<module>daytrader-oracle-datasource</module>-->
-        <module>daytrader-jms</module>
-        <module>daytrader-jetty</module>
-        <module>daytrader-tomcat</module>
-        <module>daytrader-webonly</module>
+        <!-- Geronimo c-m-p built plugins -->
+        <module>plugins</module>
+        <!-- Installable assemblies -->
+        <module>assemblies</module>
     </modules>
 
     <dependencyManagement>

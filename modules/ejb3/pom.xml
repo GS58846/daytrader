@@ -25,18 +25,23 @@
     </parent>
 
     <groupId>org.apache.geronimo.daytrader.modules</groupId>
-    <artifactId>core</artifactId>
-    <packaging>jar</packaging>
-    <name>DayTrader :: Modules - Core</name>
-    <description>Daytrader Core Module</description>
+    <artifactId>ejb3</artifactId>
+    <packaging>ejb</packaging>
+    <name>DayTrader :: Modules - EJB3</name>
+    <description>Daytrader EJB3 Module</description>
 
     <scm>
-        <connection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/modules/core</connection>
-        <developerConnection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/modules/core</developerConnection>
-        <url>http://svn.apache.org/viewcvs.cgi/geronimo/daytrader/trunk/modules/core</url>
+        <connection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/modules/ejb3</connection>
+        <developerConnection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/modules/ejb3</developerConnection>
+        <url>http://svn.apache.org/viewcvs.cgi/geronimo/daytrader/trunk/modules/ejb3</url>
     </scm>
 
     <dependencies>
+        <dependency>
+            <groupId>org.apache.geronimo.daytrader.modules</groupId>
+            <artifactId>core</artifactId>
+            <version>${pom.version}</version>
+        </dependency>
 <!--
         <dependency>
             <groupId>org.apache.geronimo.daytrader</groupId>
@@ -49,17 +54,7 @@
             <artifactId>geronimo-jaxrpc_1.1_spec</artifactId>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-    	    <groupId>org.apache.geronimo.specs</groupId>
-    	    <artifactId>geronimo-annotation_1.0_spec</artifactId>
-    	    <scope>provided</scope>
-	</dependency>
 -->
-        <dependency>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-jta_1.1_spec</artifactId>
-            <scope>provided</scope>
-        </dependency>    
         <dependency>
             <groupId>org.apache.geronimo.specs</groupId>
             <artifactId>geronimo-jms_1.1_spec</artifactId>
@@ -76,6 +71,16 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
+    	    <groupId>org.apache.geronimo.specs</groupId>
+    	    <artifactId>geronimo-annotation_1.0_spec</artifactId>
+    	    <scope>provided</scope>
+	</dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-jta_1.1_spec</artifactId>
+            <scope>provided</scope>
+        </dependency>    
+        <dependency>
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
             <scope>provided</scope>
@@ -90,7 +95,7 @@
             <artifactId>openjpa</artifactId>
             <scope>provided</scope>
         </dependency>
-        <!-- OpenJPA PCEnhancer depends -->
+        <!-- OpenJPA enhancer depends
         <dependency>
             <groupId>net.sourceforge.serp</groupId>
             <artifactId>serp</artifactId>
@@ -109,7 +114,7 @@
             <version>3.2.1</version>
             <scope>provided</scope>
         </dependency>
-        <!-- end OpenJPA PCEnhancer depends -->
+        -->
     </dependencies>
     <build>
         <resources>
@@ -121,40 +126,6 @@
 
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <phase>compile</phase>
-                        <configuration>
-                            <tasks>
-                                <path id="enhance.path.ref">
-                                    <fileset dir="${project.build.outputDirectory}">
-                                        <include name="*Bean*/*.class"/>
-                                    </fileset>
-                                </path>
-                                <pathconvert property="enhance.files"
-                                             refid="enhance.path.ref"
-                                             pathsep=" "/>
-                                <java classname="org.apache.openjpa.enhance.PCEnhancer">
-                                    <arg line="-p persistence.xml"/>
-                                    <arg line="${enhance.files}"/>
-                                    <classpath>
-                                        <path refid="maven.dependency.classpath"/>
-                                        <path refid="maven.compile.classpath"/>
-                                    </classpath>
-                                </java>
-                            </tasks>
-                        </configuration>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-<!--
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-ejb-plugin</artifactId>
                 <configuration>
                     <generateClient>true</generateClient>
@@ -165,7 +136,6 @@
                     </archive>
                 </configuration>
             </plugin>
--->
         </plugins>
     </build>
 </project>

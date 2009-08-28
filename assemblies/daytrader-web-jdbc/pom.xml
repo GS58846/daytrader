@@ -18,31 +18,29 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    
     <parent>
         <groupId>org.apache.geronimo.daytrader</groupId>
-        <artifactId>modules</artifactId>
+        <artifactId>assemblies</artifactId>
         <version>2.2-SNAPSHOT</version>
     </parent>
-
-    <groupId>org.apache.geronimo.daytrader.modules</groupId>
-    <artifactId>streamer</artifactId>
-    <packaging>jar</packaging>
-    <name>DayTrader :: Modules - Quote Streamer</name>
-    <description>Streamer Application for Day Trader</description>
-
-    <scm>
-        <connection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/modules/streamer</connection>
-        <developerConnection>
-            scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/modules/streamer</developerConnection>
-        <url>http://svn.apache.org/viewcvs.cgi/geronimo/daytrader/trunk/modules/ear</url>
-    </scm>
-
+    
+    <groupId>org.apache.geronimo.daytrader.assemblies</groupId>
+    <artifactId>daytrader-web-jdbc</artifactId>    
+    <packaging>war</packaging>
+    <name>DayTrader :: Web + JDBC Assembly</name>
+    <description>A version of Daytrader for basic Web constainers</description>
+    
     <dependencies>
         <dependency>
             <groupId>org.apache.geronimo.daytrader.modules</groupId>
-            <artifactId>ejb3</artifactId>
-            <version>${pom.version}</version>
-            <type>ejb</type>
+            <artifactId>core</artifactId>
+            <version>${version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.daytrader.modules</groupId>
+            <artifactId>web</artifactId>
+            <version>${version}</version>
         </dependency>
 
         <dependency>
@@ -52,22 +50,44 @@
         </dependency>
         <dependency>
             <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-jpa_3.0_spec</artifactId>
+            <artifactId>geronimo-servlet_2.5_spec</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-ejb_3.0_spec</artifactId>
+            <artifactId>geronimo-jsp_2.1_spec</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-jpa_3.0_spec</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <!-- we need to include this in the image for logging to work -->
+            <!-- <scope>provided</scope> -->
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.openjpa</groupId>
+            <artifactId>openjpa</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.geronimo.specs</groupId>
             <artifactId>geronimo-annotation_1.0_spec</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.openjpa</groupId>
-            <artifactId>openjpa</artifactId>
+            <!-- <version>1.1.1</version>  -->
             <scope>provided</scope>
         </dependency>
     </dependencies>
@@ -76,16 +96,20 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
+                <artifactId>maven-war-plugin</artifactId>
                 <configuration>
-                    <archive>
-                        <manifestEntries>
-                            <class-path>dt-ejb.jar</class-path>
-                        </manifestEntries>
-                        <manifest>
-                            <main-class>org.apache.geronimo.samples.daytrader.client.TradeClient</main-class>
-                        </manifest>
-                    </archive>
+                    <resources>
+                        <resource implementation="org.apache.maven.model.Resource">
+                            <filtering>false</filtering>
+                            <directory>
+                                ${basedir}/src/main/webapp/WEB-INF
+                            </directory>
+                            <includes>
+                                <include>web.xml</include>
+                                <include>geronimo-web.xml</include>
+                            </includes>
+                        </resource>
+                    </resources>
                 </configuration>
             </plugin>
         </plugins>

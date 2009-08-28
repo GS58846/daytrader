@@ -22,8 +22,8 @@ import java.util.Collection;
 import javax.naming.InitialContext;
 
 import org.apache.geronimo.samples.daytrader.direct.TradeDirect;
-import org.apache.geronimo.samples.daytrader.ejb3.TradeSLSBRemote;
-import org.apache.geronimo.samples.daytrader.ejb3.DirectSLSBRemote;
+//import org.apache.geronimo.samples.daytrader.ejb3.TradeSLSBRemote;
+//import org.apache.geronimo.samples.daytrader.ejb3.DirectSLSBRemote;
 import org.apache.geronimo.samples.daytrader.util.FinancialUtils;
 import org.apache.geronimo.samples.daytrader.util.Log;
 
@@ -61,17 +61,16 @@ public class TradeAction implements TradeServices {
     private void createTrade() {
         if (TradeConfig.runTimeMode == TradeConfig.EJB3) {
             try {
-                if (!(trade instanceof TradeSLSBRemote)) {
-                    TradeSLSBRemote tradeSLSB = null;
+                Class c = Class.forName("org.apache.geronimo.samples.daytrader.ejb3.TradeSLSBRemote");
+                if ((trade == null) ||
+                    (!(trade.getClass().isAssignableFrom(c)))) {
                     InitialContext context = new InitialContext();
                     try {
-                        tradeSLSB = (TradeSLSBRemote) context.lookup("java:comp/env/ejb/TradeSLSBBean");                
+                        trade = (TradeServices) context.lookup("java:comp/env/ejb/TradeSLSBBean");                
                     } catch (Exception ex) {
                         Log.error("TradeAction:createTrade - Lookup of TradeSLSBRemote failed!!!");
-                        tradeSLSB = (TradeSLSBRemote) context.lookup("TradeSLSBBean");
+                        trade = (TradeServices) context.lookup("TradeSLSBBean");
                     }
-                
-                    trade = tradeSLSB;
                 }
             }
             catch (Exception e) {
@@ -80,30 +79,38 @@ public class TradeAction implements TradeServices {
             }
         } else if (TradeConfig.runTimeMode == TradeConfig.SESSION3) {
             try {
-                if (!(trade instanceof DirectSLSBRemote)) {
-                    DirectSLSBRemote directSLSB = null;
+                Class c = Class.forName("org.apache.geronimo.samples.daytrader.ejb3.DirectSLSBBean");
+                if ((trade == null) ||
+                    (!(trade.getClass().isAssignableFrom(c)))) {
                     InitialContext context = new InitialContext();
                     try {
-                        directSLSB = (DirectSLSBRemote) context.lookup("java:comp/env/ejb/DirectSLSBBean");                
+                        trade = (TradeServices) context.lookup("java:comp/env/ejb/DirectSLSBBean");                
                     } catch (Exception ex) {
                         Log.error("TradeAction:createTrade - Lookup of DirectSLSBRemote failed!!!");
-                        directSLSB = (DirectSLSBRemote) context.lookup("DirectSLSBBean");
+                        trade = (TradeServices) context.lookup("DirectSLSBBean");
                     }
-                
-                    trade = directSLSB;
                 }
             }
             catch (Exception e) {
                 Log.error("TradeAction:TradeAction() Creation of Trade SESSION3 failed\n" + e);
                 e.printStackTrace();
             }
-        }else if (TradeConfig.runTimeMode == TradeConfig.DIRECT) {
+        } else if (TradeConfig.runTimeMode == TradeConfig.DIRECT) {
             try {
                 trade = new TradeDirect();
             }
             catch (Exception e) {
-                Log.error("TradeAction:TradeAction() Creation of Trade Direct failed\n" + e);
+                Log.error("TradeAction:TradeAction() Creation of Trade JDBC Direct failed\n" + e);
             }
+        } else if (TradeConfig.runTimeMode == TradeConfig.JPA) {
+            try {
+                trade = new TradeDirect();
+            }
+            catch (Exception e) {
+                Log.error("TradeAction:TradeAction() Creation of Trade JPA Direct failed\n" + e);
+            }
+        } else {
+            Log.error("TradeAction:TradeAction() Unknown Trade runtime mode.");
         }
     }
 

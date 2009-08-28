@@ -16,35 +16,37 @@
     limitations under the License.
 -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-                                   http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.apache.geronimo.daytrader</groupId>
-        <artifactId>daytrader</artifactId>
+        <artifactId>modules</artifactId>
         <version>2.2-SNAPSHOT</version>
     </parent>
-    <artifactId>daytrader-wsappclient</artifactId>
-    <name>DayTrader :: WS Application Client</name>
+
+    <groupId>org.apache.geronimo.daytrader.modules</groupId>
+    <artifactId>wsappclient</artifactId>
     <packaging>jar</packaging>
+    <name>DayTrader :: WS Application Client</name>
     <description>Client demonstrating Web Services</description>
+
     <scm>
         <connection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/modules/wsappclient</connection>
-        <developerConnection>
-            scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/modules/wsappclient</developerConnection>
+        <developerConnection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/modules/wsappclient</developerConnection>
         <url>http://svn.apache.org/viewcvs.cgi/geronimo/daytrader/trunk/modules/wsappclient</url>
     </scm>
+
     <dependencies>
         <dependency>
             <groupId>org.apache.geronimo.specs</groupId>
             <artifactId>geronimo-jaxrpc_1.1_spec</artifactId>
         </dependency>
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
                     <!-- Caveat: The wsappclient module currently has a cyclic dependency on the EJB module. Thus we are forced
