@@ -26,7 +26,7 @@
     </parent>
 
     <groupId>org.apache.geronimo.daytrader</groupId>
-    <artifactId>daytrader</artifactId>
+    <artifactId>daytrader-parent</artifactId>
     <name>DayTrader :: Performance Benchmark Sample</name>
     <packaging>pom</packaging>
     <version>2.2-SNAPSHOT</version>
@@ -50,7 +50,7 @@
         <cxfDeployer>org.apache.geronimo.configs/cxf-deployer/${geronimoVersion}/car</cxfDeployer>
         <axis2Deployer>org.apache.geronimo.configs/axis2-deployer/${geronimoVersion}/car</axis2Deployer>
         <tomcatDeployer>org.apache.geronimo.configs/tomcat6-deployer/${geronimoVersion}/car</tomcatDeployer>
-        <jetty6Deployer>org.apache.geronimo.configs/jetty6-deployer/${geronimoVersion}/car</jetty6Deployer>
+        <jetty7Deployer>org.apache.geronimo.configs/jetty7-deployer/${geronimoVersion}/car</jetty7Deployer>
         <jasperDeployer>org.apache.geronimo.configs/jasper-deployer/${geronimoVersion}/car</jasperDeployer>
         <jpaDeployer>org.apache.geronimo.configs/persistence-jpa10-deployer/${geronimoVersion}/car</jpaDeployer>
     </properties>
@@ -141,14 +141,7 @@
     </organization>
 
     <modules>
-        <module>modules/ejb</module>
-        <module>modules/web</module>
-        <module>modules/streamer</module>
-        <module>modules/wsappclient</module>
-        <module>modules/ear</module>
-        <module>modules/json-proxy</module>
-        <module>modules/dojo-ui-web</module>
-        <module>modules/dojo-ui-ear</module>
+        <module>modules</module>
         <!-- c-m-p built plugins -->
         <module>daytrader-derby-datasource</module>
         <!-- see profiles -->
@@ -208,7 +201,7 @@
                             <assembly>
                                 <id>jetty</id>
                                 <groupId>org.apache.geronimo.assemblies</groupId>
-                                <artifactId>geronimo-jetty6-javaee5</artifactId>
+                                <artifactId>geronimo-jetty7-javaee5</artifactId>
                                 <version>${geronimoVersion}</version>
                                 <classifier>bin</classifier>
                                 <type>zip</type>
@@ -217,7 +210,7 @@
                             <assembly>
                                 <id>jetty-minimal</id>
                                 <groupId>org.apache.geronimo.assemblies</groupId>
-                                <artifactId>geronimo-jetty6-minimal</artifactId>
+                                <artifactId>geronimo-jetty7-minimal</artifactId>
                                 <version>${geronimoVersion}</version>
                                 <classifier>bin</classifier>
                                 <type>zip</type>

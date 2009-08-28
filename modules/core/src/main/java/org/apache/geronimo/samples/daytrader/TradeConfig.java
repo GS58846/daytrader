@@ -25,7 +25,7 @@ import org.apache.geronimo.samples.daytrader.util.Log;
 
 /**
  * TradeConfig is a JavaBean holding all configuration and runtime parameters for the Trade application
- * TradeConfig sets runtime parameters such as the RunTimeMode (EJB, JDBC, EJB_ALT)
+ * TradeConfig sets runtime parameters such as the RunTimeMode (EJB3, DIRECT, SESSION3, JPA)
  *
  */
 
@@ -34,11 +34,12 @@ public class TradeConfig {
 	/* Trade Runtime Configuration Parameters */
 
 	/* Trade Runtime Mode parameters */
-    public static String[] runTimeModeNames = {"Full EJB3", "Direct (JDBC)", "Session (EJB3) To Direct"};
+    public static String[] runTimeModeNames = {"Full EJB3", "Direct (JDBC)", "Session (EJB3) To Direct", "Direct (JPA)"};
     public static final int EJB3 = 0;
     public static final int DIRECT = 1;
     public static final int SESSION3 = 2;
-	public static int runTimeMode = DIRECT;
+    public static final int JPA = 3;
+    public static int runTimeMode = DIRECT;
 	
     /* Trade JPA Layer parameters */
 	public static String[] jpaLayerNames = {"OpenJPA", "Hibernate"};
