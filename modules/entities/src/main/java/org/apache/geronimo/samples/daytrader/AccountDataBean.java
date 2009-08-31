@@ -26,6 +26,7 @@ import javax.ejb.EJBException;
 import javax.persistence.*;
 
 import org.apache.geronimo.samples.daytrader.util.Log;
+import org.apache.geronimo.samples.daytrader.util.TradeConfig;
 
 @Entity(name = "accountejb")
 @Table(name = "accountejb")

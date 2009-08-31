@@ -22,8 +22,8 @@ import java.util.Date;
 
 import javax.persistence.*;
 
-
 import org.apache.geronimo.samples.daytrader.util.Log;
+import org.apache.geronimo.samples.daytrader.util.TradeConfig;
 
 @Entity(name = "holdingejb")
 @Table(name = "holdingejb")

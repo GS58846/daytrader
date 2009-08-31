@@ -23,7 +23,7 @@ import org.apache.geronimo.samples.daytrader.direct.*;
 import org.apache.geronimo.samples.daytrader.util.*;
 
 import java.io.IOException;
-import org.apache.geronimo.samples.daytrader.*;
+//import org.apache.geronimo.samples.daytrader.*;
 
 /**
  * 

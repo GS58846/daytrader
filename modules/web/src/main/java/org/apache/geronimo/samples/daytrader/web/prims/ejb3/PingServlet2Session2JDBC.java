@@ -21,13 +21,12 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.naming.*;
 import javax.rmi.PortableRemoteObject;
-
 import javax.ejb.EJB;
-import org.apache.geronimo.samples.daytrader.ejb3.DirectSLSBRemote;
-import org.apache.geronimo.samples.daytrader.util.Log;
 
-import org.apache.geronimo.samples.daytrader.TradeConfig;
+import org.apache.geronimo.samples.daytrader.ejb3.DirectSLSBRemote;
 import org.apache.geronimo.samples.daytrader.QuoteDataBean;
+import org.apache.geronimo.samples.daytrader.util.Log;
+import org.apache.geronimo.samples.daytrader.util.TradeConfig;
 
 // TODO: fix comments
 /**

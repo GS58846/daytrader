@@ -19,13 +19,17 @@ package org.apache.geronimo.samples.daytrader.ejb3;
 
 import org.apache.geronimo.samples.daytrader.AccountDataBean;
 import org.apache.geronimo.samples.daytrader.AccountProfileDataBean;
+import org.apache.geronimo.samples.daytrader.FinancialUtils;
 import org.apache.geronimo.samples.daytrader.HoldingDataBean;
+import org.apache.geronimo.samples.daytrader.MarketSummaryDataBean;
 import org.apache.geronimo.samples.daytrader.OrderDataBean;
 import org.apache.geronimo.samples.daytrader.QuoteDataBean;
-import org.apache.geronimo.samples.daytrader.TradeConfig;
-import org.apache.geronimo.samples.daytrader.TradeAction;
 import org.apache.geronimo.samples.daytrader.RunStatsDataBean;
-import org.apache.geronimo.samples.daytrader.MarketSummaryDataBean;
+import org.apache.geronimo.samples.daytrader.TradeAction;
+import org.apache.geronimo.samples.daytrader.util.Log;
+import org.apache.geronimo.samples.daytrader.util.MDBStats;
+import org.apache.geronimo.samples.daytrader.util.TradeConfig;
+
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -33,6 +37,7 @@ import java.util.Collection;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Iterator;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.ejb.*;
@@ -48,9 +53,6 @@ import javax.transaction.HeuristicRollbackException;
 import javax.transaction.NotSupportedException;
 import javax.transaction.RollbackException;
 import javax.transaction.SystemException;
-import org.apache.geronimo.samples.daytrader.util.FinancialUtils;
-import org.apache.geronimo.samples.daytrader.util.Log;
-import org.apache.geronimo.samples.daytrader.util.MDBStats;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
@@ -612,7 +614,7 @@ public class TradeSLSBBean implements TradeSLSBRemote, TradeSLSBLocal {
         if (Log.doTrace())
             Log.trace("TradeSLSBBean:resetTrade", deleteAll);
 
-        return new org.apache.geronimo.samples.daytrader.direct.TradeDirect(false).resetTrade(deleteAll);
+        return new org.apache.geronimo.samples.daytrader.direct.TradeJEEDirect(false).resetTrade(deleteAll);
     }
 
     private void publishQuotePriceChange(QuoteDataBean quote, BigDecimal oldPrice, BigDecimal changeFactor, double sharesTraded) {

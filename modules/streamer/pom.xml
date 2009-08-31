@@ -40,7 +40,23 @@
     <dependencies>
         <dependency>
             <groupId>org.apache.geronimo.daytrader.modules</groupId>
-            <artifactId>ejb3</artifactId>
+            <artifactId>daytrader-util</artifactId>
+            <version>${pom.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.daytrader.modules</groupId>
+            <artifactId>daytrader-core</artifactId>
+            <version>${pom.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.daytrader.modules</groupId>
+            <artifactId>daytrader-entities</artifactId>
+            <version>${pom.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.daytrader.modules</groupId>
+            <artifactId>daytrader-ejb3</artifactId>
             <version>${pom.version}</version>
             <type>ejb</type>
         </dependency>
@@ -80,7 +96,7 @@
                 <configuration>
                     <archive>
                         <manifestEntries>
-                            <class-path>core.jar web.jar dt-ejb.jar</class-path>
+                            <class-path>util.jar core.jar entities.jar web.jar dt-ejb.jar</class-path>
                         </manifestEntries>
                         <manifest>
                             <main-class>org.apache.geronimo.samples.daytrader.client.TradeClient</main-class>

@@ -14,12 +14,11 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package org.apache.geronimo.samples.daytrader.util;
+package org.apache.geronimo.samples.daytrader;
 
 import java.util.Collection;
 import java.util.Iterator;
 import java.math.BigDecimal;
-import org.apache.geronimo.samples.daytrader.*;
 
 public class FinancialUtils {
 	//TODO -- FinancialUtils should have parts reimplemented as JSPTaglibs 

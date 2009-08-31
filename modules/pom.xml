@@ -31,6 +31,9 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>util</module>
+        <module>beans</module>
+        <module>entities</module>
         <module>core</module>
         <module>ejb3</module>
         <module>wsappclient</module>

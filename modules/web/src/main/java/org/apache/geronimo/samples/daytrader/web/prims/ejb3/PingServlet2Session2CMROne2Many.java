@@ -22,13 +22,12 @@ import java.util.Iterator;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.naming.*;
-
 import javax.ejb.EJB;
-import org.apache.geronimo.samples.daytrader.ejb3.TradeSLSBRemote;
-import org.apache.geronimo.samples.daytrader.util.Log;
 
-import org.apache.geronimo.samples.daytrader.TradeConfig;
+import org.apache.geronimo.samples.daytrader.ejb3.TradeSLSBRemote;
 import org.apache.geronimo.samples.daytrader.OrderDataBean;
+import org.apache.geronimo.samples.daytrader.util.Log;
+import org.apache.geronimo.samples.daytrader.util.TradeConfig;
 
 /**
  * Primitive to test Entity Container Managed Relationshiop One to One Servlet

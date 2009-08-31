@@ -19,6 +19,7 @@ package org.apache.geronimo.samples.daytrader;
 import javax.persistence.*;
 
 import org.apache.geronimo.samples.daytrader.util.Log;
+import org.apache.geronimo.samples.daytrader.util.TradeConfig;
 
 @Entity(name = "accountprofileejb")
 @Table(name = "accountprofileejb")

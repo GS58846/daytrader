@@ -25,7 +25,7 @@
     </parent>
 
     <groupId>org.apache.geronimo.daytrader.modules</groupId>
-    <artifactId>web</artifactId>
+    <artifactId>daytrader-web</artifactId>
     <packaging>jar</packaging>
     <name>DayTrader :: Modules - Web</name>
     <description>Daytrader Web Module</description>
@@ -39,19 +39,30 @@
     <dependencies>
         <dependency>
             <groupId>org.apache.geronimo.daytrader.modules</groupId>
-            <artifactId>core</artifactId>
+            <artifactId>daytrader-util</artifactId>
             <version>${pom.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.geronimo.daytrader.modules</groupId>
-            <artifactId>ejb3</artifactId>
+            <artifactId>daytrader-core</artifactId>
+            <version>${pom.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.daytrader.modules</groupId>
+            <artifactId>daytrader-entities</artifactId>
+            <version>${pom.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.daytrader.modules</groupId>
+            <artifactId>daytrader-ejb3</artifactId>
             <version>${pom.version}</version>
             <scope>provided</scope>
             <type>ejb</type>
         </dependency>
         <dependency>
             <groupId>org.apache.geronimo.daytrader.modules</groupId>
-            <artifactId>soap</artifactId>
+            <artifactId>daytrader-soap</artifactId>
             <version>${pom.version}</version>
             <scope>provided</scope>
         </dependency>
@@ -65,13 +76,11 @@
             <artifactId>geronimo-ejb_3.0_spec</artifactId>
             <scope>provided</scope>
         </dependency>
-<!--
         <dependency>
             <groupId>org.apache.geronimo.specs</groupId>
             <artifactId>geronimo-jta_1.1_spec</artifactId>
             <scope>provided</scope>
         </dependency>
--->
         <dependency>
             <groupId>org.apache.geronimo.specs</groupId>
             <artifactId>geronimo-jms_1.1_spec</artifactId>
@@ -131,7 +140,7 @@
                 <configuration>
                     <archive>
                         <manifestEntries>
-                            <Class-Path>dt-ejb.jar streamer.jar wsappclient.jar</Class-Path>
+                            <Class-Path>util.jar core.jar entities.jar dt-ejb.jar streamer.jar wsappclient.jar</Class-Path>
                         </manifestEntries>
                     </archive>
                     <resources>

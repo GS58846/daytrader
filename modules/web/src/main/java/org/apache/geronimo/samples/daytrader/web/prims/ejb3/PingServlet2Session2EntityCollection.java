@@ -22,11 +22,11 @@ import javax.servlet.http.*;
 import java.util.Collection;
 import java.util.Iterator;
 import javax.ejb.EJB;
-import org.apache.geronimo.samples.daytrader.ejb3.TradeSLSBRemote;
-import org.apache.geronimo.samples.daytrader.util.Log;
 
-import org.apache.geronimo.samples.daytrader.TradeConfig;
+import org.apache.geronimo.samples.daytrader.ejb3.TradeSLSBRemote;
 import org.apache.geronimo.samples.daytrader.HoldingDataBean;
+import org.apache.geronimo.samples.daytrader.util.Log;
+import org.apache.geronimo.samples.daytrader.util.TradeConfig;
 
 /**
  * 

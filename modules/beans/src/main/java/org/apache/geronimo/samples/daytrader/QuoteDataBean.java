@@ -20,63 +20,36 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
 
-import javax.persistence.*;
-
 import org.apache.geronimo.samples.daytrader.util.Log;
+import org.apache.geronimo.samples.daytrader.util.TradeConfig;
 
-@Entity(name = "quoteejb")
-@Table(name = "quoteejb")
-@NamedQueries({
-    @NamedQuery(name = "quoteejb.allQuotes",query = "SELECT q FROM quoteejb q"),
-    @NamedQuery(name = "quoteejb.quotesByChange",query = "SELECT q FROM quoteejb q WHERE q.symbol LIKE 's:1__' ORDER BY q.change1 DESC"),
-    @NamedQuery(name = "quoteejb.findByLow", query = "SELECT q FROM quoteejb q WHERE q.low = :low"),
-    @NamedQuery(name = "quoteejb.findByOpen1", query = "SELECT q FROM quoteejb q WHERE q.open1 = :open1"),
-    @NamedQuery(name = "quoteejb.findByVolume", query = "SELECT q FROM quoteejb q WHERE q.volume = :volume"),
-    @NamedQuery(name = "quoteejb.findByPrice", query = "SELECT q FROM quoteejb q WHERE q.price = :price"),
-    @NamedQuery(name = "quoteejb.findByHigh", query = "SELECT q FROM quoteejb q WHERE q.high = :high"),
-    @NamedQuery(name = "quoteejb.findByCompanyname", query = "SELECT q FROM quoteejb q WHERE q.companyName = :companyname"),
-    @NamedQuery(name = "quoteejb.findBySymbol", query = "SELECT q FROM quoteejb q WHERE q.symbol = :symbol"),
-    @NamedQuery(name = "quoteejb.findByChange1", query = "SELECT q FROM quoteejb q WHERE q.change1 = :change1")
-})
-@NamedNativeQueries({
-    @NamedNativeQuery(name="quoteejb.quoteForUpdate", query="select * from quoteejb q where q.symbol=? for update",resultClass=org.apache.geronimo.samples.daytrader.QuoteDataBean.class)
-})
+
 public class QuoteDataBean implements Serializable {
-
-    /* Accessor methods for persistent fields */
-
-    @Id
-    @Column(name = "SYMBOL", nullable = false)
+    
     private String symbol;          /* symbol */
     
-    @Column(name = "COMPANYNAME")
+   
     private String companyName;     /* companyName */
     
-    @Column(name = "VOLUME", nullable = false)
+    
     private double volume;          /* volume */
     
-    @Column(name = "PRICE")
+    
     private BigDecimal price;       /* price */
     
-    @Column(name = "OPEN1")
+    
     private BigDecimal open1;       /* open1 price */
     
-    @Column(name = "LOW")
+    
     private BigDecimal low;         /* low price */
     
-    @Column(name = "HIGH")
+    
     private BigDecimal high;        /* high price */
     
-    @Column(name = "CHANGE1", nullable = false)
+    
     private double change1;         /* price change */
     
-    /*@OneToMany(mappedBy = "quote")
-    private Collection<OrderDataBean> orders;*/
     
-//    @Version
-//    private Integer optLock;
-
-    /* Accessor methods for relationship fields are not kept in the DataBean */
     
     public QuoteDataBean() {
     }

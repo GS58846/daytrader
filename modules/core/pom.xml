@@ -25,7 +25,7 @@
     </parent>
 
     <groupId>org.apache.geronimo.daytrader.modules</groupId>
-    <artifactId>core</artifactId>
+    <artifactId>daytrader-core</artifactId>
     <packaging>jar</packaging>
     <name>DayTrader :: Modules - Core</name>
     <description>Daytrader Core Module</description>
@@ -37,6 +37,17 @@
     </scm>
 
     <dependencies>
+        <dependency>
+            <groupId>org.apache.geronimo.daytrader.modules</groupId>
+            <artifactId>daytrader-util</artifactId>
+            <version>${pom.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.daytrader.modules</groupId>
+            <artifactId>daytrader-entities</artifactId>
+            <version>${pom.version}</version>
+            <scope>provided</scope>
+        </dependency>
 <!--
         <dependency>
             <groupId>org.apache.geronimo.daytrader</groupId>
@@ -49,11 +60,6 @@
             <artifactId>geronimo-jaxrpc_1.1_spec</artifactId>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-    	    <groupId>org.apache.geronimo.specs</groupId>
-    	    <artifactId>geronimo-annotation_1.0_spec</artifactId>
-    	    <scope>provided</scope>
-	</dependency>
 -->
         <dependency>
             <groupId>org.apache.geronimo.specs</groupId>
@@ -70,6 +76,11 @@
             <artifactId>geronimo-jpa_3.0_spec</artifactId>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+    	    <groupId>org.apache.geronimo.specs</groupId>
+    	    <artifactId>geronimo-annotation_1.0_spec</artifactId>
+    	    <scope>provided</scope>
+	</dependency>
         <dependency>
             <groupId>org.apache.geronimo.specs</groupId>
             <artifactId>geronimo-ejb_3.0_spec</artifactId>
@@ -90,7 +101,7 @@
             <artifactId>openjpa</artifactId>
             <scope>provided</scope>
         </dependency>
-        <!-- OpenJPA PCEnhancer depends -->
+        <!-- OpenJPA PCEnhancer depends
         <dependency>
             <groupId>net.sourceforge.serp</groupId>
             <artifactId>serp</artifactId>
@@ -109,8 +120,9 @@
             <version>3.2.1</version>
             <scope>provided</scope>
         </dependency>
-        <!-- end OpenJPA PCEnhancer depends -->
+        end OpenJPA PCEnhancer depends -->
     </dependencies>
+
     <build>
         <resources>
             <resource>
@@ -118,7 +130,7 @@
                 <filtering>true</filtering>
             </resource>
         </resources>
-
+<!--
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -152,7 +164,6 @@
                     </execution>
                 </executions>
             </plugin>
-<!--
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-ejb-plugin</artifactId>
@@ -165,7 +176,7 @@
                     </archive>
                 </configuration>
             </plugin>
--->
         </plugins>
+-->
     </build>
 </project>

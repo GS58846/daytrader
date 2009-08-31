@@ -16,92 +16,50 @@
  */
 package org.apache.geronimo.samples.daytrader;
 
-
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import javax.persistence.*;
-
 import org.apache.geronimo.samples.daytrader.util.Log;
+import org.apache.geronimo.samples.daytrader.util.TradeConfig;
 
 
-@Entity(name="orderejb")
-@Table(name = "orderejb")
-@NamedQueries( {
-    @NamedQuery(name = "orderejb.findByOrderfee", query = "SELECT o FROM orderejb o WHERE o.orderFee = :orderfee"),
-    @NamedQuery(name = "orderejb.findByCompletiondate", query = "SELECT o FROM orderejb o WHERE o.completionDate = :completiondate"),
-    @NamedQuery(name = "orderejb.findByOrdertype", query = "SELECT o FROM orderejb o WHERE o.orderType = :ordertype"),
-    @NamedQuery(name = "orderejb.findByOrderstatus", query = "SELECT o FROM orderejb o WHERE o.orderStatus = :orderstatus"),
-    @NamedQuery(name = "orderejb.findByPrice", query = "SELECT o FROM orderejb o WHERE o.price = :price"),
-    @NamedQuery(name = "orderejb.findByQuantity", query = "SELECT o FROM orderejb o WHERE o.quantity = :quantity"),
-    @NamedQuery(name = "orderejb.findByOpendate", query = "SELECT o FROM orderejb o WHERE o.openDate = :opendate"),
-    @NamedQuery(name = "orderejb.findByOrderid", query = "SELECT o FROM orderejb o WHERE o.orderID = :orderid"),
-    @NamedQuery(name = "orderejb.findByAccountAccountid", query = "SELECT o FROM orderejb o WHERE o.account.accountID = :accountAccountid"),
-    @NamedQuery(name = "orderejb.findByQuoteSymbol", query = "SELECT o FROM orderejb o WHERE o.quote.symbol = :quoteSymbol"),
-    // Never used query related to FK constraint on holdingejb. the FK constraint will cause EJB3 runtime mode failure. So comment it.
-    //@NamedQuery(name = "orderejb.findByHoldingHoldingid", query = "SELECT o FROM orderejb o WHERE o.holding.holdingID = :holdingHoldingid"),
-    @NamedQuery(name = "orderejb.closedOrders", query = "SELECT o FROM orderejb o WHERE o.orderStatus = 'closed' AND o.account.profile.userID  = :userID"),
-    @NamedQuery(name = "orderejb.completeClosedOrders", query = "UPDATE orderejb o SET o.orderStatus = 'completed' WHERE o.orderStatus = 'closed' AND o.account.profile.userID  = :userID")
-})
 public class OrderDataBean implements Serializable
 {
 
-    @TableGenerator(
-            name="orderIdGen",
-            table="KEYGENEJB",
-            pkColumnName="KEYNAME",
-            valueColumnName="KEYVAL",
-            pkColumnValue="order",
-            allocationSize=1000)
-    @Id
-    @GeneratedValue(strategy=GenerationType.TABLE, generator="orderIdGen")
-    @Column(name = "ORDERID", nullable = false)        
+          
     private Integer orderID;            /* orderID */
     
-    @Column(name = "ORDERTYPE")
+    
     private String orderType;           /* orderType (buy, sell, etc.) */
     
-    @Column(name = "ORDERSTATUS")
+    
     private String orderStatus;         /* orderStatus (open, processing, completed, closed, cancelled) */
     
-    @Column(name = "OPENDATE")
-    @Temporal(TemporalType.TIMESTAMP)
+    
     private Date openDate;              /* openDate (when the order was entered) */
     
-    @Column(name = "COMPLETIONDATE")
-    @Temporal(TemporalType.TIMESTAMP)
+    
     private Date completionDate;		/* completionDate */
     
-    @Column(name = "QUANTITY", nullable = false)
+    
     private double quantity;			/* quantity */
     
-    @Column(name = "PRICE")
+    
     private BigDecimal price;				/* price */
     
-    @Column(name = "ORDERFEE")
+    
     private BigDecimal orderFee;			/* price */
     
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="ACCOUNT_ACCOUNTID")
+    
     private AccountDataBean account;
     
-    @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name="QUOTE_SYMBOL")
+    
     private QuoteDataBean quote;
     
-    // Cause sell operation failed, see JIRA DAYTRADER-63 for details.
-    //@OneToOne(fetch=FetchType.LAZY)
-    //@JoinColumn(name = "HOLDING_HOLDINGID")
-    // Cause sell operation failed, see JIRA DAYTRADER-63 for details.
-    @Transient    
+   
     private HoldingDataBean holding;
 
-//    @Version
-//    private Integer optLock;
-
-    /* Fields for relationship fields are not kept in the Data Bean */
-    @Transient
     private String symbol;
 
     public OrderDataBean() {        

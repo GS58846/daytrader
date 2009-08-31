@@ -18,8 +18,8 @@ package org.apache.geronimo.samples.daytrader.web;
 
 import javax.servlet.*;
 
-import org.apache.geronimo.samples.daytrader.direct.*;
-import org.apache.geronimo.samples.daytrader.util.*;
+import org.apache.geronimo.samples.daytrader.direct.TradeDirect;
+import org.apache.geronimo.samples.daytrader.util.Log;
 
 public class TradeWebContextListener
 	implements ServletContextListener 

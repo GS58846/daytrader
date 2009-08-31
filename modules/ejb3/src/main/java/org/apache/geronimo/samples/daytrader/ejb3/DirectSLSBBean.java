@@ -24,7 +24,7 @@ import org.apache.geronimo.samples.daytrader.OrderDataBean;
 import org.apache.geronimo.samples.daytrader.QuoteDataBean;
 import org.apache.geronimo.samples.daytrader.RunStatsDataBean;
 import org.apache.geronimo.samples.daytrader.MarketSummaryDataBean;
-import org.apache.geronimo.samples.daytrader.direct.TradeDirect;
+import org.apache.geronimo.samples.daytrader.direct.TradeJEEDirect;
 
 import java.math.BigDecimal;
 import java.util.Collection;
@@ -40,92 +40,92 @@ public class DirectSLSBBean implements DirectSLSBRemote, DirectSLSBLocal {
 	}
 
 	public MarketSummaryDataBean getMarketSummary() throws Exception {
-		return (new TradeDirect(true)).getMarketSummary();
+		return (new TradeJEEDirect(true)).getMarketSummary();
 	}
 
 
 	public OrderDataBean buy(String userID, String symbol, double quantity, int orderProcessingMode) throws Exception {
-		return (new TradeDirect(true)).buy(userID, symbol, quantity, orderProcessingMode);
+		return (new TradeJEEDirect(true)).buy(userID, symbol, quantity, orderProcessingMode);
 	}
 
 	public OrderDataBean sell(String userID, Integer holdingID, int orderProcessingMode) throws Exception {
-		return (new TradeDirect(true)).sell(userID, holdingID, orderProcessingMode);
+		return (new TradeJEEDirect(true)).sell(userID, holdingID, orderProcessingMode);
 	}
 
 	public void queueOrder(Integer orderID, boolean twoPhase) throws Exception {
-		(new TradeDirect(true)).queueOrder(orderID, twoPhase);
+		(new TradeJEEDirect(true)).queueOrder(orderID, twoPhase);
 	}
 
 	public OrderDataBean completeOrder(Integer orderID, boolean twoPhase) throws Exception {
-		return (new TradeDirect(true)).completeOrder(orderID, twoPhase);
+		return (new TradeJEEDirect(true)).completeOrder(orderID, twoPhase);
 	}
 
 	public void cancelOrder(Integer orderID, boolean twoPhase) throws Exception {
-		(new TradeDirect(true)).cancelOrder(orderID, twoPhase);
+		(new TradeJEEDirect(true)).cancelOrder(orderID, twoPhase);
 	}
 
 	public void orderCompleted(String userID, Integer orderID) throws Exception {
-		(new TradeDirect(true)).orderCompleted(userID, orderID);
+		(new TradeJEEDirect(true)).orderCompleted(userID, orderID);
 	}
 
 	public Collection getOrders(String userID) throws Exception {
-		return (new TradeDirect(true)).getOrders(userID);
+		return (new TradeJEEDirect(true)).getOrders(userID);
 	}
 
 	public Collection getClosedOrders(String userID) throws Exception {
-		return (new TradeDirect(true)).getClosedOrders(userID);
+		return (new TradeJEEDirect(true)).getClosedOrders(userID);
 	}
 
 	public QuoteDataBean createQuote(String symbol, String companyName, BigDecimal price) throws Exception {
-		return (new TradeDirect(true)).createQuote(symbol, companyName, price);
+		return (new TradeJEEDirect(true)).createQuote(symbol, companyName, price);
 	}
 
 	public QuoteDataBean getQuote(String symbol) throws Exception {
-		return (new TradeDirect(true)).getQuote(symbol);
+		return (new TradeJEEDirect(true)).getQuote(symbol);
 	}
 
 	public Collection getAllQuotes() throws Exception {
-		return (new TradeDirect(true)).getAllQuotes();
+		return (new TradeJEEDirect(true)).getAllQuotes();
 	}
 
 	public QuoteDataBean updateQuotePriceVolume(String symbol, BigDecimal newPrice, double sharesTraded) throws Exception {
-		return (new TradeDirect(true)).updateQuotePriceVolume(symbol, newPrice, sharesTraded);
+		return (new TradeJEEDirect(true)).updateQuotePriceVolume(symbol, newPrice, sharesTraded);
 	}
 
 	public Collection getHoldings(String userID) throws Exception {
-		return (new TradeDirect(true)).getHoldings(userID);
+		return (new TradeJEEDirect(true)).getHoldings(userID);
 	}
 
 	public HoldingDataBean getHolding(Integer holdingID) throws Exception {
-		return (new TradeDirect(true)).getHolding(holdingID);
+		return (new TradeJEEDirect(true)).getHolding(holdingID);
 	}
 
 	public AccountDataBean getAccountData(String userID) throws Exception {
-		return (new TradeDirect(true)).getAccountData(userID);
+		return (new TradeJEEDirect(true)).getAccountData(userID);
 	}
 
 	public AccountProfileDataBean getAccountProfileData(String userID) throws Exception {
-		return (new TradeDirect(true)).getAccountProfileData(userID);
+		return (new TradeJEEDirect(true)).getAccountProfileData(userID);
 	}
 
 	public AccountProfileDataBean updateAccountProfile(AccountProfileDataBean profileData) throws Exception {
-		return (new TradeDirect(true)).updateAccountProfile(profileData);
+		return (new TradeJEEDirect(true)).updateAccountProfile(profileData);
 	}
 
 	public AccountDataBean login(String userID, String password) throws Exception {
-		return (new TradeDirect(true)).login(userID, password);
+		return (new TradeJEEDirect(true)).login(userID, password);
 	}
 
 	public void logout(String userID) throws Exception {
-		(new TradeDirect(true)).logout(userID);
+		(new TradeJEEDirect(true)).logout(userID);
 	}
 
 	public AccountDataBean register(String userID, String password, String fullname, String address, String email, String creditcard, BigDecimal openBalance) throws Exception {
-		return (new TradeDirect(true)).register(userID, password, fullname, address, email, creditcard, openBalance);
+		return (new TradeJEEDirect(true)).register(userID, password, fullname, address, email, creditcard, openBalance);
 	}
 
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 	public RunStatsDataBean resetTrade(boolean deleteAll) throws Exception {
-		return (new TradeDirect(false)).resetTrade(deleteAll);
+		return (new TradeJEEDirect(false)).resetTrade(deleteAll);
 	}
 }

@@ -23,10 +23,9 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
+import org.apache.geronimo.samples.daytrader.*;
 import org.apache.geronimo.samples.daytrader.direct.TradeDirect;
 import org.apache.geronimo.samples.daytrader.util.*;
-
-import org.apache.geronimo.samples.daytrader.*;
 
 /**
  * TradeBuildDB uses operations provided by the TradeApplication to (a) create the Database tables

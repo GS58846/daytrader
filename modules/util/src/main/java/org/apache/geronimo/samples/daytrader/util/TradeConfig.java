@@ -14,13 +14,11 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package org.apache.geronimo.samples.daytrader;
+package org.apache.geronimo.samples.daytrader.util;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Random;
-
-import org.apache.geronimo.samples.daytrader.util.Log;
 
 
 /**

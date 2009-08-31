@@ -19,13 +19,13 @@ package org.apache.geronimo.samples.daytrader.web;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
+import org.apache.geronimo.samples.daytrader.*;
 import org.apache.geronimo.samples.daytrader.util.*;
 
 import java.util.Collection;
 import java.util.Iterator;
 import java.io.IOException;
 import java.io.PrintWriter;
-import org.apache.geronimo.samples.daytrader.*;
 
 /**
  * TradeScenarioServlet emulates a population of web users by generating a specific Trade operation 

@@ -20,15 +20,14 @@ import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.naming.*;
-
-import javax.ejb.EJB;
-import org.apache.geronimo.samples.daytrader.ejb3.TradeSLSBRemote;
-import org.apache.geronimo.samples.daytrader.util.Log;
-
-import org.apache.geronimo.samples.daytrader.TradeConfig;
-import org.apache.geronimo.samples.daytrader.QuoteDataBean;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.ejb.EJB;
+
+import org.apache.geronimo.samples.daytrader.ejb3.TradeSLSBRemote;
+import org.apache.geronimo.samples.daytrader.QuoteDataBean;
+import org.apache.geronimo.samples.daytrader.util.Log;
+import org.apache.geronimo.samples.daytrader.util.TradeConfig;
 
 /**
  * 

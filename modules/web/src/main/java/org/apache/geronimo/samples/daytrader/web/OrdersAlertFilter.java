@@ -20,10 +20,11 @@ import java.io.IOException;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
+//import org.apache.geronimo.samples.daytrader.*;
+import org.apache.geronimo.samples.daytrader.TradeAction;
+import org.apache.geronimo.samples.daytrader.TradeServices;
 import org.apache.geronimo.samples.daytrader.soap.*;
 import org.apache.geronimo.samples.daytrader.util.*;
-
-import org.apache.geronimo.samples.daytrader.*;
 
 public class OrdersAlertFilter implements Filter {
 

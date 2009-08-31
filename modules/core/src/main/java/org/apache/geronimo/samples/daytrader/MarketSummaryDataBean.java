@@ -23,8 +23,8 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
 
-import org.apache.geronimo.samples.daytrader.util.FinancialUtils;
 import org.apache.geronimo.samples.daytrader.util.Log;
+import org.apache.geronimo.samples.daytrader.util.TradeConfig;
 
 public class MarketSummaryDataBean implements Serializable
 {

@@ -54,7 +54,7 @@
             remove the manifestEntries section below and this comment. -->
                     <archive>
                         <manifestEntries>
-                            <class-path>core.jar web.jar soap.jar dt-ejb.jar</class-path>
+                            <class-path>util.jar entities.jar core.jar web.jar soap.jar dt-ejb.jar</class-path>
                         </manifestEntries>
                         <manifest>
                             <main-class>org.apache.geronimo.samples.daytrader.client.ws.ClientApp</main-class>

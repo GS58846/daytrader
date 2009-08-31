@@ -25,7 +25,7 @@
     </parent>
 
     <groupId>org.apache.geronimo.daytrader.modules</groupId>
-    <artifactId>soap</artifactId>
+    <artifactId>daytrader-soap</artifactId>
     <name>DayTrader :: Modules - SOAP</name>
     <packaging>jar</packaging>
     <description>Daytrader SOAP Module</description>
@@ -39,7 +39,17 @@
     <dependencies>
         <dependency>
             <groupId>org.apache.geronimo.daytrader.modules</groupId>
-            <artifactId>core</artifactId>
+            <artifactId>daytrader-util</artifactId>
+            <version>${pom.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.daytrader.modules</groupId>
+            <artifactId>daytrader-entities</artifactId>
+            <version>${pom.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.daytrader.modules</groupId>
+            <artifactId>daytrader-core</artifactId>
             <version>${pom.version}</version>
         </dependency>
         <dependency>

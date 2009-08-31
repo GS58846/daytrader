@@ -21,11 +21,12 @@ import java.util.Collection;
 
 import javax.naming.InitialContext;
 
-import org.apache.geronimo.samples.daytrader.direct.TradeDirect;
+import org.apache.geronimo.samples.daytrader.direct.TradeJEEDirect;
+import org.apache.geronimo.samples.daytrader.direct.TradeWebDirect;
 //import org.apache.geronimo.samples.daytrader.ejb3.TradeSLSBRemote;
 //import org.apache.geronimo.samples.daytrader.ejb3.DirectSLSBRemote;
-import org.apache.geronimo.samples.daytrader.util.FinancialUtils;
 import org.apache.geronimo.samples.daytrader.util.Log;
+import org.apache.geronimo.samples.daytrader.util.TradeConfig;
 
 /**
  * The TradeAction class provides the generic client side access to each of the
@@ -59,6 +60,8 @@ public class TradeAction implements TradeServices {
     }
 
     private void createTrade() {
+        RuntimeException re = null;
+        
         if (TradeConfig.runTimeMode == TradeConfig.EJB3) {
             try {
                 Class c = Class.forName("org.apache.geronimo.samples.daytrader.ejb3.TradeSLSBRemote");
@@ -75,7 +78,7 @@ public class TradeAction implements TradeServices {
             }
             catch (Exception e) {
                 Log.error("TradeAction:TradeAction() Creation of Trade EJB 3 failed\n" + e);
-                e.printStackTrace();
+                re = new RuntimeException(e);
             }
         } else if (TradeConfig.runTimeMode == TradeConfig.SESSION3) {
             try {
@@ -93,24 +96,31 @@ public class TradeAction implements TradeServices {
             }
             catch (Exception e) {
                 Log.error("TradeAction:TradeAction() Creation of Trade SESSION3 failed\n" + e);
-                e.printStackTrace();
+                re = new RuntimeException(e);
             }
         } else if (TradeConfig.runTimeMode == TradeConfig.DIRECT) {
             try {
-                trade = new TradeDirect();
+                trade = new TradeJEEDirect();
             }
             catch (Exception e) {
                 Log.error("TradeAction:TradeAction() Creation of Trade JDBC Direct failed\n" + e);
+                re = new RuntimeException(e);
             }
         } else if (TradeConfig.runTimeMode == TradeConfig.JPA) {
             try {
-                trade = new TradeDirect();
+                trade = new TradeWebDirect();
             }
             catch (Exception e) {
                 Log.error("TradeAction:TradeAction() Creation of Trade JPA Direct failed\n" + e);
+                re = new RuntimeException(e);
             }
         } else {
             Log.error("TradeAction:TradeAction() Unknown Trade runtime mode.");
+            re = new RuntimeException("TradeAction:TradeAction() Unknown Trade runtime mode.");
+        }
+        
+        if (re != null) {
+            throw re;
         }
     }
 

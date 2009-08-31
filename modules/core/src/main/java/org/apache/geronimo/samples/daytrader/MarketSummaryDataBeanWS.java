@@ -21,7 +21,6 @@ import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
 
-import org.apache.geronimo.samples.daytrader.util.FinancialUtils;
 import org.apache.geronimo.samples.daytrader.util.Log;
 
 /**
