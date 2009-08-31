@@ -23,7 +23,7 @@ import javax.servlet.http.*;
 //import org.apache.geronimo.samples.daytrader.*;
 import org.apache.geronimo.samples.daytrader.TradeAction;
 import org.apache.geronimo.samples.daytrader.TradeServices;
-import org.apache.geronimo.samples.daytrader.soap.*;
+//import org.apache.geronimo.samples.daytrader.soap.*;
 import org.apache.geronimo.samples.daytrader.util.*;
 
 public class OrdersAlertFilter implements Filter {
@@ -70,14 +70,25 @@ public class OrdersAlertFilter implements Filter {
 					if ( (userID != null) && (userID.trim().length()>0) )
 					{	
 						TradeServices tAction=null;
-						if(TradeConfig.getAccessMode() == TradeConfig.STANDARD)
+						if(TradeConfig.getAccessMode() == TradeConfig.STANDARD) {
 							tAction = new TradeAction();
-						else if(TradeConfig.getAccessMode() == TradeConfig.WEBSERVICES)
-							tAction = new TradeWebSoapProxy();										
+						} else if(TradeConfig.getAccessMode() == TradeConfig.WEBSERVICES) {
+                            try {
+                                Class c = Class.forName("org.apache.geronimo.samples.daytrader.soap.TradeWebSoapProxy");                                
+                                tAction = (TradeServices) c.newInstance();
+                            }
+                            catch (Exception e) {
+                                Log.error("OrdersAlertFilter:doFilter() Creation of TradeWebSoapProxy failed\n" + e);
+                                throw new IllegalArgumentException(e);
+                            }
+                        }
 						java.util.Collection closedOrders = tAction.getClosedOrders(userID);
-						if ( (closedOrders!=null) && (closedOrders.size() > 0) )
+						if ( (closedOrders!=null) && (closedOrders.size() > 0) ) {
 							req.setAttribute("closedOrders", closedOrders);
-						if (Log.doTrace()) Log.printCollection("OrderAlertFilter: userID="+userID+" closedOrders=", closedOrders);
+                        }
+						if (Log.doTrace()) {
+                            Log.printCollection("OrderAlertFilter: userID="+userID+" closedOrders=", closedOrders);
+                        }
 					}
 				}	
 			}

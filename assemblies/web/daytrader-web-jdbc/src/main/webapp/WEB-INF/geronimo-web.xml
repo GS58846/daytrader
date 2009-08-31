@@ -23,7 +23,7 @@
         
         <sys:environment>
             <sys:moduleId>
-                <sys:groupId>org.apache.geronimo.daytrader.assemblies</sys:groupId>
+                <sys:groupId>org.apache.geronimo.daytrader.assemblies.web</sys:groupId>
                 <sys:artifactId>daytrader-web-jdbc</sys:artifactId>
                 <sys:version>2.2</sys:version>
                 <sys:type>war</sys:type>

@@ -32,7 +32,7 @@
     </filter-mapping>
     
     <listener>
-        <listener-class>org.apache.geronimo.samples.daytrader.web.TradeWebContextListener</listener-class>
+        <listener-class>org.apache.geronimo.samples.daytrader.web.TradeJDBCContextListener</listener-class>
     </listener>
     
     <servlet>
@@ -82,19 +82,18 @@
         <servlet-name>TradeScenarioServlet</servlet-name>
         <servlet-class>org.apache.geronimo.samples.daytrader.web.TradeScenarioServlet</servlet-class>
         <init-param>
-            <description>Sets the default RuntimeMode. Legal values include EJB and Direct</description>
+            <description>Sets the default RuntimeMode. Legal values include Full EJB3, Direct (JDBC), Session (EJB3) To Direct, Web JDBC, and Web JPA</description>
             <param-name>runTimeMode</param-name>
-            <param-value>DIRECT</param-value>
+            <param-value>Web JDBC</param-value>
         </init-param>
         <init-param>
-            <description>Sets the default Order Processing Mode. Legal values include Synchronous, Asynchronous_1-Phase and Asynchronous_2-Phase</description>
+            <description>Sets the default Order Processing Mode. Legal values include Synchronous and Asynchronous_2-Phase</description>
             <param-name>orderProcessingMode</param-name>
             <param-value>Synchronous</param-value>
         </init-param>
         <init-param>
             <description>
-                Sets the protocol the web application communicates with the server side services when driving with TradeScenarioServlet. Legal values incude
-                Standard and WebServices.
+                Sets the protocol the web application communicates with the server side services when driving with TradeScenarioServlet. Legal values incude Standard and WebServices.
             </description>
             <param-name>accessMode</param-name>
             <param-value>Standard</param-value>
@@ -130,9 +129,9 @@
             <param-value>1</param-value>
         </init-param>
         <init-param>
-            <description>Sets the data caching type</description>
-            <param-name>No Caching</param-name>
-            <param-value>2</param-value>
+            <description>Sets the data caching type, which can be DistributedMap, Command Caching and No Caching</description>
+            <param-name>cachingType</param-name>
+            <param-value>No Caching</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
