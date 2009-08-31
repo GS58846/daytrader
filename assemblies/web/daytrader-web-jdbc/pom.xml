@@ -20,12 +20,12 @@
     <modelVersion>4.0.0</modelVersion>
     
     <parent>
-        <groupId>org.apache.geronimo.daytrader</groupId>
-        <artifactId>assemblies</artifactId>
+        <groupId>org.apache.geronimo.daytrader.assemblies</groupId>
+        <artifactId>web</artifactId>
         <version>2.2-SNAPSHOT</version>
     </parent>
     
-    <groupId>org.apache.geronimo.daytrader.assemblies</groupId>
+    <groupId>org.apache.geronimo.daytrader.assemblies.web</groupId>
     <artifactId>daytrader-web-jdbc</artifactId>    
     <packaging>war</packaging>
     <name>DayTrader :: Assemblies - Web + Direct JDBC</name>
@@ -34,12 +34,22 @@
     <dependencies>
         <dependency>
             <groupId>org.apache.geronimo.daytrader.modules</groupId>
-            <artifactId>core</artifactId>
+            <artifactId>daytrader-util</artifactId>
             <version>${version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.geronimo.daytrader.modules</groupId>
-            <artifactId>web</artifactId>
+            <artifactId>daytrader-core</artifactId>
+            <version>${version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.daytrader.modules</groupId>
+            <artifactId>daytrader-beans</artifactId>
+            <version>${version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.daytrader.modules</groupId>
+            <artifactId>daytrader-web</artifactId>
             <version>${version}</version>
         </dependency>
         <dependency>
@@ -48,33 +58,7 @@
             <artifactId>commons-logging</artifactId>
         </dependency>
 
-        <!-- HACK - Include these for Web-only containers -->
-        <dependency>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-jms_1.1_spec</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-jta_1.1_spec</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-jpa_3.0_spec</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-ejb_3.0_spec</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.openjpa</groupId>
-            <artifactId>openjpa</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-jpa_3.0_spec</artifactId>
-            <scope>provided</scope>
-        </dependency>
+        <!-- web container provided specs -->
         <dependency>
             <groupId>org.apache.geronimo.specs</groupId>
             <artifactId>geronimo-servlet_2.5_spec</artifactId>
@@ -90,17 +74,43 @@
             <artifactId>jstl</artifactId>
             <scope>provided</scope>
         </dependency>
+
+        <!-- test depends -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <!-- Not required for Bean version of TradeDirect
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-jta_1.1_spec</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-jms_1.1_spec</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-ejb_3.0_spec</artifactId>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>org.apache.geronimo.specs</groupId>
             <artifactId>geronimo-annotation_1.0_spec</artifactId>
-            <!-- <version>1.1.1</version>  -->
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-jpa_3.0_spec</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.openjpa</groupId>
+            <artifactId>openjpa</artifactId>
+        </dependency>
+        -->
     </dependencies>
 
     <build>
