@@ -19,45 +19,58 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.apache.geronimo.daytrader</groupId>
-        <artifactId>assemblies</artifactId>
+        <groupId>org.apache.geronimo.daytrader.assemblies</groupId>
+        <artifactId>javaee</artifactId>
         <version>2.2-SNAPSHOT</version>
     </parent>
 
-    <groupId>org.apache.geronimo.daytrader.assemblies</groupId>
-    <artifactId>daytrader-web-ejb</artifactId>
+    <groupId>org.apache.geronimo.daytrader.assemblies.javaee</groupId>
+    <artifactId>daytrader-war</artifactId>
     <packaging>war</packaging>
-    <name>DayTrader :: Assemblies - Web EJB3</name>
-    <description>Daytrader EJB Web Module</description>
+    <name>DayTrader :: Assemblies - JavaEE WAR</name>
+    <description>Daytrader JavaEE Web Module</description>
 
     <scm>
-        <connection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/assemblies/daytrader-web-ejb</connection>
-        <developerConnection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/assemblies/daytrader-web-ejb</developerConnection>
-        <url>http://svn.apache.org/viewcvs.cgi/geronimo/daytrader/trunk/assemblies/daytrader-web-ejb</url>
+        <connection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/assemblies/javaee/daytrader-war</connection>
+        <developerConnection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/assemblies/javaee/daytrader-war</developerConnection>
+        <url>http://svn.apache.org/viewcvs.cgi/geronimo/daytrader/trunk/assemblies/javaee/daytrader-war</url>
     </scm>
 
     <dependencies>
         <dependency>
             <groupId>org.apache.geronimo.daytrader.modules</groupId>
-            <artifactId>core</artifactId>
+            <artifactId>daytrader-util</artifactId>
             <version>${pom.version}</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.geronimo.daytrader.modules</groupId>
-            <artifactId>ejb3</artifactId>
+            <artifactId>daytrader-core</artifactId>
             <version>${pom.version}</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.daytrader.modules</groupId>
+            <artifactId>daytrader-entities</artifactId>
+            <version>${pom.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.daytrader.modules</groupId>
+            <artifactId>daytrader-ejb3</artifactId>
+            <version>${pom.version}</version>
             <type>ejb</type>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.geronimo.daytrader.modules</groupId>
-            <artifactId>soap</artifactId>
+            <artifactId>daytrader-soap</artifactId>
             <version>${pom.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.geronimo.daytrader.modules</groupId>
-            <artifactId>web</artifactId>
+            <artifactId>daytrader-web</artifactId>
             <version>${pom.version}</version>
             <scope>provided</scope>
         </dependency>
@@ -135,7 +148,7 @@
                 <configuration>
                     <archive>
                         <manifestEntries>
-                            <Class-Path>core.jar dt-ejb.jar soap.jar web.jar streamer.jar wsappclient.jar</Class-Path>
+                            <Class-Path>util.jar core.jar entities.jar dt-ejb.jar soap.jar web.jar streamer.jar wsappclient.jar</Class-Path>
                         </manifestEntries>
                     </archive>
                     <resources>

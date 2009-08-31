@@ -21,18 +21,22 @@
 
     <parent>
         <groupId>org.apache.geronimo.daytrader</groupId>
-        <artifactId>daytrader-parent</artifactId>
+        <artifactId>assemblies</artifactId>
         <version>2.2-SNAPSHOT</version>
     </parent>
 
     <groupId>org.apache.geronimo.daytrader</groupId>
-    <artifactId>assemblies</artifactId>
-    <name>DayTrader :: Assemblies</name>
+    <artifactId>assemblies-javaee</artifactId>
+    <name>DayTrader :: Assemblies - JavaEE</name>
     <packaging>pom</packaging>
 
     <modules>
-        <module>javaee</module>
-        <module>web</module>
+        <module>daytrader-web</module>
+        <module>daytrader-ear</module>
+        <!--
+        <module>dojo-ui-war</module>
+        <module>dojo-ui-ear</module>
+        -->
     </modules>
 
 </project>
