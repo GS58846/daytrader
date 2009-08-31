@@ -21,8 +21,9 @@ import java.util.Collection;
 
 import javax.naming.InitialContext;
 
+import org.apache.geronimo.samples.daytrader.direct.TradeJDBCDirect;
 import org.apache.geronimo.samples.daytrader.direct.TradeJEEDirect;
-import org.apache.geronimo.samples.daytrader.direct.TradeWebDirect;
+import org.apache.geronimo.samples.daytrader.direct.TradeJPADirect;
 //import org.apache.geronimo.samples.daytrader.ejb3.TradeSLSBRemote;
 //import org.apache.geronimo.samples.daytrader.ejb3.DirectSLSBRemote;
 import org.apache.geronimo.samples.daytrader.util.Log;
@@ -106,17 +107,25 @@ public class TradeAction implements TradeServices {
                 Log.error("TradeAction:TradeAction() Creation of Trade JDBC Direct failed\n" + e);
                 re = new RuntimeException(e);
             }
-        } else if (TradeConfig.runTimeMode == TradeConfig.JPA) {
+        } else if (TradeConfig.runTimeMode == TradeConfig.JDBC) {
             try {
-                trade = new TradeWebDirect();
+                trade = new TradeJDBCDirect();
             }
             catch (Exception e) {
-                Log.error("TradeAction:TradeAction() Creation of Trade JPA Direct failed\n" + e);
+                Log.error("TradeAction:TradeAction() Creation of TradeJDBCDirect failed\n" + e);
+                re = new RuntimeException(e);
+            }
+        } else if (TradeConfig.runTimeMode == TradeConfig.JPA) {
+            try {
+                trade = new TradeJPADirect();
+            }
+            catch (Exception e) {
+                Log.error("TradeAction:TradeAction() Creation of TradeJPADirect failed\n" + e);
                 re = new RuntimeException(e);
             }
         } else {
             Log.error("TradeAction:TradeAction() Unknown Trade runtime mode.");
-            re = new RuntimeException("TradeAction:TradeAction() Unknown Trade runtime mode.");
+            re = new IllegalArgumentException("TradeAction:TradeAction() Unknown runTimeMode=" + TradeConfig.runTimeMode);
         }
         
         if (re != null) {

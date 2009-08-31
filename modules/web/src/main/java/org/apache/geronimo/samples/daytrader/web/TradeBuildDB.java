@@ -24,7 +24,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import org.apache.geronimo.samples.daytrader.*;
-import org.apache.geronimo.samples.daytrader.direct.TradeDirect;
+import org.apache.geronimo.samples.daytrader.direct.TradeJEEDirect;
 import org.apache.geronimo.samples.daytrader.util.*;
 
 /**
@@ -63,7 +63,7 @@ public class TradeBuildDB {
 		{	
 			//out.println("<BR>TradeBuildDB: **** warPath= "+warPath+" ****</BR></BODY>");
 			
-			TradeDirect tradeDirect = new TradeDirect();
+			TradeJEEDirect tradeDirect = new TradeJEEDirect();
 			boolean success = false;
 			String dbProductName = null;
 			File ddlFile = null;

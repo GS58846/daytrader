@@ -23,7 +23,7 @@ import org.apache.geronimo.samples.daytrader.direct.*;
 import org.apache.geronimo.samples.daytrader.util.*;
 
 import java.io.IOException;
-//import org.apache.geronimo.samples.daytrader.*;
+
 
 /**
  * 
@@ -47,10 +47,15 @@ public class TradeAppServlet extends HttpServlet {
             TradeConfig.setConfigParam(parm, value);
         }
         try {
-            TradeDirect.init();
+            if (TradeConfig.runTimeMode == TradeConfig.JDBC) {
+                TradeJDBCDirect.init();
+            } else if (TradeConfig.runTimeMode == TradeConfig.JPA) {
+                TradeJPADirect.init();
+            } else {
+                TradeJEEDirect.init();
+            }
         } catch (Exception e) {
-            Log.error(e,
-                    "TradeAppServlet:init -- Error initializing TradeDirect");
+            Log.error(e, "TradeAppServlet:init -- Error initializing TradeDirect");
         }
     }
 

@@ -1180,7 +1180,10 @@ public class TradeJDBCDirect implements TradeServices {
 
     private void publishQuotePriceChange(QuoteDataBean quoteData, BigDecimal oldPrice, BigDecimal changeFactor,
         double sharesTraded) throws Exception {
-        throw new RuntimeException("publishQuotePriceChange() is not implemented for this runtime mode");
+        if (!TradeConfig.getPublishQuotePriceChange())
+            return;
+        Log.error("TradeJDBCDirect:publishQuotePriceChange - is not implemented for this runtime mode");
+        throw new UnsupportedOperationException("TradeJDBCDirect:publishQuotePriceChange-  is not implemented for this runtime mode");
     }
 
     /**

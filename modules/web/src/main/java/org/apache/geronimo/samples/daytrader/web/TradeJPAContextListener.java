@@ -18,26 +18,23 @@ package org.apache.geronimo.samples.daytrader.web;
 
 import javax.servlet.*;
 
-import org.apache.geronimo.samples.daytrader.direct.TradeDirect;
+import org.apache.geronimo.samples.daytrader.direct.TradeJPADirect;
 import org.apache.geronimo.samples.daytrader.util.Log;
 
-public class TradeWebContextListener
+public class TradeJPAContextListener
 	implements ServletContextListener 
 {
 
-	//receieve trade web app startup/shutown events to start(initialized)/stop TradeDirect
+	//receieve trade web app startup/shutown events to start(initialized)/stop TradeJPADirect
 	public void contextInitialized(ServletContextEvent event)
 	{
-		Log.trace("TradeWebContextListener contextInitialized -- initializing TradeDirect");
-		TradeDirect.init();		
+		Log.trace("TradeJPAContextListener:contextInitialized - initializing TradeJPADirect");
+		TradeJPADirect.init();
 	}
 	public void contextDestroyed(ServletContextEvent event)
 	{
-		Log.trace("TradeWebContextListener  contextDestroy calling TradeDirect:destroy()");		
-		TradeDirect.destroy();
+		Log.trace("TradeJPAContextListener:contextDestroyed - calling TradeJPADirect:destroy()");		
+		TradeJPADirect.destroy();
 	}
 
-    
-
 }
-
