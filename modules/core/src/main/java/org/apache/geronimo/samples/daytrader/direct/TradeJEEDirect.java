@@ -56,7 +56,7 @@ import org.apache.geronimo.samples.daytrader.*;
  * 
  */
 
-public class TradeJEEDirect implements TradeServices {
+public class TradeJEEDirect implements TradeServices, TradeDBServices {
 
     private static String dsName = TradeConfig.DATASOURCE;
 

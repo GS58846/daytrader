@@ -44,10 +44,15 @@ public class TradeServletAction {
     private TradeServices tAction = null;
 
     TradeServletAction() {
-        if (TradeConfig.getAccessMode() == TradeConfig.STANDARD)
+        if (TradeConfig.getAccessMode() == TradeConfig.STANDARD) {
             tAction = new TradeAction();
-        else if (TradeConfig.getAccessMode() == TradeConfig.WEBSERVICES)
+        } else if (TradeConfig.getAccessMode() == TradeConfig.WEBSERVICES) {
             tAction = new TradeWebSoapProxy();
+        } else {
+            throw new IllegalArgumentException(
+                "TradeServletAction - Uknown TradeConfig accessMode=" +
+                TradeConfig.getAccessMode());
+        }
     }
 
     /**
@@ -272,8 +277,10 @@ public class TradeServletAction {
     void doHome(ServletContext ctx, HttpServletRequest req,
             HttpServletResponse resp, String userID, String results)
             throws javax.servlet.ServletException, java.io.IOException {
+        
         BigDecimal balance;
         String result = "";
+        
         try {
             AccountDataBean accountData = tAction.getAccountData(userID);
             Collection holdingDataBeans = tAction.getHoldings(userID);
@@ -290,41 +297,68 @@ public class TradeServletAction {
             // See Edge Caching above
             // req.setAttribute("marketSummaryData", marketSummaryData);
             req.setAttribute("results", results);
-        } catch (java.lang.IllegalArgumentException e) { // this is a user
-                                                            // error so I will
-            // forward them to another page rather than throw a 500
-            req.setAttribute("results", results + "check userID = " + userID
-                    + " and that the database is populated");
-            requestDispatch(ctx, req, resp, userID, TradeConfig
-                    .getPage(TradeConfig.HOME_PAGE));
-            // log the exception with an error level of 3 which means, handled
-            // exception but would invalidate a automation run
-            Log
-                    .error(
-                            "TradeServletAction.doHome(...)"
-                                    + "illegal argument, information should be in exception string"
-                                    + "treating this as a user error and forwarding on to a new page",
-                            e);
-        } catch (javax.ejb.FinderException e) {
+        } catch (java.lang.IllegalArgumentException e) { 
             // this is a user error so I will
             // forward them to another page rather than throw a 500
-            req.setAttribute("results", results
-                    + "\nCould not find account for + " + userID);
-            // requestDispatch(ctx, req, resp,
-            // TradeConfig.getPage(TradeConfig.HOME_PAGE));
+            req.setAttribute("results", results + "check userID = " + userID
+                + " and that the database is populated");
+            requestDispatch(ctx, req, resp, userID, TradeConfig
+                .getPage(TradeConfig.HOME_PAGE));
             // log the exception with an error level of 3 which means, handled
             // exception but would invalidate a automation run
-            Log
-                    .error(
-                            "TradeServletAction.doHome(...)"
-                                    + "Error finding account for user "
-                                    + userID
-                                    + "treating this as a user error and forwarding on to a new page",
-                            e);
+            Log.error("TradeServletAction.doHome(...)"
+                + "illegal argument, information should be in exception string"
+                + "treating this as a user error and forwarding on to a new page",
+                e);
+        // } catch (javax.ejb.FinderException e) {
+            // moved to below
         } catch (Exception e) {
-            // log the exception with error page
-            throw new ServletException("TradeServletAction.doHome(...)"
+            boolean javaee = false;
+            // since we will not have the EJB Spec for non-JavaEE containers,
+            // lets try to handle the expected exception logic, where for
+            // JavaEE we should catch a javax.ejb.FinderException while
+            // for non-JavaEE we should catch a RuntimeException
+            try {
+                Class c = Class.forName("javax.ejb.FinderException");
+                javaee = true;
+                if ((c != null) && (e instanceof javax.ejb.FinderException)) { // JavaEE container
+                    // this is a user error so I will
+                    // forward them to another page rather than throw a 500
+                    req.setAttribute("results", results
+                        + "\nCould not find account for + " + userID);
+                    // requestDispatch(ctx, req, resp,
+                    // TradeConfig.getPage(TradeConfig.HOME_PAGE));
+                    // log the exception with an error level of 3 which means, handled
+                    // exception but would invalidate a automation run
+                    Log.error("TradeServletAction.doHome(...)"
+                        + "Error finding account for user "
+                        + userID
+                        + "treating this as a user error and forwarding on to a new page",
+                        e);
+                }
+            } catch (ClassNotFoundException cnne) {
+                // ignore, for the non-JavaEE web-only assemblies
+            }
+            
+            if (!javaee && (e instanceof RuntimeException)) {   // non-JavaEE container
+                // this is a user error so I will
+                // forward them to another page rather than throw a 500
+                req.setAttribute("results", results
+                    + "\nCould not find account for + " + userID);
+                // requestDispatch(ctx, req, resp,
+                // TradeConfig.getPage(TradeConfig.HOME_PAGE));
+                // log the exception with an error level of 3 which means, handled
+                // exception but would invalidate a automation run
+                Log.error("TradeServletAction.doHome(...)"
+                    + "Error finding account for user "
+                    + userID
+                    + "treating this as a user error and forwarding on to a new page",
+                    e);                
+            } else {
+                // log the exception with error page
+                throw new ServletException("TradeServletAction.doHome(...)"
                     + " exception user =" + userID, e);
+            }
         }
 
         requestDispatch(ctx, req, resp, userID, TradeConfig

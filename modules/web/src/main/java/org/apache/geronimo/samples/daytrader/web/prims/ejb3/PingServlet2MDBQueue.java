@@ -38,8 +38,8 @@ import org.apache.geronimo.samples.daytrader.util.TradeConfig;
 
 /**
  * This primitive is designed to run inside the TradeApplication and relies upon
- * the {@link org.apache.geronimo.samples.daytrader.TradeConfig} class to set
- * configuration parameters. PingServlet2MDBQueue tests key functionality of a
+ * the {@link org.apache.geronimo.samples.daytrader.util.TradeConfig} class to
+ * set config parameters. PingServlet2MDBQueue tests key functionality of a
  * servlet call to a post a message to an MDB Queue. The TradeBrokerMDB receives
  * the message This servlet makes use of the MDB EJB
  * {@link org.apache.geronimo.samples.daytrader.ejb.TradeBrokerMDB} by posting a

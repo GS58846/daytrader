@@ -19,6 +19,7 @@ package org.apache.geronimo.samples.daytrader.ejb3;
 
 import org.apache.geronimo.samples.daytrader.AccountDataBean;
 import org.apache.geronimo.samples.daytrader.AccountProfileDataBean;
+import org.apache.geronimo.samples.daytrader.direct.TradeJEEDirect;
 import org.apache.geronimo.samples.daytrader.FinancialUtils;
 import org.apache.geronimo.samples.daytrader.HoldingDataBean;
 import org.apache.geronimo.samples.daytrader.MarketSummaryDataBean;
@@ -614,7 +615,7 @@ public class TradeSLSBBean implements TradeSLSBRemote, TradeSLSBLocal {
         if (Log.doTrace())
             Log.trace("TradeSLSBBean:resetTrade", deleteAll);
 
-        return new org.apache.geronimo.samples.daytrader.direct.TradeJEEDirect(false).resetTrade(deleteAll);
+        return (new TradeJEEDirect(false)).resetTrade(deleteAll);
     }
 
     private void publishQuotePriceChange(QuoteDataBean quote, BigDecimal oldPrice, BigDecimal changeFactor, double sharesTraded) {

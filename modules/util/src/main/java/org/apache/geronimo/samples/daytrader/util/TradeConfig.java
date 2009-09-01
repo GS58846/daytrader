@@ -507,7 +507,7 @@ public class TradeConfig {
 			try {
 				for (int i = 0; i < runTimeModeNames.length; i++) {
 					if (value.equalsIgnoreCase(runTimeModeNames[i])) {
-						runTimeMode = i;
+						setRunTimeMode(i);
 						break;
 					}
 				}
@@ -518,7 +518,7 @@ public class TradeConfig {
 						+ "trying to set runtimemode to "
 						+ value
 						+ "reverting to current value: "
-						+ runTimeModeNames[runTimeMode],
+						+ runTimeModeNames[getRunTimeMode()],
 					e);
 			} // If the value is bad, simply revert to current
 		} else if (parm.equalsIgnoreCase("orderProcessingMode")) {
@@ -850,6 +850,14 @@ public class TradeConfig {
 		accessMode = value;
 //		TradeWebSoapProxy.updateServicePort();
 	}
+
+    public static int getRunTimeMode() {
+        return runTimeMode;
+    }
+    
+    public static void setRunTimeMode(int value) {
+        runTimeMode = value;
+    }
 
 	public static int getPrimIterations() {
 		return primIterations;

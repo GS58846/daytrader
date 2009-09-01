@@ -53,7 +53,7 @@ import java.sql.Timestamp;
  * 
  */
 
-public class TradeJDBCDirect implements TradeServices {
+public class TradeJDBCDirect implements TradeServices, TradeDBServices {
 
     private static String dsName = TradeConfig.DATASOURCE;
 

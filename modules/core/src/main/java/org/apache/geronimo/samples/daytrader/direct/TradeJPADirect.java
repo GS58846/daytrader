@@ -18,6 +18,7 @@ package org.apache.geronimo.samples.daytrader.direct;
 
 import org.apache.geronimo.samples.daytrader.AccountDataBean;
 import org.apache.geronimo.samples.daytrader.AccountProfileDataBean;
+import org.apache.geronimo.samples.daytrader.direct.TradeJDBCDirect;
 import org.apache.geronimo.samples.daytrader.FinancialUtils;
 import org.apache.geronimo.samples.daytrader.HoldingDataBean;
 import org.apache.geronimo.samples.daytrader.MarketSummaryDataBean;
@@ -25,6 +26,7 @@ import org.apache.geronimo.samples.daytrader.OrderDataBean;
 import org.apache.geronimo.samples.daytrader.QuoteDataBean;
 import org.apache.geronimo.samples.daytrader.RunStatsDataBean;
 import org.apache.geronimo.samples.daytrader.TradeAction;
+import org.apache.geronimo.samples.daytrader.TradeDBServices;
 import org.apache.geronimo.samples.daytrader.TradeServices;
 import org.apache.geronimo.samples.daytrader.util.Log;
 import org.apache.geronimo.samples.daytrader.util.MDBStats;
@@ -71,7 +73,7 @@ import javax.transaction.SystemException;
  * 
  */
 
-public class TradeJPADirect implements TradeServices {
+public class TradeJPADirect implements TradeServices, TradeDBServices {
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -619,7 +621,7 @@ public class TradeJPADirect implements TradeServices {
         if (Log.doTrace())
             Log.trace("TradeJPADirect:resetTrade", deleteAll);
 
-        return new org.apache.geronimo.samples.daytrader.direct.TradeJDBCDirect(false).resetTrade(deleteAll);
+        return (new TradeJDBCDirect(false)).resetTrade(deleteAll);
     }
 
     private void publishQuotePriceChange(QuoteDataBean quote, BigDecimal oldPrice, BigDecimal changeFactor,
@@ -685,4 +687,21 @@ public class TradeJPADirect implements TradeServices {
         Log.trace("publishQuotePriceChange: " + TradeConfig.getPublishQuotePriceChange());
     }
 
+    /**
+     * TradeBuildDB needs this abstracted method
+     */
+    public String checkDBProductName() throws Exception {
+        if (Log.doTrace())
+            Log.trace("TradeJPADirect:checkDBProductName");
+        return (new TradeJDBCDirect(false)).checkDBProductName();
+    }
+
+    /**
+     * TradeBuildDB needs this abstracted method
+     */
+    public boolean recreateDBTables(Object[] sqlBuffer, java.io.PrintWriter out) throws Exception {
+        if (Log.doTrace())
+            Log.trace("TradeJPADirect:checkDBProductName");
+        return (new TradeJDBCDirect(false)).recreateDBTables(sqlBuffer, out);
+    }
 }

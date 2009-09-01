@@ -557,4 +557,5 @@ public class TradeAction implements TradeServices {
         runStatsData = trade.resetTrade(deleteAll);
 		return runStatsData;
 	}
+    
 }

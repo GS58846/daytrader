@@ -113,7 +113,7 @@ public class TradeConfigServlet extends HttpServlet {
 				int i = Integer.parseInt(runTimeModeStr);
 				if ((i >= 0)
 					&& (i < TradeConfig.runTimeModeNames.length)) //Input validation
-					TradeConfig.runTimeMode = i;
+					TradeConfig.setRunTimeMode(i);
 			}
 			catch (Exception e)
 			{
@@ -126,7 +126,7 @@ public class TradeConfigServlet extends HttpServlet {
 
 			} // If the value is bad, simply revert to current
 		}
-		currentConfigStr += "\t\tRunTimeMode:\t\t" + TradeConfig.runTimeModeNames[TradeConfig.runTimeMode] + "\n";
+		currentConfigStr += "\t\tRunTimeMode:\t\t" + TradeConfig.runTimeModeNames[TradeConfig.getRunTimeMode()] + "\n";
 		
 		/* Add JPA layer choice to avoid some ugly Hibernate bugs */
 		String jpaLayerStr = req.getParameter("JPALayer");
@@ -408,15 +408,14 @@ public class TradeConfigServlet extends HttpServlet {
 			else if (action.equals("buildDB"))
 			{
 				resp.setContentType("text/html");
-                                new TradeBuildDB(resp.getWriter(), null);
+                new TradeBuildDB(resp.getWriter(), null);
 				result = "DayTrader Database Built - " + TradeConfig.getMAX_USERS() + "users created";
 			}
-                        else if (action.equals("buildDBTables"))
-                        {
- 
-                                resp.setContentType("text/html");
-                                new TradeBuildDB(resp.getWriter(), getServletConfig().getServletContext().getRealPath("/"));
-                        }
+            else if (action.equals("buildDBTables"))
+            {
+                resp.setContentType("text/html");
+                new TradeBuildDB(resp.getWriter(), getServletConfig().getServletContext().getRealPath("/"));
+            }
 			doConfigDisplay(req, resp, result + "Current DayTrader Configuration:");
 		}
 		catch (Exception e)
