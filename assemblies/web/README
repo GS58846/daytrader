@@ -20,3 +20,6 @@ daytrader-web-jpa - Only requires a web container (like Tomcat v6) and is
 	    openjpa.jar and its dependencies (or just openjpa-all.jar)
 	    to the lib directory.
 
+Deployment plans for use with Apache Geronimo 2.1/2.2 are located in the plans
+subdirectory.
+
