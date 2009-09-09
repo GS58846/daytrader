@@ -26,7 +26,7 @@
 
     <groupId>org.apache.geronimo.daytrader.modules</groupId>
     <artifactId>daytrader-entities</artifactId>
-    <packaging>jar</packaging>
+    <packaging>bundle</packaging>
     <name>DayTrader :: Modules - Entities</name>
     <description>Daytrader JPA Enhanced Enttities Module</description>
 
@@ -41,6 +41,7 @@
             <groupId>org.apache.geronimo.daytrader.modules</groupId>
             <artifactId>daytrader-util</artifactId>
             <version>${pom.version}</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.geronimo.specs</groupId>
@@ -143,6 +144,15 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <configuration>
+                    <instructions>
+                        <Export-Package>org.apache.geronimo.samples.daytrader.beans*;version=2.2-SNAPSHOT</Export-Package>
+                    </instructions>
+                </configuration>
             </plugin>
         </plugins>
     </build>

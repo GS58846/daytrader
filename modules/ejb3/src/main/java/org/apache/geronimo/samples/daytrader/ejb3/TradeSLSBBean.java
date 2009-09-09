@@ -17,16 +17,16 @@
 
 package org.apache.geronimo.samples.daytrader.ejb3;
 
-import org.apache.geronimo.samples.daytrader.AccountDataBean;
-import org.apache.geronimo.samples.daytrader.AccountProfileDataBean;
-import org.apache.geronimo.samples.daytrader.direct.TradeJEEDirect;
-import org.apache.geronimo.samples.daytrader.FinancialUtils;
-import org.apache.geronimo.samples.daytrader.HoldingDataBean;
-import org.apache.geronimo.samples.daytrader.MarketSummaryDataBean;
-import org.apache.geronimo.samples.daytrader.OrderDataBean;
-import org.apache.geronimo.samples.daytrader.QuoteDataBean;
-import org.apache.geronimo.samples.daytrader.RunStatsDataBean;
-import org.apache.geronimo.samples.daytrader.TradeAction;
+import org.apache.geronimo.samples.daytrader.core.direct.TradeJEEDirect;
+import org.apache.geronimo.samples.daytrader.core.FinancialUtils;
+import org.apache.geronimo.samples.daytrader.core.MarketSummaryDataBean;
+import org.apache.geronimo.samples.daytrader.core.RunStatsDataBean;
+import org.apache.geronimo.samples.daytrader.core.TradeAction;
+import org.apache.geronimo.samples.daytrader.beans.AccountDataBean;
+import org.apache.geronimo.samples.daytrader.beans.AccountProfileDataBean;
+import org.apache.geronimo.samples.daytrader.beans.HoldingDataBean;
+import org.apache.geronimo.samples.daytrader.beans.OrderDataBean;
+import org.apache.geronimo.samples.daytrader.beans.QuoteDataBean;
 import org.apache.geronimo.samples.daytrader.util.Log;
 import org.apache.geronimo.samples.daytrader.util.MDBStats;
 import org.apache.geronimo.samples.daytrader.util.TradeConfig;
@@ -390,7 +390,7 @@ public class TradeSLSBBean implements TradeSLSBRemote, TradeSLSBLocal {
                                                                           "a.BALANCE, "+
                                                                           "a.OPENBALANCE, "+
                                                                           "a.PROFILE_USERID "+
-                                                                          "from accountejb a where a.profile_userid = ?", org.apache.geronimo.samples.daytrader.AccountDataBean.class);
+                                                                          "from accountejb a where a.profile_userid = ?", org.apache.geronimo.samples.daytrader.beans.AccountDataBean.class);
                 findaccountid.setParameter(1, userID);
                 AccountDataBean account = (AccountDataBean)findaccountid.getSingleResult();                
                 Integer accountid = account.getAccountID();

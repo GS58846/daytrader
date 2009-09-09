@@ -18,7 +18,7 @@
 package org.apache.geronimo.samples.daytrader.ejb3;
 
 import javax.ejb.Remote;
-import org.apache.geronimo.samples.daytrader.TradeServices;
+import org.apache.geronimo.samples.daytrader.core.TradeServices;
 
 @Remote
 public interface DirectSLSBRemote extends TradeServices {

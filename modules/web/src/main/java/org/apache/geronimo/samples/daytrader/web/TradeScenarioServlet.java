@@ -19,7 +19,8 @@ package org.apache.geronimo.samples.daytrader.web;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
-import org.apache.geronimo.samples.daytrader.*;
+import org.apache.geronimo.samples.daytrader.core.*;
+import org.apache.geronimo.samples.daytrader.beans.*;
 import org.apache.geronimo.samples.daytrader.util.*;
 
 import java.util.Collection;

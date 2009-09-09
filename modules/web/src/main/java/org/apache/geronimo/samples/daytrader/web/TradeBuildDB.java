@@ -23,8 +23,9 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-import org.apache.geronimo.samples.daytrader.*;
-import org.apache.geronimo.samples.daytrader.direct.*;
+import org.apache.geronimo.samples.daytrader.core.*;
+import org.apache.geronimo.samples.daytrader.core.direct.*;
+import org.apache.geronimo.samples.daytrader.beans.*;
 import org.apache.geronimo.samples.daytrader.util.*;
 
 /**

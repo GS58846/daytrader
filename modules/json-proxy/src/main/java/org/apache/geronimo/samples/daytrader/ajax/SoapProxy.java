@@ -37,8 +37,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 
-import org.apache.geronimo.samples.daytrader.AccountProfileDataBean;
-import org.apache.geronimo.samples.daytrader.TradeWSServicesProxy;
+import org.apache.geronimo.samples.daytrader.core.TradeWSServicesProxy;
+import org.apache.geronimo.samples.daytrader.beans.AccountProfileDataBean;
 
 public class SoapProxy extends HttpServlet implements Servlet {
 	private TradeWSServicesProxy _soapProxy;

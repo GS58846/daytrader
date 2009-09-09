@@ -18,7 +18,7 @@ package org.apache.geronimo.samples.daytrader.web;
 
 import javax.servlet.*;
 
-import org.apache.geronimo.samples.daytrader.direct.TradeJPADirect;
+import org.apache.geronimo.samples.daytrader.core.direct.TradeJPADirect;
 import org.apache.geronimo.samples.daytrader.util.Log;
 
 public class TradeJPAContextListener

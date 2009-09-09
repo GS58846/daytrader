@@ -26,7 +26,7 @@
 
     <groupId>org.apache.geronimo.daytrader.modules</groupId>
     <artifactId>daytrader-util</artifactId>
-    <packaging>jar</packaging>
+    <packaging>bundle</packaging>
     <name>DayTrader :: Modules - Util</name>
     <description>Daytrader Util Module</description>
 
@@ -56,5 +56,16 @@
                 <filtering>true</filtering>
             </resource>
         </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <configuration>
+                    <instructions>
+                        <Export-Package>org.apache.geronimo.samples.daytrader.util*;version=2.2-SNAPSHOT</Export-Package>
+                    </instructions>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 </project>

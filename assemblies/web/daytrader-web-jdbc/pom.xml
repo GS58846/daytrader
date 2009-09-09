@@ -131,8 +131,50 @@
                             </includes>
                         </resource>
                     </resources>
+
+                    <archive>
+                      <!-- add the generated manifest to the war -->
+                      <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
+                    </archive>
+
                 </configuration>
             </plugin>
+
+            <plugin>
+              <groupId>org.apache.felix</groupId>
+              <artifactId>maven-bundle-plugin</artifactId>
+              <executions>
+                <execution>
+                  <id>bundle-manifest</id>
+                  <phase>process-classes</phase>
+                  <goals>
+                    <goal>manifest</goal>
+                  </goals>
+                </execution>
+              </executions>
+              <configuration>
+                <supportedProjectTypes>
+                  <supportedProjectType>jar</supportedProjectType>
+                  <supportedProjectType>bundle</supportedProjectType>
+                  <supportedProjectType>war</supportedProjectType>
+                </supportedProjectTypes>
+                <instructions>
+                  <Bundle-ClassPath>.,WEB-INF/classes</Bundle-ClassPath>
+                  <Embed-Directory>WEB-INF/lib</Embed-Directory>
+                  <Embed-Dependency>*;scope=compile|runtime</Embed-Dependency>
+                  <Embed-Transitive>true</Embed-Transitive>
+                  <Bundle-SymbolicName>${pom.artifactId}</Bundle-SymbolicName>
+                  <Bundle-Version>${pom.version}</Bundle-Version>
+                  <Web-ContextPath>/daytrader</Web-ContextPath>
+                  <Web-JSPExtractLocation>/</Web-JSPExtractLocation>
+                  <Import-Package>
+                      *
+                  </Import-Package>
+                </instructions>
+                <unpackBundle>true</unpackBundle>
+              </configuration>
+            </plugin>
+
         </plugins>
     </build>
 </project>

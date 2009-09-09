@@ -21,10 +21,11 @@ import java.math.BigDecimal;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
-import org.apache.geronimo.samples.daytrader.direct.*;
+import org.apache.geronimo.samples.daytrader.core.direct.*;
+import org.apache.geronimo.samples.daytrader.beans.*;
 import org.apache.geronimo.samples.daytrader.util.*;
 
-import org.apache.geronimo.samples.daytrader.*;
+import org.apache.geronimo.samples.daytrader.core.*;
 /**
  * 
  * PingJDBCReadPrepStmt uses a prepared statement

@@ -25,7 +25,7 @@ import javax.naming.InitialContext;
 import javax.rmi.PortableRemoteObject;
 import javax.ejb.EJB;
 
-import org.apache.geronimo.samples.daytrader.QuoteDataBean;
+import org.apache.geronimo.samples.daytrader.beans.QuoteDataBean;
 import org.apache.geronimo.samples.daytrader.ejb3.TradeSLSBRemote;
 
 public class TradeClient {

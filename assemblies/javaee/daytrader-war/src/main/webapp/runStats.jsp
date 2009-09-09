@@ -21,7 +21,7 @@
 <TITLE>Welcome to Trade</TITLE>
 </HEAD>
 <BODY bgcolor="#ffffff" link="#000099">
-<%@ page import="org.apache.geronimo.samples.daytrader.*"
+<%@ page import="org.apache.geronimo.samples.daytrader.core.*"
 	session="false" isThreadSafe="true" isErrorPage="false"%>
 
 <jsp:useBean

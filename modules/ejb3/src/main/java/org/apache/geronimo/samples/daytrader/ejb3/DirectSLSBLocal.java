@@ -18,7 +18,7 @@
 package org.apache.geronimo.samples.daytrader.ejb3;
 
 import javax.ejb.Local;
-import org.apache.geronimo.samples.daytrader.TradeServices;
+import org.apache.geronimo.samples.daytrader.core.TradeServices;
 
 @Local
 public interface DirectSLSBLocal extends TradeServices {

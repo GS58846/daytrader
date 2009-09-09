@@ -25,7 +25,7 @@ import javax.persistence.PersistenceContext;
 import javax.ejb.EJB;
 
 import org.apache.geronimo.samples.daytrader.ejb3.TradeSLSBRemote;
-import org.apache.geronimo.samples.daytrader.QuoteDataBean;
+import org.apache.geronimo.samples.daytrader.beans.QuoteDataBean;
 import org.apache.geronimo.samples.daytrader.util.Log;
 import org.apache.geronimo.samples.daytrader.util.TradeConfig;
 

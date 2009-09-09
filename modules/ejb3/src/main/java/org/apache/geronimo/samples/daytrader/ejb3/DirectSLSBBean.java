@@ -17,14 +17,14 @@
 
 package org.apache.geronimo.samples.daytrader.ejb3;
 
-import org.apache.geronimo.samples.daytrader.AccountDataBean;
-import org.apache.geronimo.samples.daytrader.AccountProfileDataBean;
-import org.apache.geronimo.samples.daytrader.HoldingDataBean;
-import org.apache.geronimo.samples.daytrader.OrderDataBean;
-import org.apache.geronimo.samples.daytrader.QuoteDataBean;
-import org.apache.geronimo.samples.daytrader.RunStatsDataBean;
-import org.apache.geronimo.samples.daytrader.MarketSummaryDataBean;
-import org.apache.geronimo.samples.daytrader.direct.TradeJEEDirect;
+import org.apache.geronimo.samples.daytrader.beans.AccountDataBean;
+import org.apache.geronimo.samples.daytrader.beans.AccountProfileDataBean;
+import org.apache.geronimo.samples.daytrader.beans.HoldingDataBean;
+import org.apache.geronimo.samples.daytrader.beans.OrderDataBean;
+import org.apache.geronimo.samples.daytrader.beans.QuoteDataBean;
+import org.apache.geronimo.samples.daytrader.core.RunStatsDataBean;
+import org.apache.geronimo.samples.daytrader.core.MarketSummaryDataBean;
+import org.apache.geronimo.samples.daytrader.core.direct.TradeJEEDirect;
 
 import java.math.BigDecimal;
 import java.util.Collection;

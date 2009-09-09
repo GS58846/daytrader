@@ -22,7 +22,7 @@
 
 </HEAD>
 <BODY bgcolor="#ffffff" link="#000099" vlink="#000099">
-<%@ page import="java.util.Collection, java.util.Iterator, org.apache.geronimo.samples.daytrader.*, org.apache.geronimo.samples.daytrader.util.*" session="true" isThreadSafe="true" isErrorPage="false"%>
+<%@ page import="java.util.Collection, java.util.Iterator, org.apache.geronimo.samples.daytrader.core.*, org.apache.geronimo.samples.daytrader.beans.*, org.apache.geronimo.samples.daytrader.util.*" session="true" isThreadSafe="true" isErrorPage="false"%>
 <jsp:useBean id="results" scope="request" type="java.lang.String" />
 
 <TABLE height="54">

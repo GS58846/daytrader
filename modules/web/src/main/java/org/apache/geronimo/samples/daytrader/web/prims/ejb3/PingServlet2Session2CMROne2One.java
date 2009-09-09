@@ -22,7 +22,7 @@ import javax.servlet.http.*;
 import javax.naming.*;
 import javax.ejb.EJB;
 
-import org.apache.geronimo.samples.daytrader.AccountProfileDataBean;
+import org.apache.geronimo.samples.daytrader.beans.AccountProfileDataBean;
 import org.apache.geronimo.samples.daytrader.ejb3.TradeSLSBRemote;
 import org.apache.geronimo.samples.daytrader.util.Log;
 import org.apache.geronimo.samples.daytrader.util.TradeConfig;

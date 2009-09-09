@@ -25,7 +25,7 @@ import javax.naming.*;
 import javax.ejb.EJB;
 
 import org.apache.geronimo.samples.daytrader.ejb3.TradeSLSBRemote;
-import org.apache.geronimo.samples.daytrader.OrderDataBean;
+import org.apache.geronimo.samples.daytrader.beans.OrderDataBean;
 import org.apache.geronimo.samples.daytrader.util.Log;
 import org.apache.geronimo.samples.daytrader.util.TradeConfig;
 

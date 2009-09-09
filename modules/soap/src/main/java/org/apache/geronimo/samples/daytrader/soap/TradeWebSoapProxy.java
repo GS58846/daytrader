@@ -16,7 +16,6 @@
  */
 package org.apache.geronimo.samples.daytrader.soap;
 
-import org.apache.geronimo.samples.daytrader.*;
 
 import java.util.*;
 import java.net.*;
@@ -28,9 +27,11 @@ import java.rmi.RemoteException;
 import java.math.BigDecimal;
 import javax.ejb.FinderException;
 
+import org.apache.geronimo.samples.daytrader.beans.*;
+import org.apache.geronimo.samples.daytrader.core.*;
 import org.apache.geronimo.samples.daytrader.util.*;
 
-public class TradeWebSoapProxy implements org.apache.geronimo.samples.daytrader.TradeServices {
+public class TradeWebSoapProxy implements org.apache.geronimo.samples.daytrader.core.TradeServices {
 
 	private static String servicePort;
 	private static org.apache.geronimo.samples.daytrader.client.ws.TradeWSServices trade;
@@ -90,7 +91,7 @@ public class TradeWebSoapProxy implements org.apache.geronimo.samples.daytrader.
 	/* (non-Javadoc)
 	 * @see org.apache.geronimo.samples.daytrader.TradeServices#buy(java.lang.String, java.lang.String, double, int)
 	 */
-	public org.apache.geronimo.samples.daytrader.OrderDataBean buy(String userID, String symbol, double quantity,	int orderProcessingMode) throws Exception, RemoteException {
+	public org.apache.geronimo.samples.daytrader.beans.OrderDataBean buy(String userID, String symbol, double quantity,	int orderProcessingMode) throws Exception, RemoteException {
 		return convertOrderDataBean(getTrade().buy(userID, symbol, quantity, orderProcessingMode));
 	}
 
@@ -253,7 +254,7 @@ public class TradeWebSoapProxy implements org.apache.geronimo.samples.daytrader.
 	}
 
 	/* (non-Javadoc)
-	 * @see org.apache.geronimo.samples.daytrader.TradeServices#updateAccountProfile(org.apache.geronimo.samples.daytrader.AccountProfileDataBean)
+	 * @see org.apache.geronimo.samples.daytrader.TradeServices#updateAccountProfile(org.apache.geronimo.samples.daytrader.beans.AccountProfileDataBean)
 	 */
 	public AccountProfileDataBean updateAccountProfile(AccountProfileDataBean profileData) throws Exception, RemoteException {
 		return convertAccountProfileDataBean(getTrade().updateAccountProfile(convertAccountProfileDataBeanToWS(profileData)));
@@ -266,8 +267,8 @@ public class TradeWebSoapProxy implements org.apache.geronimo.samples.daytrader.
 		return convertQuoteDataBean(getTrade().updateQuotePriceVolume(symbol, newPrice, sharesTraded));		
 	}
 
-	private org.apache.geronimo.samples.daytrader.OrderDataBean convertOrderDataBean(org.apache.geronimo.samples.daytrader.client.ws.OrderDataBean bean) {
-		return new org.apache.geronimo.samples.daytrader.OrderDataBean(
+	private org.apache.geronimo.samples.daytrader.beans.OrderDataBean convertOrderDataBean(org.apache.geronimo.samples.daytrader.client.ws.OrderDataBean bean) {
+		return new org.apache.geronimo.samples.daytrader.beans.OrderDataBean(
 			bean.getOrderID(),
 			bean.getOrderType(),
 			bean.getOrderStatus(),
@@ -279,8 +280,8 @@ public class TradeWebSoapProxy implements org.apache.geronimo.samples.daytrader.
 			bean.getSymbol());
 	}
 
-	private org.apache.geronimo.samples.daytrader.QuoteDataBean convertQuoteDataBean(org.apache.geronimo.samples.daytrader.client.ws.QuoteDataBean bean) {
-		return new org.apache.geronimo.samples.daytrader.QuoteDataBean(
+	private org.apache.geronimo.samples.daytrader.beans.QuoteDataBean convertQuoteDataBean(org.apache.geronimo.samples.daytrader.client.ws.QuoteDataBean bean) {
+		return new org.apache.geronimo.samples.daytrader.beans.QuoteDataBean(
 			bean.getSymbol(),
 			bean.getCompanyName(),
 			bean.getVolume(),
@@ -302,8 +303,8 @@ public class TradeWebSoapProxy implements org.apache.geronimo.samples.daytrader.
 		return quotesRet;
 	}
 
-	private org.apache.geronimo.samples.daytrader.HoldingDataBean convertHoldingDataBean(org.apache.geronimo.samples.daytrader.client.ws.HoldingDataBean bean) {
-		return new org.apache.geronimo.samples.daytrader.HoldingDataBean(
+	private org.apache.geronimo.samples.daytrader.beans.HoldingDataBean convertHoldingDataBean(org.apache.geronimo.samples.daytrader.client.ws.HoldingDataBean bean) {
+		return new org.apache.geronimo.samples.daytrader.beans.HoldingDataBean(
 			bean.getHoldingID(),
 			bean.getQuantity(),
 			bean.getPurchasePrice(),
@@ -311,8 +312,8 @@ public class TradeWebSoapProxy implements org.apache.geronimo.samples.daytrader.
 			bean.getQuoteID());
 	}
 
-	private org.apache.geronimo.samples.daytrader.AccountDataBean convertAccountDataBean(org.apache.geronimo.samples.daytrader.client.ws.AccountDataBean bean) {
-		return new org.apache.geronimo.samples.daytrader.AccountDataBean(
+	private org.apache.geronimo.samples.daytrader.beans.AccountDataBean convertAccountDataBean(org.apache.geronimo.samples.daytrader.client.ws.AccountDataBean bean) {
+		return new org.apache.geronimo.samples.daytrader.beans.AccountDataBean(
 			bean.getAccountID(),
 			bean.getLoginCount(),
 			bean.getLogoutCount(),
@@ -323,8 +324,8 @@ public class TradeWebSoapProxy implements org.apache.geronimo.samples.daytrader.
 			bean.getProfileID());			
 	}
 
-	private org.apache.geronimo.samples.daytrader.AccountProfileDataBean convertAccountProfileDataBean(org.apache.geronimo.samples.daytrader.client.ws.AccountProfileDataBean bean) {
-		return new org.apache.geronimo.samples.daytrader.AccountProfileDataBean(
+	private org.apache.geronimo.samples.daytrader.beans.AccountProfileDataBean convertAccountProfileDataBean(org.apache.geronimo.samples.daytrader.client.ws.AccountProfileDataBean bean) {
+		return new org.apache.geronimo.samples.daytrader.beans.AccountProfileDataBean(
 			bean.getUserID(),
 			bean.getPassword(),
 			bean.getFullName(),
@@ -333,7 +334,7 @@ public class TradeWebSoapProxy implements org.apache.geronimo.samples.daytrader.
 			bean.getCreditCard());
 	}
 
-	private org.apache.geronimo.samples.daytrader.client.ws.AccountProfileDataBean convertAccountProfileDataBeanToWS(org.apache.geronimo.samples.daytrader.AccountProfileDataBean bean) {
+	private org.apache.geronimo.samples.daytrader.client.ws.AccountProfileDataBean convertAccountProfileDataBeanToWS(org.apache.geronimo.samples.daytrader.beans.AccountProfileDataBean bean) {
 		org.apache.geronimo.samples.daytrader.client.ws.AccountProfileDataBean beanRet = new org.apache.geronimo.samples.daytrader.client.ws.AccountProfileDataBean();
 		beanRet.setUserID(bean.getUserID());
 		beanRet.setPassword(bean.getPassword());
@@ -344,8 +345,8 @@ public class TradeWebSoapProxy implements org.apache.geronimo.samples.daytrader.
 		return beanRet;
 	}
 
-	private org.apache.geronimo.samples.daytrader.MarketSummaryDataBean convertMarketSummaryDataBean(org.apache.geronimo.samples.daytrader.client.ws.MarketSummaryDataBeanWS bean) {
-		org.apache.geronimo.samples.daytrader.MarketSummaryDataBean retBean = new org.apache.geronimo.samples.daytrader.MarketSummaryDataBean();
+	private org.apache.geronimo.samples.daytrader.core.MarketSummaryDataBean convertMarketSummaryDataBean(org.apache.geronimo.samples.daytrader.client.ws.MarketSummaryDataBeanWS bean) {
+		org.apache.geronimo.samples.daytrader.core.MarketSummaryDataBean retBean = new org.apache.geronimo.samples.daytrader.core.MarketSummaryDataBean();
 		retBean.setTopGainers(convertQuoteDataBeanWSArrayToCollectionBase(bean.getTopGainers()));
 		retBean.setTopLosers(convertQuoteDataBeanWSArrayToCollectionBase(bean.getTopLosers()));
 		retBean.setTSIA(bean.getTSIA());
@@ -356,8 +357,8 @@ public class TradeWebSoapProxy implements org.apache.geronimo.samples.daytrader.
 		return retBean; 
 	}
 	
-	private org.apache.geronimo.samples.daytrader.RunStatsDataBean convertRunStatsDataBean(org.apache.geronimo.samples.daytrader.client.ws.RunStatsDataBean bean) {
-		org.apache.geronimo.samples.daytrader.RunStatsDataBean beanRet = new org.apache.geronimo.samples.daytrader.RunStatsDataBean();
+	private org.apache.geronimo.samples.daytrader.core.RunStatsDataBean convertRunStatsDataBean(org.apache.geronimo.samples.daytrader.client.ws.RunStatsDataBean bean) {
+		org.apache.geronimo.samples.daytrader.core.RunStatsDataBean beanRet = new org.apache.geronimo.samples.daytrader.core.RunStatsDataBean();
 		beanRet.setTradeUserCount(bean.getTradeUserCount());
 		beanRet.setNewUserCount(bean.getNewUserCount());
 		beanRet.setSumLoginCount(bean.getSumLoginCount());

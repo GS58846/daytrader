@@ -35,12 +35,12 @@ public class Convert {
         OrderDataBean[] wsBeans = new OrderDataBean[col.size()];
         int i = 0;
         for (Object o : col) {
-            wsBeans[i++] = convertOrderDataBean((org.apache.geronimo.samples.daytrader.OrderDataBean)o);            
+            wsBeans[i++] = convertOrderDataBean((org.apache.geronimo.samples.daytrader.beans.OrderDataBean)o);            
         }
         return wsBeans;
     }
     
-    static OrderDataBean convertOrderDataBean(org.apache.geronimo.samples.daytrader.OrderDataBean bean) {
+    static OrderDataBean convertOrderDataBean(org.apache.geronimo.samples.daytrader.beans.OrderDataBean bean) {
         OrderDataBean wsBean = new OrderDataBean();
         wsBean.setOrderID(bean.getOrderID());
         wsBean.setOrderType(bean.getOrderType());
@@ -58,12 +58,12 @@ public class Convert {
         QuoteDataBean[] wsBeans = new QuoteDataBean[col.size()];
         int i = 0;
         for (Object o : col) {
-            wsBeans[i++] = convertQuoteDataBean((org.apache.geronimo.samples.daytrader.QuoteDataBean)o);            
+            wsBeans[i++] = convertQuoteDataBean((org.apache.geronimo.samples.daytrader.beans.QuoteDataBean)o);            
         }
         return wsBeans;
     }
     
-    static QuoteDataBean convertQuoteDataBean(org.apache.geronimo.samples.daytrader.QuoteDataBean bean) {
+    static QuoteDataBean convertQuoteDataBean(org.apache.geronimo.samples.daytrader.beans.QuoteDataBean bean) {
         QuoteDataBean wsBean = new QuoteDataBean();
         wsBean.setSymbol(bean.getSymbol());
         wsBean.setCompanyName(bean.getCompanyName());
@@ -76,7 +76,7 @@ public class Convert {
         return wsBean;
     }
     
-    static RunStatsDataBean convertRunStatsDataBean(org.apache.geronimo.samples.daytrader.RunStatsDataBean bean) {
+    static RunStatsDataBean convertRunStatsDataBean(org.apache.geronimo.samples.daytrader.core.RunStatsDataBean bean) {
         RunStatsDataBean wsBean = new RunStatsDataBean();        
         wsBean.setTradeUserCount(bean.getTradeUserCount());
         wsBean.setNewUserCount(bean.getNewUserCount());
@@ -92,7 +92,7 @@ public class Convert {
         return wsBean;
     }
     
-    static AccountDataBean convertAccountDataBean(org.apache.geronimo.samples.daytrader.AccountDataBean bean) {
+    static AccountDataBean convertAccountDataBean(org.apache.geronimo.samples.daytrader.beans.AccountDataBean bean) {
         AccountDataBean wsBean = new AccountDataBean();
         wsBean.setAccountID(bean.getAccountID());
         wsBean.setLoginCount(bean.getLoginCount());
@@ -105,7 +105,7 @@ public class Convert {
         return wsBean;
     }
     
-    static AccountProfileDataBean convertAccountProfileDataBean(org.apache.geronimo.samples.daytrader.AccountProfileDataBean bean) {
+    static AccountProfileDataBean convertAccountProfileDataBean(org.apache.geronimo.samples.daytrader.beans.AccountProfileDataBean bean) {
         AccountProfileDataBean wsBean = new AccountProfileDataBean();
         wsBean.setUserID(bean.getUserID());
         wsBean.setPassword(bean.getPassword());
@@ -116,8 +116,8 @@ public class Convert {
         return wsBean;
     }
     
-    static org.apache.geronimo.samples.daytrader.AccountProfileDataBean convertAccountProfileDataBean(AccountProfileDataBean wsBean) {
-        org.apache.geronimo.samples.daytrader.AccountProfileDataBean bean = new org.apache.geronimo.samples.daytrader.AccountProfileDataBean();    
+    static org.apache.geronimo.samples.daytrader.beans.AccountProfileDataBean convertAccountProfileDataBean(AccountProfileDataBean wsBean) {
+        org.apache.geronimo.samples.daytrader.beans.AccountProfileDataBean bean = new org.apache.geronimo.samples.daytrader.beans.AccountProfileDataBean();    
         bean.setUserID(wsBean.getUserID());
         bean.setPassword(wsBean.getPassword());
         bean.setFullName(wsBean.getFullName());
@@ -131,12 +131,12 @@ public class Convert {
         HoldingDataBean[] wsBeans = new HoldingDataBean[col.size()];
         int i = 0;
         for (Object o : col) {
-            wsBeans[i++] = convertHoldingDataBean((org.apache.geronimo.samples.daytrader.HoldingDataBean)o);            
+            wsBeans[i++] = convertHoldingDataBean((org.apache.geronimo.samples.daytrader.beans.HoldingDataBean)o);            
         }
         return wsBeans;
     }     
         
-    static HoldingDataBean convertHoldingDataBean(org.apache.geronimo.samples.daytrader.HoldingDataBean bean) {
+    static HoldingDataBean convertHoldingDataBean(org.apache.geronimo.samples.daytrader.beans.HoldingDataBean bean) {
         HoldingDataBean wsBean = new HoldingDataBean();
         wsBean.setHoldingID(bean.getHoldingID());
         wsBean.setQuantity(bean.getQuantity());
@@ -146,7 +146,7 @@ public class Convert {
         return wsBean;
     }
     
-    static MarketSummaryDataBeanWS convertMarketSummaryDataBean(org.apache.geronimo.samples.daytrader.MarketSummaryDataBean bean) {
+    static MarketSummaryDataBeanWS convertMarketSummaryDataBean(org.apache.geronimo.samples.daytrader.core.MarketSummaryDataBean bean) {
         MarketSummaryDataBeanWS wsBean = new MarketSummaryDataBeanWS();   
         wsBean.setTopGainers(convertQuoteDataBeanCollection(bean.getTopGainers()));
         wsBean.setTopLosers(convertQuoteDataBeanCollection(bean.getTopLosers()));        

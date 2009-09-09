@@ -19,10 +19,10 @@ package org.apache.geronimo.samples.daytrader.web;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
-//import org.apache.geronimo.samples.daytrader.*;
-import org.apache.geronimo.samples.daytrader.RunStatsDataBean;
-import org.apache.geronimo.samples.daytrader.TradeAction;
-import org.apache.geronimo.samples.daytrader.TradeServices;
+//import org.apache.geronimo.samples.daytrader.core.*;
+import org.apache.geronimo.samples.daytrader.core.RunStatsDataBean;
+import org.apache.geronimo.samples.daytrader.core.TradeAction;
+import org.apache.geronimo.samples.daytrader.core.TradeServices;
 import org.apache.geronimo.samples.daytrader.util.*;
 
 import java.io.IOException;

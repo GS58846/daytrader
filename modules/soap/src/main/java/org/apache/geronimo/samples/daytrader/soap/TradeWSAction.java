@@ -19,7 +19,7 @@ package org.apache.geronimo.samples.daytrader.soap;
 import java.math.BigDecimal;
 import java.rmi.RemoteException;
 
-import org.apache.geronimo.samples.daytrader.TradeAction;
+import org.apache.geronimo.samples.daytrader.core.TradeAction;
 import org.apache.geronimo.samples.daytrader.client.ws.AccountDataBean;
 import org.apache.geronimo.samples.daytrader.client.ws.AccountProfileDataBean;
 import org.apache.geronimo.samples.daytrader.client.ws.HoldingDataBean;

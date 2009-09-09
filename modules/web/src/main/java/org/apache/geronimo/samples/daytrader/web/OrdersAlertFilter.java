@@ -20,9 +20,9 @@ import java.io.IOException;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
-//import org.apache.geronimo.samples.daytrader.*;
-import org.apache.geronimo.samples.daytrader.TradeAction;
-import org.apache.geronimo.samples.daytrader.TradeServices;
+//import org.apache.geronimo.samples.daytrader.core.*;
+import org.apache.geronimo.samples.daytrader.core.TradeAction;
+import org.apache.geronimo.samples.daytrader.core.TradeServices;
 //import org.apache.geronimo.samples.daytrader.soap.*;
 import org.apache.geronimo.samples.daytrader.util.*;
 
