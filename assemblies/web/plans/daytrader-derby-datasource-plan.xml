@@ -22,7 +22,7 @@
 
   <dep:environment>
     <dep:moduleId>
-      <dep:groupId>org.apache.geronimo.daytrader</dep:groupId>
+      <dep:groupId>org.apache.geronimo.daytrader.plugins</dep:groupId>
       <dep:artifactId>daytrader-derby-datasource</dep:artifactId>
       <dep:version>1.0</dep:version>
       <dep:type>car</dep:type>
