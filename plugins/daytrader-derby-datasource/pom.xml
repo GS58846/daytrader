@@ -17,65 +17,55 @@
 -->
 
 <!-- $Rev$ $Date$ -->
-<project>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
-	<groupId>org.apache.geronimo.daytrader</groupId>        
-	<artifactId>plugins</artifactId>        
+        <groupId>org.apache.geronimo.daytrader</groupId>
+        <artifactId>plugins</artifactId>
         <version>2.2-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>org.apache.geronimo.daytrader.plugins</groupId>
-    <artifactId>daytrader-web-jdbc-tomcat</artifactId>
+    <artifactId>daytrader-derby-datasource</artifactId>
     <packaging>car</packaging>
-    <name>Daytrader :: Plugins :: Web + Direct JDBC :: tomcat</name>
+    <name>Daytrader :: Plugins :: DB :: Derby DataSource</name>
 
     <dependencies>
         <dependency>
-            <groupId>org.apache.geronimo.daytrader.assemblies.web</groupId>
-            <artifactId>daytrader-web-jdbc</artifactId>
-            <version>${version}</version>
-            <type>war</type>
+            <groupId>org.tranql</groupId>
+            <artifactId>tranql-connector-derby-embed-xa</artifactId>
+            <type>rar</type>
+            <version>1.4</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.apache.geronimo.daytrader.plugins</groupId>
-            <artifactId>daytrader-derby-datasource</artifactId>
-            <version>${version}</version>
+            <groupId>org.apache.geronimo.framework</groupId>
+            <artifactId>geronimo-gbean-deployer</artifactId>
             <type>car</type>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.apache.geronimo.configs</groupId>
-            <artifactId>tomcat6-deployer</artifactId>
             <version>${geronimoVersion}</version>
-            <type>car</type>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>org.apache.geronimo.configs</groupId>
-            <artifactId>jasper-deployer</artifactId>
-            <version>${geronimoVersion}</version>
+            <artifactId>j2ee-deployer</artifactId>
             <type>car</type>
+            <version>${geronimoVersion}</version>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>org.apache.geronimo.configs</groupId>
-            <artifactId>tomcat6</artifactId>
-            <version>${geronimoVersion}</version>
+            <artifactId>connector-deployer</artifactId>
             <type>car</type>
+            <version>${geronimoVersion}</version>
+            <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>org.apache.geronimo.configs</groupId>
-            <artifactId>jasper</artifactId>
-            <version>${geronimoVersion}</version>
+            <artifactId>system-database</artifactId>
             <type>car</type>
-        </dependency>        
-
+            <version>${geronimoVersion}</version>
+        </dependency>
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
@@ -96,13 +86,12 @@
                     <deploymentConfigs>
                         <deploymentConfig>${gbeanDeployer}</deploymentConfig>
                         <deploymentConfig>${j2eeDeployer}</deploymentConfig>
-                        <deploymentConfig>${tomcatDeployer}</deploymentConfig>
-                        <deploymentConfig>${jasperDeployer}</deploymentConfig>                        
+                        <deploymentConfig>${connectorDeployer}</deploymentConfig>
                     </deploymentConfigs>
                     <module>
-                        <groupId>org.apache.geronimo.daytrader.assemblies.web</groupId>
-                        <artifactId>daytrader-web-jdbc</artifactId>
-                        <type>war</type>
+                        <groupId>org.tranql</groupId>
+                        <artifactId>tranql-connector-derby-embed-xa</artifactId>
+                        <type>rar</type>
                     </module>
                     <commonInstance>
                         <plugin-artifact>
@@ -117,31 +106,13 @@
                         <plugin-artifact>
                             <!-- The following doesn't work with c-m-p in 2.1.3
                             <obsoletes>org.apache.geronimo.daytrader/daytrader//car</obsoletes>
-                            <obsoletes>org.apache.geronimo.daytrader/daytrader-tomcat//car</obsoletes>
+                            <obsoletes>org.apache.geronimo.daytrader/daytrader-derby-datasource//car</obsoletes>
+                            <obsoletes>org.apache.geronimo.daytrader.plugins/daytrader-derby-datasource//car</obsoletes>
                             -->
                         </plugin-artifact>
                     </instance>
                 </configuration>
             </plugin>
-
-            
         </plugins>
     </build>
-    <profiles>
-        <profile>
-            <id>it</id>
-            <!--<properties>-->
-            <!--<it-server>jetty-minimal</it-server>-->
-            <!--</properties>-->
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.geronimo.buildsupport</groupId>
-                        <artifactId>geronimo-maven-plugin</artifactId>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
-    
 </project>

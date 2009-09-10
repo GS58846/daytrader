@@ -37,8 +37,8 @@
         <!--<module>daytrader-db2-datasource</module>-->
         <!--<module>daytrader-oracle-datasource</module>-->
         <module>daytrader-jms</module>
-        <!--<module>daytrader-jetty</module>
-        <module>daytrader-tomcat</module>-->
+        <module>daytrader-jetty</module>
+        <module>daytrader-tomcat</module>
 	<module>daytrader-web-jdbc-jetty</module>
         <module>daytrader-web-jdbc-tomcat</module>
     </modules>

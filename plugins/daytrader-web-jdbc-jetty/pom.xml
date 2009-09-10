@@ -19,52 +19,66 @@
 <!-- $Rev$ $Date$ -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
-        <groupId>org.apache.geronimo.daytrader</groupId>
-        <artifactId>plugins</artifactId>
+	<groupId>org.apache.geronimo.daytrader</groupId>        
+	<artifactId>plugins</artifactId>        
         <version>2.2-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>org.apache.geronimo.daytrader.plugins</groupId>
-    <artifactId>daytrader-derby-datasource</artifactId>
+    <artifactId>daytrader-web-jdbc-jetty</artifactId>
     <packaging>car</packaging>
-    <name>Daytrader :: Plugins - Derby DataSource</name>
+    <name>Daytrader :: Plugins :: Web + Direct JDBC :: Jetty</name>
+
 
     <dependencies>
         <dependency>
-            <groupId>org.tranql</groupId>
-            <artifactId>tranql-connector-derby-embed-xa</artifactId>
-            <type>rar</type>
-            <version>1.4</version>
+            <groupId>org.apache.geronimo.daytrader.assemblies.web</groupId>
+            <artifactId>daytrader-web-jdbc</artifactId>
+            <version>${version}</version>
+            <type>war</type>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.apache.geronimo.framework</groupId>
-            <artifactId>geronimo-gbean-deployer</artifactId>
+            <groupId>org.apache.geronimo.daytrader.plugins</groupId>
+            <artifactId>daytrader-derby-datasource</artifactId>
+            <version>${version}</version>
             <type>car</type>
-            <version>${geronimoVersion}</version>
-            <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>org.apache.geronimo.configs</groupId>
-            <artifactId>j2ee-deployer</artifactId>
-            <type>car</type>
-            <version>${geronimoVersion}</version>
-            <scope>provided</scope>
-        </dependency>
+        
         <dependency>
             <groupId>org.apache.geronimo.configs</groupId>
-            <artifactId>connector-deployer</artifactId>
-            <type>car</type>
+            <artifactId>jetty7-deployer</artifactId>
             <version>${geronimoVersion}</version>
+            <type>car</type>
             <scope>provided</scope>
         </dependency>
+
         <dependency>
             <groupId>org.apache.geronimo.configs</groupId>
-            <artifactId>system-database</artifactId>
-            <type>car</type>
+            <artifactId>jasper-deployer</artifactId>
             <version>${geronimoVersion}</version>
+            <type>car</type>
+            <scope>provided</scope>
         </dependency>
+
+
+        <dependency>
+            <groupId>org.apache.geronimo.configs</groupId>
+            <artifactId>jetty7</artifactId>
+            <version>${geronimoVersion}</version>
+            <type>car</type>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.geronimo.configs</groupId>
+            <artifactId>jasper</artifactId>
+            <version>${geronimoVersion}</version>
+            <type>car</type>
+        </dependency>
+        
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
@@ -73,7 +87,7 @@
                 <!-- Install as extention to allow 'car' packaging to be used. -->
                 <extensions>true</extensions>
                 <configuration>
-                    <archive>
+                   <archive>
                         <!-- Do not include META-INF/maven to avoid long file problems on windows -->
                         <addMavenDescriptor>false</addMavenDescriptor>
                     </archive>
@@ -85,12 +99,13 @@
                     <deploymentConfigs>
                         <deploymentConfig>${gbeanDeployer}</deploymentConfig>
                         <deploymentConfig>${j2eeDeployer}</deploymentConfig>
-                        <deploymentConfig>${connectorDeployer}</deploymentConfig>
+                        <deploymentConfig>${jetty7Deployer}</deploymentConfig>
+                        <deploymentConfig>${jasperDeployer}</deploymentConfig>                        
                     </deploymentConfigs>
                     <module>
-                        <groupId>org.tranql</groupId>
-                        <artifactId>tranql-connector-derby-embed-xa</artifactId>
-                        <type>rar</type>
+                        <groupId>org.apache.geronimo.daytrader.assemblies.web</groupId>
+                        <artifactId>daytrader-web-jdbc</artifactId>
+                        <type>war</type>
                     </module>
                     <commonInstance>
                         <plugin-artifact>
@@ -102,16 +117,32 @@
                         </plugin-artifact>
                     </commonInstance>
                     <instance>
-                        <plugin-artifact>
+                       <plugin-artifact>
                             <!-- The following doesn't work with c-m-p in 2.1.3
                             <obsoletes>org.apache.geronimo.daytrader/daytrader//car</obsoletes>
-                            <obsoletes>org.apache.geronimo.daytrader/daytrader-derby-datasource//car</obsoletes>
-                            <obsoletes>org.apache.geronimo.daytrader.plugins/daytrader-derby-datasource//car</obsoletes>
+                            <obsoletes>org.apache.geronimo.daytrader/daytrader-jetty//car</obsoletes>
                             -->
-                        </plugin-artifact>
+                       </plugin-artifact>
                     </instance>
                 </configuration>
             </plugin>
         </plugins>
     </build>
+    <profiles>
+        <profile>
+            <id>it</id>
+            <!--<properties>-->
+                <!--<it-server>jetty-minimal</it-server>-->
+            <!--</properties>-->
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.geronimo.buildsupport</groupId>
+                        <artifactId>geronimo-maven-plugin</artifactId>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+    
 </project>
