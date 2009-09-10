@@ -29,7 +29,7 @@
 
     <groupId>org.apache.geronimo.daytrader.plugins</groupId>
     <artifactId>daytrader-jms</artifactId>
-    <name>Daytrader :: Plugins - JMS Resource</name>
+    <name>Daytrader :: Plugins :: JavaEE JMS Resource</name>
     <packaging>car</packaging>
 
     <dependencies>

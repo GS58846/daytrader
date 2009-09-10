@@ -28,7 +28,7 @@
     <groupId>org.apache.geronimo.daytrader.plugins</groupId>
     <artifactId>daytrader-web-jdbc-tomcat</artifactId>
     <packaging>car</packaging>
-    <name>Daytrader :: Plugins :: Web + Direct JDBC :: tomcat</name>
+    <name>Daytrader :: Plugins :: Web + Direct JDBC :: Tomcat</name>
 
     <dependencies>
         <dependency>

@@ -27,7 +27,7 @@
     <groupId>org.apache.geronimo.daytrader.plugins</groupId>
     <artifactId>daytrader-oracle-datasource</artifactId>
     <packaging>car</packaging>
-    <name>Daytrader :: Plugins - Oracle DataSource</name>
+    <name>Daytrader :: Plugins :: Oracle DataSource</name>
 
     <dependencies>
         <dependency>

@@ -27,7 +27,7 @@
     <groupId>org.apache.geronimo.daytrader.plugins</groupId>
     <artifactId>daytrader-db2-datasource</artifactId>
     <packaging>car</packaging>
-    <name>Daytrader :: Plugins :: DB :: DB2 DataSource</name>
+    <name>Daytrader :: Plugins :: IBM DB2 DataSource</name>
 
     <dependencies>
         <dependency>

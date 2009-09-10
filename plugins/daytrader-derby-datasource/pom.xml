@@ -27,7 +27,7 @@
     <groupId>org.apache.geronimo.daytrader.plugins</groupId>
     <artifactId>daytrader-derby-datasource</artifactId>
     <packaging>car</packaging>
-    <name>Daytrader :: Plugins :: DB :: Derby DataSource</name>
+    <name>Daytrader :: Plugins :: Derby DataSource</name>
 
     <dependencies>
         <dependency>

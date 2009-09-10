@@ -27,12 +27,12 @@
     <groupId>org.apache.geronimo.daytrader.plugins</groupId>
     <artifactId>daytrader-tomcat</artifactId>
     <packaging>car</packaging>
-    <name>Daytrader :: Plugins - Tomcat</name>
+    <name>Daytrader :: Plugins :: JavaEE Tomcat</name>
 
     <dependencies>
         <dependency>
-            <groupId>org.apache.geronimo.daytrader.assemblies</groupId>
-            <artifactId>daytrader-javaee</artifactId>
+            <groupId>org.apache.geronimo.daytrader.assemblies.javaee</groupId>
+            <artifactId>daytrader-ear</artifactId>
             <version>${version}</version>
             <type>ear</type>
             <scope>provided</scope>
@@ -170,8 +170,8 @@
                         <deploymentConfig>${clientDeployer}</deploymentConfig>
                     </deploymentConfigs>
                     <module>
-                        <groupId>org.apache.geronimo.daytrader.assemblies</groupId>
-                        <artifactId>daytrader-javaee</artifactId>
+                        <groupId>org.apache.geronimo.daytrader.assemblies.javaee</groupId>
+                        <artifactId>daytrader-ear</artifactId>
                         <type>ear</type>
                     </module>
                     <commonInstance>
@@ -195,6 +195,7 @@
                 </configuration>
             </plugin>
 
+<!--
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
@@ -261,6 +262,7 @@
                     </execution>
                 </executions>
             </plugin>
+-->
         </plugins>
     </build>
     <profiles>

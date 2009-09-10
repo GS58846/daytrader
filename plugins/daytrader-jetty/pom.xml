@@ -28,12 +28,12 @@
     <groupId>org.apache.geronimo.daytrader.plugins</groupId>
     <artifactId>daytrader-jetty</artifactId>
     <packaging>car</packaging>
-    <name>Daytrader :: Plugins - Jetty</name>
+    <name>Daytrader :: Plugins :: JavaEE Jetty</name>
 
     <dependencies>
         <dependency>
-            <groupId>org.apache.geronimo.daytrader.assemblies</groupId>
-            <artifactId>daytrader-javaee</artifactId>
+            <groupId>org.apache.geronimo.daytrader.assemblies.javaee</groupId>
+            <artifactId>daytrader-ear</artifactId>
             <version>${version}</version>
             <type>ear</type>
             <scope>provided</scope>
@@ -171,8 +171,8 @@
                         <deploymentConfig>${clientDeployer}</deploymentConfig>
                     </deploymentConfigs>
                     <module>
-                        <groupId>org.apache.geronimo.daytrader.assemblies</groupId>
-                        <artifactId>daytrader-javaee</artifactId>
+                        <groupId>org.apache.geronimo.daytrader.assemblies.javaee</groupId>
+                        <artifactId>daytrader-ear</artifactId>
                         <type>ear</type>
                     </module>
                     <commonInstance>
