@@ -86,7 +86,7 @@ if (status != null) {
 			%>
 			
 		<tr>
-			<INPUT type="hidden" name="RunTimeMode" value="1"/>
+			<INPUT type="hidden" name="RunTimeMode" value="TradeConfig.JDBC"/>
 		</tr>
 		
 		<tr>
