@@ -701,7 +701,7 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
      */
     public boolean recreateDBTables(Object[] sqlBuffer, java.io.PrintWriter out) throws Exception {
         if (Log.doTrace())
-            Log.trace("TradeJPADirect:checkDBProductName");
+            Log.trace("TradeJPADirect:recreateDBTables");
         return (new TradeJDBCDirect(false)).recreateDBTables(sqlBuffer, out);
     }
 }
