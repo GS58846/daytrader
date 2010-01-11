@@ -105,6 +105,18 @@ public class TradeBuildDB {
                 } else if (dbProductName.startsWith("Oracle")) { // if the Db is Oracle
                     ddlFile = new File(warPath + File.separatorChar + "dbscripts"
                         + File.separatorChar + "oracle" + File.separatorChar + "Table.ddl");
+                } else if (dbProductName.startsWith("MySQL")) {// if the Db is MySQL
+                    ddlFile = new File(warPath + File.separatorChar + "dbscripts"
+                    	+ File.separatorChar + "mysql" + File.separatorChar + "Table.ddl");
+                } else if (dbProductName.startsWith("Informix Dynamic Server")) { // if the Db is Informix dynamic server
+                    ddlFile = new File(warPath + File.separatorChar + "dbscripts" 
+                    	+ File.separatorChar + "informix" + File.separatorChar + "Table.ddl");
+                } else if (dbProductName.startsWith("Microsoft SQL Server")) { // if the Db is Microsoft SQLServer
+                    ddlFile = new File(warPath + File.separatorChar + "dbscripts" 
+                    	+ File.separatorChar + "sqlserver" + File.separatorChar + "Table.ddl");
+                } else if (dbProductName.startsWith("PostgreSQL")) { // if the Db is PostgreSQL
+                    ddlFile = new File(warPath + File.separatorChar + "dbscripts" 
+                        	+ File.separatorChar + "postgre" + File.separatorChar + "Table.ddl");
                 } else { // Unsupported "Other" Database
                     ddlFile = new File(warPath + File.separatorChar + "dbscripts"
                         + File.separatorChar + "other" + File.separatorChar + "Table.ddl");
