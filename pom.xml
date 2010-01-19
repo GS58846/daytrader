@@ -34,7 +34,7 @@
 
     <properties>
         <!-- This property is required by the car:package mojo -->
-        <geronimoVersion>2.2-SNAPSHOT</geronimoVersion>
+        <geronimoVersion>2.2</geronimoVersion>
 
         <!-- set siteId to artifactId for any "top level" project rooting a website -->
         <siteId>daytrader</siteId>
@@ -433,13 +433,37 @@
         <profile>
             <id>db2</id>
             <modules>
-                <module>daytrader-db2-datasource</module>
+                <module>plugins/daytrader-db2-datasource</module>
             </modules>
         </profile>
         <profile>
             <id>oracle</id>
             <modules>
-                <module>daytrader-oracle-datasource</module>
+                <module>plugins/daytrader-oracle-datasource</module>
+            </modules>
+        </profile>
+	<profile>
+            <id>mysql</id>
+            <modules>
+                <module>plugins/daytrader-mysql-datasource</module>
+            </modules>
+        </profile>
+	<profile>
+            <id>informix</id>
+            <modules>
+                <module>plugins/daytrader-informix-datasource</module>
+            </modules>
+        </profile>
+	<profile>
+            <id>sqlserver</id>
+            <modules>
+                <module>plugins/daytrader-sqlserver-datasource</module>
+            </modules>
+        </profile>	
+	<profile>
+            <id>postgre</id>
+            <modules>
+                <module>plugins/daytrader-postgre-datasource</module>
             </modules>
         </profile>
     </profiles>
