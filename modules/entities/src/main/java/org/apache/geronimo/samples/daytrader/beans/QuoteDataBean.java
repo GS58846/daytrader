@@ -20,7 +20,14 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 import org.apache.geronimo.samples.daytrader.util.Log;
 import org.apache.geronimo.samples.daytrader.util.TradeConfig;
@@ -29,7 +36,8 @@ import org.apache.geronimo.samples.daytrader.util.TradeConfig;
 @Table(name = "quoteejb")
 @NamedQueries({
     @NamedQuery(name = "quoteejb.allQuotes",query = "SELECT q FROM quoteejb q"),
-    @NamedQuery(name = "quoteejb.quotesByChange",query = "SELECT q FROM quoteejb q WHERE q.symbol LIKE 's:1__' ORDER BY q.change1 DESC"),
+//    @NamedQuery(name = "quoteejb.quotesByChange",query = "SELECT q FROM quoteejb q WHERE q.symbol LIKE 's:1__' ORDER BY q.change1 DESC"),
+    @NamedQuery(name = "quoteejb.quotesByChange",query = "SELECT q FROM quoteejb q WHERE q.symbol LIKE 's:1__' ORDER BY q.change1 "),
     @NamedQuery(name = "quoteejb.findByLow", query = "SELECT q FROM quoteejb q WHERE q.low = :low"),
     @NamedQuery(name = "quoteejb.findByOpen1", query = "SELECT q FROM quoteejb q WHERE q.open1 = :open1"),
     @NamedQuery(name = "quoteejb.findByVolume", query = "SELECT q FROM quoteejb q WHERE q.volume = :volume"),
@@ -71,8 +79,9 @@ public class QuoteDataBean implements Serializable {
     @Column(name = "CHANGE1", nullable = false)
     private double change1;         /* price change */
     
-    /*@OneToMany(mappedBy = "quote")
-    private Collection<OrderDataBean> orders;*/
+    /* @OneToMany(mappedBy = "quote")
+    private Collection<OrderDataBean> orders;
+    */
     
 //    @Version
 //    private Integer optLock;

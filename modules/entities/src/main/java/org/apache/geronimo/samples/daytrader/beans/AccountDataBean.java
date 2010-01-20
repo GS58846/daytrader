@@ -21,9 +21,23 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Date;
-import javax.ejb.EJBException;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.TableGenerator;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.apache.geronimo.samples.daytrader.util.Log;
 import org.apache.geronimo.samples.daytrader.util.TradeConfig;
@@ -51,6 +65,7 @@ public class AccountDataBean implements Serializable {
             valueColumnName="KEYVAL",
             pkColumnValue="account",
             allocationSize=1000)
+    
     @Id
     @GeneratedValue(strategy=GenerationType.TABLE, generator="accountIdGen")
     @Column(name = "ACCOUNTID", nullable = false)
@@ -270,7 +285,8 @@ public class AccountDataBean implements Serializable {
             String error = "AccountBean:Login failure for account: " + getAccountID() +
                     ((profile == null) ? "null AccountProfile" :
                             "\n\tIncorrect password-->" + profile.getUserID() + ":" + profile.getPassword());
-            throw new EJBException(error);
+            throw new RuntimeException(error);
+            
         }
 
         setLastLogin(new Timestamp(System.currentTimeMillis()));

@@ -48,7 +48,7 @@ public class TradeServletAction {
         if (TradeConfig.getAccessMode() == TradeConfig.STANDARD) {
             tAction = new TradeAction();
         } else if (TradeConfig.getAccessMode() == TradeConfig.WEBSERVICES) {
-            tAction = new TradeWebSoapProxy();
+            tAction = (TradeServices) new TradeWebSoapProxy();
         } else {
             throw new IllegalArgumentException(
                 "TradeServletAction - Uknown TradeConfig accessMode=" +
@@ -284,7 +284,7 @@ public class TradeServletAction {
         
         try {
             AccountDataBean accountData = tAction.getAccountData(userID);
-            Collection holdingDataBeans = tAction.getHoldings(userID);
+            Collection<HoldingDataBean> holdingDataBeans = tAction.getHoldings(userID);
 
             // Edge Caching:
             // Getting the MarketSummary has been moved to the JSP

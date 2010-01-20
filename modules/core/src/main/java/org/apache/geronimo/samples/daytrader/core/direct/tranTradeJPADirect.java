@@ -22,6 +22,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -41,7 +46,9 @@ import org.apache.geronimo.samples.daytrader.core.TradeDBServices;
 import org.apache.geronimo.samples.daytrader.core.TradeServices;
 import org.apache.geronimo.samples.daytrader.util.Log;
 import org.apache.geronimo.samples.daytrader.util.TradeConfig;
-
+@Stateless
+@TransactionAttribute(TransactionAttributeType.REQUIRED)
+@TransactionManagement(TransactionManagementType.CONTAINER)
 /**
  * TradeJPADirect uses JPA to implement the business methods of the Trade online
  * broker application. These business methods represent the features and
@@ -56,11 +63,14 @@ import org.apache.geronimo.samples.daytrader.util.TradeConfig;
  * @see org.apache.geronimo.samples.daytrader.TradeServices
  * 
  */
-public class TradeJPADirect implements TradeServices, TradeDBServices {
+public class tranTradeJPADirect implements TradeServices, TradeDBServices {
 
-    @PersistenceUnit(name="daytrader")
+    @PersistenceUnit
     private static EntityManagerFactory emf;
 
+    @PersistenceContext
+    private EntityManager entityManager;
+    
     private static BigDecimal ZERO = new BigDecimal(0.0);
 
     private static boolean initialized = false;
@@ -68,7 +78,8 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
     /**
      * Zero arg constructor for TradeJPADirect
      */
-    public TradeJPADirect() {
+    
+    public tranTradeJPADirect() {
 
 
         // TO-DO why
@@ -77,6 +88,9 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
             // creating entity manager factory. the persistence xml must be
             // place under src/META-INF/
             emf = Persistence.createEntityManagerFactory("daytrader");
+        }
+        if (entityManager==null){
+        entityManager = emf.createEntityManager();
         }
 
         if (initialized == false)
@@ -114,10 +128,7 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
     public MarketSummaryDataBean getMarketSummary() {
         MarketSummaryDataBean marketSummaryData;
 
-        /*
-         * Creating entiManager
-         */
-        EntityManager entityManager = emf.createEntityManager();
+        
 
         try {
             if (Log.doTrace())
@@ -169,7 +180,7 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
         /*
          * closing entitymanager
          */
-        entityManager.close();
+        
 
         return marketSummaryData;
     }
@@ -181,13 +192,13 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
         /*
          * creating entitymanager
          */
-        EntityManager entityManager = emf.createEntityManager();
+
 
         try {
             if (Log.doTrace())
                 Log.trace("TradeJPADirect:buy", userID, symbol, quantity, orderProcessingMode);
 
-            entityManager.getTransaction().begin();
+            
 
             AccountProfileDataBean profile = entityManager.find(
                                                                AccountProfileDataBean.class, userID);
@@ -211,7 +222,7 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
             account.setBalance(balance.subtract(total));
 
             // commit the transaction before calling completeOrder
-            entityManager.getTransaction().commit();
+            
 
             if (orderProcessingMode == TradeConfig.SYNCH)
                 completeOrder(order.getOrderID(), false);
@@ -225,15 +236,12 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
             if (order != null)
                 order.cancel();
 
-            entityManager.getTransaction().rollback();
+            
 
             // throw new EJBException(e);
             throw new RuntimeException(e);
         }
-        if (entityManager != null) {
-            entityManager.close();
-            entityManager = null;
-        }
+        
 
         // after the purchase or sell of a stock, update the stocks volume and
         // price
@@ -244,12 +252,12 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
 
     public OrderDataBean sell(String userID, Integer holdingID,
                               int orderProcessingMode) {
-        EntityManager entityManager = emf.createEntityManager();
+
 
         OrderDataBean order = null;
         BigDecimal total;
         try {
-            entityManager.getTransaction().begin();
+            
             if (Log.doTrace())
                 Log.trace("TradeJPADirect:sell", userID, holdingID, orderProcessingMode);
 
@@ -270,12 +278,6 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
 
                 entityManager.persist(orderData);
 
-                if (entityManager != null) {
-                    entityManager.close();
-                    entityManager = null;
-
-                }
-                entityManager.getTransaction().commit();
                 return orderData;
             }
 
@@ -297,9 +299,7 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
 
             account.setBalance(balance.add(total));
 
-            // commit the transaction before calling completeOrder
-            entityManager.getTransaction().commit();
-
+            
             if (orderProcessingMode == TradeConfig.SYNCH)
                 completeOrder(order.getOrderID(), false);
             else if (orderProcessingMode == TradeConfig.ASYNCH_2PHASE)
@@ -312,7 +312,7 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
             if (order != null)
                 order.cancel();
 
-            entityManager.getTransaction().rollback();
+            
 
             throw new RuntimeException("TradeJPADirect:sell(" + userID + "," + holdingID + ")", e);
         }
@@ -338,7 +338,7 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
 
     public OrderDataBean completeOrder(Integer orderID, boolean twoPhase)
     throws Exception {
-        EntityManager entityManager = emf.createEntityManager();
+
         OrderDataBean order = null;
 
         if (Log.doTrace())
@@ -381,7 +381,7 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
         }
 
         try {
-            entityManager.getTransaction().begin();
+            
 
             if (newHolding != null) {
                 order.setHolding(newHolding);
@@ -414,23 +414,19 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
                           + "\n\t Account info: " + account + "\n\t Quote info: "
                           + quote + "\n\t Holding info: " + holding);
 
-            entityManager.getTransaction().commit();
+            
         }
         catch (Exception e) {
             e.printStackTrace();
-            entityManager.getTransaction().rollback();
+            
         }
 
-        if (entityManager != null) {
-            entityManager.close();
-            entityManager = null;
-        }
 
         return order;
     }
 
     public void cancelOrder(Integer orderID, boolean twoPhase) {
-        EntityManager entityManager = emf.createEntityManager();
+
 
         if (Log.doTrace())
             Log.trace("TradeJPADirect:cancelOrder", orderID + " twoPhase=" + twoPhase);
@@ -439,18 +435,8 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
         /*
          * managed transaction
          */
-        try {
-            entityManager.getTransaction().begin();
             order.cancel();
-            entityManager.getTransaction().commit();
-        }
-        catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            entityManager.close();
-            entityManager = null;
-        }
-        entityManager.close();
-    }
+            }
 
     public void orderCompleted(String userID, Integer orderID) {
         if (Log.doActionTrace())
@@ -462,11 +448,11 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
     public Collection<OrderDataBean> getOrders(String userID) {
         if (Log.doTrace())
             Log.trace("TradeJPADirect:getOrders", userID);
-        EntityManager entityManager = emf.createEntityManager();
+
         AccountProfileDataBean profile = entityManager.find(
                                                            AccountProfileDataBean.class, userID);
         AccountDataBean account = profile.getAccount();
-        entityManager.close();
+        
         return account.getOrders();
     }
 
@@ -474,7 +460,7 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
 
         if (Log.doTrace())
             Log.trace("TradeJPADirect:getClosedOrders", userID);
-        EntityManager entityManager = emf.createEntityManager();
+
 
         try {
 
@@ -483,12 +469,12 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
             /*
              * managed transaction
              */
-            entityManager.getTransaction().begin();
+            
             Query query = entityManager
                           .createNamedQuery("orderejb.closedOrders");
             query.setParameter("userID", userID);
 
-            entityManager.getTransaction().commit();
+        
             Collection results = query.getResultList();
             Iterator itr = results.iterator();
             // entityManager.joinTransaction();
@@ -504,18 +490,14 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
                 /*
                  * managed transaction
                  */
-                try {
-                    entityManager.getTransaction().begin();
+                
+                    
                     updateStatus.setParameter("userID", userID);
 
                     updateStatus.executeUpdate();
-                    entityManager.getTransaction().commit();
-                }
-                catch (Exception e) {
-                    entityManager.getTransaction().rollback();
-                    entityManager.close();
-                    entityManager = null;
-                }
+                 
+                
+                
             }
             else if (TradeConfig.jpaLayer == TradeConfig.HIBERNATE) {
                 /*
@@ -545,16 +527,10 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
                 updateStatus.setParameter(1, accountid.intValue());
                 updateStatus.executeUpdate();
             }
-            if (entityManager != null) {
-                entityManager.close();
-                entityManager = null;
-            }
             return results;
         }
         catch (Exception e) {
             Log.error("TradeJPADirect.getClosedOrders", e);
-            entityManager.close();
-            entityManager = null;
             throw new RuntimeException(
                                       "TradeJPADirect.getClosedOrders - error", e);
 
@@ -564,36 +540,24 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
 
     public QuoteDataBean createQuote(String symbol, String companyName,
                                      BigDecimal price) {
-        EntityManager entityManager = emf.createEntityManager();
+
         try {
             QuoteDataBean quote = new QuoteDataBean(symbol, companyName, 0, price, price, price, price, 0);
             /*
              * managed transaction
              */
-            try {
-                entityManager.getTransaction().begin();
+                
                 entityManager.persist(quote);
-                entityManager.getTransaction().commit();
-            }
-            catch (Exception e) {
-                entityManager.getTransaction().rollback();
-            }
 
             if (Log.doTrace())
                 Log.trace("TradeJPADirect:createQuote-->" + quote);
 
-            if (entityManager != null) {
-                entityManager.close();
-                entityManager = null;
-            }
             return quote;
         }
         catch (Exception e) {
             Log.error("TradeJPADirect:createQuote -- exception creating Quote", e);
             System.out
             .println("TradeJPADirect:createQuote -- exception creating Quote");
-            entityManager.close();
-            entityManager = null;
             throw new RuntimeException(e);
         }
     }
@@ -601,29 +565,20 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
     public QuoteDataBean getQuote(String symbol) {
         if (Log.doTrace())
             Log.trace("TradeJPADirect:getQuote", symbol);
-        EntityManager entityManager = emf.createEntityManager();
+
 
         QuoteDataBean qdb = entityManager.find(QuoteDataBean.class, symbol);
 
-        if (entityManager != null) {
-            entityManager.close();
-            entityManager = null;
-        }
         return qdb;
     }
 
     public Collection<QuoteDataBean> getAllQuotes() {
         if (Log.doTrace())
             Log.trace("TradeJPADirect:getAllQuotes");
-        EntityManager entityManager = emf.createEntityManager();
+
 
         Query query = entityManager.createNamedQuery("quoteejb.allQuotes");
 
-        if (entityManager != null) {
-            entityManager.close();
-            entityManager = null;
-
-        }
         return query.getResultList();
     }
 
@@ -640,7 +595,7 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
          * DB2Dialect and MySQL5Dialect do not work with annotated query
          * "quoteejb.quoteForUpdate" defined in QuoteDatabean
          */
-        EntityManager entityManager = emf.createEntityManager();
+
         QuoteDataBean quote = new QuoteDataBean();
         if (TradeConfig.jpaLayer == TradeConfig.HIBERNATE) {
             quote = entityManager.find(QuoteDataBean.class, symbol);
@@ -667,24 +622,15 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
          * managed transaction
          */
 
-        try {
+      
 
             quote.setPrice(newPrice);
             quote.setVolume(quote.getVolume() + sharesTraded);
             quote.setChange((newPrice.subtract(quote.getOpen()).doubleValue()));
 
-            entityManager.getTransaction().begin();
+            
             entityManager.merge(quote);
-            entityManager.getTransaction().commit();
-        }
-        catch (Exception e) {
-            entityManager.getTransaction().rollback();
-        }
 
-        if (entityManager != null) {
-            entityManager.close();
-            entityManager = null;
-        }
 
         this.publishQuotePriceChange(quote, oldPrice, changeFactor, sharesTraded);
 
@@ -694,16 +640,15 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
     public Collection<HoldingDataBean> getHoldings(String userID) {
         if (Log.doTrace())
             Log.trace("TradeJPADirect:getHoldings", userID);
-        EntityManager entityManager = emf.createEntityManager();
+
         /*
          * managed transaction
          */
-        entityManager.getTransaction().begin();
+        
 
         Query query = entityManager.createNamedQuery("holdingejb.holdingsByUserID");
         query.setParameter("userID", userID);
 
-        entityManager.getTransaction().commit();
         Collection<HoldingDataBean> holdings = query.getResultList();
         /*
          * Inflate the lazy data memebers
@@ -713,15 +658,13 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
             ((HoldingDataBean) itr.next()).getQuote();
         }
 
-        entityManager.close();
-        entityManager = null;
         return holdings;
     }
 
     public HoldingDataBean getHolding(Integer holdingID) {
         if (Log.doTrace())
             Log.trace("TradeJPADirect:getHolding", holdingID);
-        EntityManager entityManager = emf.createEntityManager();
+
         return entityManager.find(HoldingDataBean.class, holdingID);
     }
 
@@ -729,7 +672,7 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
         if (Log.doTrace())
             Log.trace("TradeJPADirect:getAccountData", userID);
 
-        EntityManager entityManager = emf.createEntityManager();
+
 
         AccountProfileDataBean profile = entityManager.find(AccountProfileDataBean.class, userID);
         /*
@@ -740,8 +683,6 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
 
         // Added to populate transient field for account
         account.setProfileID(profile.getUserID());
-        entityManager.close();
-        entityManager = null;
 
         return account;
     }
@@ -749,17 +690,15 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
     public AccountProfileDataBean getAccountProfileData(String userID) {
         if (Log.doTrace())
             Log.trace("TradeJPADirect:getProfileData", userID);
-        EntityManager entityManager = emf.createEntityManager();
+
 
         AccountProfileDataBean apb = entityManager.find(AccountProfileDataBean.class, userID);
-        entityManager.close();
-        entityManager = null;
         return apb;
     }
 
     public AccountProfileDataBean updateAccountProfile(AccountProfileDataBean profileData) {
 
-        EntityManager entityManager = emf.createEntityManager();
+
 
         if (Log.doTrace())
             Log.trace("TradeJPADirect:updateAccountProfileData", profileData);
@@ -786,18 +725,10 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
         /*
          * Managed Transaction
          */
-        try {
 
-            entityManager.getTransaction().begin();
+            
             entityManager.merge(temp);
-            entityManager.getTransaction().commit();
-            entityManager.close();
-        }
-        catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            entityManager.close();
-            entityManager = null;
-        }
+        
 
         return temp;
     }
@@ -805,7 +736,7 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
     public AccountDataBean login(String userID, String password)
     throws Exception {
 
-        EntityManager entityManager = emf.createEntityManager();
+
 
         AccountProfileDataBean profile = entityManager.find(AccountProfileDataBean.class, userID);
 
@@ -815,7 +746,7 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
         /*
          * Managed Transaction
          */
-        entityManager.getTransaction().begin();
+        
         entityManager.merge(profile);
 
         AccountDataBean account = profile.getAccount();
@@ -824,17 +755,17 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
             Log.trace("TradeJPADirect:login", userID, password);
 
         account.login(password);
-        entityManager.getTransaction().commit();
+        
         if (Log.doTrace())
             Log.trace("TradeJPADirect:login(" + userID + "," + password + ") success" + account);
-        entityManager.close();
+        
         return account;
     }
 
     public void logout(String userID) {
         if (Log.doTrace())
             Log.trace("TradeJPADirect:logout", userID);
-        EntityManager entityManager = emf.createEntityManager();
+
 
         AccountProfileDataBean profile = entityManager.find(AccountProfileDataBean.class, userID);
         AccountDataBean account = profile.getAccount();
@@ -842,17 +773,9 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
         /*
          * Managed Transaction
          */
-        try {
-            entityManager.getTransaction().begin();
+           
             account.logout();
-            entityManager.getTransaction().commit();
-            entityManager.close();
-        }
-        catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            entityManager.close();
-            entityManager = null;
-        }
+         
 
         if (Log.doTrace())
             Log.trace("TradeJPADirect:logout(" + userID + ") success");
@@ -863,7 +786,7 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
                                     BigDecimal openBalance) {
         AccountDataBean account = null;
         AccountProfileDataBean profile = null;
-        EntityManager entityManager = emf.createEntityManager();
+
 
         if (Log.doTrace())
             Log.trace("TradeJPADirect:register", userID, password, fullname, address, email, creditcard, openBalance);
@@ -877,9 +800,7 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
             return null;
         }
         else {
-        	try {
-        		entityManager.getTransaction().begin();
-        	profile = new AccountProfileDataBean(userID, password, fullname,
+            profile = new AccountProfileDataBean(userID, password, fullname,
                                                  address, email, creditcard);
             account = new AccountDataBean(0, 0, null, new Timestamp(System.currentTimeMillis()), openBalance, openBalance, userID);
             profile.setAccount(account);
@@ -887,17 +808,11 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
             /*
              * managed Transaction
              */
-            
+          
                 
                 entityManager.persist(profile);
                 entityManager.persist(account);
-                entityManager.getTransaction().commit();
-            }
-            catch (Exception e) {
-                entityManager.getTransaction().rollback();
-                entityManager.close();
-                entityManager = null;
-            }
+            
 
         }
 
@@ -962,19 +877,11 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
         HoldingDataBean newHolding = new HoldingDataBean(quantity,
                                                          purchasePrice, new Timestamp(System.currentTimeMillis()),
                                                          account, quote);
-        try {
-            /*
-             * manage transactions
-             */
-            entityManager.getTransaction().begin();
+       
+            
             entityManager.persist(newHolding);
-            entityManager.getTransaction().commit();
-        }
-        catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            entityManager.close();
-            entityManager = null;
-        }
+            
+      
         return newHolding;
     }
 

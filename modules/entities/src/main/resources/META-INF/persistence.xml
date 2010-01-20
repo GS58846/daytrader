@@ -37,8 +37,10 @@
             <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)"/>
             <property name="openjpa.Sequence" value="table(Table=OPENJPASEQ, Increment=100)"/>
             <property name="openjpa.jdbc.UpdateManager" value="org.apache.openjpa.jdbc.kernel.OperationOrderUpdateManager(batchLimit=0)" /> 
-            <property name="openjpa.ConnectionProperties" value="DriverClassName=org.apache.derby.jdbc.EmbeddedDriver,URL=jdbc:derby:tradedb;create=true,MaxActive=50,MaxWait=10000,Username=,Password="/>
-            <property name="openjpa.ConnectionDriverName" value="org.apache.commons.dbcp.BasicDataSource"/>
+            <!-- <property name="openjpa.ConnectionDriverName" value="org.apache.commons.dbcp.BasicDataSource"/> -->
+            <property name="openjpa.ConnectionDriverName" value="org.apache.derby.jdbc.EmbeddedDriver"/>
+            <property name="openjpa.ConnectionURL" value="jdbc:derby:tradedb;create=true"/>
+            <!-- <property name="openjpa.ConnectionProperties" value="DriverClassName=org.apache.derby.jdbc.EmbeddedDriver,Url=jdbc:derby:tradedb;create=true,MaxActive=50,MaxWait=10000,Username=,Password="/> -->
         </properties>
     </persistence-unit>
 </persistence>

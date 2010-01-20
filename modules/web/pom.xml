@@ -116,6 +116,12 @@
         -->
     </dependencies>
     <build>
+        <resources>
+            <resource>
+                <directory>${basedir}/src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <plugins>
             <!-- Removed per DATRADER-7 due to interop issues on commercial AppServers
             <plugin>
