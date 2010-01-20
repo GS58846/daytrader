@@ -32,9 +32,7 @@
 
     <modules>
         <module>daytrader-web-jdbc</module>
-<!--
         <module>daytrader-web-jpa</module>
--->
     </modules>
 
 </project>
