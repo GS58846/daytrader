@@ -17,7 +17,7 @@
 -->
 <persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
 
-    <persistence-unit transaction-type="JTA" name="daytrader">
+    <persistence-unit transaction-type="RESOURCE_LOCAL" name="daytrader">
         <provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
         <jta-data-source>jdbc/TradeDataSource</jta-data-source>  
         <non-jta-data-source>jdbc/NoTxTradeDataSource</non-jta-data-source> 

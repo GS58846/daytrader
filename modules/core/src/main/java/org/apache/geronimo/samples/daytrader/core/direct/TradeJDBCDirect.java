@@ -66,6 +66,8 @@ public class TradeJDBCDirect implements TradeServices, TradeDBServices {
 
     private boolean inSession = false;
 
+    private static InitialContext context;
+
     /**
      * Zero arg constructor for TradeJDBCDirect
      */
@@ -162,7 +164,7 @@ public class TradeJDBCDirect implements TradeServices, TradeDBServices {
         }
 
         catch (Exception e) {
-            Log.error("TradeJDBCDirect:login -- error logging in user", e);
+            Log.error("TradeJDBCDirect:getMarketSummary -- error getting summary", e);
             rollBack(conn, e);
         } finally {
             releaseConn(conn);
@@ -1253,9 +1255,14 @@ public class TradeJDBCDirect implements TradeServices, TradeDBServices {
      * @see TradeServices#logout(String)
      */
     public void logout(String userID) throws Exception {
+
+        Connection conn = null;
+
+        if (Log.doActionTrace())
+            Log.trace("TradeAction:logout", userID);
+
         if (Log.doTrace())
             Log.trace("TradeJDBCDirect:logout - inSession(" + this.inSession + ")", userID);
-        Connection conn = null;
         try {
             conn = getConn();
             PreparedStatement stmt = getStatement(conn, logoutSQL);
@@ -1277,7 +1284,7 @@ public class TradeJDBCDirect implements TradeServices, TradeDBServices {
      */
 
     public AccountDataBean register(String userID, String password, String fullname, String address, String email,
-        String creditcard, BigDecimal openBalance) throws Exception {
+        String creditCard, BigDecimal openBalance) throws Exception {
 
         AccountDataBean accountData = null;
         Connection conn = null;
@@ -1312,7 +1319,7 @@ public class TradeJDBCDirect implements TradeServices, TradeDBServices {
             stmt.setString(3, fullname);
             stmt.setString(4, address);
             stmt.setString(5, email);
-            stmt.setString(6, creditcard);
+            stmt.setString(6, creditCard);
             stmt.executeUpdate();
             stmt.close();
 
@@ -1890,8 +1897,6 @@ public class TradeJDBCDirect implements TradeServices, TradeDBServices {
         }
     }
 
-    private static InitialContext context;
-
     /**
      * Gets the inGlobalTxn
      * 
@@ -1909,6 +1914,15 @@ public class TradeJDBCDirect implements TradeServices, TradeDBServices {
      */
     private void setInGlobalTxn(boolean inGlobalTxn) {
         this.inGlobalTxn = inGlobalTxn;
+    }
+
+    /**
+     * Get mode - returns the persistence mode (TradeConfig.JDBC)
+     * 
+     * @return int mode
+     */
+    public int getMode() {
+        return TradeConfig.JDBC;
     }
 
 }
