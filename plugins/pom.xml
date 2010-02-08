@@ -30,24 +30,76 @@
     <name>DayTrader :: Plugins</name>
     <packaging>pom</packaging>
 
-    <modules>
-        <!-- c-m-p built plugins -->
-        <module>daytrader-derby-datasource</module>
-        <!-- see profiles -->
-        <!--<module>daytrader-db2-datasource</module>-->
-        <!--<module>daytrader-oracle-datasource</module>-->
-	<!--<module>daytrader-mysql-datasource</module>-->
-        <!--<module>daytrader-informix-datasource</module>-->
-	<!--<module>daytrader-sqlserver-datasource</module>-->
-        <!--<module>daytrader-postgre-datasource</module>-->
-	<module>daytrader-web-jdbc-jetty</module>
-        <module>daytrader-web-jdbc-tomcat</module>
-	<module>daytrader-web-jpa-jetty</module>
-        <module>daytrader-web-jpa-tomcat</module>
-        <module>daytrader-jms</module>
-        <module>daytrader-jetty</module>
-        <module>daytrader-tomcat</module>
-    </modules>
+    <profiles>
+        <profile>
+            <id>default</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+                <property>
+                    <name>default</name>
+                </property>
+            </activation>
+            <modules>
+                <module>daytrader-derby-datasource</module>
+        	<module>daytrader-web-jdbc-jetty</module>
+                <module>daytrader-web-jdbc-tomcat</module>
+        	<module>daytrader-web-jpa-jetty</module>
+                <module>daytrader-web-jpa-tomcat</module>
+                <module>daytrader-jms</module>
+                <module>daytrader-jetty</module>
+                <module>daytrader-tomcat</module>
+            </modules>
+        </profile>
+        <!--
+            You can build the extra datasources in this profile if you have
+            the required JDBC artifacts from each DB vendor installed into
+            either your local repo or a private maven repo you have setup,
+            by supplying the URL on the mvn cmdline as:
+                -Dmaven.repo.drivers=http://my.local.repo
+        -->
+        <profile>
+            <id>all</id>
+            <activation>
+                <property>
+                    <name>all</name>
+                </property>
+            </activation>
+            <modules>
+                <module>daytrader-derby-datasource</module>
+                <module>daytrader-db2-datasource</module>
+                <module>daytrader-oracle-datasource</module>
+        	<module>daytrader-mysql-datasource</module>
+                <module>daytrader-informix-datasource</module>
+        	<module>daytrader-sqlserver-datasource</module>
+                <module>daytrader-postgre-datasource</module>
+        	<module>daytrader-web-jdbc-jetty</module>
+                <module>daytrader-web-jdbc-tomcat</module>
+        	<module>daytrader-web-jpa-jetty</module>
+                <module>daytrader-web-jpa-tomcat</module>
+                <module>daytrader-jms</module>
+                <module>daytrader-jetty</module>
+                <module>daytrader-tomcat</module>
+            </modules>
+            <properties>
+                <maven.repo.drivers>http://not.a.real.repository</maven.repo.drivers>
+            </properties>
+            <repositories>
+                <repository>
+                    <id>maven.repo.drivers</id>
+                    <name>Private JDBC Driver Repository</name>
+                    <url>${maven.repo.drivers}</url>
+                    <layout>default</layout>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                    <releases>
+                        <enabled>true</enabled>
+                        <checksumPolicy>ignore</checksumPolicy>
+                    </releases>
+                </repository>
+            </repositories>
+        </profile>
+    </profiles>
 
     <build>
         <plugins>

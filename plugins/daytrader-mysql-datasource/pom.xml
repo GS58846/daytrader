@@ -28,6 +28,37 @@
     <artifactId>daytrader-mysql-datasource</artifactId>
     <packaging>car</packaging>
     <name>Daytrader :: Plugins :: MySQL DataSource</name>
+    <description>MySQL Datasource plugin for Daytrader.  Requires MySQL 5.1.10 JDBC files.</description>
+
+    <!--
+        You can build this datasource if you:
+        1) have the MySQL artifact installed in a local repo and supply the URL:
+            -Dmaven.repo.drivers=http://my.local.repo
+        2) have a copy of the MySQL JDBC driver and run the following command:
+            mvn install:install-file -Dfile=${path to mysql-connector-java.jar}\
+                                     -DgroupId=mysql \
+                                     -DartifactId=mysql-connector-java \
+                                     -Dversion=5.1.10 \
+                                     -Dpackaging=jar
+    -->
+    <properties>
+        <maven.repo.drivers>http://not.a.real.repository</maven.repo.drivers>
+    </properties>
+    <repositories>
+        <repository>
+            <id>maven.repo.drivers</id>
+            <name>Private JDBC Driver Repository</name>
+            <url>${maven.repo.drivers}</url>
+            <layout>default</layout>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+                <checksumPolicy>ignore</checksumPolicy>
+            </releases>
+        </repository>
+    </repositories>
 
     <dependencies>
         <dependency>

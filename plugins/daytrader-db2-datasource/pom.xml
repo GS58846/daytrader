@@ -28,6 +28,43 @@
     <artifactId>daytrader-db2-datasource</artifactId>
     <packaging>car</packaging>
     <name>Daytrader :: Plugins :: IBM DB2 DataSource</name>
+    <description>IBM DB2 Datasource plugin for Daytrader.  Requires DB2 v9.7 JCC and License files.</description>
+
+    <!--
+        You can build this datasource if you:
+        1) have the DB2 artifacts installed in a local repo and supply the URL:
+            -Dmaven.repo.drivers=http://my.local.repo
+        2) have a copy of the DB2 JCC driver and run the following commands :
+            mvn install:install-file -Dfile=${path to db2jcc.jar} \
+                                     -DgroupId=com.ibm.db2 \
+                                     -DartifactId=db2jcc \
+                                     -Dversion=9.7 \
+                                     -Dpackaging=jar
+
+            mvn install:install-file -Dfile=${path to db2jcc_license_cu.jar} \
+                                     -DgroupId=com.ibm.db2 \
+                                     -DartifactId=db2jcc_license_cu \
+                                     -Dversion=9.7 \
+                                     -Dpackaging=jar
+    -->
+    <properties>
+        <maven.repo.drivers>http://not.a.real.repository</maven.repo.drivers>
+    </properties>
+    <repositories>
+        <repository>
+            <id>maven.repo.drivers</id>
+            <name>Private JDBC Driver Repository</name>
+            <url>${maven.repo.drivers}</url>
+            <layout>default</layout>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+                <checksumPolicy>ignore</checksumPolicy>
+            </releases>
+        </repository>
+    </repositories>
 
     <dependencies>
         <dependency>

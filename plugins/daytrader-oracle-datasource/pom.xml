@@ -28,6 +28,37 @@
     <artifactId>daytrader-oracle-datasource</artifactId>
     <packaging>car</packaging>
     <name>Daytrader :: Plugins :: Oracle DataSource</name>
+    <description>Oracle Datasource plugin for Daytrader.  Requires Oracle 10g JDBC files.</description>
+
+    <!--
+        You can build this datasource if you have:
+        1) the Oracle artifacts installed in a local repo and supply the URL:
+            -Dmaven.repo.drivers=http://my.local.repo
+        2) a copy of the Oracle JDBC driver and run the following command:
+            mvn install:install-file -Dfile=${path to ojdbc14.jar} \
+                                     -DgroupId=oracle \
+                                     -DartifactId=ojdbc14 \
+                                     -Dversion=10g \
+                                     -Dpackaging=jar
+    -->
+    <properties>
+        <maven.repo.drivers>http://not.a.real.repository</maven.repo.drivers>
+    </properties>
+    <repositories>
+        <repository>
+            <id>maven.repo.drivers</id>
+            <name>Private JDBC Driver Repository</name>
+            <url>${maven.repo.drivers}</url>
+            <layout>default</layout>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+                <checksumPolicy>ignore</checksumPolicy>
+            </releases>
+        </repository>
+    </repositories>
 
     <dependencies>
         <dependency>
@@ -59,9 +90,17 @@
             <scope>provided</scope>
         </dependency>
 	<!--You need to install the jdbc driver into local maven repo by self-->
+        <!--
         <dependency>
             <groupId>oracle</groupId>
             <artifactId>ojdbc14</artifactId>
+            <version>10g</version>
+            <type>jar</type>
+        </dependency>
+        -->
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>jdbc-driver</artifactId>
             <version>10g</version>
             <type>jar</type>
           </dependency>

@@ -28,6 +28,43 @@
     <artifactId>daytrader-informix-datasource</artifactId>
     <packaging>car</packaging>
     <name>Daytrader :: Plugins :: IBM Informix DataSource</name>
+    <description>IBM Informix Datasource plugin for Daytrader.  Requires Informix v3.50 JDBC files.</description>
+
+    <!--
+        You can build this datasource if you:
+        1) have the IDS artifacts installed in a local repo and supply the URL:
+            -Dmaven.repo.drivers=http://my.local.repo
+        2) have a copy of the IDS JDBC driver and run the following commands :
+            mvn install:install-file -Dfile=${path to ifxjdbc.jar} \
+                                     -DgroupId=com.informix \
+                                     -DartifactId=ifxjdbc \
+                                     -Dversion=3.50 \
+                                     -Dpackaging=jar
+
+            mvn install:install-file -Dfile=${path to ifxjdbcx.jar} \
+                                     -DgroupId=com.informmix \
+                                     -DartifactId=ifxjdbcx \
+                                     -Dversion=3.50 \
+                                     -Dpackaging=jar
+    -->
+    <properties>
+        <maven.repo.drivers>http://not.a.real.repository</maven.repo.drivers>
+    </properties>
+    <repositories>
+        <repository>
+            <id>maven.repo.drivers</id>
+            <name>Private JDBC Driver Repository</name>
+            <url>${maven.repo.drivers}</url>
+            <layout>default</layout>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+                <checksumPolicy>ignore</checksumPolicy>
+            </releases>
+        </repository>
+    </repositories>
 
     <dependencies>
         <dependency>
