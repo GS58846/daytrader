@@ -78,47 +78,50 @@
             <plugin>
                 <groupId>org.apache.geronimo.buildsupport</groupId>
                 <artifactId>car-maven-plugin</artifactId>
-                <!-- Install as extention to allow 'car' packaging to be used. -->
                 <extensions>true</extensions>
                 <configuration>
-                    <archive>
-                        <!-- Do not include META-INF/maven to avoid long file problems on windows -->
-                        <addMavenDescriptor>false</addMavenDescriptor>
-                    </archive>
-                    <osiApproved>true</osiApproved>
-                    <useMavenDependencies>
-                        <value>true</value>
-                        <includeVersion>true</includeVersion>
-                    </useMavenDependencies>
-                    <deploymentConfigs>
-                        <deploymentConfig>${gbeanDeployer}</deploymentConfig>
-                        <deploymentConfig>${j2eeDeployer}</deploymentConfig>
-                        <deploymentConfig>${connectorDeployer}</deploymentConfig>
-                    </deploymentConfigs>
                     <module>
                         <groupId>org.tranql</groupId>
                         <artifactId>tranql-connector-db2-xa</artifactId>
                         <type>rar</type>
                     </module>
-                    <commonInstance>
-                        <plugin-artifact>
-                            <geronimo-version>${geronimoVersion}</geronimo-version>
-                            <jvm-version>1.5</jvm-version>
-                            <jvm-version>1.6</jvm-version>
-                            <source-repository>~/.m2/repository/</source-repository>
-                            <source-repository>http://repo1.maven.org/maven2/</source-repository>
-                        </plugin-artifact>
-                    </commonInstance>
                     <instance>
                         <plugin-artifact>
-                            <artifact-alias key="org.apache.geronimo.daytrader.plugins/daytrader-derby-datasource/${version}/car">org.apache.geronimo.daytrader.plugins/daytrader-db2-datasource/${version}/car</artifact-alias>
-                            <!-- The following doesn't work with c-m-p in 2.1.3
-                            <obsoletes>org.apache.geronimo.daytrader/daytrader//car</obsoletes>
-                            <obsoletes>org.apache.geronimo.daytrader/daytrader-derby-datasource//car</obsoletes>
-                            <obsoletes>org.apache.geronimo.daytrader.plugins/daytrader-derby-datasource//car</obsoletes>
-                            <obsoletes>org.apache.geronimo.daytrader/daytrader-db2-datasource//car</obsoletes>
-                            <obsoletes>org.apache.geronimo.daytrader.plugins/daytrader-db2-datasource//car</obsoletes>
-                            -->
+                            <obsoletes>
+                                <groupId>org.apache.geronimo.daytrader.plugins</groupId>
+                                <artifactId>daytrader-db2-datasource</artifactId>
+                            </obsoletes>
+                            <artifact-alias key="org.apache.geronimo.daytrader.plugins/daytrader-db2-datasource/${pom.version}/car">org.apache.geronimo.daytrader.plugins/daytrader-db2-datasource/${pom.version}/car</artifact-alias>
+                            <obsoletes>
+                                <groupId>org.apache.geronimo.daytrader.plugins</groupId>
+                                <artifactId>daytrader-derby-datasource</artifactId>
+                            </obsoletes>
+                            <artifact-alias key="org.apache.geronimo.daytrader.plugins/daytrader-derby-datasource/${pom.version}/car">org.apache.geronimo.daytrader.plugins/daytrader-db2-datasource/${pom.version}/car</artifact-alias>
+                            <obsoletes>
+                                <groupId>org.apache.geronimo.daytrader.plugins</groupId>
+                                <artifactId>daytrader-informix-datasource</artifactId>
+                            </obsoletes>
+                            <artifact-alias key="org.apache.geronimo.daytrader.plugins/daytrader-informix-datasource/${pom.version}/car">org.apache.geronimo.daytrader.plugins/daytrader-db2-datasource/${pom.version}/car</artifact-alias>
+                            <obsoletes>
+                                <groupId>org.apache.geronimo.daytrader.plugins</groupId>
+                                <artifactId>daytrader-mysql-datasource</artifactId>
+                            </obsoletes>
+                            <artifact-alias key="org.apache.geronimo.daytrader.plugins/daytrader-mysql-datasource/${pom.version}/car">org.apache.geronimo.daytrader.plugins/daytrader-db2-datasource/${pom.version}/car</artifact-alias>
+                            <obsoletes>
+                                <groupId>org.apache.geronimo.daytrader.plugins</groupId>
+                                <artifactId>daytrader-oracle-datasource</artifactId>
+                            </obsoletes>
+                            <artifact-alias key="org.apache.geronimo.daytrader.plugins/daytrader-oracle-datasource/${pom.version}/car">org.apache.geronimo.daytrader.plugins/daytrader-db2-datasource/${pom.version}/car</artifact-alias>
+                            <obsoletes>
+                                <groupId>org.apache.geronimo.daytrader.plugins</groupId>
+                                <artifactId>daytrader-postgre-datasource</artifactId>
+                            </obsoletes>
+                            <artifact-alias key="org.apache.geronimo.daytrader.plugins/daytrader-postgre-datasource/${pom.version}/car">org.apache.geronimo.daytrader.plugins/daytrader-db2-datasource/${pom.version}/car</artifact-alias>
+                            <obsoletes>
+                                <groupId>org.apache.geronimo.daytrader.plugins</groupId>
+                                <artifactId>daytrader-sqlserver-datasource</artifactId>
+                            </obsoletes>
+                            <artifact-alias key="org.apache.geronimo.daytrader.plugins/daytrader-sqlserver-datasource/${pom.version}/car">org.apache.geronimo.daytrader.plugins/daytrader-db2-datasource/${pom.version}/car</artifact-alias>
                         </plugin-artifact>
                     </instance>
                 </configuration>
