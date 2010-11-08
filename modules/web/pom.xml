@@ -16,36 +16,79 @@
     limitations under the License.
 -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.apache.geronimo.daytrader</groupId>
-        <artifactId>daytrader</artifactId>
+        <artifactId>modules</artifactId>
         <version>2.2-SNAPSHOT</version>
     </parent>
+
+    <groupId>org.apache.geronimo.daytrader.modules</groupId>
     <artifactId>daytrader-web</artifactId>
-    <name>DayTrader :: Web Application</name>
-    <packaging>war</packaging>
-    <description>Daytrader Web</description>
+    <packaging>jar</packaging>
+    <name>DayTrader :: Modules - Web</name>
+    <description>Daytrader Web Module</description>
+
     <scm>
         <connection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/modules/web</connection>
-        <developerConnection>
-            scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/modules/web</developerConnection>
+        <developerConnection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/modules/web</developerConnection>
         <url>http://svn.apache.org/viewcvs.cgi/geronimo/daytrader/trunk/modules/web</url>
     </scm>
+
     <dependencies>
         <dependency>
-            <groupId>org.apache.geronimo.daytrader</groupId>
-            <artifactId>daytrader-ejb</artifactId>
+            <groupId>org.apache.geronimo.daytrader.modules</groupId>
+            <artifactId>daytrader-util</artifactId>
+            <version>${pom.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.daytrader.modules</groupId>
+            <artifactId>daytrader-core</artifactId>
+            <version>${pom.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.daytrader.modules</groupId>
+            <artifactId>daytrader-entities</artifactId>
+            <version>${pom.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.daytrader.modules</groupId>
+            <artifactId>daytrader-ejb3</artifactId>
             <version>${pom.version}</version>
             <scope>provided</scope>
             <type>ejb</type>
         </dependency>
         <dependency>
+            <groupId>org.apache.geronimo.daytrader.modules</groupId>
+            <artifactId>daytrader-soap</artifactId>
+            <version>${pom.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-jpa_1.0_spec</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-ejb_3.0_spec</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-jta_1.1_spec</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
             <groupId>org.apache.geronimo.specs</groupId>
             <artifactId>geronimo-jms_1.1_spec</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-annotation_1.0_spec</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -63,26 +106,6 @@
             <artifactId>jstl</artifactId>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-jpa_3.0_spec</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-ejb_3.0_spec</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-jta_1.1_spec</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-    		<groupId>org.apache.geronimo.specs</groupId>
-    		<artifactId>geronimo-annotation_1.0_spec</artifactId>
-    		<scope>provided</scope>
-		</dependency>
         <!-- Removed per DAYTRADER-7 due to interop issues on commercial AppServers 
         <dependency>
             <groupId>org.codehaus.mojo</groupId>
@@ -93,6 +116,12 @@
         -->
     </dependencies>
     <build>
+        <resources>
+            <resource>
+                <directory>${basedir}/src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <plugins>
             <!-- Removed per DATRADER-7 due to interop issues on commercial AppServers
             <plugin>
@@ -110,14 +139,14 @@
                 </executions>
             </plugin>
             -->
+<!--
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <configuration>
-                    <!-- <webXml>${basedir}/target/jspweb.xml</webXml> Removed per DATRADER-7 due to interop issues on commercial AppServers -->
                     <archive>
                         <manifestEntries>
-                            <Class-Path>dt-ejb.jar streamer.jar wsappclient.jar</Class-Path>
+                            <Class-Path>util.jar core.jar entities.jar dt-ejb.jar streamer.jar wsappclient.jar</Class-Path>
                         </manifestEntries>
                     </archive>
                     <resources>
@@ -132,12 +161,6 @@
                             </includes>
                         </resource>
                     </resources>
-                    <!--                        
-                    HACK: Include legal files explicity, otherwise they will
-                          end up in the wrong path
-                          or in another jar file in the war.    
-                    NOTE: targetPath is broken for webResources (as documented)
-                    -->
                     <webResources>
                         <resource>
                             <directory>${project.build.outputDirectory}</directory>
@@ -150,6 +173,7 @@
                     </webResources>
                 </configuration>
             </plugin>
+-->
         </plugins>
     </build>
 </project>

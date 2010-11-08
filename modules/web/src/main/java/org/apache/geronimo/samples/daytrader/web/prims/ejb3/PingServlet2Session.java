@@ -21,12 +21,11 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.naming.*;
 // import javax.rmi.PortableRemoteObject;
-
 import javax.ejb.EJB;
+
 import org.apache.geronimo.samples.daytrader.ejb3.TradeSLSBRemote;
 import org.apache.geronimo.samples.daytrader.util.Log;
-
-import org.apache.geronimo.samples.daytrader.TradeConfig;
+import org.apache.geronimo.samples.daytrader.util.TradeConfig;
 
 /**
  * 

@@ -23,12 +23,12 @@ import java.util.Collection;
 import java.util.Iterator;
 import javax.naming.*;
 import javax.ejb.EJB;
-import org.apache.geronimo.samples.daytrader.ejb3.DirectSLSBRemote;
-import org.apache.geronimo.samples.daytrader.util.Log;
 
-import org.apache.geronimo.samples.daytrader.TradeConfig;
-import org.apache.geronimo.samples.daytrader.QuoteDataBean;
-import org.apache.geronimo.samples.daytrader.HoldingDataBean;
+import org.apache.geronimo.samples.daytrader.ejb3.DirectSLSBRemote;
+import org.apache.geronimo.samples.daytrader.beans.HoldingDataBean;
+import org.apache.geronimo.samples.daytrader.beans.QuoteDataBean;
+import org.apache.geronimo.samples.daytrader.util.Log;
+import org.apache.geronimo.samples.daytrader.util.TradeConfig;
 
 // TODO: Fix comments
 /**

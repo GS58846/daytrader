@@ -19,11 +19,12 @@ package org.apache.geronimo.samples.daytrader.web;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
+//import org.apache.geronimo.samples.daytrader.*;
+import org.apache.geronimo.samples.daytrader.core.TradeAction;
 import org.apache.geronimo.samples.daytrader.util.*;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import org.apache.geronimo.samples.daytrader.*;
 
 public class TestServlet extends HttpServlet {
 

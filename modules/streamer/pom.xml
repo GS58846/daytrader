@@ -16,35 +16,51 @@
     limitations under the License.
 -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-                                   http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.apache.geronimo.daytrader</groupId>
-        <artifactId>daytrader</artifactId>
+        <artifactId>modules</artifactId>
         <version>2.2-SNAPSHOT</version>
     </parent>
 
-    <artifactId>daytrader-streamer</artifactId>
-    <name>DayTrader :: Quote Streamer</name>
+    <groupId>org.apache.geronimo.daytrader.modules</groupId>
+    <artifactId>streamer</artifactId>
     <packaging>jar</packaging>
+    <name>DayTrader :: Modules - Quote Streamer</name>
     <description>Streamer Application for Day Trader</description>
+
     <scm>
         <connection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/modules/streamer</connection>
         <developerConnection>
             scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/modules/streamer</developerConnection>
         <url>http://svn.apache.org/viewcvs.cgi/geronimo/daytrader/trunk/modules/ear</url>
     </scm>
+
     <dependencies>
         <dependency>
-            <groupId>org.apache.geronimo.daytrader</groupId>
-            <artifactId>daytrader-ejb</artifactId>
+            <groupId>org.apache.geronimo.daytrader.modules</groupId>
+            <artifactId>daytrader-util</artifactId>
+            <version>${pom.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.daytrader.modules</groupId>
+            <artifactId>daytrader-core</artifactId>
+            <version>${pom.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.daytrader.modules</groupId>
+            <artifactId>daytrader-entities</artifactId>
+            <version>${pom.version}</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.daytrader.modules</groupId>
+            <artifactId>daytrader-ejb3</artifactId>
             <version>${pom.version}</version>
             <type>ejb</type>
         </dependency>
+
         <dependency>
             <groupId>org.apache.geronimo.specs</groupId>
             <artifactId>geronimo-jms_1.1_spec</artifactId>
@@ -52,7 +68,7 @@
         </dependency>
         <dependency>
             <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-jpa_3.0_spec</artifactId>
+            <artifactId>geronimo-jpa_1.0_spec</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -71,14 +87,16 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
                     <archive>
                         <manifestEntries>
-                            <class-path>dt-ejb.jar</class-path>
+                            <class-path>util.jar core.jar entities.jar web.jar dt-ejb.jar</class-path>
                         </manifestEntries>
                         <manifest>
                             <main-class>org.apache.geronimo.samples.daytrader.client.TradeClient</main-class>

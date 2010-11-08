@@ -18,7 +18,7 @@ package org.apache.geronimo.samples.daytrader.client;
 
 import java.util.Date;
 import java.math.BigDecimal;
-import org.apache.geronimo.samples.daytrader.*;
+import org.apache.geronimo.samples.daytrader.beans.*;
 
 public class TradeStreamerQuoteDataBean extends QuoteDataBean {
 
