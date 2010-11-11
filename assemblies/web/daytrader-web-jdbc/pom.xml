@@ -79,11 +79,13 @@
     <build>
         <resources>
             <!--Put db creation scripts into WEB-INF/classes in order to load it from DBInitializationGBean-->
+            <!-- This does not work with mvn eclipse:eclipse on windows platform.
             <resource>
                 <filtering>true</filtering>
                     <directory>${basedir}/src/main/resources</directory>
                     <targetPath>${project.build.directory}/${project.artifactId}-${project.version}/WEB-INF/classes</targetPath>
             </resource>                        
+            -->
         </resources>      
         <plugins>
             <plugin>
