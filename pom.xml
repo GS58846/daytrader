@@ -20,29 +20,27 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.apache.geronimo.samples</groupId>
-        <artifactId>samples</artifactId>
-        <version>3.0-SNAPSHOT</version>
+        <groupId>org.apache.geronimo.genesis</groupId>
+        <artifactId>genesis-java6-flava</artifactId>
+        <version>2.0</version>
     </parent>
 
-    <groupId>org.apache.geronimo.samples.daytrader</groupId>
+    <groupId>org.apache.geronimo.daytrader</groupId>
     <artifactId>daytrader-parent</artifactId>
-    <name>DayTrader :: Performance Benchmark Sample</name>
+    <version>3.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     
-    <description>Java EE 5.0 Performance Benchmark Sample Application</description>
+    <name>DayTrader :: Performance Benchmark Sample :: Java EE 6</name>    
+    <description>Java EE 6.0 Performance Benchmark Sample Application</description>
 
     <scm>
-        <connection>scm:svn:http://svn.apache.org/repos/asf/geronimo/samples/trunk/samples/daytrader</connection>
-        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/geronimo/samples/trunk/samples/daytrader</developerConnection>
-        <url>http://svn.apache.org/viewcvs.cgi/geronimo/samples/trunk/samples/daytrader</url>
+        <connection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/</connection>
+        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/geronimo/daytrader/trunk/</developerConnection>
+        <url>http://svn.apache.org/viewcvs.cgi/geronimo/daytrader/trunk/</url>
     </scm>
 
-    <properties>
-        <!-- This property is required by the car:package mojo, inherited from samples' root pom -->
-        <!--Crack: Use 2.2 to test if plugins is compilable and workable -->
-        <!--<geronimoVersion>2.2</geronimoVersion>-->
-
+    <properties>        
+        <geronimoVersion>3.0-SNAPSHOT</geronimoVersion>
         <!-- set siteId to artifactId for any "top level" project rooting a website -->
         <siteId>daytrader</siteId>
         <openjpaVersion>2.0.0</openjpaVersion>
@@ -50,7 +48,7 @@
 
     <issueManagement>
         <system>jira</system>
-        <url>http://issues.apache.org/jira/browse/GERONIMO</url>
+        <url>http://issues.apache.org/jira/browse/DAYTRADER</url>
     </issueManagement>
     <ciManagement>
         <system>continuum</system>
@@ -121,6 +119,13 @@
             </roles>
             <timezone>-5</timezone>
         </contributor>
+        <contributor>
+            <name>Forrest Xia</name>
+            <roles>
+                <role>Java EE 6 features developer</role>
+            </roles>
+            <timezone>+8</timezone>
+        </contributor>
     </contributors>
     <dependencies/>
     
@@ -132,7 +137,32 @@
     
 
     <dependencyManagement>
-        <dependencies>            
+        <dependencies>
+        		<!-- Import Geronimo Server used dependency versions -->
+            <dependency>
+                <groupId>org.apache.geronimo</groupId>
+                <artifactId>geronimo</artifactId>
+                <version>${geronimoVersion}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- Import ActiveMQ dependency versions -->
+            <dependency>
+                <groupId>org.apache.geronimo.plugins</groupId>
+                <artifactId>activemq</artifactId>
+                <version>${geronimoVersion}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- Import MyFaces dependency versions -->
+            <dependency>
+                <groupId>org.apache.geronimo.plugins</groupId>
+                <artifactId>myfaces</artifactId>
+                <version>${geronimoVersion}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+                        
             <dependency>
                 <groupId>commons-logging</groupId>
                 <artifactId>commons-logging</artifactId>
@@ -169,7 +199,79 @@
                 <artifactId>openjpa-kernel</artifactId>
                 <version>${openjpaVersion}</version>
             </dependency>
-        </dependencies>
+            
+            <!-- All daytrader sub modules listed here -->
+        		<dependency>
+        				<groupId>org.apache.geronimo.daytrader</groupId>
+            		<artifactId>daytrader-util</artifactId>
+            		<version>${project.version}</version>
+            		<scope>provided</scope>
+        		</dependency>
+        		
+        		<dependency>
+        				<groupId>org.apache.geronimo.daytrader</groupId>
+            		<artifactId>daytrader-beans</artifactId>
+            		<version>${project.version}</version>
+            		<scope>provided</scope>            		
+        		</dependency>
+        		
+        		<dependency>
+        				<groupId>org.apache.geronimo.daytrader</groupId>
+            		<artifactId>daytrader-core</artifactId>
+            		<version>${project.version}</version>            		
+            		<scope>provided</scope>
+        		</dependency>
+        		
+        		<dependency>
+        				<groupId>org.apache.geronimo.daytrader</groupId>
+            		<artifactId>daytrader-ejb3</artifactId>
+            		<version>${project.version}</version>
+            		<type>ejb</type>         		
+            		<scope>provided</scope>
+        		</dependency>
+        		
+        		<dependency>
+        				<groupId>org.apache.geronimo.daytrader</groupId>
+            		<artifactId>daytrader-entities</artifactId>
+            		<version>${project.version}</version>      
+            		<scope>provided</scope>      		
+        		</dependency>
+        		
+        		<dependency>
+        				<groupId>org.apache.geronimo.daytrader</groupId>
+            		<artifactId>json-proxy</artifactId>
+            		<version>${project.version}</version>      
+            		<scope>provided</scope>      		
+        		</dependency>
+        		
+        		<dependency>
+        				<groupId>org.apache.geronimo.daytrader</groupId>
+            		<artifactId>daytrader-soap</artifactId>
+            		<version>${project.version}</version>   
+            		<scope>provided</scope>         		
+        		</dependency>
+        		
+        		<dependency>
+        				<groupId>org.apache.geronimo.daytrader</groupId>
+            		<artifactId>streamer</artifactId>
+            		<version>${project.version}</version>    
+            		<scope>provided</scope>        		
+        		</dependency>
+        		
+        		<dependency>
+        				<groupId>org.apache.geronimo.daytrader</groupId>
+            		<artifactId>daytrader-web</artifactId>
+            		<version>${project.version}</version>        
+            		<scope>provided</scope>    		
+        		</dependency>
+        		
+        		<dependency>
+        				<groupId>org.apache.geronimo.daytrader</groupId>
+            		<artifactId>wsappclient</artifactId>
+            		<version>${project.version}</version>       
+            		<scope>provided</scope>     		
+        		</dependency>
+        </dependencies>        
     </dependencyManagement>
 
     <build>
@@ -181,7 +283,7 @@
                     <version>${geronimoVersion}</version>
                     <extensions>true</extensions>
                     <configuration>
-                        <category>Daytrader</category>
+                        <category>Daytrader :: Java EE 6</category>
                     </configuration>
                 </plugin>
                 
@@ -190,14 +292,14 @@
 
         <plugins>       
 
-            <plugin>
+            <!--<plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-idea-plugin</artifactId>
                 <configuration>
-                    <jdkName>1.5</jdkName>
+                    <jdkName>1.6</jdkName>
                     <linkModules>true</linkModules>
                 </configuration>
-            </plugin>
+            </plugin>-->
 
         </plugins>
     </build>
@@ -217,7 +319,7 @@
                 <!-- Installable assemblies -->
                 <module>assemblies</module>
                 <!-- Geronimo c-m-p built plugins -->
-                <module>plugins</module>        
+                <!--<module>plugins</module>        -->
             </modules>
         </profile>
         <profile>

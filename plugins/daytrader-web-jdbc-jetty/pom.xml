@@ -21,7 +21,7 @@
     <modelVersion>4.0.0</modelVersion>
     
     <parent>
-        <groupId>org.apache.geronimo.samples.daytrader</groupId>
+        <groupId>org.apache.geronimo.daytrader</groupId>
         <artifactId>plugins</artifactId>
         <version>3.0-SNAPSHOT</version>
     </parent>
@@ -37,14 +37,14 @@
         <dependency>
             <groupId>org.apache.geronimo.samples.daytrader.assemblies.web</groupId>
             <artifactId>daytrader-web-jdbc</artifactId>
-            <version>${version}</version>
+            <version>${project.version}</version>
             <type>war</type>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.geronimo.samples.daytrader.plugins</groupId>
             <artifactId>daytrader-derby-datasource</artifactId>
-            <version>${version}</version>
+            <version>${project.version}</version>
             <type>car</type>
         </dependency>
         

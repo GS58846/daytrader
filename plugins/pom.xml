@@ -20,12 +20,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.apache.geronimo.samples.daytrader</groupId>
+        <groupId>org.apache.geronimo.daytrader</groupId>
         <artifactId>daytrader-parent</artifactId>
         <version>3.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>org.apache.geronimo.samples.daytrader</groupId>
+    <groupId>org.apache.geronimo.daytrader</groupId>
     <artifactId>plugins</artifactId>
     <name>DayTrader :: Plugins</name>
     <packaging>pom</packaging>

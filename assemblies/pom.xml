@@ -20,29 +20,20 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.apache.geronimo.samples.daytrader</groupId>
+        <groupId>org.apache.geronimo.daytrader</groupId>
         <artifactId>daytrader-parent</artifactId>
         <version>3.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>org.apache.geronimo.samples.daytrader</groupId>
+    
     <artifactId>assemblies</artifactId>
     <name>DayTrader :: Assemblies</name>
     <packaging>pom</packaging>
-    <profiles>
-        <profile>
-            <id>default</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <modules>
-                <module>javaee</module>
-                <module>web</module>
-                <module>webprofile</module>     
-            </modules>
-        </profile>
-          
-    </profiles>
     
+    <modules>    		
+        <module>web</module>
+        <module>webprofile</module>     
+        <module>javaee</module>
+    </modules>
 
 </project>

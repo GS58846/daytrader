@@ -21,7 +21,7 @@
     <modelVersion>4.0.0</modelVersion>
     
     <parent>
-        <groupId>org.apache.geronimo.samples.daytrader</groupId>
+        <groupId>org.apache.geronimo.daytrader</groupId>
         <artifactId>plugins</artifactId>
         <version>3.0-SNAPSHOT</version>
     </parent>
@@ -35,20 +35,20 @@
         <dependency>
             <groupId>org.apache.geronimo.samples.daytrader.assemblies.javaee</groupId>
             <artifactId>daytrader-ear</artifactId>
-            <version>${version}</version>
+            <version>${project.version}</version>
             <type>ear</type>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.geronimo.samples.daytrader.plugins</groupId>
             <artifactId>daytrader-derby-datasource</artifactId>
-            <version>${version}</version>
+            <version>${project.version}</version>
             <type>car</type>
         </dependency>
         <dependency>
             <groupId>org.apache.geronimo.samples.daytrader.plugins</groupId>
             <artifactId>daytrader-jms</artifactId>
-            <version>${version}</version>
+            <version>${project.version}</version>
             <type>car</type>
         </dependency>
 
@@ -202,38 +202,38 @@
                         <configuration>
                             <tasks>
                                 <echo>Copying manually generated geronimo-plugin.xml files for app daytrader ws client</echo>
-                                <copy todir="${project.build.directory}/repository/org/apache/geronimo/daytrader/plugins/daytrader-ws-client/${version}/daytrader-ws-client-${version}.car/META-INF"
+                                <copy todir="${project.build.directory}/repository/org/apache/geronimo/daytrader/plugins/daytrader-ws-client/${project.version}/daytrader-ws-client-${project.version}.car/META-INF"
                                     failonerror="false" overwrite="true">
                                     <fileset dir="${basedir}/../plans/wsclient" includes="geronimo-plugin.xml"/>
                                 </copy>
 
                                 <echo>Copying manually generated geronimo-plugin.xml files for app daytrader streamer client</echo>
-                                <copy todir="${project.build.directory}/repository/org/apache/geronimo/daytrader/plugins/daytrader-streamer-client/${version}/daytrader-streamer-client-${version}.car/META-INF"
+                                <copy todir="${project.build.directory}/repository/org/apache/geronimo/daytrader/plugins/daytrader-streamer-client/${project.version}/daytrader-streamer-client-${project.version}.car/META-INF"
                                     failonerror="false" overwrite="true">
                                     <fileset dir="${basedir}/../plans/streamerclient" includes="geronimo-plugin.xml"/>
                                 </copy>
 
                                 <echo>Pack the daytrader ws client car file and install onto local repo</echo>
-                                <jar destfile="${project.build.directory}/daytrader-ws-client-${version}.car"
-                                    basedir="${project.build.directory}/repository/org/apache/geronimo/daytrader/plugins/daytrader-ws-client/${version}/daytrader-ws-client-${version}.car"/>
+                                <jar destfile="${project.build.directory}/daytrader-ws-client-${project.version}.car"
+                                    basedir="${project.build.directory}/repository/org/apache/geronimo/daytrader/plugins/daytrader-ws-client/${project.version}/daytrader-ws-client-${project.version}.car"/>
                                 
                                 <condition property="mvn.exe" value="mvn.bat" else="mvn">
                                     <os family="windows"/>
                                 </condition>
                                 <exec executable="${mvn.exe}">
                                     <arg value="install:install-file"/>
-                                    <arg value="-Dfile=${project.build.directory}/daytrader-ws-client-${version}.car"/>
+                                    <arg value="-Dfile=${project.build.directory}/daytrader-ws-client-${project.version}.car"/>
                                     <arg value="-DgroupId=org.apache.geronimo.samples.daytrader.plugins"/>
                                     <arg value="-DartifactId=daytrader-ws-client"/>
-                                    <arg value="-Dversion=${version}"/>
+                                    <arg value="-Dversion=${project.version}"/>
                                     <arg value="-Dpackaging=car"/>
                                     <arg value="-DgeneratePom=true"/>
                                     <arg value="-DcreateChecksum=true"/>
                                 </exec>
                                 
                                 <echo>Pack the daytrader streamer client car file and install onto local repo</echo>
-                                <jar destfile="${project.build.directory}/daytrader-streamer-client-${version}.car"
-                                    basedir="${project.build.directory}/repository/org/apache/geronimo/daytrader/plugins/daytrader-streamer-client/${version}/daytrader-streamer-client-${version}.car"/>
+                                <jar destfile="${project.build.directory}/daytrader-streamer-client-${project.version}.car"
+                                    basedir="${project.build.directory}/repository/org/apache/geronimo/daytrader/plugins/daytrader-streamer-client/${project.version}/daytrader-streamer-client-${project.version}.car"/>
                                 
 
                                 <condition property="mvn.exe" value="mvn.bat" else="mvn">
@@ -241,10 +241,10 @@
                                 </condition>
                                 <exec executable="${mvn.exe}">
                                     <arg value="install:install-file"/>
-                                    <arg value="-Dfile=${project.build.directory}/daytrader-streamer-client-${version}.car"/>
+                                    <arg value="-Dfile=${project.build.directory}/daytrader-streamer-client-${project.version}.car"/>
                                     <arg value="-DgroupId=org.apache.geronimo.samples.daytrader.plugins"/>
                                     <arg value="-DartifactId=daytrader-streamer-client"/>
-                                    <arg value="-Dversion=${version}"/>
+                                    <arg value="-Dversion=${project.version}"/>
                                     <arg value="-Dpackaging=car"/>
                                     <arg value="-DgeneratePom=true"/>
                                     <arg value="-DcreateChecksum=true"/>

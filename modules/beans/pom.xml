@@ -19,29 +19,27 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.apache.geronimo.samples.daytrader</groupId>
+        <groupId>org.apache.geronimo.daytrader</groupId>
         <artifactId>modules</artifactId>
         <version>3.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>org.apache.geronimo.samples.daytrader.modules</groupId>
+    
     <artifactId>daytrader-beans</artifactId>
     <packaging>bundle</packaging>
     <name>DayTrader :: Modules - Beans</name>
-    <description>Daytrader UnEnhanced Enttities Module</description>
+    <description>Daytrader UnEnhanced Entities Module</description>
 
     <scm>
-        <connection>scm:svn:http://svn.apache.org/repos/asf/geronimo/samples/trunk/samples/daytrader/modules/beans</connection>
-        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/geronimo/samples/trunk/samples/daytrader/modules/beans</developerConnection>
-        <url>http://svn.apache.org/viewcvs.cgi/geronimo/samples/trunk/samples/daytrader/modules/beans</url>
+        <connection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/modules/beans</connection>
+        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/geronimo/daytrader/trunk/modules/beans</developerConnection>
+        <url>http://svn.apache.org/viewcvs.cgi/geronimo/daytrader/trunk/modules/beans</url>
     </scm>
 
     <dependencies>
         <dependency>
-            <groupId>org.apache.geronimo.samples.daytrader.modules</groupId>
-            <artifactId>daytrader-util</artifactId>
-            <version>${pom.version}</version>
-            <scope>provided</scope>
+        		<groupId>org.apache.geronimo.daytrader</groupId>            
+            <artifactId>daytrader-util</artifactId>            
         </dependency>
 <!--
         <dependency>
@@ -74,12 +72,7 @@
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
+        </dependency>        
 <!-- OpenJPA depends
         <dependency>
             <groupId>org.apache.openjpa</groupId>
