@@ -20,39 +20,32 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.apache.geronimo.genesis</groupId>
-        <artifactId>genesis-java5-flava</artifactId>
-        <version>2.0</version>
+        <groupId>org.apache.geronimo.samples</groupId>
+        <artifactId>samples</artifactId>
+        <version>3.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>org.apache.geronimo.daytrader</groupId>
+    <groupId>org.apache.geronimo.samples.daytrader</groupId>
     <artifactId>daytrader-parent</artifactId>
     <name>DayTrader :: Performance Benchmark Sample</name>
     <packaging>pom</packaging>
-    <version>2.2-SNAPSHOT</version>
+    
     <description>Java EE 5.0 Performance Benchmark Sample Application</description>
 
+    <scm>
+        <connection>scm:svn:http://svn.apache.org/repos/asf/geronimo/samples/trunk/samples/daytrader</connection>
+        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/geronimo/samples/trunk/samples/daytrader</developerConnection>
+        <url>http://svn.apache.org/viewcvs.cgi/geronimo/samples/trunk/samples/daytrader</url>
+    </scm>
+
     <properties>
-        <!-- This property is required by the car:package mojo -->
-        <geronimoVersion>2.2</geronimoVersion>
+        <!-- This property is required by the car:package mojo, inherited from samples' root pom -->
+        <!--Crack: Use 2.2 to test if plugins is compilable and workable -->
+        <!--<geronimoVersion>2.2</geronimoVersion>-->
 
         <!-- set siteId to artifactId for any "top level" project rooting a website -->
         <siteId>daytrader</siteId>
-
-        <gbeanDeployerBootstrap>org.apache.geronimo.framework/geronimo-gbean-deployer-bootstrap/${geronimoVersion}/car</gbeanDeployerBootstrap>
-        <gbeanDeployer>org.apache.geronimo.framework/geronimo-gbean-deployer/${geronimoVersion}/car</gbeanDeployer>
-        <j2eeDeployer>org.apache.geronimo.configs/j2ee-deployer/${geronimoVersion}/car</j2eeDeployer>
-        <clientDeployer>org.apache.geronimo.configs/client-deployer/${geronimoVersion}/car</clientDeployer>
-        <connectorDeployer>org.apache.geronimo.configs/connector-deployer/${geronimoVersion}/car</connectorDeployer>
-        <openejbDeployer>org.apache.geronimo.configs/openejb-deployer/${geronimoVersion}/car</openejbDeployer>
-        <openejbcorbaDeployer>org.apache.geronimo.configs/openejb-corba-deployer/${geronimoVersion}/car</openejbcorbaDeployer>
-        <axisDeployer>org.apache.geronimo.configs/axis-deployer/${geronimoVersion}/car</axisDeployer>
-        <cxfDeployer>org.apache.geronimo.configs/cxf-deployer/${geronimoVersion}/car</cxfDeployer>
-        <axis2Deployer>org.apache.geronimo.configs/axis2-deployer/${geronimoVersion}/car</axis2Deployer>
-        <tomcatDeployer>org.apache.geronimo.configs/tomcat6-deployer/${geronimoVersion}/car</tomcatDeployer>
-        <jetty7Deployer>org.apache.geronimo.configs/jetty7-deployer/${geronimoVersion}/car</jetty7Deployer>
-        <jasperDeployer>org.apache.geronimo.configs/jasper-deployer/${geronimoVersion}/car</jasperDeployer>
-        <jpaDeployer>org.apache.geronimo.configs/persistence-jpa10-deployer/${geronimoVersion}/car</jpaDeployer>
+        <openjpaVersion>2.0.0</openjpaVersion>
     </properties>
 
     <issueManagement>
@@ -130,44 +123,16 @@
         </contributor>
     </contributors>
     <dependencies/>
-    <scm>
-        <connection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/</connection>
-        <developerConnection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/</developerConnection>
-        <url>http://svn.apache.org/viewcvs.cgi/geronimo/daytrader/trunk/</url>
-    </scm>
+    
     <organization>
         <name>Apache Software Foundation</name>
         <url>http://www.apache.org/</url>
     </organization>
 
-    <modules>
-        <!-- Daytrader application -->
-        <module>modules</module>
-        <!-- Installable assemblies -->
-        <module>assemblies</module>
-        <!-- Geronimo c-m-p built plugins -->
-        <module>plugins</module>
-        
-    </modules>
+    
 
     <dependencyManagement>
-        <dependencies>
-            <!-- Import Geronimo Server used dependency versions -->
-            <dependency>
-                <groupId>org.apache.geronimo</groupId>
-                <artifactId>geronimo</artifactId>
-                <version>${geronimoVersion}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <!-- Import ActiveMQ dependency versions -->
-            <dependency>
-                <groupId>org.apache.geronimo.plugins</groupId>
-                <artifactId>activemq</artifactId>
-                <version>${geronimoVersion}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
+        <dependencies>            
             <dependency>
                 <groupId>commons-logging</groupId>
                 <artifactId>commons-logging</artifactId>
@@ -219,175 +184,11 @@
                         <category>Daytrader</category>
                     </configuration>
                 </plugin>
-                <plugin>
-                    <groupId>org.apache.geronimo.buildsupport</groupId>
-                    <artifactId>geronimo-maven-plugin</artifactId>
-                    <version>${geronimoVersion}</version>
-
-                    <configuration>
-                        <assemblies>
-                            <assembly>
-                                <id>jetty</id>
-                                <groupId>org.apache.geronimo.assemblies</groupId>
-                                <artifactId>geronimo-jetty7-javaee5</artifactId>
-                                <version>${geronimoVersion}</version>
-                                <classifier>bin</classifier>
-                                <type>zip</type>
-                            </assembly>
-
-                            <assembly>
-                                <id>jetty-minimal</id>
-                                <groupId>org.apache.geronimo.assemblies</groupId>
-                                <artifactId>geronimo-jetty7-minimal</artifactId>
-                                <version>${geronimoVersion}</version>
-                                <classifier>bin</classifier>
-                                <type>zip</type>
-                            </assembly>
-
-                            <assembly>
-                                <id>tomcat</id>
-                                <groupId>org.apache.geronimo.assemblies</groupId>
-                                <artifactId>geronimo-tomcat6-javaee5</artifactId>
-                                <version>${geronimoVersion}</version>
-                                <classifier>bin</classifier>
-                                <type>zip</type>
-                            </assembly>
-
-                            <assembly>
-                                <id>tomcat-minimal</id>
-                                <groupId>org.apache.geronimo.assemblies</groupId>
-                                <artifactId>geronimo-tomcat6-minimal</artifactId>
-                                <version>${geronimoVersion}</version>
-                                <classifier>bin</classifier>
-                                <type>zip</type>
-                            </assembly>
-
-                            <assembly>
-                                <id>framework</id>
-                                <groupId>org.apache.geronimo.assemblies</groupId>
-                                <artifactId>geronimo-framework</artifactId>
-                                <version>${geronimoVersion}</version>
-                                <classifier>bin</classifier>
-                                <type>zip</type>
-                            </assembly>
-                        </assemblies>
-
-                        <defaultAssemblyId>framework</defaultAssemblyId>
-
-                        <optionSets>
-                            <optionSet>
-                                <id>morememory</id>
-                                <options>
-                                    <option>-Xmx512m</option>
-                                    <option>-XX:MaxPermSize=128m</option>
-                                </options>
-                            </optionSet>
-
-                            <optionSet>
-                                <id>debug</id>
-                                <options>
-                                    <option>-Xdebug</option>
-                                    <option>-Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=n</option>
-                                </options>
-                            </optionSet>
-                        </optionSets>
-                    </configuration>
-                    <executions>
-                        <execution>
-                            <id>start</id>
-                            <phase>pre-integration-test</phase>
-                            <goals>
-                                <goal>start-server</goal>
-                            </goals>
-                            <configuration>
-                                <assemblyId>${it-server}</assemblyId>
-                                <logOutput>true</logOutput>
-                                <background>true</background>
-                                <verifyTimeout>300</verifyTimeout>
-                                <refresh>true</refresh>
-                                <optionSets>
-                                    <optionSet>
-                                        <id>default</id>
-                                        <options>
-                                            <option>-XX:MaxPermSize=128m</option>
-                                        </options>
-                                    </optionSet>
-
-                                    <optionSet>
-                                        <id>morememory</id>
-                                        <options>
-                                            <option>-Xmx512m</option>
-                                            <option>-XX:MaxPermSize=128m</option>
-                                        </options>
-                                    </optionSet>
-
-                                    <optionSet>
-                                        <id>debug</id>
-                                        <options>
-                                            <option>-Xdebug</option>
-                                            <option>-Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=n</option>
-                                        </options>
-                                    </optionSet>
-                                </optionSets>
-                            </configuration>
-                        </execution>
-                        <execution>
-                            <id>install-plugin</id>
-                            <phase>install</phase>
-                            <goals>
-                                <goal>install-plugin</goal>
-                            </goals>
-                            <!--<configuration>-->
-                            <!--<defaultGeronimoRepository>http://geronimo.apache.org/plugins/geronimo-${geronimoVersion}/</defaultGeronimoRepository>-->
-                            <!--</configuration>-->
-                        </execution>
-                        <execution>
-                            <id>stop</id>
-                            <phase>install</phase>
-                            <goals>
-                                <goal>stop-server</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
+                
             </plugins>
         </pluginManagement>
 
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-enforcer-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>enforce</goal>
-                        </goals>
-                        <configuration>
-                            <rules>
-                                <!-- Allow any Java >= 1.5 -->
-                                <requireJavaVersion>
-                                    <version>[1.5,)</version>
-                                </requireJavaVersion>
-
-                                <!-- Allow any Maven >= 2.0.9 -->
-                                <requireMavenVersion>
-                                    <version>[2.0.9,)</version>
-                                </requireMavenVersion>
-                            </rules>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.5</source>
-                    <target>1.5</target>
-                </configuration>
-            </plugin>
+        <plugins>       
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -401,40 +202,43 @@
         </plugins>
     </build>
 
-    <!--
-        Remove this once the genesis 2.0.1 is released or there is a better solution
-    -->
-    <pluginRepositories>
-        <pluginRepository>
-            <id>apache.snapshots</id>
-            <name>Apache Snapshots Repository</name>
-            <url>http://repository.apache.org/snapshots</url>
-            <layout>default</layout>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>daily</updatePolicy>
-                <checksumPolicy>ignore</checksumPolicy>
-            </snapshots>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-        </pluginRepository>
-    </pluginRepositories>
-
     <profiles>
         <profile>
-            <id>jboss-db2</id>
+            <id>default</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
-                <property>
-                    <name>database</name>
-                    <value>db2</value>
-                </property>
             </activation>
             <properties>
                 <jboss.mapping>DB2</jboss.mapping>
             </properties>
+            <modules>
+                <!-- Daytrader application -->
+                <module>modules</module>
+                <!-- Installable assemblies -->
+                <module>assemblies</module>
+                <!-- Geronimo c-m-p built plugins -->
+                <module>plugins</module>        
+            </modules>
         </profile>
+        <profile>
+            <id>no-plugin</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>        
+                <property>
+                    <name>buildPlugin</name>
+                    <value>false</value>
+                </property>        
+            </activation>
+            <properties>
+                <jboss.mapping>DB2</jboss.mapping>
+            </properties>
+            <modules>
+                <!-- Daytrader application -->
+                <module>modules</module>
+                <!-- Installable assemblies -->
+                <module>assemblies</module>                
+            </modules>
+        </profile>             
 
         <profile>
             <id>jboss-mysql</id>
@@ -448,14 +252,7 @@
                 <jboss.mapping>mySQL</jboss.mapping>
             </properties>
         </profile>
-
-        <profile>
-            <id>test</id>
-            <modules>
-                <module>functional-tests</module>
-            </modules>
-        </profile>
-
+        
         <profile>
             <id>db2</id>
             <modules>
@@ -468,25 +265,25 @@
                 <module>plugins/daytrader-oracle-datasource</module>
             </modules>
         </profile>
-	<profile>
+	    <profile>
             <id>mysql</id>
             <modules>
                 <module>plugins/daytrader-mysql-datasource</module>
             </modules>
         </profile>
-	<profile>
+	    <profile>
             <id>informix</id>
             <modules>
                 <module>plugins/daytrader-informix-datasource</module>
             </modules>
         </profile>
-	<profile>
+	    <profile>
             <id>sqlserver</id>
             <modules>
                 <module>plugins/daytrader-sqlserver-datasource</module>
             </modules>
         </profile>	
-	<profile>
+	    <profile>
             <id>postgre</id>
             <modules>
                 <module>plugins/daytrader-postgre-datasource</module>

@@ -64,6 +64,9 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
     private static BigDecimal ZERO = new BigDecimal(0.0);
 
     private static boolean initialized = false;
+    
+    private Integer soldholdingID = null;
+    private Object soldholdingIDlock = new Object();
 
     /**
      * Zero arg constructor for TradeJPADirect
@@ -92,7 +95,7 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
         if (initialized)
             return;
         if (Log.doTrace())
-            Log.trace("TradeJPADirect:init -- *** initializing");
+            Log.trace("TradeJPADirect:init -- *** initializing");  
 
         TradeConfig.setPublishQuotePriceChange(false);
 
@@ -295,9 +298,12 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
             // commit the transaction before calling completeOrder
             entityManager.getTransaction().commit();
 
-            if (orderProcessingMode == TradeConfig.SYNCH)
-                completeOrder(order.getOrderID(), false);
-            else if (orderProcessingMode == TradeConfig.ASYNCH_2PHASE)
+            if (orderProcessingMode == TradeConfig.SYNCH) {            	
+            	synchronized(soldholdingIDlock) {
+            		this.soldholdingID = holding.getHoldingID();
+            		completeOrder(order.getOrderID(), false);
+            	}            	
+            } else if (orderProcessingMode == TradeConfig.ASYNCH_2PHASE)
                 queueOrder(order.getOrderID(), true);
 
         }
@@ -353,11 +359,14 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
 
         AccountDataBean account = order.getAccount();
         QuoteDataBean quote = order.getQuote();
-        HoldingDataBean holding = order.getHolding();
+        HoldingDataBean holding = null;
+        if(order.isSell() && this.soldholdingID != null){
+        	holding = entityManager.find(HoldingDataBean.class, this.soldholdingID);
+        }        
         BigDecimal price = order.getPrice();
         double quantity = order.getQuantity();
 
-        String userID = account.getProfile().getUserID();
+        //String userID = account.getProfile().getUserID();
 
         if (Log.doTrace())
             Log.trace("TradeJPADirect:completeOrder--> Completing Order "
@@ -365,23 +374,25 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
                       + "\n\t Account info: " + account + "\n\t Quote info: "
                       + quote + "\n\t Holding info: " + holding);
 
-        HoldingDataBean newHolding = null;
+        HoldingDataBean newHolding = null;        
+        
         if (order.isBuy()) {
             /*
              * Complete a Buy operation - create a new Holding for the Account -
              * deduct the Order cost from the Account balance
              */
-
-            newHolding = createHolding(account, quote, quantity, price, entityManager);
-        }
-
-        try {
-            entityManager.getTransaction().begin();
-
+        	//newHolding = createHolding(account, quote, quantity, price, entityManager);
+        	entityManager.getTransaction().begin();
+        	newHolding = new HoldingDataBean(quantity, price, new Timestamp(System.currentTimeMillis()), account, quote);
+        	entityManager.persist(newHolding);            
+            
             if (newHolding != null) {
                 order.setHolding(newHolding);
             }
+            entityManager.getTransaction().commit();
+        }
 
+        try {
             if (order.isSell()) {
                 /*
                  * Complete a Sell operation - remove the Holding from the Account -
@@ -389,13 +400,15 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
                  */
                 if (holding == null) {
                     Log.error("TradeJPADirect:completeOrder -- Unable to sell order " + order.getOrderID() + " holding already sold");
-                    order.cancel();
-                    entityManager.getTransaction().commit();
+                    order.cancel();                    
                     return order;
                 }
                 else {
-                    entityManager.remove(holding);
+                	entityManager.getTransaction().begin();
+                    entityManager.remove(holding);                    
                     order.setHolding(null);
+                    this.soldholdingID = null;
+                    entityManager.getTransaction().commit();
                 }
             }
 
@@ -409,7 +422,6 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
                           + "\n\t Account info: " + account + "\n\t Quote info: "
                           + quote + "\n\t Holding info: " + holding);
 
-            entityManager.getTransaction().commit();
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -477,12 +489,12 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
             /*
              * managed transaction
              */
-            entityManager.getTransaction().begin();
+            //entityManager.getTransaction().begin();
             Query query = entityManager
                           .createNamedQuery("orderejb.closedOrders");
             query.setParameter("userID", userID);
 
-            entityManager.getTransaction().commit();
+            //entityManager.getTransaction().commit();
             Collection results = query.getResultList();
             Iterator itr = results.iterator();
             // entityManager.joinTransaction();
@@ -512,6 +524,7 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
                 }
             }
             else if (TradeConfig.jpaLayer == TradeConfig.HIBERNATE) {
+            	try {
                 /*
                  * Add logic to do update orders operation, because JBoss5'
                  * Hibernate 3.3.1GA DB2Dialect and MySQL5Dialect do not work
@@ -537,8 +550,16 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
                 Query updateStatus = entityManager.createNativeQuery("UPDATE orderejb o SET o.orderStatus = 'completed' WHERE "
                                                                      + "o.orderStatus = 'closed' AND o.ACCOUNT_ACCOUNTID  = ?");
                 updateStatus.setParameter(1, accountid.intValue());
+                entityManager.getTransaction().begin();
                 updateStatus.executeUpdate();
+                entityManager.getTransaction().commit();
+            	} catch (Exception e){
+            		entityManager.getTransaction().rollback();
+                    entityManager.close();
+                    entityManager = null;
+            	}
             }
+            
             if (entityManager != null) {
                 entityManager.close();
                 entityManager = null;
@@ -949,34 +970,28 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
                 entityManager.persist(order);
         }
         catch (Exception e) {
+        	entityManager.getTransaction().rollback();
             Log.error("TradeJPADirect:createOrder -- failed to create Order", e);
             throw new RuntimeException("TradeJPADirect:createOrder -- failed to create Order", e);
         }
         return order;
     }
 
-    private HoldingDataBean createHolding(AccountDataBean account,
+    /*private HoldingDataBean createHolding(AccountDataBean account,
                                           QuoteDataBean quote, double quantity, BigDecimal purchasePrice,
                                           EntityManager entityManager) throws Exception {
         HoldingDataBean newHolding = new HoldingDataBean(quantity,
                                                          purchasePrice, new Timestamp(System.currentTimeMillis()),
                                                          account, quote);
-        try {
-            /*
-             * manage transactions
-             */
-            entityManager.getTransaction().begin();
-            entityManager.persist(newHolding);
-            entityManager.getTransaction().commit();
+        try {            
+            entityManager.persist(newHolding);            
         }
         catch (Exception e) {
             entityManager.getTransaction().rollback();
-        } finally {
-            entityManager.close();
-        }
-
+        } 
+        
         return newHolding;
-    }
+    }*/
 
     public double investmentReturn(double investment, double NetValue)
     throws Exception {

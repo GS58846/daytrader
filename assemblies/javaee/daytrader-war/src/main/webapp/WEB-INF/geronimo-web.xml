@@ -20,8 +20,6 @@
     <web-app xmlns="http://geronimo.apache.org/xml/ns/j2ee/web-2.0.1"
         xmlns:naming="http://geronimo.apache.org/xml/ns/naming-1.2"
         configId="TradeWeb" parentId="Trade">
-    
-    <context-priority-classloader>false</context-priority-classloader>
 
     <naming:resource-ref>
         <naming:ref-name>jdbc/TradeDataSource</naming:ref-name>

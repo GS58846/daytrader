@@ -86,19 +86,19 @@ if (status != null) {
 			%>
 			
 		<tr>
-			<INPUT type="hidden" name="RunTimeMode" value="TradeConfig.JDBC"/>
+			<INPUT type="hidden" name="RunTimeMode" value="<%= TradeConfig.JDBC %>"/>
 		</tr>
 		
 		<tr>
-			<INPUT type="hidden" name="JPALayer" value="0"/>
+			<INPUT type="hidden" name="JPALayer" value="<%= TradeConfig.OPENJPA %>"/>
 		</tr>
 		
 		<tr>
-			<INPUT type="hidden" name="OrderProcessingMode" value="0"/>
+			<INPUT type="hidden" name="OrderProcessingMode" value="<%= TradeConfig.SYNCH %>"/>
 		</tr>
 		
 		<tr>
-			<INPUT type="hidden" name="AcessMode" value="0"/>
+			<INPUT type="hidden" name="AcessMode" value="<%= TradeConfig.STANDARD %>"/>
 		</tr>		
 		
 		<TR>

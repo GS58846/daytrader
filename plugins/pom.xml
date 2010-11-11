@@ -20,12 +20,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.apache.geronimo.daytrader</groupId>
+        <groupId>org.apache.geronimo.samples.daytrader</groupId>
         <artifactId>daytrader-parent</artifactId>
-        <version>2.2-SNAPSHOT</version>
+        <version>3.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>org.apache.geronimo.daytrader</groupId>
+    <groupId>org.apache.geronimo.samples.daytrader</groupId>
     <artifactId>plugins</artifactId>
     <name>DayTrader :: Plugins</name>
     <packaging>pom</packaging>
@@ -41,13 +41,13 @@
             </activation>
             <modules>
                 <module>daytrader-derby-datasource</module>
-        	<module>daytrader-web-jdbc-jetty</module>
+        	    <module>daytrader-web-jdbc-jetty</module>
                 <module>daytrader-web-jdbc-tomcat</module>
-        	<module>daytrader-web-jpa-jetty</module>
+        	    <module>daytrader-web-jpa-jetty</module>
                 <module>daytrader-web-jpa-tomcat</module>
-                <module>daytrader-jms</module>
+                <!--<module>daytrader-jms</module>
                 <module>daytrader-jetty</module>
-                <module>daytrader-tomcat</module>
+                <module>daytrader-tomcat</module>-->
             </modules>
         </profile>
         <!--
@@ -58,7 +58,7 @@
                 -Dmaven.repo.drivers=http://my.local.repo
         -->
         <profile>
-            <id>all</id>
+            <id>all-subprojects</id>
             <activation>
                 <property>
                     <name>all</name>
@@ -66,19 +66,19 @@
             </activation>
             <modules>
                 <module>daytrader-derby-datasource</module>
-                <module>daytrader-db2-datasource</module>
-                <module>daytrader-oracle-datasource</module>
-        	<module>daytrader-mysql-datasource</module>
-                <module>daytrader-informix-datasource</module>
-        	<module>daytrader-sqlserver-datasource</module>
-                <module>daytrader-postgre-datasource</module>
-        	<module>daytrader-web-jdbc-jetty</module>
+                <module>daytrader-web-jdbc-jetty</module>
                 <module>daytrader-web-jdbc-tomcat</module>
-        	<module>daytrader-web-jpa-jetty</module>
+        	    <module>daytrader-web-jpa-jetty</module>
                 <module>daytrader-web-jpa-tomcat</module>
                 <module>daytrader-jms</module>
                 <module>daytrader-jetty</module>
                 <module>daytrader-tomcat</module>
+                <module>daytrader-db2-datasource</module>
+                <module>daytrader-oracle-datasource</module>
+        	    <module>daytrader-mysql-datasource</module>
+                <module>daytrader-informix-datasource</module>
+        	    <module>daytrader-sqlserver-datasource</module>
+                <module>daytrader-postgre-datasource</module>        	    
             </modules>
             <properties>
                 <maven.repo.drivers>http://not.a.real.repository</maven.repo.drivers>
@@ -100,91 +100,5 @@
             </repositories>
         </profile>
     </profiles>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.geronimo.buildsupport</groupId>
-                <artifactId>car-maven-plugin</artifactId>
-                <version>${geronimoVersion}</version>
-                <!-- Install as extention to allow 'car' packaging to be used. -->
-                <extensions>true</extensions>
-                <configuration>
-                    <archive>
-                        <!-- Do not include META-INF/maven to avoid long file problems on windows -->
-                        <addMavenDescriptor>false</addMavenDescriptor>
-                    </archive>
-                    <url>http://geronimo.apache.org/</url>
-                    <author>The Apache Geronimo development community</author>
-                    <osiApproved>true</osiApproved>
-                    <useMavenDependencies>
-                        <value>true</value>
-                        <includeVersion>true</includeVersion>
-                        <useTransitiveDependencies>true</useTransitiveDependencies>
-                    </useMavenDependencies>
-                    <deploymentConfigs>
-                        <deploymentConfig>${gbeanDeployer}</deploymentConfig>
-                        <deploymentConfig>${j2eeDeployer}</deploymentConfig>
-                        <deploymentConfig>${connectorDeployer}</deploymentConfig>
-                    </deploymentConfigs>
-                    <commonInstance>
-                        <plugin-artifact>
-                            <geronimo-version>2.2</geronimo-version>
-                            <geronimo-version>2.2.1-SNAPSHOT</geronimo-version>
-                            <jvm-version>1.5</jvm-version>
-                            <jvm-version>1.6</jvm-version>
-                            <source-repository>~/.m2/repository/</source-repository>
-                            <source-repository>http://repository.apache.org/snapshots/</source-repository>
-                            <source-repository>http://repo1.maven.org/maven2/</source-repository>
-                        </plugin-artifact>
-                    </commonInstance>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-enforcer-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>enforce</goal>
-                        </goals>
-                        <configuration>
-                            <rules>
-                                <!-- Allow any Java >= 1.5 -->
-                                <requireJavaVersion>
-                                    <version>[1.5,)</version>
-                                </requireJavaVersion>
-
-                                <!-- Allow any Maven >= 2.0.9 -->
-                                <requireMavenVersion>
-                                    <version>[2.0.9,)</version>
-                                </requireMavenVersion>
-                            </rules>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.5</source>
-                    <target>1.5</target>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-idea-plugin</artifactId>
-                <configuration>
-                    <jdkName>1.5</jdkName>
-                    <linkModules>true</linkModules>
-                </configuration>
-            </plugin>
-
-        </plugins>
-    </build>
+    
 </project>

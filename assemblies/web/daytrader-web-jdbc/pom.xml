@@ -20,12 +20,12 @@
     <modelVersion>4.0.0</modelVersion>
     
     <parent>
-        <groupId>org.apache.geronimo.daytrader.assemblies</groupId>
+        <groupId>org.apache.geronimo.samples.daytrader.assemblies</groupId>
         <artifactId>web</artifactId>
-        <version>2.2-SNAPSHOT</version>
+        <version>3.0-SNAPSHOT</version>
     </parent>
     
-    <groupId>org.apache.geronimo.daytrader.assemblies.web</groupId>
+    <groupId>org.apache.geronimo.samples.daytrader.assemblies.web</groupId>
     <artifactId>daytrader-web-jdbc</artifactId>    
     <packaging>war</packaging>
     <name>DayTrader :: Assemblies - Web + Direct JDBC</name>
@@ -33,24 +33,24 @@
     
     <dependencies>
         <dependency>
-            <groupId>org.apache.geronimo.daytrader.modules</groupId>
+            <groupId>org.apache.geronimo.samples.daytrader.modules</groupId>
             <artifactId>daytrader-util</artifactId>
-            <version>${version}</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.geronimo.daytrader.modules</groupId>
+            <groupId>org.apache.geronimo.samples.daytrader.modules</groupId>
             <artifactId>daytrader-core</artifactId>
-            <version>${version}</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.geronimo.daytrader.modules</groupId>
+            <groupId>org.apache.geronimo.samples.daytrader.modules</groupId>
             <artifactId>daytrader-beans</artifactId>
-            <version>${version}</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.geronimo.daytrader.modules</groupId>
+            <groupId>org.apache.geronimo.samples.daytrader.modules</groupId>
             <artifactId>daytrader-web</artifactId>
-            <version>${version}</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <!-- we need to include this in the image for logging to work -->
@@ -61,16 +61,16 @@
         <!-- web container provided specs -->
         <dependency>
             <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-servlet_2.5_spec</artifactId>
+            <artifactId>geronimo-servlet_3.0_spec</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-jsp_2.1_spec</artifactId>
+            <artifactId>geronimo-jsp_2.2_spec</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>javax.servlet</groupId>
+            <groupId>org.apache.geronimo.bundles</groupId>
             <artifactId>jstl</artifactId>
             <scope>provided</scope>
         </dependency>
@@ -80,40 +80,18 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
-        </dependency>
-
-        <!-- Not required for Bean version of TradeDirect
-        <dependency>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-jta_1.1_spec</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-jms_1.1_spec</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-ejb_3.0_spec</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-annotation_1.0_spec</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-jpa_1.0_spec</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.openjpa</groupId>
-            <artifactId>openjpa</artifactId>
-        </dependency>
-        -->
+        </dependency>        
     </dependencies>
 
     <build>
+        <resources>
+            <!--Put db creation scripts into WEB-INF/classes in order to load it from DBInitializationGBean-->
+            <resource>
+                <filtering>true</filtering>
+                    <directory>${basedir}/src/main/resources</directory>
+                    <targetPath>${project.build.directory}/${project.artifactId}-${project.version}/WEB-INF/classes</targetPath>
+            </resource>                        
+        </resources>      
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -121,7 +99,7 @@
                 <configuration>
                     <resources>
                         <resource implementation="org.apache.maven.model.Resource">
-                            <filtering>false</filtering>
+                            <filtering>true</filtering>
                             <directory>
                                 ${basedir}/src/main/webapp/WEB-INF
                             </directory>
@@ -129,8 +107,8 @@
                                 <include>web.xml</include>
                                 <include>geronimo-web.xml</include>
                             </includes>
-                        </resource>
-                    </resources>
+                        </resource>                        
+                    </resources>                   
 
                     <archive>
                       <!-- add the generated manifest to the war -->
@@ -138,7 +116,7 @@
                     </archive>
 
                 </configuration>
-            </plugin>
+            </plugin>            
 
             <plugin>
               <groupId>org.apache.felix</groupId>

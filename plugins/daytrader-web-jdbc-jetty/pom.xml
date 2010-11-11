@@ -18,29 +18,31 @@
 
 <!-- $Rev$ $Date$ -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <parent>
-	<groupId>org.apache.geronimo.daytrader</groupId>        
-	<artifactId>plugins</artifactId>        
-        <version>2.2-SNAPSHOT</version>
-    </parent>
     <modelVersion>4.0.0</modelVersion>
-
-    <groupId>org.apache.geronimo.daytrader.plugins</groupId>
+    
+    <parent>
+        <groupId>org.apache.geronimo.samples.daytrader</groupId>
+        <artifactId>plugins</artifactId>
+        <version>3.0-SNAPSHOT</version>
+    </parent>
+    
+    <groupId>org.apache.geronimo.samples.daytrader.plugins</groupId>
     <artifactId>daytrader-web-jdbc-jetty</artifactId>
     <packaging>car</packaging>
     <name>Daytrader :: Plugins :: Web + Direct JDBC :: Jetty</name>
 
+    <description>Daytrader :: Plugins :: Web + Direct JDBC :: Jetty</description>
 
     <dependencies>
         <dependency>
-            <groupId>org.apache.geronimo.daytrader.assemblies.web</groupId>
+            <groupId>org.apache.geronimo.samples.daytrader.assemblies.web</groupId>
             <artifactId>daytrader-web-jdbc</artifactId>
             <version>${version}</version>
             <type>war</type>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.apache.geronimo.daytrader.plugins</groupId>
+            <groupId>org.apache.geronimo.samples.daytrader.plugins</groupId>
             <artifactId>daytrader-derby-datasource</artifactId>
             <version>${version}</version>
             <type>car</type>
@@ -48,7 +50,7 @@
         
         <dependency>
             <groupId>org.apache.geronimo.configs</groupId>
-            <artifactId>jetty7-deployer</artifactId>
+            <artifactId>${jetty}-deployer</artifactId>
             <version>${geronimoVersion}</version>
             <type>car</type>
             <scope>provided</scope>
@@ -65,7 +67,7 @@
 
         <dependency>
             <groupId>org.apache.geronimo.configs</groupId>
-            <artifactId>jetty7</artifactId>
+            <artifactId>${jetty}</artifactId>
             <version>${geronimoVersion}</version>
             <type>car</type>
         </dependency>
@@ -89,31 +91,31 @@
                     <deploymentConfigs>
                         <deploymentConfig>${gbeanDeployer}</deploymentConfig>
                         <deploymentConfig>${j2eeDeployer}</deploymentConfig>
-                        <deploymentConfig>${jetty7Deployer}</deploymentConfig>
+                        <deploymentConfig>${jettyDeployer}</deploymentConfig>
                         <deploymentConfig>${jasperDeployer}</deploymentConfig>
                     </deploymentConfigs>
                     <module>
-                        <groupId>org.apache.geronimo.daytrader.assemblies.web</groupId>
+                        <groupId>org.apache.geronimo.samples.daytrader.assemblies.web</groupId>
                         <artifactId>daytrader-web-jdbc</artifactId>
                         <type>war</type>
                     </module>
                     <instance>
                        <plugin-artifact>
                             <obsoletes>
-                                <groupId>org.apache.geronimo.daytrader.plugins</groupId>
+                                <groupId>org.apache.geronimo.samples.daytrader.plugins</groupId>
                                 <artifactId>daytrader-web-jdbc-jetty</artifactId>
                             </obsoletes>
-                            <artifact-alias key="org.apache.geronimo.daytrader.plugins/daytrader-web-jdbc-jetty//car">org.apache.geronimo.daytrader.plugins/daytrader-web-jdbc-jetty/${pom.version}/car</artifact-alias>
-                            <obsoletes>
-                                <groupId>org.apache.geronimo.daytrader.plugins</groupId>
+                            <artifact-alias key="org.apache.geronimo.samples.daytrader.plugins/daytrader-web-jdbc-jetty//car">org.apache.geronimo.samples.daytrader.plugins/daytrader-web-jdbc-jetty/${project.version}/car</artifact-alias>
+                            <!--<obsoletes>
+                                <groupId>org.apache.geronimo.samples.daytrader.plugins</groupId>
                                 <artifactId>daytrader-web-jpa-jetty</artifactId>
                             </obsoletes>
-                            <artifact-alias key="org.apache.geronimo.daytrader.plugins/daytrader-web-jpa-jetty/${pom.version}/car">org.apache.geronimo.daytrader.plugins/daytrader-web-jdbc-jetty/${pom.version}/car</artifact-alias>
+                            <artifact-alias key="org.apache.geronimo.samples.daytrader.plugins/daytrader-web-jpa-jetty/${project.version}/car">org.apache.geronimo.samples.daytrader.plugins/daytrader-web-jdbc-jetty/${project.version}/car</artifact-alias>
                             <obsoletes>
-                                <groupId>org.apache.geronimo.daytrader.plugins</groupId>
+                                <groupId>org.apache.geronimo.samples.daytrader.plugins</groupId>
                                 <artifactId>daytrader-jetty</artifactId>
                             </obsoletes>
-                            <artifact-alias key="org.apache.geronimo.daytrader.plugins/daytrader-jetty/${pom.version}/car">org.apache.geronimo.daytrader.plugins/daytrader-web-jdbc-jetty/${pom.version}/car</artifact-alias>
+                            <artifact-alias key="org.apache.geronimo.samples.daytrader.plugins/daytrader-jetty/${project.version}/car">org.apache.geronimo.samples.daytrader.plugins/daytrader-web-jdbc-jetty/${project.version}/car</artifact-alias>-->
                        </plugin-artifact>
                     </instance>
                 </configuration>

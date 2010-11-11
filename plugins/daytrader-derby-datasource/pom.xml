@@ -18,13 +18,15 @@
 
 <!-- $Rev$ $Date$ -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <parent>
-        <groupId>org.apache.geronimo.daytrader</groupId>
-        <artifactId>plugins</artifactId>
-        <version>2.2-SNAPSHOT</version>
-    </parent>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.apache.geronimo.daytrader.plugins</groupId>
+    
+    <parent>
+        <groupId>org.apache.geronimo.samples.daytrader</groupId>
+        <artifactId>plugins</artifactId>
+        <version>3.0-SNAPSHOT</version>
+    </parent>
+    
+    <groupId>org.apache.geronimo.samples.daytrader.plugins</groupId>
     <artifactId>daytrader-derby-datasource</artifactId>
     <packaging>car</packaging>
     <name>Daytrader :: Plugins :: Derby DataSource</name>
@@ -34,7 +36,7 @@
             <groupId>org.tranql</groupId>
             <artifactId>tranql-connector-derby-embed-xa</artifactId>
             <type>rar</type>
-            <version>1.5</version>
+            <version>1.6</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -53,7 +55,7 @@
         </dependency>
         <dependency>
             <groupId>org.apache.geronimo.configs</groupId>
-            <artifactId>connector-deployer</artifactId>
+            <artifactId>connector-deployer-1_6</artifactId>
             <type>car</type>
             <version>${geronimoVersion}</version>
             <scope>provided</scope>
@@ -61,8 +63,9 @@
         <dependency>
             <groupId>org.apache.geronimo.configs</groupId>
             <artifactId>system-database</artifactId>
-            <type>car</type>
             <version>${geronimoVersion}</version>
+            <type>car</type>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
@@ -73,6 +76,11 @@
                 <artifactId>car-maven-plugin</artifactId>
                 <extensions>true</extensions>
                 <configuration>
+                    <deploymentConfigs>
+                        <deploymentConfig>${gbeanDeployer}</deploymentConfig>
+                        <deploymentConfig>${j2eeDeployer}</deploymentConfig>
+                        <deploymentConfig>${connectorDeployer}</deploymentConfig>
+                    </deploymentConfigs>
                     <module>
                         <groupId>org.tranql</groupId>
                         <artifactId>tranql-connector-derby-embed-xa</artifactId>
@@ -81,40 +89,40 @@
                     <instance>
                         <plugin-artifact>
                             <obsoletes>
-                                <groupId>org.apache.geronimo.daytrader.plugins</groupId>
+                                <groupId>org.apache.geronimo.samples.daytrader.plugins</groupId>
                                 <artifactId>daytrader-db2-datasource</artifactId>
                             </obsoletes>
-                            <artifact-alias key="org.apache.geronimo.daytrader.plugins/daytrader-db2-datasource/${pom.version}/car">org.apache.geronimo.daytrader.plugins/daytrader-derby-datasource/${pom.version}/car</artifact-alias>
+                            <artifact-alias key="org.apache.geronimo.samples.daytrader.plugins/daytrader-db2-datasource/${project.version}/car">org.apache.geronimo.samples.daytrader.plugins/daytrader-derby-datasource/${project.version}/car</artifact-alias>
                             <obsoletes>
-                                <groupId>org.apache.geronimo.daytrader.plugins</groupId>
+                                <groupId>org.apache.geronimo.samples.daytrader.plugins</groupId>
                                 <artifactId>daytrader-derby-datasource</artifactId>
                             </obsoletes>
-                            <artifact-alias key="org.apache.geronimo.daytrader.plugins/daytrader-derby-datasource/${pom.version}/car">org.apache.geronimo.daytrader.plugins/daytrader-derby-datasource/${pom.version}/car</artifact-alias>
+                            <artifact-alias key="org.apache.geronimo.samples.daytrader.plugins/daytrader-derby-datasource/${project.version}/car">org.apache.geronimo.samples.daytrader.plugins/daytrader-derby-datasource/${project.version}/car</artifact-alias>
                             <obsoletes>
-                                <groupId>org.apache.geronimo.daytrader.plugins</groupId>
+                                <groupId>org.apache.geronimo.samples.daytrader.plugins</groupId>
                                 <artifactId>daytrader-informix-datasource</artifactId>
                             </obsoletes>
-                            <artifact-alias key="org.apache.geronimo.daytrader.plugins/daytrader-informix-datasource/${pom.version}/car">org.apache.geronimo.daytrader.plugins/daytrader-derby-datasource/${pom.version}/car</artifact-alias>
+                            <artifact-alias key="org.apache.geronimo.samples.daytrader.plugins/daytrader-informix-datasource/${project.version}/car">org.apache.geronimo.samples.daytrader.plugins/daytrader-derby-datasource/${project.version}/car</artifact-alias>
                             <obsoletes>
-                                <groupId>org.apache.geronimo.daytrader.plugins</groupId>
+                                <groupId>org.apache.geronimo.samples.daytrader.plugins</groupId>
                                 <artifactId>daytrader-mysql-datasource</artifactId>
                             </obsoletes>
-                            <artifact-alias key="org.apache.geronimo.daytrader.plugins/daytrader-mysql-datasource/${pom.version}/car">org.apache.geronimo.daytrader.plugins/daytrader-derby-datasource/${pom.version}/car</artifact-alias>
+                            <artifact-alias key="org.apache.geronimo.samples.daytrader.plugins/daytrader-mysql-datasource/${project.version}/car">org.apache.geronimo.samples.daytrader.plugins/daytrader-derby-datasource/${project.version}/car</artifact-alias>
                             <obsoletes>
-                                <groupId>org.apache.geronimo.daytrader.plugins</groupId>
+                                <groupId>org.apache.geronimo.samples.daytrader.plugins</groupId>
                                 <artifactId>daytrader-oracle-datasource</artifactId>
                             </obsoletes>
-                            <artifact-alias key="org.apache.geronimo.daytrader.plugins/daytrader-oracle-datasource/${pom.version}/car">org.apache.geronimo.daytrader.plugins/daytrader-derby-datasource/${pom.version}/car</artifact-alias>
+                            <artifact-alias key="org.apache.geronimo.samples.daytrader.plugins/daytrader-oracle-datasource/${project.version}/car">org.apache.geronimo.samples.daytrader.plugins/daytrader-derby-datasource/${project.version}/car</artifact-alias>
                             <obsoletes>
-                                <groupId>org.apache.geronimo.daytrader.plugins</groupId>
+                                <groupId>org.apache.geronimo.samples.daytrader.plugins</groupId>
                                 <artifactId>daytrader-postgre-datasource</artifactId>
                             </obsoletes>
-                            <artifact-alias key="org.apache.geronimo.daytrader.plugins/daytrader-postgre-datasource/${pom.version}/car">org.apache.geronimo.daytrader.plugins/daytrader-derby-datasource/${pom.version}/car</artifact-alias>
+                            <artifact-alias key="org.apache.geronimo.samples.daytrader.plugins/daytrader-postgre-datasource/${project.version}/car">org.apache.geronimo.samples.daytrader.plugins/daytrader-derby-datasource/${project.version}/car</artifact-alias>
                             <obsoletes>
-                                <groupId>org.apache.geronimo.daytrader.plugins</groupId>
+                                <groupId>org.apache.geronimo.samples.daytrader.plugins</groupId>
                                 <artifactId>daytrader-sqlserver-datasource</artifactId>
                             </obsoletes>
-                            <artifact-alias key="org.apache.geronimo.daytrader.plugins/daytrader-sqlserver-datasource/${pom.version}/car">org.apache.geronimo.daytrader.plugins/daytrader-derby-datasource/${pom.version}/car</artifact-alias>
+                            <artifact-alias key="org.apache.geronimo.samples.daytrader.plugins/daytrader-sqlserver-datasource/${project.version}/car">org.apache.geronimo.samples.daytrader.plugins/daytrader-derby-datasource/${project.version}/car</artifact-alias>
                         </plugin-artifact>
                     </instance>
                 </configuration>

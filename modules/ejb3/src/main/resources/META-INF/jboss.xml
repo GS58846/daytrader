@@ -31,15 +31,7 @@
             <resource-ref>
                <res-ref-name>jms/TopicConnectionFactory</res-ref-name>
                <jndi-name>ConnectionFactory</jndi-name>
-            </resource-ref>
-            
-             <resource-ref>
-               <res-ref-name>jdbc/TradeDataSource</res-ref-name>
-               <!-- If using DB2, comment out this line -->
-               <!--<jndi-name>jdbc/TradeDataSource</jndi-name>-->
-               <!-- If using MySql or Oracle, use this line -->
-               <jndi-name>java:jdbc/TradeDataSource</jndi-name>
-             </resource-ref>
+            </resource-ref>             
 
             <message-destination-ref>
                 <message-destination-ref-name>jms/TradeBrokerQueue</message-destination-ref-name>
@@ -87,14 +79,6 @@
             <resource-manager>
                <res-name>jms/TradeBrokerQueue</res-name>
                <res-jndi-name>TradeBrokerQueue</res-jndi-name>
-            </resource-manager>
-            
-             <resource-manager>
-               <res-name>jdbc/TradeDataSource</res-name>
-               <!-- If using DB2, comment out this line -->
-               <!--<res-jndi-name>jdbc/TradeDataSource</res-jndi-name>-->
-               <!-- If using MySql or Oracle, use this line -->
-               <res-jndi-name>java:jdbc/TradeDataSource</res-jndi-name>
-            </resource-manager>
+            </resource-manager>             
    </resource-managers> 
 </jboss>
