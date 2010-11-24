@@ -125,6 +125,18 @@
         -->
     </dependencies>
     <build>
+    	  <resources>
+        	<resource>
+                <directory>
+                    ${basedir}/src/main/resources
+                </directory>
+                <targetPath>${project.build.directory}/${project.artifactId}-${project.version}/docs</targetPath>
+                <filtering>true</filtering>                            
+                <includes>
+                    <include>**/tradeversion.html</include>
+                </includes>
+            </resource>                
+        </resources>
         <plugins>
             <!-- Removed per DATRADER-7 due to interop issues on commercial AppServers
             <plugin>
@@ -175,6 +187,24 @@
                     </webResources>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>buildnumber-maven-plugin</artifactId>
+                <configuration>
+                  <format>{0,date,yyyy/MM/dd}</format>
+                  <items>
+                    <item>timestamp</item>
+                  </items>
+                </configuration>
+                <executions>
+                  <execution>
+                    <phase>validate</phase>
+                    <goals>
+                      <goal>create</goal>
+                    </goals>
+                  </execution>
+                </executions>
+             </plugin>
         </plugins>
     </build>
 </project>
