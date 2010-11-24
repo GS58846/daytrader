@@ -128,7 +128,11 @@ public class TradeAppServlet extends HttpServlet {
             userID = req.getParameter("uid");
             String passwd = req.getParameter("passwd");
             String inScenario = req.getParameter("inScenario");
-            tsAction.doLogin(ctx, req, resp, userID, passwd);
+            try {
+            	tsAction.doLogin(ctx, req, resp, userID, passwd);
+            } catch (ServletException se) {
+            	tsAction.doWelcome(ctx, req, resp, se.getMessage());
+            }
             return;
         } else if (action.equals("register")) {
             userID = req.getParameter("user id");
