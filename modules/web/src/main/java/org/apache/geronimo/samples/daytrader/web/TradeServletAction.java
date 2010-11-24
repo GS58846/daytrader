@@ -409,13 +409,14 @@ public class TradeServletAction {
                 return;
             } else {
                 req.setAttribute("results", results
-                        + "\nCould not find account for + " + userID);
+                        + "\nCould not find account for user=" + userID);
                 // log the exception with an error level of 3 which means,
                 // handled exception but would invalidate a automation run
                 Log.log(
                                 "TradeServletAction.doLogin(...)",
                                 "Error finding account for user " + userID + "",
                                 "user entered a bad username or the database is not populated");
+                throw new NullPointerException("User does not exist or password is incorrect!");
             }
         } catch (java.lang.IllegalArgumentException e) { // this is a user
                                                             // error so I will
@@ -434,8 +435,8 @@ public class TradeServletAction {
         } catch (Exception e) {
             // log the exception with error page
             throw new ServletException("TradeServletAction.doLogin(...)"
-                    + "Exception logging in user " + userID + "with password"
-                    + passwd, e);
+                    + "Exception logging in user=" + userID + " with password="
+                    + passwd + "; " + e.getMessage(), e);
         }
 
         requestDispatch(ctx, req, resp, userID, TradeConfig
