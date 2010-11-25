@@ -1706,7 +1706,9 @@ public class TradeJDBCDirect implements TradeServices, TradeDBServices {
         if (datasource == null)
             getDataSource();
         conn = datasource.getConnection();
-        conn.setAutoCommit(false);
+        if (!this.inSession) {
+			conn.setAutoCommit(false);
+		}
         if (Log.doTrace()) {
             synchronized (lock) {
                 connCount++;
