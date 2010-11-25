@@ -105,10 +105,14 @@ public class OrderDataBean implements Serializable
     private QuoteDataBean quote;
     
     // Cause sell operation failed, see JIRA DAYTRADER-63 for details.
-    //@OneToOne(fetch=FetchType.LAZY)
-    //@JoinColumn(name = "HOLDING_HOLDINGID")
-    // Cause sell operation failed, see JIRA DAYTRADER-63 for details.
-    @Transient    
+    // rollback change for fullejb3 mode operation failures
+    // In JPA programming mode, the database schema cannot be created by JPA provider, 
+    // instead, user need to create db schema by self. And cannot enalbe foreign key constraint,
+    // Since the foreign key constraint is controled by code logic, not database logic.
+    @OneToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name = "HOLDING_HOLDINGID")
+    // rollback change for fullejb3 mode operation failures
+    //@Transient    
     private HoldingDataBean holding;
 
 //    @Version
