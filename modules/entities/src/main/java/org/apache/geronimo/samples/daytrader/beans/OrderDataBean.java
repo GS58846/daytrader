@@ -104,11 +104,12 @@ public class OrderDataBean implements Serializable
     @JoinColumn(name="QUOTE_SYMBOL")
     private QuoteDataBean quote;
     
+    // Cause sell operation failed, see JIRA DAYTRADER-63 for details. 
+    // rollback change for fullejb3 mode operation failures
+    @OneToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name = "HOLDING_HOLDINGID")
     // Cause sell operation failed, see JIRA DAYTRADER-63 for details.
-    //@OneToOne(fetch=FetchType.LAZY)
-    //@JoinColumn(name = "HOLDING_HOLDINGID")
-    // Cause sell operation failed, see JIRA DAYTRADER-63 for details.
-    @Transient    
+    //@Transient    
     private HoldingDataBean holding;
 
 //    @Version
