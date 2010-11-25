@@ -91,7 +91,9 @@ public class AccountDataBean implements Serializable {
     @Column(name = "OPENBALANCE")
     private BigDecimal openBalance;         /* open balance */
     
-    @OneToMany(mappedBy = "account", fetch=FetchType.LAZY)
+    // change to eager so that pingservlet2session2cmrone2many works
+    @OneToMany(mappedBy = "account", fetch=FetchType.EAGER)
+    //@OneToMany(mappedBy = "account", fetch=FetchType.LAZY)
     private Collection<OrderDataBean> orders;
     
     @OneToMany(mappedBy = "account", fetch=FetchType.LAZY)
