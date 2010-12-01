@@ -60,7 +60,7 @@ public class AccountDataBean implements Serializable {
     /* Accessor methods for persistent fields */
     @TableGenerator(
             name="accountIdGen",
-            table="KEYGENEJB",
+            table="keygenejb",
             pkColumnName="KEYNAME",
             valueColumnName="KEYVAL",
             pkColumnValue="account",

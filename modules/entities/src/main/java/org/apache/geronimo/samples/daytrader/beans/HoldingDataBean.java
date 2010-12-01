@@ -54,7 +54,7 @@ public class HoldingDataBean implements Serializable {
 
     @TableGenerator(
             name="holdingIdGen",
-            table="KEYGENEJB",
+            table="keygenejb",
             pkColumnName="KEYNAME",
             valueColumnName="KEYVAL",
             pkColumnValue="holding",
