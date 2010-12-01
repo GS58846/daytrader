@@ -110,10 +110,11 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.apache.geronimo.bundles</groupId>
-            <artifactId>jstl</artifactId>
-            <scope>provided</scope>
+                <groupId>org.apache.taglibs</groupId>
+                <artifactId>taglibs-standard-jstlel</artifactId>
+                <scope>provided</scope>
         </dependency>
+
         <!-- Removed per DAYTRADER-7 due to interop issues on commercial AppServers 
         <dependency>
             <groupId>org.codehaus.mojo</groupId>
@@ -123,19 +124,7 @@
         </dependency>
         -->
     </dependencies>
-    <build>
-    	<resources>
-        	<resource>
-                <directory>
-                    ${basedir}/src/main/resources
-                </directory>
-                <targetPath>${project.build.directory}/${project.artifactId}-${project.version}/docs</targetPath>
-                <filtering>true</filtering>                            
-                <includes>
-                    <include>**/tradeversion.html</include>
-                </includes>
-            </resource>                
-        </resources>
+    <build>    	
         <plugins>
             <!-- Removed per DATRADER-7 due to interop issues on commercial AppServers
             <plugin>
@@ -181,6 +170,16 @@
                                 <include>META-INF/LICENSE*</include>
                                 <include>META-INF/NOTICE*</include>
                                 <include>META-INF/DISCLAIMER*</include>
+                            </includes>
+                        </resource>
+                        <resource>
+                            <directory>
+                                ${basedir}/src/main/resources
+                            </directory>
+                            <targetPath>docs</targetPath>
+                            <filtering>true</filtering>                            
+                            <includes>
+                                <include>**/tradeversion.html</include>
                             </includes>
                         </resource>
                     </webResources>

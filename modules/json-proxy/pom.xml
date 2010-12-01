@@ -53,10 +53,11 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.apache.geronimo.bundles</groupId>
-            <artifactId>jstl</artifactId>
-            <scope>provided</scope>
+                <groupId>org.apache.taglibs</groupId>
+                <artifactId>taglibs-standard-jstlel</artifactId>
+                <scope>provided</scope>
         </dependency>
+
     </dependencies>
 
     <build>
