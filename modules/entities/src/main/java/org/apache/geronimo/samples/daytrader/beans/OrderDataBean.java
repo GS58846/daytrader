@@ -63,7 +63,7 @@ public class OrderDataBean implements Serializable
 
     @TableGenerator(
             name="orderIdGen",
-            table="KEYGENEJB",
+            table="keygenejb",
             pkColumnName="KEYNAME",
             valueColumnName="KEYVAL",
             pkColumnValue="order",
