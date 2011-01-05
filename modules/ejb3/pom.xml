@@ -30,11 +30,11 @@
     <name>DayTrader :: Modules - EJB3</name>
     <description>Daytrader EJB3 Module</description>
 
-    <scm>
+    <!--<scm>
         <connection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/modules/ejb3</connection>
         <developerConnection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/modules/ejb3</developerConnection>
         <url>http://svn.apache.org/viewcvs.cgi/geronimo/daytrader/trunk/modules/ejb3</url>
-    </scm>
+    </scm>-->
 
     <dependencies>
         <dependency>

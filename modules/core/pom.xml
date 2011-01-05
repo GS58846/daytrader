@@ -30,11 +30,11 @@
     <name>DayTrader :: Modules - Core</name>
     <description>Daytrader Core Module</description>
 
-    <scm>
+    <!--<scm>
         <connection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/modules/core</connection>
         <developerConnection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/modules/core</developerConnection>
         <url>http://svn.apache.org/viewcvs.cgi/geronimo/daytrader/trunk/modules/core</url>
-    </scm>
+    </scm>-->
 
     <dependencies>
         <dependency>

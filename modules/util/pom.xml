@@ -30,11 +30,11 @@
     <name>DayTrader :: Modules - Util</name>
     <description>Daytrader Util Module</description>
 
-    <scm>
+    <!--<scm>
         <connection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/modules/util</connection>
         <developerConnection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/modules/util</developerConnection>
         <url>http://svn.apache.org/viewcvs.cgi/geronimo/daytrader/trunk/modules/util</url>
-    </scm>
+    </scm>-->
 
     <dependencies>
         <dependency>

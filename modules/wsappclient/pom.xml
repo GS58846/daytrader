@@ -30,11 +30,11 @@
     <name>DayTrader :: Modules - WS Application Client</name>
     <description>Client demonstrating Web Services</description>
 
-    <scm>
+   <!-- <scm>
         <connection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/modules/wsappclient</connection>
         <developerConnection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/modules/wsappclient</developerConnection>
         <url>http://svn.apache.org/viewcvs.cgi/geronimo/daytrader/trunk/modules/wsappclient</url>
-    </scm>
+    </scm>-->
 
     <dependencies>
         <dependency>

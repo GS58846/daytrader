@@ -30,11 +30,11 @@
     <name>DayTrader :: Modules - Entities</name>
     <description>Daytrader JPA Enhanced Enttities Module</description>
 
-    <scm>
+    <!--<scm>
         <connection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/modules/entities</connection>
         <developerConnection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/modules/entities</developerConnection>
         <url>http://svn.apache.org/viewcvs.cgi/geronimo/daytrader/trunk/modules/entities</url>
-    </scm>
+    </scm>-->
 
     <dependencies>
         <dependency>

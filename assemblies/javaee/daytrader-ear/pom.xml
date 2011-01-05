@@ -30,11 +30,11 @@
     <name>DayTrader :: Assemblies - JavaEE EAR</name>
     <description>Daytrader EAR</description>
 
-    <scm>
+    <!--<scm>
         <connection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/assemblies/javaee/daytrader-ear</connection>
         <developerConnection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/assemblies/javaee/daytrader-ear</developerConnection>
         <url>http://svn.apache.org/viewcvs.cgi/geronimo/daytrader/trunk/assemblies/javaee/daytrader-ear</url>
-    </scm>
+    </scm>-->
 
     <dependencies>
         <dependency>

@@ -30,11 +30,11 @@
     <name>DayTrader :: Assemblies - JavaEE WAR</name>
     <description>Daytrader JavaEE Web Module</description>
 
-    <scm>
+    <!--<scm>
         <connection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/assemblies/javaee/daytrader-war</connection>
         <developerConnection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/assemblies/javaee/daytrader-war</developerConnection>
         <url>http://svn.apache.org/viewcvs.cgi/geronimo/daytrader/trunk/assemblies/javaee/daytrader-war</url>
-    </scm>
+    </scm>-->
 
     <dependencies>
         <dependency>

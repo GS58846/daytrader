@@ -30,11 +30,11 @@
     <name>DayTrader :: Modules - Beans</name>
     <description>Daytrader UnEnhanced Enttities Module</description>
 
-    <scm>
+    <!--<scm>
         <connection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/modules/beans</connection>
         <developerConnection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/modules/beans</developerConnection>
         <url>http://svn.apache.org/viewcvs.cgi/geronimo/daytrader/trunk/modules/beans</url>
-    </scm>
+    </scm>-->
 
     <dependencies>
         <dependency>

@@ -30,12 +30,12 @@
     <name>DayTrader :: Modules - Quote Streamer</name>
     <description>Streamer Application for Day Trader</description>
 
-    <scm>
+    <!--<scm>
         <connection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/modules/streamer</connection>
         <developerConnection>
             scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/modules/streamer</developerConnection>
         <url>http://svn.apache.org/viewcvs.cgi/geronimo/daytrader/trunk/modules/ear</url>
-    </scm>
+    </scm>-->
 
     <dependencies>
         <dependency>

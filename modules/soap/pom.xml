@@ -30,11 +30,11 @@
     <packaging>jar</packaging>
     <description>Daytrader SOAP Module</description>
 
-    <scm>
+    <!--<scm>
         <connection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/modules/soap</connection>
         <developerConnection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/modules/soap</developerConnection>
         <url>http://svn.apache.org/viewcvs.cgi/geronimo/daytrader/trunk/modules/soap</url>
-    </scm>
+    </scm>-->
 
     <dependencies>
         <dependency>
