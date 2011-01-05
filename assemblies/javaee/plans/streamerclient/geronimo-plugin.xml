@@ -29,16 +29,16 @@
         <module-id>
             <groupId>org.apache.geronimo.daytrader</groupId>
             <artifactId>daytrader-streamer-client</artifactId>
-            <version>2.2-SNAPSHOT</version>
+            <version>2.2.1-SNAPSHOT</version>
             <type>car</type>
         </module-id>
-        <geronimo-version>2.2-SNAPSHOT</geronimo-version>
+        <geronimo-version>2.2.1-SNAPSHOT</geronimo-version>
         <jvm-version>1.5</jvm-version>
         <jvm-version>1.6</jvm-version>
         <dependency start="false">
             <groupId>org.apache.geronimo.configs</groupId>
             <artifactId>client</artifactId>
-            <version>2.2-SNAPSHOT</version>
+            <version>2.2.1-SNAPSHOT</version>
             <type>car</type>
         </dependency>
         <config-xml-content load="false"/>
