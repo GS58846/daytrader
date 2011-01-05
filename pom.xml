@@ -131,9 +131,9 @@
     </contributors>
     <dependencies/>
     <scm>
-        <connection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/</connection>
-        <developerConnection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/</developerConnection>
-        <url>http://svn.apache.org/viewcvs.cgi/geronimo/daytrader/trunk/</url>
+        <connection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/branches/2.2/</connection>
+        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/geronimo/daytrader/branches/2.2/</developerConnection>
+        <url>http://svn.apache.org/viewcvs.cgi/geronimo/daytrader/branches/2.2/</url>
     </scm>
     <organization>
         <name>Apache Software Foundation</name>
