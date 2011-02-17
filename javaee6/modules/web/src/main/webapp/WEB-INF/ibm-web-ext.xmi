@@ -15,28 +15,6 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-
-    <modelVersion>4.0.0</modelVersion>
-
-    <parent>
-        <groupId>org.apache.geronimo.daytrader</groupId>
-        <artifactId>assemblies</artifactId>
-        <version>3.0-SNAPSHOT</version>
-    </parent>
-
-    
-    <artifactId>javaee</artifactId>
-    <name>DayTrader :: Assemblies for JavaEE</name>
-    <packaging>pom</packaging>
-    
-    <modules>
-    <module>daytrader-war</module>
-        <module>daytrader-ear</module>
-        <!--
-        <module>dojo-ui-war</module>
-        <module>dojo-ui-ear</module>
-        -->
-   </modules>
-
-</project>
+<webappext:WebAppExtension xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:webappext="webappext.xmi" xmi:id="WebAppExtension_1253388157890" reloadInterval="3" reloadingEnabled="true" additionalClassPath="" fileServingEnabled="true" directoryBrowsingEnabled="false" serveServletsByClassnameEnabled="true">
+  <webApp href="WEB-INF/web.xml#WebApp_ID"/>
+</webappext:WebAppExtension>

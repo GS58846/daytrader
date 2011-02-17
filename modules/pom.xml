@@ -39,7 +39,7 @@
         <module>soap</module>
         <module>web</module>
         <module>streamer</module>
-        <module>json-proxy</module>
+        <!--<module>json-proxy</module>-->
     </modules>
 
 </project>

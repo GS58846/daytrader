@@ -14,8 +14,7 @@
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
--->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+--><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
@@ -138,7 +137,7 @@
 
     <dependencyManagement>
         <dependencies>
-        		<!-- Import Geronimo Server used dependency versions -->
+        <!-- Import Geronimo Server used dependency versions -->
             <dependency>
                 <groupId>org.apache.geronimo</groupId>
                 <artifactId>geronimo</artifactId>
@@ -193,6 +192,19 @@
                 <artifactId>serp</artifactId>
                 <version>1.13.1</version>
             </dependency>
+            
+            <!--JSF 1.2 JARs from Apache MyFaces -->
+            <dependency>
+                <groupId>org.apache.myfaces.core</groupId>
+                <artifactId>myfaces-api</artifactId>
+                <version>1.2.3</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.myfaces.core</groupId>
+                <artifactId>myfaces-impl</artifactId>
+                <version>1.2.3</version>
+            </dependency>
 
             <dependency>
                 <groupId>org.apache.openjpa</groupId>
@@ -201,81 +213,81 @@
             </dependency>
             
             <!-- All daytrader sub modules listed here -->
-        		<dependency>
-        				<groupId>org.apache.geronimo.daytrader</groupId>
-            		<artifactId>daytrader-util</artifactId>
-            		<version>${project.version}</version>
-            		<scope>provided</scope>
-        		</dependency>
-        		
-        		<dependency>
-        				<groupId>org.apache.geronimo.daytrader</groupId>
-            		<artifactId>daytrader-beans</artifactId>
-            		<version>${project.version}</version>
-            		<scope>provided</scope>            		
-        		</dependency>
-        		
-        		<dependency>
-        				<groupId>org.apache.geronimo.daytrader</groupId>
-            		<artifactId>daytrader-core</artifactId>
-            		<version>${project.version}</version>            		
-            		<scope>provided</scope>
-        		</dependency>
-        		
-        		<dependency>
-        				<groupId>org.apache.geronimo.daytrader</groupId>
-            		<artifactId>daytrader-ejb3</artifactId>
-            		<version>${project.version}</version>
-            		<type>ejb</type>         		
-            		<scope>provided</scope>
-        		</dependency>
-        		
-        		<dependency>
-        				<groupId>org.apache.geronimo.daytrader</groupId>
-            		<artifactId>daytrader-entities</artifactId>
-            		<version>${project.version}</version>      
-            		<scope>provided</scope>      		
-        		</dependency>
-        		
-        		<dependency>
-        				<groupId>org.apache.geronimo.daytrader</groupId>
-            		<artifactId>json-proxy</artifactId>
-            		<version>${project.version}</version>      
-            		<scope>provided</scope>      		
-        		</dependency>
-        		
-        		<dependency>
-        				<groupId>org.apache.geronimo.daytrader</groupId>
-            		<artifactId>daytrader-soap</artifactId>
-            		<version>${project.version}</version>   
-            		<scope>provided</scope>         		
-        		</dependency>
-        		
-        		<dependency>
-        				<groupId>org.apache.geronimo.daytrader</groupId>
-            		<artifactId>streamer</artifactId>
-            		<version>${project.version}</version>    
-            		<scope>provided</scope>        		
-        		</dependency>
-        		
-        		<dependency>
-        				<groupId>org.apache.geronimo.daytrader</groupId>
-            		<artifactId>daytrader-web</artifactId>
-            		<version>${project.version}</version>        
-            		<scope>provided</scope>    		
-        		</dependency>
-        		
-        		<dependency>
-        				<groupId>org.apache.geronimo.daytrader</groupId>
-            		<artifactId>wsappclient</artifactId>
-            		<version>${project.version}</version>       
-            		<scope>provided</scope>     		
-        		</dependency>
+        <dependency>
+       <groupId>org.apache.geronimo.daytrader</groupId>
+         <artifactId>daytrader-util</artifactId>
+           <version>${project.version}</version>
+            <scope>provided</scope>
+                </dependency>
+                
+                <dependency>
+                        <groupId>org.apache.geronimo.daytrader</groupId>
+                    <artifactId>daytrader-beans</artifactId>
+                    <version>${project.version}</version>
+                    <scope>provided</scope>            
+                </dependency>
+                
+                <dependency>
+                        <groupId>org.apache.geronimo.daytrader</groupId>
+                    <artifactId>daytrader-core</artifactId>
+                    <version>${project.version}</version>            
+                    <scope>provided</scope>
+                </dependency>
+                
+                <dependency>
+                        <groupId>org.apache.geronimo.daytrader</groupId>
+                    <artifactId>daytrader-ejb3</artifactId>
+                    <version>${project.version}</version>
+                    <type>ejb</type>                 
+                    <scope>provided</scope>
+                </dependency>
+                
+                <dependency>
+                        <groupId>org.apache.geronimo.daytrader</groupId>
+                    <artifactId>daytrader-entities</artifactId>
+                    <version>${project.version}</version>      
+                    <scope>provided</scope>              
+                </dependency>
+                
+                <dependency>
+                        <groupId>org.apache.geronimo.daytrader</groupId>
+                    <artifactId>json-proxy</artifactId>
+                    <version>${project.version}</version>      
+                    <scope>provided</scope>              
+                </dependency>
+                
+                <dependency>
+                        <groupId>org.apache.geronimo.daytrader</groupId>
+                    <artifactId>daytrader-soap</artifactId>
+                    <version>${project.version}</version>   
+                    <scope>provided</scope>                 
+                </dependency>
+                
+                <dependency>
+                        <groupId>org.apache.geronimo.daytrader</groupId>
+                    <artifactId>streamer</artifactId>
+                    <version>${project.version}</version>    
+                    <scope>provided</scope>                
+                </dependency>
+                
+                <dependency>
+                        <groupId>org.apache.geronimo.daytrader</groupId>
+                    <artifactId>daytrader-web</artifactId>
+                    <version>${project.version}</version>        
+                    <scope>provided</scope>            
+                </dependency>
+                
+                <dependency>
+                        <groupId>org.apache.geronimo.daytrader</groupId>
+                    <artifactId>wsappclient</artifactId>
+                    <version>${project.version}</version>       
+                    <scope>provided</scope>             
+                </dependency>
                 
                 <dependency>
                 <groupId>org.apache.taglibs</groupId>
                 <artifactId>taglibs-standard-jstlel</artifactId>
-                <version>1.2</version>  
+                <version>1.2-SNAPSHOT</version>  
                 <scope>provided</scope>
         </dependency>
         </dependencies>        
@@ -345,7 +357,9 @@
                 <!-- Daytrader application -->
                 <module>modules</module>
                 <!-- Installable assemblies -->
-                <module>assemblies</module>                
+                <module>assemblies</module>  
+                <!-- Daytrader Java EE 6 -->
+               <module>javaee6</module>                
             </modules>
         </profile>             
 
@@ -374,29 +388,29 @@
                 <module>plugins/daytrader-oracle-datasource</module>
             </modules>
         </profile>
-	    <profile>
+        <profile>
             <id>mysql</id>
             <modules>
                 <module>plugins/daytrader-mysql-datasource</module>
             </modules>
         </profile>
-	    <profile>
+        <profile>
             <id>informix</id>
             <modules>
                 <module>plugins/daytrader-informix-datasource</module>
             </modules>
         </profile>
-	    <profile>
+        <profile>
             <id>sqlserver</id>
             <modules>
                 <module>plugins/daytrader-sqlserver-datasource</module>
             </modules>
-        </profile>	
-	    <profile>
+        </profile>    
+        <profile>
             <id>postgre</id>
             <modules>
                 <module>plugins/daytrader-postgre-datasource</module>
             </modules>
         </profile>
-    </profiles>
+    </profiles> 
 </project>
