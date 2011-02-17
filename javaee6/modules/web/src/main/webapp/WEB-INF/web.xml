@@ -19,14 +19,7 @@
 <web-app xmlns="http://java.sun.com/xml/ns/javaee" version="2.5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
-    <display-name>DayTrader Web JDBC</display-name>    
-   
-    <listener>
-        <listener-class>org.apache.geronimo.samples.daytrader.web.TradeJDBCContextListener</listener-class>
-    </listener>
-    <listener>
-        <listener-class>org.apache.geronimo.samples.daytrader.web.TradeJPAContextListener</listener-class>
-    </listener>  
+    <display-name>DayTrader Web JDBC</display-name>
    
     <servlet>
         <display-name>register</display-name>
