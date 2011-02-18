@@ -17,7 +17,7 @@
 
 
 <%@ page
-    import="java.util.Collection, java.util.Iterator, org.apache.geronimo.daytrader.javaee6.core.*, org.apache.geronimo.daytrader.javaee6.entities.*, org.apache.geronimo.daytrader.javaee6.utils.*"
+    import="java.util.Collection, java.util.Iterator, org.apache.geronimo.daytrader.javaee6.core.direct.*, org.apache.geronimo.daytrader.javaee6.core.api.*, org.apache.geronimo.daytrader.javaee6.entities.*, org.apache.geronimo.daytrader.javaee6.core.beans.*"
     session="true" isThreadSafe="true" isErrorPage="false"%>
 
 <%

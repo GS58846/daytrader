@@ -22,11 +22,11 @@
         <jta-data-source>jdbc/TradeDataSource</jta-data-source>  
         <non-jta-data-source>jdbc/NoTxTradeDataSource</non-jta-data-source> 
         
-        <class>org.apache.geronimo.daytrader.entities.AccountDataBean</class>
-        <class>org.apache.geronimo.daytrader.entities.AccountProfileDataBean</class>
-        <class>org.apache.geronimo.daytrader.entities.HoldingDataBean</class>
-        <class>org.apache.geronimo.daytrader.entities.OrderDataBean</class>
-        <class>org.apache.geronimo.daytrader.entities.QuoteDataBean</class>
+        <class>org.apache.geronimo.daytrader.javaee6.entities.AccountDataBean</class>
+        <class>org.apache.geronimo.daytrader.javaee6.entities.AccountProfileDataBean</class>
+        <class>org.apache.geronimo.daytrader.javaee6.entities.HoldingDataBean</class>
+        <class>org.apache.geronimo.daytrader.javaee6.entities.OrderDataBean</class>
+        <class>org.apache.geronimo.daytrader.javaee6.entities.QuoteDataBean</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         
         <properties>

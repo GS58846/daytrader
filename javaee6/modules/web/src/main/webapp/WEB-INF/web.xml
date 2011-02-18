@@ -69,7 +69,7 @@
         <res-auth>Container</res-auth>
         <res-sharing-scope>Shareable</res-sharing-scope>
     </resource-ref>
-<!-- JavaEE only
+
     <resource-ref>
         <res-ref-name>jms/QueueConnectionFactory</res-ref-name>
         <res-type>javax.jms.QueueConnectionFactory</res-type>
@@ -83,7 +83,7 @@
         <res-sharing-scope>Shareable</res-sharing-scope>
     </resource-ref>
     
-    <ejb-ref>
+    <!--  <ejb-ref>
         <ejb-ref-name>ejb/TradeSLSBBean</ejb-ref-name>
         <ejb-ref-type>Session</ejb-ref-type>
         <remote>org.apache.geronimo.samples.daytrader.ejb3.TradeSLSBRemote</remote>
@@ -94,7 +94,7 @@
         <ejb-ref-type>Session</ejb-ref-type>
         <remote>org.apache.geronimo.samples.daytrader.ejb3.DirectSLSBRemote</remote>
         <ejb-link>DirectSLSBBean</ejb-link>
-    </ejb-ref>
+    </ejb-ref>-->
 
     <message-destination-ref>
         <message-destination-ref-name>jms/TradeBrokerQueue</message-destination-ref-name>
@@ -109,7 +109,7 @@
         <message-destination-link>dt-ejb.jar#jms/TradeStreamerTopic</message-destination-link>
     </message-destination-ref>
     
-    <service-ref>
+    <!--  <service-ref>
         <description>WSDL Service Trade</description>
         <service-ref-name>service/Trade</service-ref-name>
         <service-interface>org.apache.geronimo.samples.daytrader.client.ws.Trade</service-interface>
@@ -119,6 +119,6 @@
         <port-component-ref>
             <service-endpoint-interface>org.apache.geronimo.samples.daytrader.client.ws.TradeWSServices</service-endpoint-interface>
         </port-component-ref>
-    </service-ref>
--->
+    </service-ref>-->
+
 </web-app>

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 import org.apache.geronimo.daytrader.javaee6.core.api.*;
 import org.apache.geronimo.daytrader.javaee6.core.direct.*;
-import org.apache.geronimo.daytrader.javaee6.core.beans.*;
+
 import org.apache.geronimo.daytrader.javaee6.entities.AccountDataBean;
 import org.apache.geronimo.daytrader.javaee6.entities.AccountProfileDataBean;
 import org.apache.geronimo.daytrader.javaee6.entities.OrderDataBean;

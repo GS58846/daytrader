@@ -33,7 +33,8 @@ public class TradeConfig {
     public static final int UNKNOWN = -1;
 
     /* Trade Runtime Mode parameters */
-    public static String[] runTimeModeNames = {"Full EJB3", "Direct (JDBC)", "Session (EJB3) To Direct", "Web JDBC", "Web JPA"};
+   //Disable Web JDBC&JPA public static String[] runTimeModeNames = {"Full EJB3", "Direct (JDBC)", "Session (EJB3) To Direct", "Web JDBC", "Web JPA"};    
+    public static String[] runTimeModeNames = {"Full EJB3", "Direct (JDBC)", "Session (EJB3) To Direct"};
     public static final int EJB3 = 0;
     public static final int DIRECT = 1;
     public static final int SESSION3 = 2;
@@ -53,7 +54,8 @@ public class TradeConfig {
     public static final int ASYNCH_2PHASE = 1;
     public static int orderProcessingMode = SYNCH;
 
-    public static String[] accessModeNames = { "Standard", "WebServices" };
+    //public static String[] accessModeNames = { "Standard", "WebServices" };
+    public static String[] accessModeNames = { "Standard" };
     public static final int STANDARD = 0;
     public static final int WEBSERVICES = 1;
     private static int accessMode = STANDARD;

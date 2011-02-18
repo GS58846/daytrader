@@ -32,7 +32,7 @@ import org.apache.geronimo.daytrader.javaee6.core.beans.*;
 
 import org.apache.geronimo.daytrader.javaee6.utils.*;
 
-import java.rmi.RemoteException;
+
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
@@ -63,9 +63,9 @@ import java.sql.Timestamp;
 
 public class TradeJEEDirect implements TradeServices, TradeDBServices {
 
-    //private static String dsName = TradeConfig.DATASOURCE;
+    private static String dsName = TradeConfig.DATASOURCE;
     
-    @Resource(name="jdbc/TradeDataSource")
+    /*@Resource(name="jdbc/TradeDataSource")*/
     private static DataSource datasource;
 
     
@@ -1834,10 +1834,10 @@ public class TradeJEEDirect implements TradeServices, TradeDBServices {
 
     /*
      * Lookup the TradeData datasource
-     
+     */
     private void getDataSource() throws Exception {
         datasource = (DataSource) context.lookup(dsName);
-    }*/
+    }
 
     /*
      * Allocate a new connection to the datasource
@@ -1849,8 +1849,8 @@ public class TradeJEEDirect implements TradeServices, TradeDBServices {
     private Connection getConn() throws Exception {
 
         Connection conn = null;
-        /*if (datasource == null)
-            getDataSource();*/
+       if (datasource == null)
+            getDataSource();
         conn = datasource.getConnection();
         conn.setAutoCommit(false);
         if (Log.doTrace()) {
@@ -2015,7 +2015,7 @@ public class TradeJEEDirect implements TradeServices, TradeDBServices {
             return;
         if (Log.doTrace())
             Log.trace("TradeDirect:init -- *** initializing");
-        /*try {
+        try {
             if (Log.doTrace())
                 Log.trace("TradeDirect: init");
             context = new InitialContext();
@@ -2023,7 +2023,7 @@ public class TradeJEEDirect implements TradeServices, TradeDBServices {
         } catch (Exception e) {
             Log.error("TradeDirect:init -- error on JNDI lookups of DataSource -- TradeDirect will not work", e);
             return;
-        }*/
+        }
 
         try {
             qConnFactory = (ConnectionFactory) context.lookup("java:comp/env/jms/QueueConnectionFactory");

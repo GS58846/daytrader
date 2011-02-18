@@ -88,7 +88,7 @@ public class TradeAction implements TradeServices {
                 Log.error("TradeAction:TradeAction() Creation of Trade EJB 3 failed\n" + e);
                 re = new RuntimeException(e);
             }
-        }/* else if (TradeConfig.runTimeMode == TradeConfig.SESSION3) {
+        } else if (TradeConfig.runTimeMode == TradeConfig.SESSION3) {
             try {
                 Class c = Class.forName("org.apache.geronimo.daytrader.javaee6.ejb3.DirectSLSBBean");
                 if ((trade == null) ||
@@ -133,7 +133,7 @@ public class TradeAction implements TradeServices {
         } else {
             Log.error("TradeAction:TradeAction() Unknown Trade runtime mode.");
             re = new IllegalArgumentException("TradeAction:TradeAction() Unknown runTimeMode=" + TradeConfig.runTimeMode);
-        }*/
+        }
         
         if (re != null) {
             throw re;

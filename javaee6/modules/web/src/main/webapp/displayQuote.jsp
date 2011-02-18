@@ -15,7 +15,7 @@
   limitations under the License.
 -->
 <%@ page
-    import="java.math.BigDecimal, org.apache.geronimo.daytrader.javaee6.core.*, org.apache.geronimo.daytrader.javaee6.entities.*, org.apache.geronimo.daytrader.javaee6.utils.*"
+    import="java.math.BigDecimal, org.apache.geronimo.daytrader.javaee6.core.direct.*, org.apache.geronimo.daytrader.javaee6.entities.*, org.apache.geronimo.daytrader.javaee6.utils.*,org.apache.geronimo.daytrader.javaee6.core.api.*"
     session="true" isThreadSafe="true" isErrorPage="false"%>
 <% 
     String symbol = request.getParameter("symbol");
