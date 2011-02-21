@@ -19,6 +19,8 @@ package org.apache.geronimo.daytrader.javaee6.core.direct;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.ArrayList;
+
+import javax.annotation.Resource;
 import javax.naming.InitialContext;
 
 import javax.sql.DataSource;
@@ -58,7 +60,7 @@ public class TradeJDBCDirect implements TradeServices, TradeDBServices {
 
     private static String dsName = TradeConfig.DATASOURCE;
 
-    private static DataSource datasource = null;
+    private static @Resource DataSource datasource = null;
 
     private static BigDecimal ZERO = new BigDecimal(0.0);
 

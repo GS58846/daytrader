@@ -72,15 +72,15 @@ public class TradeAction implements TradeServices {
         
         if (TradeConfig.runTimeMode == TradeConfig.EJB3) {
             try {
-                Class c = Class.forName("org.apache.geronimo.daytrader.javaee6.ejb3.TradeSLSBRemote");
+                Class c = Class.forName("org.apache.geronimo.daytrader.javaee6.web.ejb3.TradeSLSBRemote");
                 if ((trade == null) ||
                     (!(trade.getClass().isAssignableFrom(c)))) {
                     InitialContext context = new InitialContext();
                     try {
-                        trade = (TradeServices) context.lookup("java:comp/env/ejb/TradeSLSBBean");                
+                        trade = (TradeServices) context.lookup("java:global/daytrader/web/TradeSLSBBean");                
                     } catch (Exception ex) {
                         Log.error("TradeAction:createTrade - Lookup of TradeSLSBRemote failed!!!");
-                        trade = (TradeServices) context.lookup("TradeSLSBBean");
+                        trade = (TradeServices) context.lookup("java:global/TradeSLSBBean");
                     }
                 }
             }
@@ -90,15 +90,15 @@ public class TradeAction implements TradeServices {
             }
         } else if (TradeConfig.runTimeMode == TradeConfig.SESSION3) {
             try {
-                Class c = Class.forName("org.apache.geronimo.daytrader.javaee6.ejb3.DirectSLSBBean");
+                Class c = Class.forName("org.apache.geronimo.daytrader.javaee6.web.ejb3.DirectSLSBBean");
                 if ((trade == null) ||
                     (!(trade.getClass().isAssignableFrom(c)))) {
                     InitialContext context = new InitialContext();
                     try {
-                        trade = (TradeServices) context.lookup("java:comp/env/ejb/DirectSLSBBean");                
+                        trade = (TradeServices) context.lookup("java:global/daytrader/web/DirectSLSBBean");                
                     } catch (Exception ex) {
                         Log.error("TradeAction:createTrade - Lookup of DirectSLSBRemote failed!!!");
-                        trade = (TradeServices) context.lookup("DirectSLSBBean");
+                        trade = (TradeServices) context.lookup("java:global/DirectSLSBBean");
                     }
                 }
             }

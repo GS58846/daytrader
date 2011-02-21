@@ -65,8 +65,8 @@ public class TradeJEEDirect implements TradeServices, TradeDBServices {
 
     private static String dsName = TradeConfig.DATASOURCE;
     
-    /*@Resource(name="jdbc/TradeDataSource")*/
-    private static DataSource datasource;
+    
+    private static @Resource DataSource datasource;
 
     
 

@@ -28,6 +28,7 @@ import javax.ejb.*;
 
 
 @Stateless
+@EJB(name="java:global/DirectSLSBBean", beanInterface=DirectSLSBRemote.class)
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
 @TransactionManagement(TransactionManagementType.CONTAINER)
 public class DirectSLSBBean implements DirectSLSBRemote, DirectSLSBLocal {

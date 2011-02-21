@@ -51,6 +51,7 @@ import javax.transaction.RollbackException;
 
 
 @Stateless
+@EJB(name="java:global/TradeSLSBBean",beanInterface=TradeSLSBRemote.class)
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
 @TransactionManagement(TransactionManagementType.CONTAINER)
 public class TradeSLSBBean implements TradeSLSBRemote, TradeSLSBLocal {

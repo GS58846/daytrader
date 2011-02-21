@@ -16,11 +16,11 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 -->
-<web-app xmlns="http://java.sun.com/xml/ns/javaee" version="2.5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" version="3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 
     <display-name>DayTrader Web JDBC</display-name>
-   
+   <module-name>web</module-name>
     <servlet>
         <display-name>register</display-name>
         <servlet-name>register</servlet-name>
@@ -57,7 +57,7 @@
         <location>/error.jsp</location>
     </error-page>
     
-    <resource-ref>
+    <!-- <resource-ref>
         <res-ref-name>jdbc/TradeDataSource</res-ref-name>
         <res-type>javax.sql.DataSource</res-type>
         <res-auth>Container</res-auth>
@@ -69,7 +69,6 @@
         <res-auth>Container</res-auth>
         <res-sharing-scope>Shareable</res-sharing-scope>
     </resource-ref>
-
     <resource-ref>
         <res-ref-name>jms/QueueConnectionFactory</res-ref-name>
         <res-type>javax.jms.QueueConnectionFactory</res-type>
@@ -81,21 +80,10 @@
         <res-type>javax.jms.TopicConnectionFactory</res-type>
         <res-auth>Application</res-auth>
         <res-sharing-scope>Shareable</res-sharing-scope>
-    </resource-ref>
+    </resource-ref> -->
     
-    <!--  <ejb-ref>
-        <ejb-ref-name>ejb/TradeSLSBBean</ejb-ref-name>
-        <ejb-ref-type>Session</ejb-ref-type>
-        <remote>org.apache.geronimo.samples.daytrader.ejb3.TradeSLSBRemote</remote>
-        <ejb-link>TradeSLSBBean</ejb-link>
-    </ejb-ref>
-    <ejb-ref>
-        <ejb-ref-name>ejb/DirectSLSBBean</ejb-ref-name>
-        <ejb-ref-type>Session</ejb-ref-type>
-        <remote>org.apache.geronimo.samples.daytrader.ejb3.DirectSLSBRemote</remote>
-        <ejb-link>DirectSLSBBean</ejb-link>
-    </ejb-ref>-->
-
+    
+    <!-- 
     <message-destination-ref>
         <message-destination-ref-name>jms/TradeBrokerQueue</message-destination-ref-name>
         <message-destination-type>javax.jms.Queue</message-destination-type>
@@ -107,7 +95,8 @@
         <message-destination-type>javax.jms.Topic</message-destination-type>
         <message-destination-usage>Produces</message-destination-usage>
         <message-destination-link>dt-ejb.jar#jms/TradeStreamerTopic</message-destination-link>
-    </message-destination-ref>
+    </message-destination-ref>-->
+    
     
     <!--  <service-ref>
         <description>WSDL Service Trade</description>
