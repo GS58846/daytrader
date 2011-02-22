@@ -50,7 +50,7 @@ import javax.persistence.Query;
 import javax.transaction.RollbackException;
 
 
-@Stateless
+@Singleton
 @EJB(name="java:global/TradeSLSBBean",beanInterface=TradeSLSBRemote.class)
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
 @TransactionManagement(TransactionManagementType.CONTAINER)

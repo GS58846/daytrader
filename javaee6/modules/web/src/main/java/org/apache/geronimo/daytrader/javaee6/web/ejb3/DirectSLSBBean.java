@@ -27,7 +27,7 @@ import java.util.Collection;
 import javax.ejb.*;
 
 
-@Stateless
+@Singleton
 @EJB(name="java:global/DirectSLSBBean", beanInterface=DirectSLSBRemote.class)
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
 @TransactionManagement(TransactionManagementType.CONTAINER)
