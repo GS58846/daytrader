@@ -26,7 +26,6 @@ import java.sql.ResultSet;
 
 import org.apache.geronimo.daytrader.javaee6.utils.*;
 
-import org.apache.geronimo.daytrader.*;
 
 public class KeySequenceDirect {
 

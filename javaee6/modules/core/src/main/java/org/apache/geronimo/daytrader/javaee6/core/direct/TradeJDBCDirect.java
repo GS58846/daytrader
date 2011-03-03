@@ -412,8 +412,8 @@ public class TradeJDBCDirect implements TradeServices, TradeDBServices {
         commit(conn);
 
         // signify this order for user userID is complete
-        TradeAction tradeAction = new TradeAction(this);
-        tradeAction.orderCompleted(userID, orderID);
+        /*TradeAction tradeAction = new TradeAction(this);
+        tradeAction.orderCompleted(userID, orderID);*/
 
         return orderData;
     }

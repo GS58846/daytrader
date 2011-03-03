@@ -103,8 +103,6 @@ public class TradeConfigServlet extends HttpServlet {
     void doConfigUpdate(HttpServletRequest req, HttpServletResponse resp)
         throws Exception {
 
-        TradeConfig currentConfig = new TradeConfig();
-
         String currentConfigStr = "\n\n########## Trade configuration update. Current config:\n\n";
         String runTimeModeStr = req.getParameter("RunTimeMode");
         if (runTimeModeStr != null)
@@ -175,7 +173,8 @@ public class TradeConfigServlet extends HttpServlet {
         }
         currentConfigStr += "\t\tOrderProcessingMode:\t" + TradeConfig.orderProcessingModeNames[TradeConfig.orderProcessingMode]  + "\n";        
         
-        String accessModeStr = req.getParameter("AcessMode");
+        //String accessModeStr = req.getParameter("AcessMode");
+        String accessModeStr = "Standard";
         if (accessModeStr != null)
         {
             try

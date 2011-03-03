@@ -20,7 +20,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 
 import org.apache.geronimo.daytrader.javaee6.core.api.TradeServices;
-import org.apache.geronimo.daytrader.javaee6.core.direct.TradeAction;
+import org.apache.geronimo.daytrader.javaee6.web.TradeAction;
 import org.apache.geronimo.daytrader.javaee6.entities.*;
 import org.apache.geronimo.daytrader.javaee6.utils.*;
 
@@ -42,11 +42,12 @@ import java.math.BigDecimal;
  * {@link TradeAction} methods to actually perform each trading operation.
  * 
  */
+
 public class TradeServletAction {
 
     private TradeServices tAction = null;
 
-    TradeServletAction() {
+    public TradeServletAction() {
         if (TradeConfig.getAccessMode() == TradeConfig.STANDARD) {
             tAction = new TradeAction();
         } else if (TradeConfig.getAccessMode() == TradeConfig.WEBSERVICES) {             

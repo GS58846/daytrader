@@ -22,7 +22,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.WebFilter;
 
 
-import org.apache.geronimo.daytrader.javaee6.core.direct.TradeAction;
+import org.apache.geronimo.daytrader.javaee6.web.TradeAction;
 import org.apache.geronimo.daytrader.javaee6.core.api.TradeServices;
 
 import org.apache.geronimo.daytrader.javaee6.utils.Log;

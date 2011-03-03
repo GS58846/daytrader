@@ -520,8 +520,9 @@ public class TradeJEEDirect implements TradeServices, TradeDBServices {
         commit(conn);
 
         // signify this order for user userID is complete
-        TradeAction tradeAction = new TradeAction(this);
-        tradeAction.orderCompleted(userID, orderID);
+        /*It's just log information. so remove this line
+         * TradeAction tradeAction = new TradeAction(this);
+        tradeAction.orderCompleted(userID, orderID);*/
 
         return orderData;
     }
