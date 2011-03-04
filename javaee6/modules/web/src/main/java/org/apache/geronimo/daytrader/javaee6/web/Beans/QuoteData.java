@@ -17,7 +17,6 @@
 package org.apache.geronimo.daytrader.javaee6.web.Beans;
 
 import java.math.BigDecimal;
-
 import org.apache.geronimo.daytrader.javaee6.core.direct.FinancialUtils;
 
 public class QuoteData {
@@ -31,6 +30,7 @@ public class QuoteData {
     private double change;
     private String range;
     private BigDecimal gainPercent;
+    private BigDecimal gain;    
     
     public QuoteData(BigDecimal price, BigDecimal open, String symbol){
         this.open = open;
@@ -127,4 +127,13 @@ public class QuoteData {
     public BigDecimal getGainPercent() {
         return gainPercent;
     }
+   
+
+	public void setGain(BigDecimal gain) {
+		this.gain = gain;
+	}
+
+	public BigDecimal getGain() {
+		return gain;
+	}
 }

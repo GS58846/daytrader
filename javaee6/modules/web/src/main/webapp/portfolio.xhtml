@@ -138,8 +138,7 @@
                             <CAPTION align="bottom"><b>Portfolio </b></CAPTION>
                             <tbody>
                                 <tr align="center" colspan="10">
-                                     <h:dataTable id="holdings" value="#{portfolio.holdingDatas}"
-            var="item">
+                                     <h:dataTable id="holdings" value="#{portfolio.holdingDatas}" var="item" binding="#{portfolio.dataTable}" bgcolor="#fafcb6" align="center" border="1">
             <h:column>
                 <f:facet name="header">
                     <h:outputText value="holding ID" />
@@ -207,7 +206,7 @@
                 <f:facet name="header">
                     <h:outputText value="trade" />
                 </f:facet>
-                <h:commandButton action="#{item.sell()}"></h:commandButton>                
+                <h:commandButton value="sell" action="#{portfolio.sell}"></h:commandButton>                
             </h:column>
         </h:dataTable>
                                 </tr>

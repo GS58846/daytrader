@@ -78,8 +78,9 @@ public class OrderDataJSF {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);    
         OrderData order = (OrderData)session.getAttribute("orderData");
-        setOrderData(order);
-        
+        if(order != null){
+        	setOrderData(order);
+        }
     }
     
     public void setAllOrders(OrderData[] allOrders) {

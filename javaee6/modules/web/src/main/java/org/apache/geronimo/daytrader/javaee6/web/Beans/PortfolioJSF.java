@@ -20,19 +20,14 @@ import java.math.BigDecimal;
 //import java.util.Collection;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.Iterator;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-//import javax.faces.bean.SessionScoped;
+import javax.faces.component.html.HtmlDataTable;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 import org.apache.geronimo.daytrader.javaee6.core.direct.FinancialUtils;
-import org.apache.geronimo.daytrader.javaee6.entities.AccountDataBean;
 import org.apache.geronimo.daytrader.javaee6.entities.HoldingDataBean;
 import org.apache.geronimo.daytrader.javaee6.entities.OrderDataBean;
 import org.apache.geronimo.daytrader.javaee6.entities.QuoteDataBean;
@@ -51,7 +46,10 @@ public class PortfolioJSF {
     private BigDecimal totalValue = new BigDecimal(0.0);
     private BigDecimal totalBasis = new BigDecimal(0.0);
     private BigDecimal totalGainPercent = new BigDecimal(0.0);    
-    private HoldingData[] holdingDatas;
+    private ArrayList<HoldingData> holdingDatas;
+    private HtmlDataTable dataTable;
+   
+    
     
     
     public PortfolioJSF(){
@@ -112,8 +110,8 @@ public class PortfolioJSF {
         // Walk through the collection of user holdings and creating a list of quotes
         if (holdingDataBeans.size() > 0) {
             Iterator it = holdingDataBeans.iterator();  
-            holdingDatas = new HoldingData[holdingDataBeans.size()];
-            int count = 0;
+            holdingDatas = new ArrayList<HoldingData>(holdingDataBeans.size());
+            //int count = 0;
             while (it.hasNext()) {
                 HoldingDataBean holdingData = (HoldingDataBean) it.next();
                 QuoteDataBean quoteData = tAction.getQuote(holdingData.getQuoteID());               
@@ -143,9 +141,10 @@ public class PortfolioJSF {
                 h.setGain(gain);
                 h.setMarketValue(marketValue);
                 h.setPrice(quoteData.getPrice());               
-                holdingDatas[count] = h;
-                count++;
+                holdingDatas.add(h);
+                //count++;
             }
+                //dataTable
                 setTotalGainPercent(FinancialUtils.computeGainPercent(totalValue, totalBasis));
             
         } else {
@@ -181,11 +180,11 @@ public class PortfolioJSF {
         return totalBasis;
     }
 
-    public void setHoldingDatas(HoldingData[] holdingDatas) {
+    public void setHoldingDatas(ArrayList<HoldingData> holdingDatas) {
         this.holdingDatas = holdingDatas;
     }
 
-    public HoldingData[] getHoldingDatas() {
+    public ArrayList<HoldingData> getHoldingDatas() {
         return holdingDatas;
     }    
 
@@ -196,4 +195,35 @@ public class PortfolioJSF {
     public BigDecimal getTotalGainPercent() {
         return totalGainPercent;
     } 
+    public String sell(){
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);    
+        String userID = (String)session.getAttribute("uidBean");    
+        TradeAction tAction = new TradeAction();
+        OrderDataBean orderDataBean = null;
+        HoldingData holdingData = (HoldingData)dataTable.getRowData();
+        try {
+        	orderDataBean = tAction.sell(userID, holdingData.getHoldingID(), TradeConfig.orderProcessingMode);
+            holdingDatas.remove(holdingData);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+           
+        OrderData orderData = new OrderData(orderDataBean.getOrderID(),
+				orderDataBean.getOrderStatus(), orderDataBean.getOpenDate(),
+				orderDataBean.getCompletionDate(), orderDataBean.getOrderFee(),
+				orderDataBean.getOrderType(), orderDataBean.getQuantity(),
+				orderDataBean.getSymbol());
+        session.setAttribute("orderData", orderData);
+        return "sell";
+    }
+
+	public void setDataTable(HtmlDataTable dataTable) {
+		this.dataTable = dataTable;
+	}
+
+	public HtmlDataTable getDataTable() {
+		return dataTable;
+	}
 }

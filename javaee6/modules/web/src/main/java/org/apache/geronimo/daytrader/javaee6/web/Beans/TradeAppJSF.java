@@ -248,15 +248,6 @@ public class TradeAppJSF {
             session.invalidate();
         }
 
-        /*Object o = session.getAttribute("TSS-RecreateSessionInLogout");
-        if (o != null && ((Boolean) o).equals(Boolean.TRUE)) {
-            // Recreate Session object before writing output to the response
-            // Once the response headers are written back to the client the
-            // opportunity
-            // to create a new session in this request may be lost
-            // This is to handle only the TradeScenarioServlet case
-            session = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-        }*/
         //Go to welcome page
         return "welcome";
     }

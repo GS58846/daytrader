@@ -112,21 +112,4 @@ public class HoldingData {
     public BigDecimal getGain() {
         return gain;
     }
-
-    public void sell(){
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);    
-        String userID = (String)session.getAttribute("uidBean");    
-        TradeAction tAction = new TradeAction();
-        OrderDataBean orderData = null;
-        try {
-            orderData = tAction.sell(userID, holdingID, TradeConfig.orderProcessingMode);
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        session.setAttribute("orderData", orderData);        
-    }    
-    
 }

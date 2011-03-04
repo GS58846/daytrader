@@ -112,7 +112,7 @@
             <f:facet name="header">
                 <h:outputText value="quantity" />
             </f:facet>
-            <h:outputText value="#{item.quantity}"></h:outputText>
+            <h:outputText value="#{item.quantity}"></h:outputText>           
         </h:column>
     </h:dataTable>
             </td>
@@ -134,7 +134,7 @@
                     </tr>
                     <tr>
                         <td align="center">
-                       <h:dataTable id="quotes" value="#{quotedata.quotes}" var="item">
+                       <h:dataTable id="quotes" value="#{quotedata.quotes}" var="item" binding="#{quotedata.dataTable}" bgcolor="#fafcb6" align="center" border="1">
         <h:column>
             <f:facet name="header">
                 <h:outputText value="symbol" />
@@ -187,8 +187,10 @@
         <h:column>
             <f:facet name="header">
                 <h:outputText value="trade" />
-            </f:facet>
-            <h:outputText value="#{item.symbol}"></h:outputText>
+            </f:facet>           
+            <h:commandLink value="buy" action="#{quotedata.buy}"></h:commandLink>
+            <h:inputText value="#{quotedata.quantity}"></h:inputText>
+            
         </h:column>
     </h:dataTable>
                         </td>

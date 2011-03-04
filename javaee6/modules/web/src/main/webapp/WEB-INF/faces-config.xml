@@ -62,14 +62,22 @@
        <navigation-case>
             <from-outcome>Go to account</from-outcome>
             <to-view-id>/quote.xhtml</to-view-id>
-        </navigation-case>        
+        </navigation-case> 
+        <navigation-case>
+            <from-outcome>welcome</from-outcome>
+            <to-view-id>/welcome.xhtml</to-view-id>
+        </navigation-case>                
     </navigation-rule> 
 <navigation-rule>
         <from-view-id>/portfolio.xhtml</from-view-id>       
-<navigation-case>
+        <navigation-case>
             <from-outcome>quotes</from-outcome>
             <to-view-id>/quote.xhtml</to-view-id>
-        </navigation-case>        
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>sell</from-outcome>
+            <to-view-id>/order.xhtml</to-view-id>
+        </navigation-case>          
     </navigation-rule>      
     <navigation-rule>
         <from-view-id>/configure.xhtml</from-view-id>
@@ -85,5 +93,19 @@
             <from-outcome>stats</from-outcome>
             <to-view-id>/config.xhtml</to-view-id>
         </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/order.xhtml</from-view-id>        
+       <navigation-case>
+            <from-outcome>quotes</from-outcome>
+            <to-view-id>/quote.xhtml</to-view-id>
+        </navigation-case>             
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/quote.xhtml</from-view-id>        
+       <navigation-case>
+            <from-outcome>buy</from-outcome>
+            <to-view-id>/order.xhtml</to-view-id>
+        </navigation-case>             
     </navigation-rule>
 </faces-config>

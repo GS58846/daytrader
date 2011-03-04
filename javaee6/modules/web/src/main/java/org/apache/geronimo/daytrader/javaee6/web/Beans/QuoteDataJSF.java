@@ -16,14 +16,19 @@
  */
 package org.apache.geronimo.daytrader.javaee6.web.Beans;
 
+
 import java.util.ArrayList;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.component.html.HtmlDataTable;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+
+import org.apache.geronimo.daytrader.javaee6.entities.OrderDataBean;
 import org.apache.geronimo.daytrader.javaee6.entities.QuoteDataBean;
 import org.apache.geronimo.daytrader.javaee6.utils.Log;
+import org.apache.geronimo.daytrader.javaee6.utils.TradeConfig;
 import org.apache.geronimo.daytrader.javaee6.web.TradeAction;
 import org.apache.geronimo.daytrader.javaee6.web.Beans.QuoteData;
 
@@ -31,6 +36,8 @@ import org.apache.geronimo.daytrader.javaee6.web.Beans.QuoteData;
 public class QuoteDataJSF {
     private QuoteData[] quotes;
     private String symbols = "s:0, s:1, s:2, s:3, s:4";
+    private HtmlDataTable dataTable;
+    private Integer quantity = 100;
     
     public QuoteDataJSF(){
         getAllQuotes();
@@ -86,6 +93,30 @@ public class QuoteDataJSF {
         }
         setQuotes(quoteDatas);
         return "quotes";
+    }    
+    
+    public String buy(){
+    	FacesContext facesContext = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+        String userID = (String)session.getAttribute("uidBean");    
+        QuoteData quoteData = (QuoteData)dataTable.getRowData();
+    	TradeAction tAction=null;
+        tAction = new TradeAction();
+    	OrderDataBean orderDataBean;
+		try {
+			orderDataBean = tAction.buy(userID, quoteData.getSymbol(), new Double(this.quantity).doubleValue(), TradeConfig.orderProcessingMode);
+			OrderData orderData = new OrderData(orderDataBean.getOrderID(),
+					orderDataBean.getOrderStatus(), orderDataBean.getOpenDate(),
+					orderDataBean.getCompletionDate(), orderDataBean.getOrderFee(),
+					orderDataBean.getOrderType(), orderDataBean.getQuantity(),
+					orderDataBean.getSymbol());
+			session.setAttribute("orderData", orderData);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			Log.error(e.toString());
+			e.printStackTrace();
+		}
+    	return "buy";
     }
 
     public void setSymbols(String symbols) {
@@ -95,4 +126,19 @@ public class QuoteDataJSF {
     public String getSymbols() {
         return symbols;
     }
+    public void setDataTable(HtmlDataTable dataTable) {
+		this.dataTable = dataTable;
+	}
+
+	public HtmlDataTable getDataTable() {
+		return dataTable;
+	}
+
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
+	}
+
+	public Integer getQuantity() {
+		return quantity;
+	}
 }
