@@ -22,7 +22,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 //import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpSession;
 
 
@@ -30,7 +29,6 @@ import org.apache.geronimo.daytrader.javaee6.entities.AccountDataBean;
 import org.apache.geronimo.daytrader.javaee6.entities.AccountProfileDataBean;
 
 import org.apache.geronimo.daytrader.javaee6.utils.Log;
-import org.apache.geronimo.daytrader.javaee6.utils.TradeConfig;
 import org.apache.geronimo.daytrader.javaee6.web.TradeAction;
 
 

@@ -8,36 +8,19 @@ under the ASF license to further functional and performance testing of Geronimo.
 -----------
 |  BUILD  |
 -----------
-To build DayTrader, you need to have Java SE 5 and Maven 2.0.9 or later
+To build DayTrader, you need to have JDK 6 and Maven 2.0.9 or later
 installed, which can be found at http://maven.apache.org.
 Once installed you can build DayTrader by executing the following command
 from the dayTrader root directory (the directory containing this README):
 
         mvn clean install
 
-This will build the daytrader-jms, daytrader-derby-datasource, daytrader-jetty
-and daytrader-tomcat plugins.
+
 
 
 -------------
 |  INSTALL  |
 -------------
-
-Plug-ins
---------
-After building daytrader, you can go to admin console to install the
-daytrader-jetty or daytrader-tomcat plugin, which will automatically install and
-use the daytrader-derby-datasource. Alternatively, you can install them
-via the "deploy/list-plugins" command, for example:
-
-    gsh deploy/list-plugins -u system -w manager -r file:/<your-local-maven-repo> org.apache.geronimo.daytrader/daytrader-tomcat/2.2-SNAPSHOT/car
-
-For app clients, you'll have to install them using deploy install-plugin
-commands for now, before we publish the app client plugins on a public repo,
-for example: 
-
-    gsh deploy/install-plugin -u system -w manager $DAYTRADER_HOME/daytrader-tomcat/target/daytrader-ws-client-2.2-SNAPSHOT.car
-    gsh deploy/install-plugin -u system -w manager $DAYTRADER_HOME/daytrader-tomcat/target/daytrader-streamer-client-2.2-SNAPSHOT.car 
 
 You will need to create the database and populate the initial data into the
 database.  Make sure Geronimo is started and the GERONIMO_HOME environment
@@ -115,7 +98,8 @@ Deployer
 |  RUN  |
 ---------
 1. Access the dayTrader application at:
-         http://<hostname>:<port>/daytrader.
+         http://<hostname>:<port>/daytrader (This is for traditional servlet and jsp)
+         http://<hostname>:<port>/daytrader/index.faces(This is for JSF)
 2. Before you begin using DayTraader, theres are a couple setup steps:
    - Populate the database with a set of fictional users, stocks, prices, etc.
      by selecting:
@@ -124,33 +108,14 @@ Deployer
    - After populating the database, the DayTrader Configuration options will
      appear.  Just accept the defaults.
 3. Now you can begin trading by going to:
-         'Trading & Portfolios'
-   Or run the sample test scenario to verify it is installed and working:
-         'Configuration -> Test DayTrader Scenario'
-
-There are two optional application clients you can run, the streamer client and
-web services client.  To run these (from $GERONIMO_HOME/bin):
-   TradeStreamerAppClient:
-      client.[bat|sh] org.apache.geronimo.daytrader/daytrader-streamer-client/2.2-SNAPSHOT/car -waitForMain
-   WSAppClient:
-      client.[bat|sh] org.apache.geronimo.daytrader/daytrader-ws-client/2.2-SNAPSHOT/car -waitForMain
-
+         'Trading & Portfolios'   
 
 ---------------
 |  UNINSTALL  |
 ---------------
 To uninstall DayTrader, issue the following commands:
-1. If you installed DayTrader as a plugin:
-  - If you installed the DayTrader :: Tomcat plugin:
-      deploy.[bat|sh] undeploy org.apache.geronimo.daytrader/daytrader-tomcat/2.2-SNAPSHOT/car
-  - If you installed the DayTrader :: Jetty plugin:
-      deploy.[bat|sh] undeploy org.apache.geronimo.daytrader/daytrader-tomcat/2.2-SNAPSHOT/car
-  - To remove the DayTrader :: JMS plugin (Tomcat or Jetty):
-      deploy.[bat|sh] undeploy org.apache.geronimo.daytrader/daytrader-jms/2.2-SNAPSHOT/car
-  - To remove the DayTrader :: Derby DataSource (Tomcat or Jetty):
-      deploy.[bat|sh] undeploy org.apache.geronimo.daytrader/daytrader-derby-datasource/2.2-SNAPSHOT/car
 
-2. If you installed DayTrader as an application (EAR) using the deployer:
-      deploy.[bat|sh] undeploy org.apache.geronimo.daytrader/daytrader/2.2-SNAPSHOT/car
+1. If you installed DayTrader as an application (EAR) using the deployer:
+      deploy.[bat|sh] undeploy org.apache.geronimo.daytrader/daytrader/3.0-SNAPSHOT/car
 
 
