@@ -42,7 +42,8 @@ public class PingServlet2JNDI extends HttpServlet
     private static String initTime;
     private static int hitCount;    
     
-    private @Resource DataSource datasource;
+    //@Resource(name="jdbc/TradeDataSource")
+    private DataSource datasource;
     /**
      * forwards post requests to the doGet method
      * Creation date: (11/6/2000 10:52:39 AM)

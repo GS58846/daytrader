@@ -18,23 +18,20 @@
   <dependencies>
     <dependency>
             <groupId>org.apache.geronimo.daytrader.javaee6</groupId>
-            <artifactId>utils</artifactId>     
-            <version>${project.version}</version>
+            <artifactId>utils</artifactId>            
         </dependency>
         <dependency>
             <groupId>org.apache.geronimo.daytrader.javaee6</groupId>
-            <artifactId>core</artifactId>
-            <version>${project.version}</version>              
+            <artifactId>core</artifactId>            
         </dependency>
         <dependency>
             <groupId>org.apache.geronimo.daytrader.javaee6</groupId>
-            <artifactId>entities</artifactId>           
-            <version>${project.version}</version>              
+            <artifactId>entities</artifactId>
              </dependency>              
            <dependency>
             <groupId>org.apache.geronimo.daytrader.javaee6</groupId>
             <artifactId>web</artifactId>
-            <version>${project.version}</version>
+            <version>${project.version}</version>    
             <type>war</type>
         </dependency>
         </dependencies>
@@ -42,8 +39,7 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-ear-plugin</artifactId>
-                <!--<version>2.3.1</version>-->
+                <artifactId>maven-ear-plugin</artifactId>               
                 <configuration>
                     <displayName>DayTrader EAR</displayName>
                     <description>DayTrader Stock Trading Performance Benchmark Sample</description>

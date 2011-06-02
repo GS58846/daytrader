@@ -128,6 +128,7 @@ public class TradeAppJSF {
                 //Go to tradehome.jsp
                 FacesContext facesContext = FacesContext.getCurrentInstance();
                 HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+                
                 session.setAttribute("uidBean", userID);
                 session.setAttribute("sessionCreationDate", new java.util.Date());                          
                 setResults("Ready to Trade");

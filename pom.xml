@@ -42,7 +42,25 @@
         <geronimoVersion>3.0-SNAPSHOT</geronimoVersion>
         <!-- set siteId to artifactId for any "top level" project rooting a website -->
         <siteId>daytrader</siteId>
-        <openjpaVersion>2.0.0</openjpaVersion>
+        <openjpaVersion>2.1.0</openjpaVersion>
+
+        <gbeanDeployerBootstrap>org.apache.geronimo.framework/geronimo-gbean-deployer-bootstrap/${geronimoVersion}/car</gbeanDeployerBootstrap>
+        <gbeanDeployer>org.apache.geronimo.framework/geronimo-gbean-deployer/${geronimoVersion}/car</gbeanDeployer>
+        <j2eeDeployer>org.apache.geronimo.configs/j2ee-deployer/${geronimoVersion}/car</j2eeDeployer>
+        <clientDeployer>org.apache.geronimo.configs/client-deployer/${geronimoVersion}/car</clientDeployer>
+        <connectorDeployer>org.apache.geronimo.configs/connector-deployer-1_6/${geronimoVersion}/car</connectorDeployer>
+        <openejbDeployer>org.apache.geronimo.configs/openejb-deployer/${geronimoVersion}/car</openejbDeployer>
+        <openejbcorbaDeployer>org.apache.geronimo.configs/openejb-corba-deployer/${geronimoVersion}/car</openejbcorbaDeployer>
+        <axisDeployer>org.apache.geronimo.configs/axis-deployer/${geronimoVersion}/car</axisDeployer>
+        <cxfDeployer>org.apache.geronimo.configs/cxf-deployer/${geronimoVersion}/car</cxfDeployer>
+        <axis2Deployer>org.apache.geronimo.configs/axis2-deployer/${geronimoVersion}/car</axis2Deployer>
+        <tomcatDeployer>org.apache.geronimo.configs/tomcat7-deployer/${geronimoVersion}/car</tomcatDeployer>
+        <jetty7Deployer>org.apache.geronimo.configs/jetty8-deployer/${geronimoVersion}/car</jetty7Deployer>
+        <jasperDeployer>org.apache.geronimo.configs/jasper-deployer/${geronimoVersion}/car</jasperDeployer>
+        <jpaDeployer>org.apache.geronimo.configs/persistence-jpa20-deployer/${geronimoVersion}/car</jpaDeployer>
+        <myfacesDeployer>org.apache.geronimo.configs/myfaces-deployer/${geronimoVersion}/car</myfacesDeployer>
+        <openwebbeansDeployer>org.apache.geronimo.configs/openwebbeans-deployer/${geronimoVersion}/car</openwebbeansDeployer>
+        <winkDeployer>org.apache.geronimo.configs/wink-deployer/${geronimoVersion}/car</winkDeployer>
     </properties>
 
     <issueManagement>
@@ -212,78 +230,36 @@
                 <version>${openjpaVersion}</version>
             </dependency>
             
-            <!-- All daytrader sub modules listed here -->
-        <dependency>
-       <groupId>org.apache.geronimo.daytrader</groupId>
-         <artifactId>daytrader-util</artifactId>
-           <version>${project.version}</version>
-            <scope>provided</scope>
-                </dependency>
-                
+            <!-- All daytrader sub modules listed here --> 
                 <dependency>
-                        <groupId>org.apache.geronimo.daytrader</groupId>
-                    <artifactId>daytrader-beans</artifactId>
+                        <groupId>org.apache.geronimo.daytrader.javaee6</groupId>
+                    <artifactId>utils</artifactId>
                     <version>${project.version}</version>
                     <scope>provided</scope>            
                 </dependency>
                 
                 <dependency>
-                        <groupId>org.apache.geronimo.daytrader</groupId>
-                    <artifactId>daytrader-core</artifactId>
+                        <groupId>org.apache.geronimo.daytrader.javaee6</groupId>
+                    <artifactId>core</artifactId>
                     <version>${project.version}</version>            
                     <scope>provided</scope>
-                </dependency>
+                </dependency>                
+               
                 
                 <dependency>
-                        <groupId>org.apache.geronimo.daytrader</groupId>
-                    <artifactId>daytrader-ejb3</artifactId>
-                    <version>${project.version}</version>
-                    <type>ejb</type>                 
-                    <scope>provided</scope>
-                </dependency>
-                
-                <dependency>
-                        <groupId>org.apache.geronimo.daytrader</groupId>
-                    <artifactId>daytrader-entities</artifactId>
+                        <groupId>org.apache.geronimo.daytrader.javaee6</groupId>
+                    <artifactId>entities</artifactId>
                     <version>${project.version}</version>      
                     <scope>provided</scope>              
-                </dependency>
+                </dependency> 
                 
                 <dependency>
-                        <groupId>org.apache.geronimo.daytrader</groupId>
-                    <artifactId>json-proxy</artifactId>
-                    <version>${project.version}</version>      
-                    <scope>provided</scope>              
-                </dependency>
-                
-                <dependency>
-                        <groupId>org.apache.geronimo.daytrader</groupId>
-                    <artifactId>daytrader-soap</artifactId>
-                    <version>${project.version}</version>   
-                    <scope>provided</scope>                 
-                </dependency>
-                
-                <dependency>
-                        <groupId>org.apache.geronimo.daytrader</groupId>
-                    <artifactId>streamer</artifactId>
-                    <version>${project.version}</version>    
-                    <scope>provided</scope>                
-                </dependency>
-                
-                <dependency>
-                        <groupId>org.apache.geronimo.daytrader</groupId>
-                    <artifactId>daytrader-web</artifactId>
+                        <groupId>org.apache.geronimo.daytrader.javaee6</groupId>
+                    <artifactId>web</artifactId>
                     <version>${project.version}</version>        
                     <scope>provided</scope>            
                 </dependency>
-                
-                <dependency>
-                        <groupId>org.apache.geronimo.daytrader</groupId>
-                    <artifactId>wsappclient</artifactId>
-                    <version>${project.version}</version>       
-                    <scope>provided</scope>             
-                </dependency>
-                
+               
                 <dependency>
                 <groupId>org.apache.taglibs</groupId>
                 <artifactId>taglibs-standard-jstlel</artifactId>
@@ -334,7 +310,8 @@
             </properties>
             <modules>
                 <!-- Daytrader Java EE 6 -->
-               <module>javaee6</module>   
+               <module>javaee6</module>  
+               <module>plugins</module> 
             </modules>
         </profile>
         <profile>
@@ -351,7 +328,8 @@
             </properties>
             <modules>               
                 <!-- Daytrader Java EE 6 -->
-               <module>javaee6</module>                
+               <module>javaee6</module>
+               <module>plugins</module>                 
             </modules>
         </profile>             
 
