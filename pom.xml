@@ -297,7 +297,26 @@
             </plugin>-->
 
         </plugins>
+
     </build>
+
+    <pluginRepositories>
+        <!-- required for clean build unless you want to bootstrap the car-maven-plugin -->
+        <pluginRepository>
+            <id>apache.snapshots</id>
+            <name>Apache Snapshots Repository</name>
+            <url>http://repository.apache.org/snapshots</url>
+            <layout>default</layout>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+                <checksumPolicy>ignore</checksumPolicy>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </pluginRepository>
+    </pluginRepositories>
 
     <profiles>
         <profile>
