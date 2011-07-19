@@ -17,7 +17,7 @@
 -->
 <persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
 
-    <persistence-unit transaction-type="RESOURCE_LOCAL" name="daytrader">
+    <persistence-unit transaction-type="JTA" name="daytrader">
         <provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
         <jta-data-source>jdbc/TradeDataSource</jta-data-source>  
         <non-jta-data-source>jdbc/NoTxTradeDataSource</non-jta-data-source> 
@@ -30,8 +30,10 @@
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         
         <properties>
-            <property name="openjpa.DynamicEnhancementAgent" value="false"/>
+            <property name="openjpa.jdbc.DBDictionary" value="derby" /> 
             <property name="openjpa.BrokerImpl" value="non-finalizing" />
+            <!-- To enable OpenJPA to generate foreign key constraints, comment out this line -->
+            <!-- <property name="openjpa.jdbc.MappingDefaults" value="ForeignKeyDeleteAction=restrict,JoinForeignKeyDeleteAction=restrict"/> -->
             <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)"/>
             <property name="openjpa.Sequence" value="table(Table=OPENJPASEQ, Increment=100)"/>
 

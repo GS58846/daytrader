@@ -47,7 +47,7 @@ public class PingServlet2Entity extends HttpServlet {
     
     private @EJB QuoteDataBean quote;
 
-    @PersistenceContext
+    @PersistenceContext(unitName = "daytrader")
     private EntityManager em;
 
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {

@@ -68,7 +68,7 @@ public class TradeSLSBBean implements TradeSLSBRemote, TradeSLSBLocal {
     @Resource(name = "jms/TradeBrokerQueue")
     private Queue tradeBrokerQueue;
 
-    @PersistenceContext
+    @PersistenceContext(unitName = "daytrader")
     private EntityManager entityManager;
 
     /** Creates a new instance of TradeSLSBBean */
