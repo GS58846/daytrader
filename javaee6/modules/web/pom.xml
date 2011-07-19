@@ -23,20 +23,12 @@
         </dependency>
         <dependency>
             <groupId>org.apache.geronimo.daytrader.javaee6</groupId>
-            <artifactId>utils</artifactId>     
-            <version>${project.version}</version>  
+            <artifactId>utils</artifactId>            
              <scope>provided</scope>          
-        </dependency>
+        </dependency>        
         <dependency>
             <groupId>org.apache.geronimo.daytrader.javaee6</groupId>
-            <artifactId>core</artifactId>
-            <version>${project.version}</version> 
-             <scope>provided</scope>    
-        </dependency>
-        <dependency>
-            <groupId>org.apache.geronimo.daytrader.javaee6</groupId>
-            <artifactId>entities</artifactId>           
-            <version>${project.version}</version> 
+            <artifactId>entities</artifactId>            
              <scope>provided</scope>    
         </dependency>
                
@@ -101,12 +93,7 @@
         <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <configuration>
-                    <archive>
-                        <manifestEntries>
-                            <Class-Path>util.jar core.jar entities.jar</Class-Path>
-                        </manifestEntries>
-                    </archive>
+                <configuration>                    
                     <resources>
                         <resource
                                 implementation="org.apache.maven.model.Resource">

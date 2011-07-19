@@ -16,10 +16,8 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <modules>
-    <module>entities</module>
-    <!--<module>ejb3</module>-->
-    <module>utils</module>
-    <module>core</module>
+    <module>entities</module>   
+    <module>utils</module>    
     <module>web</module>
   </modules>
 </project>
