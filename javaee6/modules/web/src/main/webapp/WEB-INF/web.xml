@@ -77,7 +77,7 @@
         <error-code>500</error-code>
         <location>/error.jsp</location>
     </error-page>
-     <!-- 
+     
      <resource-ref>
         <res-ref-name>jdbc/TradeDataSource</res-ref-name>
         <res-type>javax.sql.DataSource</res-type>
@@ -90,7 +90,7 @@
         <res-auth>Container</res-auth>
         <res-sharing-scope>Shareable</res-sharing-scope>
     </resource-ref>
-    <resource-ref>
+   <!--  <resource-ref>
         <res-ref-name>jms/QueueConnectionFactory</res-ref-name>
         <res-type>javax.jms.QueueConnectionFactory</res-type>
         <res-auth>Application</res-auth>

@@ -29,14 +29,14 @@
                 <sys:type>car</sys:type>
             </sys:moduleId>
         
-            <sys:dependencies>
+            <!--<sys:dependencies>
                 <sys:dependency>
                     <sys:groupId>org.apache.geronimo.samples.daytrader.plugins</sys:groupId>
                     <sys:artifactId>daytrader-derby-datasource</sys:artifactId>
                     <sys:version>${project.version}</sys:version>
                     <sys:type>car</sys:type>
                 </sys:dependency>
-            </sys:dependencies>
+            </sys:dependencies>-->
         </sys:environment>
     
     <context-root>/${project.artifactId}</context-root>
