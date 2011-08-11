@@ -20,6 +20,7 @@
             <groupId>org.apache.geronimo.daytrader.javaee6</groupId>
             <artifactId>utils</artifactId>            
         </dependency>       
+       
         <dependency>
             <groupId>org.apache.geronimo.daytrader.javaee6</groupId>
             <artifactId>entities</artifactId>
@@ -45,6 +46,7 @@
                             <artifactId>utils</artifactId>
                              <uri>lib/utils.jar</uri>
                         </javaModule>                       
+                        
                         <javaModule>
                             <groupId>org.apache.geronimo.daytrader.javaee6</groupId>
                             <artifactId>entities</artifactId>
