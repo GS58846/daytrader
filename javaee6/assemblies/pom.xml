@@ -4,7 +4,7 @@
   <parent>
     <artifactId>javaee6</artifactId>
     <groupId>org.apache.geronimo.daytrader</groupId>
-    <version>3.0-beta-1</version>
+    <version>3.0-beta-2-SNAPSHOT</version>
   </parent>
   
   <groupId>org.apache.geronimo.daytrader.javaee6</groupId>
