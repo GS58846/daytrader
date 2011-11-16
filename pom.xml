@@ -43,6 +43,7 @@
         <!-- set siteId to artifactId for any "top level" project rooting a website -->
         <siteId>daytrader</siteId>
         <openjpaVersion>2.1.0</openjpaVersion>
+        <myfacesVersion>2.0.9_1</myfacesVersion>
 
         <gbeanDeployerBootstrap>org.apache.geronimo.framework/geronimo-gbean-deployer-bootstrap/${geronimoVersion}/car</gbeanDeployerBootstrap>
         <gbeanDeployer>org.apache.geronimo.framework/geronimo-gbean-deployer/${geronimoVersion}/car</gbeanDeployer>
@@ -213,15 +214,43 @@
             
             <!--JSF 1.2 JARs from Apache MyFaces -->
             <dependency>
-                <groupId>org.apache.myfaces.core</groupId>
-                <artifactId>myfaces-api</artifactId>
-                <version>2.0.2</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.apache.myfaces.core</groupId>
-                <artifactId>myfaces-impl</artifactId>
-                <version>2.0.2</version>
+                <groupId>org.apache.geronimo.bundles</groupId>
+                <artifactId>myfaces-bundle</artifactId>
+                <version>${myfacesVersion}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>commons-logging</groupId>
+                        <artifactId>commons-logging</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>javax.validation</groupId>
+                        <artifactId>validation-api</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>javax.el</groupId>
+                        <artifactId>el-api</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>commons-logging</groupId>
+                        <artifactId>commons-logging</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>commons-digester</groupId>
+                        <artifactId>commons-digester</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>commons-discovery</groupId>
+                        <artifactId>commons-discovery</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>commons-codec</groupId>
+                        <artifactId>commons-codec</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>commons-beanutils</groupId>
+                        <artifactId>commons-beanutils</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
 
             <dependency>
@@ -250,14 +279,8 @@
                     <version>${project.version}</version>
                     <type>war</type>                     
                     <scope>provided</scope>            
-                </dependency>
-               
-                <dependency>
-                <groupId>org.apache.taglibs</groupId>
-                <artifactId>taglibs-standard-jstlel</artifactId>
-                <version>1.2-SNAPSHOT</version>  
-                <scope>provided</scope>
-        </dependency>
+                </dependency>              
+                
         </dependencies>        
     </dependencyManagement>
 
