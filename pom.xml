@@ -33,9 +33,9 @@
     <description>Java EE 6.0 Performance Benchmark Sample Application</description>
 
     <scm>
-        <connection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/</connection>
-        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/geronimo/daytrader/trunk/</developerConnection>
-        <url>http://svn.apache.org/viewcvs.cgi/geronimo/daytrader/trunk/</url>
+        <connection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/branches/3.0-beta/</connection>
+        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/geronimo/daytrader/branches/3.0-beta/</developerConnection>
+        <url>http://svn.apache.org/viewcvs.cgi/geronimo/daytrader/branches/3.0-beta/</url>
     </scm>
 
     <properties>        
@@ -415,6 +415,9 @@
             <modules>
                 <module>plugins/daytrader-postgre-datasource</module>
             </modules>
-        </profile>       
+        </profile>
+        <profile>
+            <id>none</id>
+            </profile>       
     </profiles> 
 </project>
