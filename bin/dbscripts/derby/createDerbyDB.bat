@@ -25,12 +25,9 @@ if not "%GERONIMO_HOME%" == "" goto GERONIMO_OK
 @goto END
 :GERONIMO_OK
 
-set DERBY_PATH=%GERONIMO_HOME%\repository\org\apache\derby
-set DERBY_VER=10.4.2.0
-set CLASSPATH=%DERBY_PATH%\derby\%DERBY_VER%\derby-%DERBY_VER%.jar
-set CLASSPATH=%CLASSPATH%;%DERBY_PATH%\derbynet\%DERBY_VER%\derbynet-%DERBY_VER%.jar
-set CLASSPATH=%CLASSPATH%;%DERBY_PATH%\derbytools\%DERBY_VER%\derbytools-%DERBY_VER%.jar
-set CLASSPATH=%CLASSPATH%;%DERBY_PATH%\derbyclient\%DERBY_VER%\derbyclient-%DERBY_VER%.jar
+set DERBY_PATH=%GERONIMO_HOME%\repository\org\apache\geronimo\bundles\derby-all
+set DERBY_VER=10.6.1.0_1
+set CLASSPATH=%DERBY_PATH%\%DERBY_VER%\derby-all-%DERBY_VER%.jar
 
 @echo "Invoking IJ command line tool to create the database and tables...please wait"
 

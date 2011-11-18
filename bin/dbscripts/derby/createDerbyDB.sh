@@ -27,12 +27,10 @@ then
   exit
 fi
 
-export DERBY_PATH=${GERONIMO_HOME}/repository/org/apache/derby
-export DERBY_VER=10.4.2.0
-export CLASSPATH=${DERBY_PATH}/derby/${DERBY_VER}/derby-${DERBY_VER}.jar
-export CLASSPATH=${CLASSPATH}:${DERBY_PATH}/derbynet/${DERBY_VER}/derbynet-${DERBY_VER}.jar
-export CLASSPATH=${CLASSPATH}:${DERBY_PATH}/derbytools/${DERBY_VER}/derbytools-${DERBY_VER}.jar
-export CLASSPATH=${CLASSPATH}:${DERBY_PATH}/derbyclient/${DERBY_VER}/derbyclient-${DERBY_VER}.jar
+export DERBY_PATH=${GERONIMO_HOME}/repository/org/apache/geronimo/bundles/derby-all
+export DERBY_VER=10.6.1.0_1
+export CLASSPATH=${DERBY_PATH}/${DERBY_VER}/derby-all-${DERBY_VER}.jar
+
 
 echo "Invoking IJ command line tool to create the database and tables...please wait"
 
