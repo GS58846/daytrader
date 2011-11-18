@@ -26,16 +26,16 @@
 
     <groupId>org.apache.geronimo.daytrader</groupId>
     <artifactId>daytrader-parent</artifactId>
-    <version>3.0-beta-1-SNAPSHOT</version>
+    <version>3.0-beta-1</version>
     <packaging>pom</packaging>
     
     <name>DayTrader :: Performance Benchmark Sample :: Java EE 6</name>    
     <description>Java EE 6.0 Performance Benchmark Sample Application</description>
 
     <scm>
-        <connection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/</connection>
-        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/geronimo/daytrader/trunk/</developerConnection>
-        <url>http://svn.apache.org/viewcvs.cgi/geronimo/daytrader/trunk/</url>
+        <connection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/tags/daytrader-3.0-beta-1</connection>
+        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/geronimo/daytrader/tags/daytrader-3.0-beta-1</developerConnection>
+        <url>http://svn.apache.org/viewcvs.cgi/geronimo/daytrader/tags/daytrader-3.0-beta-1</url>
     </scm>
 
     <properties>        
@@ -145,7 +145,7 @@
             <timezone>+8</timezone>
         </contributor>
     </contributors>
-    <dependencies/>
+    <dependencies />
     
     <organization>
         <name>Apache Software Foundation</name>
