@@ -80,7 +80,7 @@ Deployer
 2. Use the deployer tool to install the application:
    - Execute these commands from a command prompt:
          cd $GERONIMO_HOME/bin
-         deploy.[bat|sh] deploy $DAYTRADER_HOME/modules/ear/target/daytrader-ear-2.2-SNAPSHOT.ear $DAYTRADER_HOME/plans/<My plan>
+         deploy.[bat|sh] deploy $DAYTRADER_HOME/javaee6/assemblies/daytrader-ear/target/daytrader-ear-[version].ear $DAYTRADER_HOME/plans/<My plan>
            where <My plan> is
                For Apache Derby:  dayTrader-derby-plan.xml
                For IBM DB2 v9.1:  dayTrader-db2-9.1-XA-plan.xml
@@ -116,6 +116,6 @@ Deployer
 To uninstall DayTrader, issue the following commands:
 
 1. If you installed DayTrader as an application (EAR) using the deployer:
-      deploy.[bat|sh] undeploy org.apache.geronimo.daytrader/daytrader/3.0-SNAPSHOT/car
+      deploy.[bat|sh] undeploy org.apache.geronimo.daytrader.javaee6/daytrader/[version]/car
 
 
