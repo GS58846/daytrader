@@ -26,7 +26,7 @@
 
     <groupId>org.apache.geronimo.daytrader</groupId>
     <artifactId>daytrader-parent</artifactId>
-    <version>3.0-beta-2-SNAPSHOT</version>
+    <version>3.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     
     <name>DayTrader :: Performance Benchmark Sample :: Java EE 6</name>    
@@ -39,10 +39,10 @@
     </scm>
 
     <properties>        
-        <geronimoVersion>3.0-beta-1</geronimoVersion>
+        <geronimoVersion>${version}</geronimoVersion>
         <!-- set siteId to artifactId for any "top level" project rooting a website -->
         <siteId>daytrader</siteId>
-        <openjpaVersion>2.1.0</openjpaVersion>
+        <openjpaVersion>2.1.1</openjpaVersion>
         <myfacesVersion>2.0.9_1</myfacesVersion>
 
         <gbeanDeployerBootstrap>org.apache.geronimo.framework/geronimo-gbean-deployer-bootstrap/${geronimoVersion}/car</gbeanDeployerBootstrap>
