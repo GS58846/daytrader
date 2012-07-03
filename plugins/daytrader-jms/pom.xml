@@ -24,7 +24,7 @@
     <parent>
         <groupId>org.apache.geronimo.daytrader</groupId>
         <artifactId>plugins</artifactId>
-        <version>3.0.0</version>
+        <version>3.0.1-SNAPSHOT</version>
     </parent>
 
     <groupId>org.apache.geronimo.daytrader.plugins</groupId>
