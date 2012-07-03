@@ -120,9 +120,7 @@
                     </deploymentConfigs>
                     <commonInstance>
                         <plugin-artifact>
-                        <geronimo-version>${geronimoVersion}</geronimo-version>
-                            <!--<geronimo-version>2.2</geronimo-version>
-                            <geronimo-version>2.2.1-SNAPSHOT</geronimo-version>-->
+                            <geronimo-version>${geronimoVersion}</geronimo-version>
                             <jvm-version>1.5</jvm-version>
                             <jvm-version>1.6</jvm-version>
                             <source-repository>~/.m2/repository/</source-repository>
