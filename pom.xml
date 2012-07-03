@@ -33,13 +33,13 @@
     <description>Java EE 6.0 Performance Benchmark Sample Application</description>
 
     <scm>
-        <connection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/branches/3.0-beta/</connection>
-        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/geronimo/daytrader/branches/3.0-beta/</developerConnection>
-        <url>http://svn.apache.org/viewcvs.cgi/geronimo/daytrader/branches/3.0-beta/</url>
+        <connection>scm:svn:http://svn.apache.org/repos/asf/geronimo/daytrader/branches/3.0/</connection>
+        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/geronimo/daytrader/branches/3.0/</developerConnection>
+        <url>http://svn.apache.org/viewcvs.cgi/geronimo/daytrader/branches/3.0/</url>
     </scm>
 
     <properties>        
-        <geronimoVersion>${version}</geronimoVersion>
+        <geronimoVersion>3.0.0</geronimoVersion>
         <!-- set siteId to artifactId for any "top level" project rooting a website -->
         <siteId>daytrader</siteId>
         <openjpaVersion>2.1.1</openjpaVersion>

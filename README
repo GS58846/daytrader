@@ -1,4 +1,4 @@
-(C) Copyright 2006,2011 The Apache Software Foundation.
+(C) Copyright 2006,2012 The Apache Software Foundation.
 ----------------------------------------------------------------------
 
 The code in this directory contains the code for the benchmark sample called
@@ -116,6 +116,6 @@ Deployer
 To uninstall DayTrader, issue the following commands:
 
 1. If you installed DayTrader as an application (EAR) using the deployer:
-      deploy.[bat|sh] undeploy org.apache.geronimo.daytrader.javaee6/daytrader/[version]/car
+      deploy.[bat|sh] undeploy org.apache.geronimo.daytrader.javaee6/daytrader/<version>/car
 
 
