@@ -34,20 +34,20 @@
         <dependency>
             <groupId>org.apache.geronimo.daytrader.javaee6</groupId>
             <artifactId>daytrader-ear</artifactId>
-            <version>${pom.version}</version>
+            <version>${project.version}</version>
             <type>ear</type>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.geronimo.daytrader.plugins</groupId>
             <artifactId>daytrader-derby-datasource</artifactId>
-            <version>${pom.version}</version>
+            <version>${project.version}</version>
             <type>car</type>
         </dependency>
         <dependency>
             <groupId>org.apache.geronimo.daytrader.plugins</groupId>
             <artifactId>daytrader-jms</artifactId>
-            <version>${pom.version}</version>
+            <version>${project.version}</version>
             <type>car</type>
         </dependency>
 
@@ -171,7 +171,7 @@
                                 <groupId>org.apache.geronimo.daytrader.plugins</groupId>
                                 <artifactId>daytrader-jetty</artifactId>
                             </obsoletes>
-                            <artifact-alias key="org.apache.geronimo.daytrader.plugins/daytrader-jetty//car">org.apache.geronimo.daytrader.plugins/daytrader-jetty/${pom.version}/car</artifact-alias>                            
+                            <artifact-alias key="org.apache.geronimo.daytrader.plugins/daytrader-jetty//car">org.apache.geronimo.daytrader.plugins/daytrader-jetty/${project.version}/car</artifact-alias>                            
                        </plugin-artifact>
                     </instance>
                 </configuration>

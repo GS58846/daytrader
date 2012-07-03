@@ -172,7 +172,7 @@
                                 <groupId>org.apache.geronimo.daytrader.plugins</groupId>
                                 <artifactId>daytrader-tomcat</artifactId>
                             </obsoletes>
-                            <artifact-alias key="org.apache.geronimo.daytrader.plugins/daytrader-tomcat//car">org.apache.geronimo.daytrader.plugins/daytrader-tomcat/${pom.version}/car</artifact-alias>
+                            <artifact-alias key="org.apache.geronimo.daytrader.plugins/daytrader-tomcat//car">org.apache.geronimo.daytrader.plugins/daytrader-tomcat/${project.version}/car</artifact-alias>
                             
                         </plugin-artifact>
                     </instance>

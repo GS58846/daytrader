@@ -133,7 +133,7 @@
                                 <groupId>org.apache.geronimo.daytrader.plugins</groupId>
                                 <artifactId>daytrader-derby-datasource</artifactId>
                             </obsoletes>
-                            <artifact-alias key="org.apache.geronimo.daytrader.plugins/daytrader-derby-datasource/${pom.version}/car">org.apache.geronimo.daytrader.plugins/daytrader-informix-datasource/${pom.version}/car</artifact-alias>
+                            <artifact-alias key="org.apache.geronimo.daytrader.plugins/daytrader-derby-datasource/${project.version}/car">org.apache.geronimo.daytrader.plugins/daytrader-informix-datasource/${project.version}/car</artifact-alias>
                             <obsoletes>
                                 <groupId>org.apache.geronimo.daytrader.plugins</groupId>
                                 <artifactId>daytrader-informix-datasource</artifactId>

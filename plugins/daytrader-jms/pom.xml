@@ -93,7 +93,7 @@
                                 <groupId>org.apache.geronimo.daytrader.plugins</groupId>
                                 <artifactId>daytrader-jms</artifactId>
                             </obsoletes>
-                            <artifact-alias key="org.apache.geronimo.daytrader.plugins/daytrader-jms//car">org.apache.geronimo.daytrader.plugins/daytrader-jms/${pom.version}/car</artifact-alias>
+                            <artifact-alias key="org.apache.geronimo.daytrader.plugins/daytrader-jms//car">org.apache.geronimo.daytrader.plugins/daytrader-jms/${project.version}/car</artifact-alias>
                         </plugin-artifact>
                     </instance>
                 </configuration>
