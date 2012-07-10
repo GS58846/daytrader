@@ -47,8 +47,7 @@
                 <type>jar</type>
             </dependency>
             
-        </dependencies>
-	<inverse-classloading/>
+        </dependencies>	
     </environment>
 
     <!--
