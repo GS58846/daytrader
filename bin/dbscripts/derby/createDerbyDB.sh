@@ -28,7 +28,7 @@ then
 fi
 
 export DERBY_PATH=${GERONIMO_HOME}/repository/org/apache/geronimo/bundles/derby-all
-export DERBY_VER=10.6.1.0_1
+export DERBY_VER=10.8.2.2_1
 export CLASSPATH=${DERBY_PATH}/${DERBY_VER}/derby-all-${DERBY_VER}.jar
 
 
