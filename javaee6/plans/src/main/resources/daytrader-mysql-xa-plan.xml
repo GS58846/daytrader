@@ -45,8 +45,8 @@
             </dependency>
             <dependency>
                 <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
-                <version>5.1.7</version>
+                <artifactId>com.mysql.jdbc</artifactId>
+                <version>5.1.34</version>
                 <type>jar</type>
             </dependency>
         </dependencies>
@@ -92,7 +92,7 @@
                             <config-property-setting name="UserName">trade</config-property-setting>
                             <config-property-setting name="Password">trade</config-property-setting>
                             <config-property-setting name="PortNumber">3306</config-property-setting>
-                            <config-property-setting name="ServerName">localhost</config-property-setting>
+                            <config-property-setting name="ServerName">172.17.0.2</config-property-setting>
                             <config-property-setting name="DatabaseName">tradedb</config-property-setting>
                             <connectionmanager>
                                 <xa-transaction>
@@ -112,7 +112,7 @@
                             <config-property-setting name="UserName">trade</config-property-setting>
                             <config-property-setting name="Password">trade</config-property-setting>
                             <config-property-setting name="PortNumber">3306</config-property-setting>
-                            <config-property-setting name="ServerName">localhost</config-property-setting>
+                            <config-property-setting name="ServerName">172.17.0.2</config-property-setting>
                             <config-property-setting name="DatabaseName">tradedb</config-property-setting>
                             <connectionmanager>
                                 <no-transaction/>
