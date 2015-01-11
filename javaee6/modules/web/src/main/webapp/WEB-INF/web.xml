@@ -41,6 +41,11 @@
         <servlet-name>tradehome</servlet-name>
         <jsp-file>/tradehome.jsp</jsp-file>
     </servlet>
+    <servlet>
+        <display-name>oauth2callback</display-name>
+        <servlet-name>oauth2callback</servlet-name>
+        <jsp-file>/oauth2callback.jsp</jsp-file>
+    </servlet>
     <context-param>
         <param-name>com.sun.faces.verifyObjects</param-name>
         <param-value>false</param-value>

@@ -1,5 +1,5 @@
 # Daytrader example installed in Apache Geronimo
-FROM jaxzin/geronimo:3.0.1
+FROM jaxzin/daytrader-mysql:3.0.0
 
 MAINTAINER brian@jaxzin.com
 
@@ -7,7 +7,7 @@ ADD javaee6/assemblies/daytrader-ear/target/daytrader-ear-3.0.0.ear /apps/
 ADD javaee6/plans/target/classes/daytrader-mysql-xa-plan.xml /apps/
 
 # Download MySQL JDBC driver
-ADD http://repo1.maven.org/maven2/mysql/mysql-connector-java/5.1.34/mysql-connector-java-5.1.34.jar /apps/
+#ADD http://repo1.maven.org/maven2/mysql/mysql-connector-java/5.1.34/mysql-connector-java-5.1.34.jar /apps/
 
 # =====
 # These commands need to be run after the container is up,

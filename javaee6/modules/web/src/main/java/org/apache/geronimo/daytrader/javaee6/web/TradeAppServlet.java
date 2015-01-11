@@ -136,6 +136,8 @@ public class TradeAppServlet extends HttpServlet {
                 tsAction.doWelcome(ctx, req, resp, se.getMessage());
             }
             return;
+        } else if (action.equals("login-oauth")) {
+
         } else if (action.equals("register")) {
             userID = req.getParameter("user id");
             String passwd = req.getParameter("passwd");
