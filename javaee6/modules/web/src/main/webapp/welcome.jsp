@@ -19,6 +19,7 @@
 <HEAD>
 <TITLE>Trade Login</TITLE>
 <LINK rel="stylesheet" href="style.css" type="text/css" />
+    <script src="https://apis.google.com/js/client:platform.js" async defer></script>
 </HEAD>
 <BODY bgcolor="#ffffff" link="#000099">
 <%@ page session="false"%>
@@ -66,6 +67,20 @@ if ( results != null )out.print(results);
                 size="10" type="password" name="passwd" value="xxx"> &nbsp; <INPUT
                 type="submit" value="Log in"><INPUT type="hidden" name="action"
                 value="login"></FORM>
+            </TD>
+        </TR>
+        <TR>
+            <TD align="right" colspan="2">
+                <span id="signinButton">
+                  <span
+                          class="g-signin"
+                          data-callback="signinCallback"
+                          data-clientid="1003102423058-93thuatnhj2m2qbmtt9575o3jsf9sngm.apps.googleusercontent.com"
+                          data-cookiepolicy="single_host_origin"
+                          data-requestvisibleactions="http://schema.org/AddAction"
+                          data-scope="https://www.googleapis.com/auth/plus.login">
+                  </span>
+                </span>
             </TD>
         </TR>
     </TBODY>
