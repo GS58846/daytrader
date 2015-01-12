@@ -59,7 +59,7 @@ You should now be able to access the application on port 80 of your EC2 instance
 
 ## Developing
 
-1. [Install Docker]
+1. [Install Docker](https://docs.docker.com/installation/#installation)
 1. Setup the MySQL container by running `src/develop/dev-db.sh`
 1. Build and deploy the app by running `src/develop/dev-reset.sh`
 
