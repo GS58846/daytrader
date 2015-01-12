@@ -21,6 +21,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.WebServlet;
 
 import org.apache.geronimo.daytrader.javaee6.core.direct.*;
+import org.apache.geronimo.daytrader.javaee6.entities.ExternalAuthProvider;
 import org.apache.geronimo.daytrader.javaee6.utils.*;
 
 import java.io.IOException;
@@ -118,8 +119,12 @@ public class TradeAppServlet extends HttpServlet {
         resp.setContentType("text/html");
         TradeServletAction tsAction = new TradeServletAction();
 
-        // Dyna - need status string - prepended to output
-        action = req.getParameter("action");
+        action = (String) req.getAttribute("action");
+
+        if(action == null) {
+            // Dyna - need status string - prepended to output
+            action = req.getParameter("action");
+        }
 
         ServletContext ctx = getServletConfig().getServletContext();
 
@@ -136,8 +141,15 @@ public class TradeAppServlet extends HttpServlet {
                 tsAction.doWelcome(ctx, req, resp, se.getMessage());
             }
             return;
-        } else if (action.equals("login-oauth")) {
-
+        } else if (action.equals("login-oauth2")) {
+            ExternalAuthProvider provider = ExternalAuthProvider.valueOf(req.getParameter("provider"));
+            String token = req.getParameter("token");
+            try {
+                tsAction.doLoginExt(ctx, req, resp, provider, token);
+            } catch (ServletException se) {
+                tsAction.doWelcome(ctx, req, resp, se.getMessage());
+            }
+            return;
         } else if (action.equals("register")) {
             userID = req.getParameter("user id");
             String passwd = req.getParameter("passwd");

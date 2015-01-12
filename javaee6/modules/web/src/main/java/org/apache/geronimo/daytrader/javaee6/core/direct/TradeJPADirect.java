@@ -847,6 +847,37 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
         return account;
     }
 
+    public AccountDataBean loginExt(ExternalAuthProvider provider, String token)
+            throws Exception {
+
+        EntityManager entityManager = emf.createEntityManager();
+
+        ExternalAuthDataBean externalAuth = entityManager.find(ExternalAuthDataBean.class, new ExternalAuthKey(provider, token));
+
+        if (externalAuth == null) {
+            throw new RuntimeException("No such externalAuth: " + provider + ", " + token);
+        }
+        /*
+         * Managed Transaction
+         */
+        entityManager.getTransaction().begin();
+        entityManager.merge(externalAuth);
+
+        AccountProfileDataBean profile = externalAuth.getProfile();
+        AccountDataBean account = externalAuth.getProfile().getAccount();
+
+        if (Log.doTrace())
+            Log.trace("TradeJPADirect:loginExt", provider, token, profile.getUserID());
+
+        account.login(provider, token);
+        entityManager.getTransaction().commit();
+        if (Log.doTrace())
+            Log.trace("TradeJPADirect:loginExt (" + provider + "," + token + ", "+ profile.getUserID() + ") success" + account);
+        entityManager.close();
+        return account;
+    }
+
+
     public void logout(String userID) {
         if (Log.doTrace())
             Log.trace("TradeJPADirect:logout", userID);
@@ -902,6 +933,60 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
              */
             try {
                 entityManager.getTransaction().begin();
+                entityManager.persist(profile);
+                entityManager.persist(account);
+                entityManager.getTransaction().commit();
+            }
+            catch (Exception e) {
+                entityManager.getTransaction().rollback();
+            } finally {
+                entityManager.close();
+            }
+
+        }
+
+        return account;
+    }
+
+    public AccountDataBean registerExt(String userID, String password, String fullname,
+                                    String address, String email, String creditcard,
+                                    BigDecimal openBalance, ExternalAuthProvider provider,
+                                    String token) {
+        AccountDataBean account = null;
+        AccountProfileDataBean profile = null;
+        ExternalAuthDataBean externalAuth = null;
+        EntityManager entityManager = emf.createEntityManager();
+
+        if (Log.doTrace()) {
+            Log.trace("TradeJPADirect:registerExt", userID, password, fullname, address, email, creditcard, openBalance);
+        }
+
+        // Check to see if a profile with the desired userID already exists
+
+        profile = entityManager.find(AccountProfileDataBean.class, userID);
+
+        if (profile != null) {
+            Log.error("Failed to register new Account - AccountProfile with userID(" + userID + ") already exists");
+            return null;
+        }
+        else {
+            profile = new AccountProfileDataBean(userID, password, fullname,
+                    address, email, creditcard);
+            account = new AccountDataBean(0, 0, null, new Timestamp(System.currentTimeMillis()), openBalance, openBalance, userID);
+            externalAuth = new ExternalAuthDataBean(new ExternalAuthKey(provider, token));
+
+            externalAuth.setProfile(profile);
+            profile.getExternalAuths().add(externalAuth);
+
+            profile.setAccount(account);
+            account.setProfile(profile);
+
+            /*
+             * managed Transaction
+             */
+            try {
+                entityManager.getTransaction().begin();
+                entityManager.persist(externalAuth);
                 entityManager.persist(profile);
                 entityManager.persist(account);
                 entityManager.getTransaction().commit();

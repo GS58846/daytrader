@@ -17,15 +17,12 @@
 package org.apache.geronimo.daytrader.javaee6.web;
 
 import java.math.BigDecimal;
+import java.rmi.RemoteException;
 import java.util.Collection;
 
 import javax.naming.InitialContext;
 
-import org.apache.geronimo.daytrader.javaee6.entities.AccountDataBean;
-import org.apache.geronimo.daytrader.javaee6.entities.AccountProfileDataBean;
-import org.apache.geronimo.daytrader.javaee6.entities.HoldingDataBean;
-import org.apache.geronimo.daytrader.javaee6.entities.OrderDataBean;
-import org.apache.geronimo.daytrader.javaee6.entities.QuoteDataBean;
+import org.apache.geronimo.daytrader.javaee6.entities.*;
 import org.apache.geronimo.daytrader.javaee6.core.api.TradeServices;
 
 import org.apache.geronimo.daytrader.javaee6.core.beans.MarketSummaryDataBean;
@@ -519,6 +516,20 @@ public class TradeAction implements TradeServices {
         return accountData;
     }
 
+    @Override
+    public AccountDataBean loginExt(ExternalAuthProvider provider, String token) throws Exception, RemoteException {
+        if (Log.doActionTrace())
+            Log.trace("TradeAction:loginExt", provider, token);
+        AccountDataBean accountData;
+        accountData = trade.loginExt(provider, token);
+        return accountData;
+    }
+
+    public AccountDataBean loginExt(String providerName, String token) throws Exception, RemoteException {
+        ExternalAuthProvider provider = ExternalAuthProvider.valueOf(providerName);
+        return loginExt(provider, token);
+    }
+
     /**
      * Logout the given user
      *
@@ -556,6 +567,22 @@ public class TradeAction implements TradeServices {
         BigDecimal openBalance = new BigDecimal(openBalanceString);
         return register(userID, password, fullname, address, email, creditCard, openBalance);
     }
+
+    @Override
+    public AccountDataBean registerExt(String userID, String password, String fullname, String address, String email, String creditCard, BigDecimal openBalance, ExternalAuthProvider provider, String token) throws Exception, RemoteException {
+        if (Log.doActionTrace())
+            Log.trace("TradeAction:registerExt", userID, password, fullname, address, email, creditCard, openBalance);
+        AccountDataBean accountData;
+        accountData = trade.registerExt(userID, password, fullname, address, email, creditCard, openBalance, provider, token);
+        return accountData;
+    }
+
+    public AccountDataBean registerExt(String userID, String password, String fullname, String address, String email, String creditCard, String openBalanceString, String providerString, String token) throws Exception, RemoteException {
+        BigDecimal openBalance = new BigDecimal(openBalanceString);
+        ExternalAuthProvider provider = ExternalAuthProvider.valueOf(providerString);
+        return registerExt(userID, password, fullname, address, email, creditCard, openBalance, provider, token);
+    }
+
 
     /**
      * Reset the TradeData by - removing all newly registered users by scenario

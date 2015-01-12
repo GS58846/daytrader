@@ -17,6 +17,7 @@
 package org.apache.geronimo.daytrader.javaee6.core.direct;
 
 import java.math.BigDecimal;
+import java.rmi.RemoteException;
 import java.util.Collection;
 import java.util.ArrayList;
 import javax.naming.InitialContext;
@@ -1403,6 +1404,54 @@ public class TradeJEEDirect implements TradeServices, TradeDBServices {
          */
     }
 
+    @Override
+    public AccountDataBean loginExt(ExternalAuthProvider provider, String token) throws Exception, RemoteException {
+        AccountDataBean accountData = null;
+        Connection conn = null;
+        try {
+            if (Log.doTrace())
+                Log.trace("TradeDirect:loginExt - inSession(" + this.inSession + ")", provider, token);
+
+            conn = getConn();
+            PreparedStatement stmt = getStatement(conn, getExternalAuthSQL);
+            stmt.setString(1, provider.name());
+            stmt.setString(2, token);
+
+            ResultSet rs = stmt.executeQuery();
+            if (!rs.next()) {
+                Log.error("TradeDirect:login -- failure to find external auth for" + provider + ", "+token);
+                throw new javax.ejb.FinderException("Cannot find external auth for" + provider + ", "+token);
+            }
+
+            String userId = rs.getString("profile_userid");
+            stmt.close();
+
+            stmt = getStatement(conn, loginSQL);
+            stmt.setTimestamp(1, new Timestamp(System.currentTimeMillis()));
+            stmt.setString(2, userId);
+
+            int rows = stmt.executeUpdate();
+            // ?assert rows==1?
+            stmt.close();
+
+            stmt = getStatement(conn, getAccountForUserSQL);
+            stmt.setString(1, userId);
+            rs = stmt.executeQuery();
+
+            accountData = getAccountDataFromResultSet(rs);
+
+            stmt.close();
+
+            commit(conn);
+        } catch (Exception e) {
+            Log.error("TradeDirect:login -- error logging in user", e);
+            rollBack(conn, e);
+        } finally {
+            releaseConn(conn);
+        }
+        return accountData;
+    }
+
     /**
      * @see TradeServices#logout(String)
      */
@@ -1483,6 +1532,11 @@ public class TradeJEEDirect implements TradeServices, TradeDBServices {
             releaseConn(conn);
         }
         return accountData;
+    }
+
+    @Override
+    public AccountDataBean registerExt(String userID, String password, String fullname, String address, String email, String creditcard, BigDecimal openBalance, ExternalAuthProvider provider, String token) throws Exception, RemoteException {
+        throw new UnsupportedOperationException("External Logins are not implemented.");
     }
 
     private AccountDataBean getAccountDataFromResultSet(ResultSet rs) throws Exception {
@@ -2008,6 +2062,10 @@ public class TradeJEEDirect implements TradeServices, TradeDBServices {
 
     private static final String updateQuotePriceVolumeSQL =
         "update quoteejb set " + "price = ?, change1 = ? - open1, volume = ? " + "where symbol = ?";
+
+    private final static String getExternalAuthSQL =
+            "select * from externalauthejb ea where ea.provider = ? and ea.token = ?";
+
 
     private static boolean initialized = false;
 

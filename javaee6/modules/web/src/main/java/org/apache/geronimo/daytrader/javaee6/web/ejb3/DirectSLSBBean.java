@@ -23,6 +23,7 @@ import org.apache.geronimo.daytrader.javaee6.core.beans.MarketSummaryDataBean;
 import org.apache.geronimo.daytrader.javaee6.core.direct.TradeJEEDirect;
 
 import java.math.BigDecimal;
+import java.rmi.RemoteException;
 import java.util.Collection;
 import javax.ejb.*;
 
@@ -113,12 +114,22 @@ public class DirectSLSBBean implements DirectSLSBRemote, DirectSLSBLocal {
         return (new TradeJEEDirect(true)).login(userID, password);
     }
 
+    @Override
+    public AccountDataBean loginExt(ExternalAuthProvider provider, String token) throws Exception, RemoteException {
+        return (new TradeJEEDirect(true)).loginExt(provider, token);
+    }
+
     public void logout(String userID) throws Exception {
         (new TradeJEEDirect(true)).logout(userID);
     }
 
     public AccountDataBean register(String userID, String password, String fullname, String address, String email, String creditcard, BigDecimal openBalance) throws Exception {
         return (new TradeJEEDirect(true)).register(userID, password, fullname, address, email, creditcard, openBalance);
+    }
+
+    @Override
+    public AccountDataBean registerExt(String userID, String password, String fullname, String address, String email, String creditcard, BigDecimal openBalance, ExternalAuthProvider provider, String token) throws Exception, RemoteException {
+        return (new TradeJEEDirect(true)).registerExt(userID, password, fullname, address, email, creditcard, openBalance, provider, token);
     }
 
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)

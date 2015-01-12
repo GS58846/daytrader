@@ -17,6 +17,7 @@
 package org.apache.geronimo.daytrader.javaee6.core.direct;
 
 import java.math.BigDecimal;
+import java.rmi.RemoteException;
 import java.util.Collection;
 import java.util.ArrayList;
 
@@ -1253,6 +1254,11 @@ public class TradeJDBCDirect implements TradeServices, TradeDBServices {
          */
     }
 
+    @Override
+    public AccountDataBean loginExt(ExternalAuthProvider provider, String token) throws Exception, RemoteException {
+        throw new UnsupportedOperationException("External Logins are not implemented.");
+    }
+
     /**
      * @see TradeServices#logout(String)
      */
@@ -1338,6 +1344,11 @@ public class TradeJDBCDirect implements TradeServices, TradeDBServices {
             releaseConn(conn);
         }
         return accountData;
+    }
+
+    @Override
+    public AccountDataBean registerExt(String userID, String password, String fullname, String address, String email, String creditcard, BigDecimal openBalance, ExternalAuthProvider provider, String token) throws Exception, RemoteException {
+        throw new UnsupportedOperationException("External Logins are not implemented.");
     }
 
     private AccountDataBean getAccountDataFromResultSet(ResultSet rs) throws Exception {

@@ -300,6 +300,31 @@ public class AccountDataBean implements Serializable {
         setLoginCount(getLoginCount() + 1);
     }
 
+    public void login(ExternalAuthProvider provider, String token) {
+        AccountProfileDataBean profile = getProfile();
+        boolean tokenMatches = false;
+        if(profile != null) {
+            for (ExternalAuthDataBean externalAuth : profile.getExternalAuths()) {
+                if(externalAuth.getExternalAuthKey().getProvider() == provider &&
+                        externalAuth.getExternalAuthKey().getToken().equals(token)) {
+                    tokenMatches = true;
+                    break;
+                }
+            }
+        }
+        if (!tokenMatches) {
+            String error = "AccountBean:Login failure for account: " + getAccountID() +
+                    ((profile == null) ? "null AccountProfile" :
+                            "\n\tIncorrect token-->" + provider + ":" + token);
+            throw new RuntimeException(error);
+
+        }
+
+        setLastLogin(new Timestamp(System.currentTimeMillis()));
+        setLoginCount(getLoginCount() + 1);
+    }
+
+
     public void logout() {
         setLogoutCount(getLogoutCount() + 1);
     }

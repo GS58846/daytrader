@@ -22,16 +22,13 @@ import org.apache.geronimo.daytrader.javaee6.core.direct.FinancialUtils;
 import org.apache.geronimo.daytrader.javaee6.core.beans.MarketSummaryDataBean;
 import org.apache.geronimo.daytrader.javaee6.core.beans.RunStatsDataBean;
 
-import org.apache.geronimo.daytrader.javaee6.entities.AccountDataBean;
-import org.apache.geronimo.daytrader.javaee6.entities.AccountProfileDataBean;
-import org.apache.geronimo.daytrader.javaee6.entities.HoldingDataBean;
-import org.apache.geronimo.daytrader.javaee6.entities.OrderDataBean;
-import org.apache.geronimo.daytrader.javaee6.entities.QuoteDataBean;
+import org.apache.geronimo.daytrader.javaee6.entities.*;
 import org.apache.geronimo.daytrader.javaee6.utils.Log;
 
 import org.apache.geronimo.daytrader.javaee6.utils.TradeConfig;
 
 import java.math.BigDecimal;
+import java.rmi.RemoteException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -566,6 +563,26 @@ public class TradeSLSBBean implements TradeSLSBRemote, TradeSLSBLocal {
         return account;
     }
 
+    @Override
+    public AccountDataBean loginExt(ExternalAuthProvider provider, String token) throws Exception, RemoteException {
+        ExternalAuthDataBean externalAuth = entityManager.find(ExternalAuthDataBean.class, new ExternalAuthKey(provider, token));
+
+        if (externalAuth == null) {
+            throw new EJBException("No such token: " + provider + ", " + token);
+        }
+        entityManager.merge(externalAuth);
+        AccountProfileDataBean profile = externalAuth.getProfile();
+        AccountDataBean account = profile.getAccount();
+
+        if (Log.doTrace())
+            Log.trace("TradeSLSBBean:loginExt", provider, token);
+        account.login(provider, token);
+        if (Log.doTrace())
+            Log.trace("TradeSLSBBean:loginExt(" + provider + "," + token + ") success" + account);
+
+        return account;
+    }
+
     public void logout(String userID) {
         if (Log.doTrace())
             Log.trace("TradeSLSBBean:logout", userID);
@@ -603,6 +620,40 @@ public class TradeSLSBBean implements TradeSLSBRemote, TradeSLSBLocal {
             entityManager.persist(account);
         }
         
+        return account;
+    }
+
+    @Override
+    public AccountDataBean registerExt(String userID, String password, String fullname, String address, String email, String creditcard, BigDecimal openBalance, ExternalAuthProvider provider, String token) throws Exception, RemoteException {
+        AccountDataBean account = null;
+        AccountProfileDataBean profile = null;
+        ExternalAuthDataBean externalAuth = null;
+
+        if (Log.doTrace())
+            Log.trace("TradeSLSBBean:registerExt", userID, password, fullname, address, email, creditcard, openBalance);
+
+        // Check to see if a profile with the desired userID already exists
+        profile = entityManager.find(AccountProfileDataBean.class, userID);
+
+        if (profile != null) {
+            Log.error("Failed to register new Account - AccountProfile with userID(" + userID + ") already exists");
+            return null;
+        } else {
+            profile = new AccountProfileDataBean(userID, password, fullname, address, email, creditcard);
+            account = new AccountDataBean(0, 0, null, new Timestamp(System.currentTimeMillis()), openBalance, openBalance, userID);
+            externalAuth = new ExternalAuthDataBean(new ExternalAuthKey(provider, token));
+
+            externalAuth.setProfile(profile);
+            profile.getExternalAuths().add(externalAuth);
+
+            profile.setAccount(account);
+            account.setProfile(profile);
+
+            entityManager.persist(externalAuth);
+            entityManager.persist(profile);
+            entityManager.persist(account);
+        }
+
         return account;
     }
 

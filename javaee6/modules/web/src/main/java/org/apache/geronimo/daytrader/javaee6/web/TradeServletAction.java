@@ -382,9 +382,6 @@ public class TradeServletAction {
      *            the HttpRequest object
      * @param resp
      *            the HttpResponse object
-     * @param results
-     *            A short description of the results/success of this web request
-     *            provided on the web page
      * @exception javax.servlet.ServletException
      *                If a servlet specific exception is encountered
      * @exception javax.io.IOException
@@ -402,7 +399,66 @@ public class TradeServletAction {
 
             AccountDataBean accountData = tAction.login(userID, passwd);
 
+            doLogin(ctx, req, resp, accountData);
+
+        } catch (Exception e) {
+            // log the exception with error page
+            throw new ServletException("TradeServletAction.doLogin(...)"
+                    + "Exception logging in user=" + userID + " with password="
+                    + passwd + "; " + e.getMessage(), e);
+        }
+    }
+
+    /**
+     * Login a Trade User. Dispatch to the Trade Home JSP for display
+     *
+     * @param provider
+     *            The external authentication provider name
+     * @param token
+     *            The authentication token
+     * @param ctx
+     *            the servlet context
+     * @param req
+     *            the HttpRequest object
+     * @param resp
+     *            the HttpResponse object
+     * @exception javax.servlet.ServletException
+     *                If a servlet specific exception is encountered
+     * @exception javax.io.IOException
+     *                If an exception occurs while writing results back to the
+     *                user
+     *
+     */
+    void doLoginExt(ServletContext ctx, HttpServletRequest req,
+                 HttpServletResponse resp, ExternalAuthProvider provider, String token)
+            throws javax.servlet.ServletException, java.io.IOException {
+
+        String results = "";
+        try {
+            // Got a valid userID and passwd, attempt login
+
+            AccountDataBean accountData = tAction.loginExt(provider, token);
+            
+            doLogin(ctx, req, resp, accountData);
+
+        } catch (Exception e) {
+            // log the exception with error page
+            throw new ServletException("TradeServletAction.doLoginExt(...)"
+                    + "Exception logging in provider=" + provider + " with token="
+                    + token + "; " + e.getMessage(), e);
+        }
+
+    }
+
+    void doLogin(ServletContext ctx, HttpServletRequest req,
+                 HttpServletResponse resp, AccountDataBean accountData)
+            throws javax.servlet.ServletException, java.io.IOException {
+
+        String results = "";
+        try {
+
             if (accountData != null) {
+                final String userID = accountData.getProfile().getUserID();
                 HttpSession session = req.getSession(true);
                 session.setAttribute("uidBean", userID);
                 session.setAttribute("sessionCreationDate",
@@ -412,17 +468,17 @@ public class TradeServletAction {
                 return;
             } else {
                 req.setAttribute("results", results
-                        + "\nCould not find account for user=" + userID);
+                        + "\nCould not find account");
                 // log the exception with an error level of 3 which means,
                 // handled exception but would invalidate a automation run
                 Log.log(
-                                "TradeServletAction.doLogin(...)",
-                                "Error finding account for user " + userID + "",
-                                "user entered a bad username or the database is not populated");
-                throw new NullPointerException("User does not exist or password is incorrect!");
+                        "TradeServletAction.doLogin(...)",
+                        "Error finding account",
+                        "user entered a bad username or the database is not populated");
+                throw new NullPointerException("User does not exist or password is incorrect, try registering first!");
             }
         } catch (java.lang.IllegalArgumentException e) { // this is a user
-                                                            // error so I will
+            // error so I will
             // forward them to another page rather than throw a 500
             req.setAttribute("results", results + "illegal argument:"
                     + e.getMessage());
@@ -438,15 +494,17 @@ public class TradeServletAction {
         } catch (Exception e) {
             // log the exception with error page
             throw new ServletException("TradeServletAction.doLogin(...)"
-                    + "Exception logging in user=" + userID + " with password="
-                    + passwd + "; " + e.getMessage(), e);
+                    + "Exception logging in account=" + accountData + "; " + e.getMessage(), e);
         }
 
-        requestDispatch(ctx, req, resp, userID, TradeConfig
-                .getPage(TradeConfig.WELCOME_PAGE));
+        if(accountData != null) {
+            requestDispatch(ctx, req, resp, accountData.getProfile().getUserID(), TradeConfig
+                    .getPage(TradeConfig.WELCOME_PAGE));
+        }
 
-    }
-
+    }    
+    
+    
     /**
      * Logout a Trade User Dispatch to the Trade Welcome JSP for display
      * 

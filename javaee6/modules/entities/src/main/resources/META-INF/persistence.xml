@@ -27,6 +27,7 @@
         <class>org.apache.geronimo.daytrader.javaee6.entities.HoldingDataBean</class>
         <class>org.apache.geronimo.daytrader.javaee6.entities.OrderDataBean</class>
         <class>org.apache.geronimo.daytrader.javaee6.entities.QuoteDataBean</class>
+        <class>org.apache.geronimo.daytrader.javaee6.entities.ExternalAuthDataBean</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         
         <properties>

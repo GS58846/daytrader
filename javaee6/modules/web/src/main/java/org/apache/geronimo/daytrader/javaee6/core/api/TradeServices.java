@@ -22,11 +22,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.Collection;
 
-import org.apache.geronimo.daytrader.javaee6.entities.AccountDataBean;
-import org.apache.geronimo.daytrader.javaee6.entities.AccountProfileDataBean;
-import org.apache.geronimo.daytrader.javaee6.entities.HoldingDataBean;
-import org.apache.geronimo.daytrader.javaee6.entities.OrderDataBean;
-import org.apache.geronimo.daytrader.javaee6.entities.QuoteDataBean;
+import org.apache.geronimo.daytrader.javaee6.entities.*;
 import org.apache.geronimo.daytrader.javaee6.core.beans.MarketSummaryDataBean;
 import org.apache.geronimo.daytrader.javaee6.core.beans.RunStatsDataBean;
 
@@ -236,7 +232,16 @@ public interface TradeServices extends Remote {
      * @param password the password entered by the customer for authentication
      * @return User account data in AccountDataBean
      */
-   public AccountDataBean login(String userID, String password) throws Exception, RemoteException;                              
+   public AccountDataBean login(String userID, String password) throws Exception, RemoteException;
+
+    /**
+     * Attempt to authenticate and login a user with the given external auth
+     *
+     * @param provider the external authentication provider
+     * @param token the authentication token
+     * @return User account data in AccountDataBean
+     */
+    public AccountDataBean loginExt(ExternalAuthProvider provider, String token) throws Exception, RemoteException;
 
     /**
      * Logout the given user
@@ -258,7 +263,7 @@ public interface TradeServices extends Remote {
      * @param address  the customers street address
      * @param email    the customers email address
      * @param creditcard the customers creditcard number
-     * @param initialBalance the amount to charge to the customers credit to open the account and set the initial balance
+     * @param openBalance the amount to charge to the customers credit to open the account and set the initial balance
      * @return the userID if successful, null otherwise
      */
     public AccountDataBean register(String userID,
@@ -267,10 +272,35 @@ public interface TradeServices extends Remote {
                                   String address,
                                   String email,
                                   String creditcard,
-                                  BigDecimal openBalance) throws Exception, RemoteException;  
-                          
+                                  BigDecimal openBalance) throws Exception, RemoteException;
 
-   /**
+    /**
+     * Register a new Trade customer from an external auth system.
+     * Create a new user profile, user registry entry, account with initial balance,
+     * and empty portfolio.
+     *
+     * @param userID the new customer to register
+     * @param password the customers password
+     * @param fullname the customers fullname
+     * @param address  the customers street address
+     * @param email    the customers email address
+     * @param creditcard the customers creditcard number
+     * @param openBalance the amount to charge to the customers credit to open the account and set the initial balance
+     * @param provider the external authentication system
+     * @param token the external auth token
+     * @return the userID if successful, null otherwise
+     */
+    public AccountDataBean registerExt(String userID,
+                                    String password,
+                                    String fullname,
+                                    String address,
+                                    String email,
+                                    String creditcard,
+                                    BigDecimal openBalance,
+                                    ExternalAuthProvider provider,
+                                    String token) throws Exception, RemoteException;
+
+    /**
      * Reset the TradeData by
      * - removing all newly registered users by scenario servlet
      *    (i.e. users with userID's beginning with "ru:")     * 

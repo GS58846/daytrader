@@ -16,18 +16,13 @@
  */
 package org.apache.geronimo.daytrader.javaee6.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import org.apache.geronimo.daytrader.javaee6.utils.Log;
 import org.apache.geronimo.daytrader.javaee6.utils.TradeConfig;
+
+import java.util.Collection;
 
 @Entity(name = "accountprofileejb")
 @Table(name = "accountprofileejb")
@@ -65,6 +60,9 @@ public class AccountProfileDataBean implements java.io.Serializable {
     
     @OneToOne(mappedBy="profile", fetch=FetchType.LAZY)
     private AccountDataBean account;
+
+    @OneToMany(mappedBy="profile", fetch=FetchType.EAGER)
+    private Collection<ExternalAuthDataBean> externalAuths;
 
 //    @Version
 //    private Integer optLock;
@@ -176,7 +174,15 @@ public class AccountProfileDataBean implements java.io.Serializable {
     public void setAccount(AccountDataBean account) {
         this.account = account;
     }
-    
+
+    public Collection<ExternalAuthDataBean> getExternalAuths() {
+        return externalAuths;
+    }
+
+    public void setExternalAuths(Collection<ExternalAuthDataBean> externalAuths) {
+        this.externalAuths = externalAuths;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
