@@ -596,7 +596,7 @@ public class TradeSLSBBean implements TradeSLSBRemote, TradeSLSBLocal {
             Log.trace("TradeSLSBBean:logout(" + userID + ") success");
     }
 
-    public AccountDataBean register(String userID, String password, String fullname, String address, String email, String creditcard, BigDecimal openBalance) {
+    public AccountDataBean register(String userID, String password, String fullname, String address, String email, String creditcard, BigDecimal openBalance, ExternalAuthProvider provider, String uid, String token) {
         AccountDataBean account = null;
         AccountProfileDataBean profile = null;
         
@@ -618,42 +618,9 @@ public class TradeSLSBBean implements TradeSLSBRemote, TradeSLSBLocal {
 
             entityManager.persist(profile); 
             entityManager.persist(account);
+            //TODO: Persist externalAuth
         }
         
-        return account;
-    }
-
-    @Override
-    public AccountDataBean registerExt(String userID, String password, String fullname, String address, String email, String creditcard, BigDecimal openBalance, ExternalAuthProvider provider, String token) throws Exception, RemoteException {
-        AccountDataBean account = null;
-        AccountProfileDataBean profile = null;
-        ExternalAuthDataBean externalAuth = null;
-
-        if (Log.doTrace())
-            Log.trace("TradeSLSBBean:registerExt", userID, password, fullname, address, email, creditcard, openBalance);
-
-        // Check to see if a profile with the desired userID already exists
-        profile = entityManager.find(AccountProfileDataBean.class, userID);
-
-        if (profile != null) {
-            Log.error("Failed to register new Account - AccountProfile with userID(" + userID + ") already exists");
-            return null;
-        } else {
-            profile = new AccountProfileDataBean(userID, password, fullname, address, email, creditcard);
-            account = new AccountDataBean(0, 0, null, new Timestamp(System.currentTimeMillis()), openBalance, openBalance, userID);
-            externalAuth = new ExternalAuthDataBean(new ExternalAuthKey(provider, token));
-
-            externalAuth.setProfile(profile);
-            profile.getExternalAuths().add(externalAuth);
-
-            profile.setAccount(account);
-            account.setProfile(profile);
-
-            entityManager.persist(externalAuth);
-            entityManager.persist(profile);
-            entityManager.persist(account);
-        }
-
         return account;
     }
 

@@ -264,33 +264,12 @@ public interface TradeServices extends Remote {
      * @param email    the customers email address
      * @param creditcard the customers creditcard number
      * @param openBalance the amount to charge to the customers credit to open the account and set the initial balance
+     * @param provider the external authorization provider (optional)
+     * @param uid the external authorization user id (optional)
+     * @param token the external authorization token (optional)
      * @return the userID if successful, null otherwise
      */
     public AccountDataBean register(String userID,
-                                  String password,
-                                  String fullname,
-                                  String address,
-                                  String email,
-                                  String creditcard,
-                                  BigDecimal openBalance) throws Exception, RemoteException;
-
-    /**
-     * Register a new Trade customer from an external auth system.
-     * Create a new user profile, user registry entry, account with initial balance,
-     * and empty portfolio.
-     *
-     * @param userID the new customer to register
-     * @param password the customers password
-     * @param fullname the customers fullname
-     * @param address  the customers street address
-     * @param email    the customers email address
-     * @param creditcard the customers creditcard number
-     * @param openBalance the amount to charge to the customers credit to open the account and set the initial balance
-     * @param provider the external authentication system
-     * @param token the external auth token
-     * @return the userID if successful, null otherwise
-     */
-    public AccountDataBean registerExt(String userID,
                                     String password,
                                     String fullname,
                                     String address,
@@ -298,7 +277,9 @@ public interface TradeServices extends Remote {
                                     String creditcard,
                                     BigDecimal openBalance,
                                     ExternalAuthProvider provider,
+                                    String uid,
                                     String token) throws Exception, RemoteException;
+
 
     /**
      * Reset the TradeData by

@@ -123,13 +123,8 @@ public class DirectSLSBBean implements DirectSLSBRemote, DirectSLSBLocal {
         (new TradeJEEDirect(true)).logout(userID);
     }
 
-    public AccountDataBean register(String userID, String password, String fullname, String address, String email, String creditcard, BigDecimal openBalance) throws Exception {
-        return (new TradeJEEDirect(true)).register(userID, password, fullname, address, email, creditcard, openBalance);
-    }
-
-    @Override
-    public AccountDataBean registerExt(String userID, String password, String fullname, String address, String email, String creditcard, BigDecimal openBalance, ExternalAuthProvider provider, String token) throws Exception, RemoteException {
-        return (new TradeJEEDirect(true)).registerExt(userID, password, fullname, address, email, creditcard, openBalance, provider, token);
+    public AccountDataBean register(String userID, String password, String fullname, String address, String email, String creditcard, BigDecimal openBalance, ExternalAuthProvider provider, String uid, String token) throws Exception {
+        return (new TradeJEEDirect(true)).register(userID, password, fullname, address, email, creditcard, openBalance, provider, uid, token);
     }
 
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)

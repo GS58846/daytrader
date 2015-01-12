@@ -553,34 +553,22 @@ public class TradeAction implements TradeServices {
      * @param creditCard     the customers creditcard number
      * @param openBalance the amount to charge to the customers credit to open the
      *                       account and set the initial balance
-     * @return the userID if successful, null otherwise
+     * @param provider
+     *@param uid
+     * @param token @return the userID if successful, null otherwise
      */
-    public AccountDataBean register(String userID, String password, String fullname, String address, String email, String creditCard, BigDecimal openBalance) throws Exception {
+    public AccountDataBean register(String userID, String password, String fullname, String address, String email, String creditCard, BigDecimal openBalance, ExternalAuthProvider provider, String uid, String token) throws Exception {
         if (Log.doActionTrace())
             Log.trace("TradeAction:register", userID, password, fullname, address, email, creditCard, openBalance);
         AccountDataBean accountData;
-        accountData = trade.register(userID, password, fullname, address, email, creditCard, openBalance);
+        accountData = trade.register(userID, password, fullname, address, email, creditCard, openBalance, provider, uid, token);
         return accountData;
     }
 
-    public AccountDataBean register(String userID, String password, String fullname, String address, String email, String creditCard, String openBalanceString) throws Exception {
+    public AccountDataBean register(String userID, String password, String fullname, String address, String email, String creditCard, String openBalanceString, String providerName, String uid, String token) throws Exception {
         BigDecimal openBalance = new BigDecimal(openBalanceString);
-        return register(userID, password, fullname, address, email, creditCard, openBalance);
-    }
-
-    @Override
-    public AccountDataBean registerExt(String userID, String password, String fullname, String address, String email, String creditCard, BigDecimal openBalance, ExternalAuthProvider provider, String token) throws Exception, RemoteException {
-        if (Log.doActionTrace())
-            Log.trace("TradeAction:registerExt", userID, password, fullname, address, email, creditCard, openBalance);
-        AccountDataBean accountData;
-        accountData = trade.registerExt(userID, password, fullname, address, email, creditCard, openBalance, provider, token);
-        return accountData;
-    }
-
-    public AccountDataBean registerExt(String userID, String password, String fullname, String address, String email, String creditCard, String openBalanceString, String providerString, String token) throws Exception, RemoteException {
-        BigDecimal openBalance = new BigDecimal(openBalanceString);
-        ExternalAuthProvider provider = ExternalAuthProvider.valueOf(providerString);
-        return registerExt(userID, password, fullname, address, email, creditCard, openBalance, provider, token);
+        ExternalAuthProvider provider = providerName == null ? null : ExternalAuthProvider.valueOf(providerName);
+        return register(userID, password, fullname, address, email, creditCard, openBalance, provider, uid, token);
     }
 
 

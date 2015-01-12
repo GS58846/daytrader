@@ -156,7 +156,7 @@ public class TradeAppJSF {
         // Validate user passwords match and are atleast 1 char in length
         try{
         if ((password.equals(cpassword)) && (password.length() >= 1)) {
-            AccountDataBean accountData = tAction.register(userID, password, fullname, address, email, ccn, new BigDecimal(money));
+            AccountDataBean accountData = tAction.register(userID, password, fullname, address, email, ccn, new BigDecimal(money), null, null, null); //TODO: Add support for externalAuth in JSF
             if (accountData == null) {
                 setResults("Registration operation failed;");
                 //Go to register page

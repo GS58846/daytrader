@@ -430,7 +430,7 @@ public class TradeServletAction {
      *
      */
     void doLoginExt(ServletContext ctx, HttpServletRequest req,
-                 HttpServletResponse resp, ExternalAuthProvider provider, String uid)
+                 HttpServletResponse resp, ExternalAuthProvider provider, String uid, String token)
             throws javax.servlet.ServletException, java.io.IOException {
 
         String results = "";
@@ -442,11 +442,18 @@ public class TradeServletAction {
             if(accountData != null && accountData.getProfile() != null) {
                 doLogin(ctx, req, resp, accountData, accountData.getProfile().getUserID());
             } else {
-                // log the exception with error page
-                throw new ServletException("TradeServletAction.doLoginExt(...)"
-                        + "No account found logging in provider=" + provider + " with uid="
-                        + uid + "; ");
-
+                HttpSession session = req.getSession();
+                String page = "/register.jsp?" +
+                        "email="+ session.getAttribute("email") +
+                        "&Full+Name=" + session.getAttribute("name")
+                        ;
+                if(provider != null) {
+                    page = page +
+                            "&extAuthProvider=" + provider.name() +
+                            "&extAuthUid=" + uid +
+                            "&extAuthToken=" + token;
+                }
+                requestDispatch(ctx, req, resp, "", page);
             }
 
         } catch (Exception e) {
@@ -714,6 +721,12 @@ public class TradeServletAction {
      *            the HttpRequest object
      * @param resp
      *            the HttpResponse object
+     * @param provider
+     *            the external authorization provider (optional)
+     * @param uid
+     *            the external authorization uid (optional)
+     * @param token
+     *            the external authorization token (optional)
      * @exception javax.servlet.ServletException
      *                If a servlet specific exception is encountered
      * @exception javax.io.IOException
@@ -724,7 +737,8 @@ public class TradeServletAction {
     void doRegister(ServletContext ctx, HttpServletRequest req,
             HttpServletResponse resp, String userID, String passwd,
             String cpasswd, String fullname, String ccn,
-            String openBalanceString, String email, String address)
+            String openBalanceString, String email, String address,
+            ExternalAuthProvider provider, String uid, String token)
             throws ServletException, IOException {
         String results = "";
 
@@ -734,7 +748,7 @@ public class TradeServletAction {
 
                 AccountDataBean accountData = tAction.register(userID, passwd,
                         fullname, address, email, ccn, new BigDecimal(
-                                openBalanceString));
+                                openBalanceString), provider, uid, token);
                 if (accountData == null) {
                     results = "Registration operation failed;";
                     System.out.println(results);

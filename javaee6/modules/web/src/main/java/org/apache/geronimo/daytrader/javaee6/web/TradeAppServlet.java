@@ -23,6 +23,7 @@ import javax.servlet.annotation.WebServlet;
 import org.apache.geronimo.daytrader.javaee6.core.direct.*;
 import org.apache.geronimo.daytrader.javaee6.entities.ExternalAuthProvider;
 import org.apache.geronimo.daytrader.javaee6.utils.*;
+import org.scribe.model.Token;
 
 import java.io.IOException;
 
@@ -149,7 +150,7 @@ public class TradeAppServlet extends HttpServlet {
                 tsAction.doWelcome(ctx, req, resp, "No valid OAuth2 token found.");
             }
             try {
-                tsAction.doLoginExt(ctx, req, resp, provider, uid);
+                tsAction.doLoginExt(ctx, req, resp, provider, uid, ((Token) req.getSession().getAttribute("token")).getToken());
             } catch (ServletException se) {
                 tsAction.doWelcome(ctx, req, resp, se.getMessage());
             }
@@ -163,8 +164,12 @@ public class TradeAppServlet extends HttpServlet {
             String money = req.getParameter("money");
             String email = req.getParameter("email");
             String smail = req.getParameter("snail mail");
+            String providerName = req.getParameter("extProvider");
+            ExternalAuthProvider provider = (providerName == null || providerName.length() == 0) ? null : ExternalAuthProvider.valueOf(providerName);
+            String uid = req.getParameter("extUid");
+            String token = req.getParameter("extToken");
             tsAction.doRegister(ctx, req, resp, userID, passwd, cpasswd,
-                    fullname, ccn, money, email, smail);
+                    fullname, ccn, money, email, smail, provider, uid, token);
             return;
         }
 

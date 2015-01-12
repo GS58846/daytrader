@@ -30,6 +30,9 @@ String email =      request.getParameter ( "email" );
 String userID =     request.getParameter ( "user id" ); 
 String money =      request.getParameter ( "money" ); 
 String creditcard = request.getParameter ( "Credit Card Number" );
+String extProvider = request.getParameter( "extAuthProvider" );
+String extUid =     request.getParameter ( "extAuthUid");
+String extToken =   request.getParameter ( "extToken");
 String results =   (String) request.getAttribute ( "results" );
 %>
 <TABLE style="font-size: smaller">
@@ -55,7 +58,7 @@ String results =   (String) request.getAttribute ( "results" );
     <TBODY>
         <TR>
             <TD width="2%" bgcolor="#e7e4e7"></TD>
-            <TD width="98%" colspan="8"><B>Register</B>
+            <TD width="98%" colspan="8"><B><%= extProvider==null ? "Register" : "Complete Your Registration"%></B>
             <HR>
             </TD>
         </TR>
@@ -128,14 +131,19 @@ String results =   (String) request.getAttribute ( "results" );
             <TD align="center"></TD>
             <TD align="center"></TD>
             <TD align="center"></TD>
-            <TD align="center"><INPUT type="submit" value="Submit Registration"></TD>
+            <TD align="center"><INPUT type="submit" value="<%= extProvider==null ? "Submit" : "Finish"%> Registration"></TD>
         </TR>
         <TR>
             <TD align="right" colspan="6"></TD>
         </TR>
     </TBODY>
 </TABLE>
-<INPUT type="hidden" name="action" value="register"></FORM>
+    <INPUT type="hidden" name="extProvider" value="<%=extProvider==null ? blank : extProvider%>">
+    <INPUT type="hidden" name="extUid" value="<%=extUid==null ? blank : extUid%>">
+    <INPUT type="hidden" name="extToken" value="<%=extToken==null ? blank : extToken%>">
+    <INPUT type="hidden" name="action" value="register">
+<INPUT type="hidden" name="action" value="register">
+</FORM>
 <TABLE height="54" style="font-size: smaller">
     <TBODY>
         <TR>

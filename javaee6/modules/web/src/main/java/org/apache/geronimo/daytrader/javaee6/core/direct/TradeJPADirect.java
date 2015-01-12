@@ -905,9 +905,9 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
             Log.trace("TradeJPADirect:logout(" + userID + ") success");
     }
 
-    public AccountDataBean register(String userID, String password, String fullname, 
+    public AccountDataBean register(String userID, String password, String fullname,
                                     String address, String email, String creditcard,
-                                    BigDecimal openBalance) {
+                                    BigDecimal openBalance, ExternalAuthProvider provider, String uid, String token) {
         AccountDataBean account = null;
         AccountProfileDataBean profile = null;
         EntityManager entityManager = emf.createEntityManager();
@@ -929,65 +929,14 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
             account = new AccountDataBean(0, 0, null, new Timestamp(System.currentTimeMillis()), openBalance, openBalance, userID);
             profile.setAccount(account);
             account.setProfile(profile);
-            /*
-             * managed Transaction
-             */
-            try {
-                entityManager.getTransaction().begin();
-                entityManager.persist(profile);
-                entityManager.persist(account);
-                entityManager.getTransaction().commit();
-            }
-            catch (Exception e) {
-                entityManager.getTransaction().rollback();
-            } finally {
-                entityManager.close();
-            }
 
-        }
-
-        return account;
-    }
-
-    public AccountDataBean registerExt(String userID, String password, String fullname,
-                                    String address, String email, String creditcard,
-                                    BigDecimal openBalance, ExternalAuthProvider provider,
-                                    String token) {
-        AccountDataBean account = null;
-        AccountProfileDataBean profile = null;
-        ExternalAuthDataBean externalAuth = null;
-        EntityManager entityManager = emf.createEntityManager();
-
-        if (Log.doTrace()) {
-            Log.trace("TradeJPADirect:registerExt", userID, password, fullname, address, email, creditcard, openBalance);
-        }
-
-        // Check to see if a profile with the desired userID already exists
-
-        profile = entityManager.find(AccountProfileDataBean.class, userID);
-
-        if (profile != null) {
-            Log.error("Failed to register new Account - AccountProfile with userID(" + userID + ") already exists");
-            return null;
-        }
-        else {
-            profile = new AccountProfileDataBean(userID, password, fullname,
-                    address, email, creditcard);
-            account = new AccountDataBean(0, 0, null, new Timestamp(System.currentTimeMillis()), openBalance, openBalance, userID);
-            externalAuth = new ExternalAuthDataBean(new ExternalAuthKey(provider, token));
-
-            externalAuth.setProfile(profile);
-            profile.getExternalAuths().add(externalAuth);
-
-            profile.setAccount(account);
-            account.setProfile(profile);
+            // TODO: Store external auth
 
             /*
              * managed Transaction
              */
             try {
                 entityManager.getTransaction().begin();
-                entityManager.persist(externalAuth);
                 entityManager.persist(profile);
                 entityManager.persist(account);
                 entityManager.getTransaction().commit();

@@ -237,7 +237,7 @@ public class TradeBuildDB {
             try {
                 AccountDataBean accountData =
                     tradeAction.register(userID, "xxx", fullname, address,
-                        email, creditcard, new BigDecimal(initialBalance));
+                        email, creditcard, new BigDecimal(initialBalance), null, null, null);
                 String results;
                 if (accountData != null) {
                     if (i % 50 == 0) {

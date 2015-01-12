@@ -1492,7 +1492,7 @@ public class TradeJEEDirect implements TradeServices, TradeDBServices {
      */
 
     public AccountDataBean register(String userID, String password, String fullname, String address, String email,
-        String creditcard, BigDecimal openBalance) throws Exception {
+                                    String creditcard, BigDecimal openBalance, ExternalAuthProvider provider, String uid, String token) throws Exception {
 
         AccountDataBean accountData = null;
         Connection conn = null;
@@ -1531,6 +1531,16 @@ public class TradeJEEDirect implements TradeServices, TradeDBServices {
             stmt.executeUpdate();
             stmt.close();
 
+            if(provider != null) {
+                stmt = getStatement(conn, createExternalAuthSQL);
+                stmt.setString(1, provider.name());
+                stmt.setString(2, uid);
+                stmt.setString(3, token);
+                stmt.setString(4, userID);
+                stmt.executeUpdate();
+                stmt.close();
+            }
+
             commit(conn);
 
             accountData =
@@ -1544,11 +1554,6 @@ public class TradeJEEDirect implements TradeServices, TradeDBServices {
             releaseConn(conn);
         }
         return accountData;
-    }
-
-    @Override
-    public AccountDataBean registerExt(String userID, String password, String fullname, String address, String email, String creditcard, BigDecimal openBalance, ExternalAuthProvider provider, String token) throws Exception, RemoteException {
-        throw new UnsupportedOperationException("External Logins are not implemented.");
     }
 
     private AccountDataBean getAccountDataFromResultSet(ResultSet rs) throws Exception {

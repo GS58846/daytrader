@@ -1292,7 +1292,7 @@ public class TradeJDBCDirect implements TradeServices, TradeDBServices {
      */
 
     public AccountDataBean register(String userID, String password, String fullname, String address, String email,
-        String creditCard, BigDecimal openBalance) throws Exception {
+                                    String creditCard, BigDecimal openBalance, ExternalAuthProvider provider, String uid, String token) throws Exception {
 
         AccountDataBean accountData = null;
         Connection conn = null;
@@ -1331,6 +1331,8 @@ public class TradeJDBCDirect implements TradeServices, TradeDBServices {
             stmt.executeUpdate();
             stmt.close();
 
+            // TODO: Store external auth
+
             commit(conn);
 
             accountData =
@@ -1344,11 +1346,6 @@ public class TradeJDBCDirect implements TradeServices, TradeDBServices {
             releaseConn(conn);
         }
         return accountData;
-    }
-
-    @Override
-    public AccountDataBean registerExt(String userID, String password, String fullname, String address, String email, String creditcard, BigDecimal openBalance, ExternalAuthProvider provider, String token) throws Exception, RemoteException {
-        throw new UnsupportedOperationException("External Logins are not implemented.");
     }
 
     private AccountDataBean getAccountDataFromResultSet(ResultSet rs) throws Exception {
