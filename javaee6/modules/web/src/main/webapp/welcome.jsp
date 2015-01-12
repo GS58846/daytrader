@@ -71,16 +71,20 @@ if ( results != null )out.print(results);
         </TR>
         <TR>
             <TD align="right" colspan="2">
-                <span id="signinButton">
-                  <span
-                          class="g-signin"
-                          data-callback="signinCallback"
-                          data-clientid="1003102423058-93thuatnhj2m2qbmtt9575o3jsf9sngm.apps.googleusercontent.com"
-                          data-cookiepolicy="single_host_origin"
-                          data-requestvisibleactions="http://schema.org/AddAction"
-                          data-scope="https://www.googleapis.com/auth/plus.login">
-                  </span>
-                </span>
+                <FORM action="googleplus" method="GET" target="_blank">
+                    <INPUT
+                        type="submit" value="Log in with Google">
+                </FORM>
+                <%--<span id="signinButton">--%>
+                  <%--<span--%>
+                          <%--class="g-signin"--%>
+                          <%--data-callback="signinCallback"--%>
+                          <%--data-clientid="1003102423058-93thuatnhj2m2qbmtt9575o3jsf9sngm.apps.googleusercontent.com"--%>
+                          <%--data-cookiepolicy="single_host_origin"--%>
+                          <%--data-requestvisibleactions="http://schema.org/AddAction"--%>
+                          <%--data-scope="https://www.googleapis.com/auth/plus.login">--%>
+                  <%--</span>--%>
+                <%--</span>--%>
             </TD>
         </TR>
     </TBODY>
