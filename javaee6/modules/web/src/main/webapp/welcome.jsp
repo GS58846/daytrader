@@ -17,9 +17,41 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML>
 <HEAD>
-<TITLE>Trade Login</TITLE>
-<LINK rel="stylesheet" href="style.css" type="text/css" />
-    <script src="https://apis.google.com/js/client:platform.js" async defer></script>
+    <TITLE>Trade Login</TITLE>
+    <LINK rel="stylesheet" href="style.css" type="text/css" />
+    <link rel="stylesheet" href="css/zocial.css" type="text/css" />
+    <%--<link href='http://fonts.googleapis.com/css?family=Pompiere' rel='stylesheet' type='text/css'>--%>
+    <%--<style type="text/css">--%>
+        <%--html {--%>
+            <%--background: #f0f0eb;--%>
+            <%--font-family: "Helvetica Neue", sans-serif;--%>
+        <%--}--%>
+        <%--h2, p {--%>
+            <%--font-family: "Pompiere","Helvetica Neue", sans-serif;--%>
+        <%--}--%>
+        <%--body {--%>
+            <%--background: #FFF;--%>
+            <%---webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.5);--%>
+            <%---moz-box-shadow: 0 1px 1px rgba(0,0,0,0.5);--%>
+            <%--box-shadow: 0 1px 1px rgba(0,0,0,0.5);--%>
+            <%---webkit-border-radius: 0 0 2px 2px;--%>
+            <%---moz-border-radius: 0 0 2px 2px;--%>
+            <%--border-radius: 0 0 2px 2px;--%>
+            <%--margin: 0 auto 2em;--%>
+            <%--padding: 2em 1em;--%>
+            <%--width: 600px;--%>
+        <%--}--%>
+        <%--body .zocial {--%>
+            <%--margin: 8px 4px;--%>
+            <%--font-size: 13px;--%>
+        <%--}--%>
+        <%--h2 {--%>
+            <%--font-size: 17px;--%>
+            <%--font-weight: normal;--%>
+            <%--padding: 1em 0 0.75em;--%>
+            <%--border-bottom: 1px solid #eee;--%>
+        <%--}--%>
+    <%--</style>--%>
 </HEAD>
 <BODY bgcolor="#ffffff" link="#000099">
 <%@ page session="false"%>
@@ -71,22 +103,7 @@ if ( results != null )out.print(results);
         </TR>
         <TR>
             <TD align="right" colspan="2">
-                <FORM action="googleplus" method="GET" target="_blank">
-                    <INPUT
-                        type="submit" value="Log in with Google">
-                    <INPUT
-                        type="hidden" name="state" value="login-oauth2">
-                </FORM>
-                <%--<span id="signinButton">--%>
-                  <%--<span--%>
-                          <%--class="g-signin"--%>
-                          <%--data-callback="signinCallback"--%>
-                          <%--data-clientid="1003102423058-93thuatnhj2m2qbmtt9575o3jsf9sngm.apps.googleusercontent.com"--%>
-                          <%--data-cookiepolicy="single_host_origin"--%>
-                          <%--data-requestvisibleactions="http://schema.org/AddAction"--%>
-                          <%--data-scope="https://www.googleapis.com/auth/plus.login">--%>
-                  <%--</span>--%>
-                <%--</span>--%>
+                <a href="googleplus?state=login-oauth2" target="_blank" class="zocial googleplus">Sign in with Google+</a>
             </TD>
         </TR>
     </TBODY>
