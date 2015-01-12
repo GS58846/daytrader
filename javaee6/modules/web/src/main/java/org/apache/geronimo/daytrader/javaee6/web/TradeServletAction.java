@@ -399,7 +399,7 @@ public class TradeServletAction {
 
             AccountDataBean accountData = tAction.login(userID, passwd);
 
-            doLogin(ctx, req, resp, accountData);
+            doLogin(ctx, req, resp, accountData, userID);
 
         } catch (Exception e) {
             // log the exception with error page
@@ -439,7 +439,7 @@ public class TradeServletAction {
 
             AccountDataBean accountData = tAction.loginExt(provider, token);
             
-            doLogin(ctx, req, resp, accountData);
+            doLogin(ctx, req, resp, accountData, accountData.getProfile().getUserID());
 
         } catch (Exception e) {
             // log the exception with error page
@@ -451,14 +451,13 @@ public class TradeServletAction {
     }
 
     void doLogin(ServletContext ctx, HttpServletRequest req,
-                 HttpServletResponse resp, AccountDataBean accountData)
+                 HttpServletResponse resp, AccountDataBean accountData, String userID)
             throws javax.servlet.ServletException, java.io.IOException {
 
         String results = "";
         try {
 
             if (accountData != null) {
-                final String userID = accountData.getProfile().getUserID();
                 HttpSession session = req.getSession(true);
                 session.setAttribute("uidBean", userID);
                 session.setAttribute("sessionCreationDate",
@@ -468,12 +467,12 @@ public class TradeServletAction {
                 return;
             } else {
                 req.setAttribute("results", results
-                        + "\nCould not find account");
+                        + "\nCould not find account for user:" + userID);
                 // log the exception with an error level of 3 which means,
                 // handled exception but would invalidate a automation run
                 Log.log(
                         "TradeServletAction.doLogin(...)",
-                        "Error finding account",
+                        "Error finding account for user: "+ userID,
                         "user entered a bad username or the database is not populated");
                 throw new NullPointerException("User does not exist or password is incorrect, try registering first!");
             }
