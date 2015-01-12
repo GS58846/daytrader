@@ -20,38 +20,6 @@
     <TITLE>Trade Login</TITLE>
     <LINK rel="stylesheet" href="style.css" type="text/css" />
     <link rel="stylesheet" href="css/zocial.css" type="text/css" />
-    <%--<link href='http://fonts.googleapis.com/css?family=Pompiere' rel='stylesheet' type='text/css'>--%>
-    <%--<style type="text/css">--%>
-        <%--html {--%>
-            <%--background: #f0f0eb;--%>
-            <%--font-family: "Helvetica Neue", sans-serif;--%>
-        <%--}--%>
-        <%--h2, p {--%>
-            <%--font-family: "Pompiere","Helvetica Neue", sans-serif;--%>
-        <%--}--%>
-        <%--body {--%>
-            <%--background: #FFF;--%>
-            <%---webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.5);--%>
-            <%---moz-box-shadow: 0 1px 1px rgba(0,0,0,0.5);--%>
-            <%--box-shadow: 0 1px 1px rgba(0,0,0,0.5);--%>
-            <%---webkit-border-radius: 0 0 2px 2px;--%>
-            <%---moz-border-radius: 0 0 2px 2px;--%>
-            <%--border-radius: 0 0 2px 2px;--%>
-            <%--margin: 0 auto 2em;--%>
-            <%--padding: 2em 1em;--%>
-            <%--width: 600px;--%>
-        <%--}--%>
-        <%--body .zocial {--%>
-            <%--margin: 8px 4px;--%>
-            <%--font-size: 13px;--%>
-        <%--}--%>
-        <%--h2 {--%>
-            <%--font-size: 17px;--%>
-            <%--font-weight: normal;--%>
-            <%--padding: 1em 0 0.75em;--%>
-            <%--border-bottom: 1px solid #eee;--%>
-        <%--}--%>
-    <%--</style>--%>
 </HEAD>
 <BODY bgcolor="#ffffff" link="#000099">
 <%@ page session="false"%>

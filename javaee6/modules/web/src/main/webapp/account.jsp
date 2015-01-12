@@ -17,9 +17,10 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML>
 <HEAD>
-<META http-equiv="Content-Style-Type" content="text/css">
-<TITLE>Trade Account information</TITLE>
-<LINK rel="stylesheet" href="style.css" type="text/css" />
+    <META http-equiv="Content-Style-Type" content="text/css">
+    <TITLE>Trade Account information</TITLE>
+    <LINK rel="stylesheet" href="style.css" type="text/css" />
+    <link rel="stylesheet" href="css/zocial.css" type="text/css" />
 </HEAD>
 <BODY bgcolor="#ffffff" link="#000099" vlink="#000099">
 <%@ page
@@ -280,26 +281,28 @@ Iterator it = closedOrders.iterator();
                 </TBODY>
             </TABLE>
             </FORM>
-                <FORM action="googleplus" method="get" target="_blank">
-                    <TABLE width="100%">
-                        <TBODY>
-                        <TR>
-                            <TD colspan="6" bgcolor="#cccccc"><B>Social Accounts</B></TD>
-                        </TR>
-                        <TR>
-                            <TD align="right" width="113">Google:</TD>
-                            <TD colspan="2" align="left" width="228"></TD>
-                            <TD align="center"><INPUT type="submit" value="Link">
-                                <INPUT type="hidden" name="state" value="link-oauth2">
-                            </TD>
-                        </TR>
-                        <TR>
-                            <TD width="113"></TD>
-                            <TD colspan="5"></TD>
-                        </TR>
-                        </TBODY>
-                    </TABLE>
-                </FORM>
+            <TABLE width="100%">
+                <TBODY>
+                <TR>
+                    <TD colspan="6" bgcolor="#cccccc"><B>Social Accounts</B></TD>
+                </TR>
+                <TR>
+                    <TD align="right" width="113">Google:</TD>
+                    <TD colspan="2" align="left" width="228"></TD>
+                    <TD align="center">
+                        <%if( session.getAttribute("token") == null ) { %>
+                        <a href="googleplus?state=link-oauth2" class="zocial googleplus" target="_blank">Link with Google+</a>
+                        <% } else { %>
+                        <strong>Linked with Google+</strong>
+                        <% } %>
+                    </TD>
+                </TR>
+                <TR>
+                    <TD width="113"></TD>
+                    <TD colspan="5"></TD>
+                </TR>
+                </TBODY>
+            </TABLE>
             </TD>
         </TR>
     </TBODY>
