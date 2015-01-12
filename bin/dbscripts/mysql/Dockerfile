@@ -1,4 +1,4 @@
-FROM mysql;
+FROM mysql
 
-ADD Table.dll
+ADD Table.ddl /
 

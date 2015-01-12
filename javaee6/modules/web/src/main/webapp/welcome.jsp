@@ -74,6 +74,8 @@ if ( results != null )out.print(results);
                 <FORM action="googleplus" method="GET" target="_blank">
                     <INPUT
                         type="submit" value="Log in with Google">
+                    <INPUT
+                        type="hidden" name="state" value="login-oauth2">
                 </FORM>
                 <%--<span id="signinButton">--%>
                   <%--<span--%>

@@ -665,6 +665,14 @@ public class TradeSLSBBean implements TradeSLSBRemote, TradeSLSBLocal {
         return (new TradeJEEDirect(false)).resetTrade(deleteAll);
     }
 
+    @Override
+    public void createExternalAuth(ExternalAuthDataBean externalAuth, String userID) throws Exception, RemoteException {
+        if (Log.doTrace())
+            Log.trace("TradeSLSBBean:createExternalAuth", externalAuth, userID);
+
+        (new TradeJEEDirect(false)).createExternalAuth(externalAuth, userID);
+    }
+
     private void publishQuotePriceChange(QuoteDataBean quote, BigDecimal oldPrice, BigDecimal changeFactor, double sharesTraded) {
         if (!TradeConfig.getPublishQuotePriceChange())
             return;

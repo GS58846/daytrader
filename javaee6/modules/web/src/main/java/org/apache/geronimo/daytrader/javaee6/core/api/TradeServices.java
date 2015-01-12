@@ -310,6 +310,7 @@ public interface TradeServices extends Remote {
       *  return statistics for this benchmark run
      */
     public RunStatsDataBean resetTrade(boolean deleteAll) throws Exception, RemoteException;
-    
-}   
+
+    void createExternalAuth(ExternalAuthDataBean externalAuth, String userID) throws Exception, RemoteException;
+}
 

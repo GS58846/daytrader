@@ -209,6 +209,10 @@ public class TradeAppServlet extends HttpServlet {
                     address == null ? "" : address.trim(),
                     creditcard == null ? "" : creditcard.trim(),
                     email == null ? "" : email.trim());
+        } else if (action.equals("link-oauth2")) {
+            ExternalAuthProvider provider = ExternalAuthProvider.valueOf(req.getParameter("provider"));
+            String token = req.getParameter("token");
+            tsAction.doLinkExtAuth(ctx, req, resp, userID, provider, token);
         } else {
             System.out.println("TradeAppServlet: Invalid Action=" + action);
             tsAction.doWelcome(ctx, req, resp,

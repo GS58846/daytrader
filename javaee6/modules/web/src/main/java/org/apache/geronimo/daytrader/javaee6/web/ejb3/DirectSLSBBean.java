@@ -136,4 +136,9 @@ public class DirectSLSBBean implements DirectSLSBRemote, DirectSLSBLocal {
     public RunStatsDataBean resetTrade(boolean deleteAll) throws Exception {
         return (new TradeJEEDirect(false)).resetTrade(deleteAll);
     }
+
+    @Override
+    public void createExternalAuth(ExternalAuthDataBean externalAuth, String userID) throws Exception, RemoteException {
+        (new TradeJEEDirect(false)).createExternalAuth(externalAuth, userID);
+    }
 }

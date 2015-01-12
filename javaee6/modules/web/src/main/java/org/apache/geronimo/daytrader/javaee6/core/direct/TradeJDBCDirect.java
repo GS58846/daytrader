@@ -1683,6 +1683,11 @@ public class TradeJDBCDirect implements TradeServices, TradeDBServices {
 
     }
 
+    @Override
+    public void createExternalAuth(ExternalAuthDataBean externalAuth, String userID) throws Exception, RemoteException {
+        throw new UnsupportedOperationException("TradeJDBCDirect: createExternalAuth not implemented.");
+    }
+
     private void releaseConn(Connection conn) throws Exception {
         try {
             if (conn != null) {

@@ -830,4 +830,26 @@ public class TradeServletAction {
             throws ServletException, IOException {
         resp.sendRedirect(resp.encodeRedirectURL(page));
     }
+
+    public void doLinkExtAuth(ServletContext ctx, HttpServletRequest req,
+                              HttpServletResponse resp, String userID,
+                              ExternalAuthProvider provider, String token)
+            throws ServletException, IOException {
+
+        String results;
+
+        ExternalAuthDataBean externalAuth = new ExternalAuthDataBean(new ExternalAuthKey(provider, token));
+
+        try {
+            tAction.createExternalAuth(externalAuth, userID);
+            results = "Google account linked successfully!";
+        } catch(Exception e) {
+            results = "Google account was not linked due to an error.";
+
+        }
+
+
+        doAccount(ctx, req, resp, userID, results);
+    }
+
 }

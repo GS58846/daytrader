@@ -596,5 +596,10 @@ public class TradeAction implements TradeServices {
         runStatsData = trade.resetTrade(deleteAll);
         return runStatsData;
     }
-    
+
+    @Override
+    public void createExternalAuth(ExternalAuthDataBean externalAuth, String userID) throws Exception, RemoteException {
+        trade.createExternalAuth(externalAuth, userID);
+    }
+
 }

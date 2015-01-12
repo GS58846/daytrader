@@ -280,6 +280,26 @@ Iterator it = closedOrders.iterator();
                 </TBODY>
             </TABLE>
             </FORM>
+                <FORM action="googleplus" method="get" target="_blank">
+                    <TABLE width="100%">
+                        <TBODY>
+                        <TR>
+                            <TD colspan="6" bgcolor="#cccccc"><B>Social Accounts</B></TD>
+                        </TR>
+                        <TR>
+                            <TD align="right" width="113">Google:</TD>
+                            <TD colspan="2" align="left" width="228"></TD>
+                            <TD align="center"><INPUT type="submit" value="Link">
+                                <INPUT type="hidden" name="state" value="link-oauth2">
+                            </TD>
+                        </TR>
+                        <TR>
+                            <TD width="113"></TD>
+                            <TD colspan="5"></TD>
+                        </TR>
+                        </TBODY>
+                    </TABLE>
+                </FORM>
             </TD>
         </TR>
     </TBODY>

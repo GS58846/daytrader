@@ -17,6 +17,7 @@
 package org.apache.geronimo.daytrader.javaee6.core.direct;
 
 import java.math.BigDecimal;
+import java.rmi.RemoteException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -1008,6 +1009,11 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
             Log.trace("TradeJPADirect:resetTrade", deleteAll);
 
         return(new TradeJDBCDirect(false)).resetTrade(deleteAll);
+    }
+
+    @Override
+    public void createExternalAuth(ExternalAuthDataBean externalAuth, String userID) throws Exception, RemoteException {
+        throw new UnsupportedOperationException("TradeJPADirect: createExternalAuth not implemented.");
     }
 
     /*

@@ -32,6 +32,14 @@ public class GooglePlusServlet extends HttpServlet {
                 .build(); //Now build the call
         HttpSession sess = req.getSession();
         sess.setAttribute("oauth2Service", service);
-        res.sendRedirect(service.getAuthorizationUrl(null));
+
+        String state = req.getParameter("state");
+        if(state != null && state.length() > 0) {
+            state = "&state=" + state;
+        } else {
+            state = null;
+        }
+
+        res.sendRedirect(service.getAuthorizationUrl(null) + state);
     }
 }

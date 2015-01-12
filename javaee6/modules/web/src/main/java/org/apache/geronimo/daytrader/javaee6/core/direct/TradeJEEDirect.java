@@ -1871,6 +1871,33 @@ public class TradeJEEDirect implements TradeServices, TradeDBServices {
 
     }
 
+    @Override
+    public void createExternalAuth(ExternalAuthDataBean externalAuth, String userID) throws Exception {
+        Connection conn = null;
+        try {
+            if (Log.doTrace())
+                Log.traceEnter("TradeDirect:createExternalAuth");
+
+            conn = getConn();
+            PreparedStatement stmt = getStatement(conn, createExternalAuthSQL);
+
+            stmt.setString(1, externalAuth.getExternalAuthKey().getProvider().name());
+            stmt.setString(2, externalAuth.getExternalAuthKey().getToken());
+            stmt.setString(3, userID);
+            stmt.executeUpdate();
+            stmt.close();
+
+            commit(conn);
+
+            if (Log.doTrace())
+                Log.traceExit("TradeDirect:createExternalAuth");
+
+        } finally {
+            releaseConn(conn);
+        }
+
+    }
+
     private void releaseConn(Connection conn) throws Exception {
         try {
             if (conn != null) {
@@ -1978,6 +2005,10 @@ public class TradeJEEDirect implements TradeServices, TradeDBServices {
         "insert into orderejb "
             + "( orderid, ordertype, orderstatus, opendate, quantity, price, orderfee, account_accountid,  holding_holdingid, quote_symbol) "
             + "VALUES (  ?  ,  ?  ,  ?  ,  ?  ,  ?  ,  ?  ,  ?  , ? , ? , ?)";
+
+    private static final String createExternalAuthSQL =
+            "insert into externalauthejb " + "( provider, token, profile_userid ) "
+                    + "VALUES (  ?  ,  ?  ,  ?  )";
 
     private static final String removeHoldingSQL = "delete from holdingejb where holdingid = ?";
 

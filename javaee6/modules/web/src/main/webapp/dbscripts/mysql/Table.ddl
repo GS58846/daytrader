@@ -17,6 +17,7 @@
 # Lines starting with the pound character (#) are considered as comments
 DROP TABLE holdingejb;
 DROP TABLE accountprofileejb;
+DROP TABLE externalauthejb;
 DROP TABLE quoteejb;
 DROP TABLE keygenejb;
 DROP TABLE accountejb;
@@ -43,6 +44,14 @@ CREATE TABLE accountprofileejb
 
 ALTER TABLE accountprofileejb 
     ADD CONSTRAINT PK_ACCOUNTPROFILE2 PRIMARY KEY (USERID);
+
+CREATE TABLE externalauthejb
+(PROFILE_USERID VARCHAR(250) NOT NULL,
+ PROVIDER VARCHAR(250) NOT NULL,
+ TOKEN VARCHAR(250) NOT NULL);
+
+ALTER TABLE externalauthejb
+ADD CONSTRAINT PK_EXTERNALAUTHEJB PRIMARY KEY (PROVIDER, TOKEN);
 
 CREATE TABLE quoteejb
   (LOW DECIMAL(14, 2),
