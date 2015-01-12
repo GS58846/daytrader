@@ -3,6 +3,7 @@
 ## Installation
 
 To install Daytrader on an EC2 instance running CentOS 6.4 you will:
+
 1. Install Docker
 1. Start the `daytrader-mysql` container
 1. Start the `daytrader` container
