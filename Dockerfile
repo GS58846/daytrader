@@ -6,6 +6,9 @@ MAINTAINER brian@jaxzin.com
 ADD javaee6/assemblies/daytrader-ear/target/daytrader-ear-3.0.0.ear /apps/
 ADD javaee6/plans/target/classes/daytrader-mysql-xa-plan.xml /apps/
 
+ADD src/deploy/deploy.sh /apps/
+RUN chmod a+x /apps/deploy.sh
+
 # Download MySQL JDBC driver
 #ADD http://repo1.maven.org/maven2/mysql/mysql-connector-java/5.1.34/mysql-connector-java-5.1.34.jar /apps/
 

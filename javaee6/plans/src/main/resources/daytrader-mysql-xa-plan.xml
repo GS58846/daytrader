@@ -92,7 +92,7 @@
                             <config-property-setting name="UserName">trade</config-property-setting>
                             <config-property-setting name="Password">trade</config-property-setting>
                             <config-property-setting name="PortNumber">3306</config-property-setting>
-                            <config-property-setting name="ServerName">172.17.0.2</config-property-setting>
+                            <config-property-setting name="ServerName">$MYSQL_PORT_3306_TCP_ADDR</config-property-setting>
                             <config-property-setting name="DatabaseName">tradedb</config-property-setting>
                             <connectionmanager>
                                 <xa-transaction>
@@ -112,7 +112,7 @@
                             <config-property-setting name="UserName">trade</config-property-setting>
                             <config-property-setting name="Password">trade</config-property-setting>
                             <config-property-setting name="PortNumber">3306</config-property-setting>
-                            <config-property-setting name="ServerName">172.17.0.2</config-property-setting>
+                            <config-property-setting name="ServerName">$MYSQL_PORT_3306_TCP_ADDR</config-property-setting>
                             <config-property-setting name="DatabaseName">tradedb</config-property-setting>
                             <connectionmanager>
                                 <no-transaction/>
