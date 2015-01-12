@@ -1,7 +1,6 @@
 package org.apache.geronimo.daytrader.javaee6.entities;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -14,12 +13,12 @@ public class ExternalAuthKey implements Serializable {
     @Column(name = "PROVIDER")
     private ExternalAuthProvider provider;
 
-    @Column(name = "TOKEN")
-    private String token;
+    @Column(name = "UID")
+    private String uid;
 
-    public ExternalAuthKey(ExternalAuthProvider provider, String token) {
+    public ExternalAuthKey(ExternalAuthProvider provider, String uid) {
         this.provider = provider;
-        this.token = token;
+        this.uid = uid;
     }
 
     public ExternalAuthProvider getProvider() {
@@ -30,12 +29,12 @@ public class ExternalAuthKey implements Serializable {
         this.provider = provider;
     }
 
-    public String getToken() {
-        return token;
+    public String getUid() {
+        return uid;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     @Override
@@ -46,7 +45,7 @@ public class ExternalAuthKey implements Serializable {
         ExternalAuthKey that = (ExternalAuthKey) o;
 
         if (provider != null ? !provider.equals(that.provider) : that.provider != null) return false;
-        if (token != null ? !token.equals(that.token) : that.token != null) return false;
+        if (uid != null ? !uid.equals(that.uid) : that.uid != null) return false;
 
         return true;
     }
@@ -54,7 +53,7 @@ public class ExternalAuthKey implements Serializable {
     @Override
     public int hashCode() {
         int result = provider != null ? provider.hashCode() : 0;
-        result = 31 * result + (token != null ? token.hashCode() : 0);
+        result = 31 * result + (uid != null ? uid.hashCode() : 0);
         return result;
     }
 
@@ -62,7 +61,7 @@ public class ExternalAuthKey implements Serializable {
     public String toString() {
         return "ExternalAuthKey{" +
                 "provider='" + provider + '\'' +
-                ", token='" + token + '\'' +
+                ", uid='" + uid + '\'' +
                 '}';
     }
 }

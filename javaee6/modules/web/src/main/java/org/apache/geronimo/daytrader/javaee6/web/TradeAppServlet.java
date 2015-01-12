@@ -143,9 +143,13 @@ public class TradeAppServlet extends HttpServlet {
             return;
         } else if (action.equals("login-oauth2")) {
             ExternalAuthProvider provider = ExternalAuthProvider.valueOf(req.getParameter("provider"));
-            String token = req.getParameter("token");
+            String uid = req.getParameter("uid");
+            if(req.getSession().getAttribute("token") == null) {
+                // This blocks URL hacking, by checking that we checked the service in this session.
+                tsAction.doWelcome(ctx, req, resp, "No valid OAuth2 token found.");
+            }
             try {
-                tsAction.doLoginExt(ctx, req, resp, provider, token);
+                tsAction.doLoginExt(ctx, req, resp, provider, uid);
             } catch (ServletException se) {
                 tsAction.doWelcome(ctx, req, resp, se.getMessage());
             }
@@ -211,8 +215,9 @@ public class TradeAppServlet extends HttpServlet {
                     email == null ? "" : email.trim());
         } else if (action.equals("link-oauth2")) {
             ExternalAuthProvider provider = ExternalAuthProvider.valueOf(req.getParameter("provider"));
+            String uid = req.getParameter("uid");
             String token = req.getParameter("token");
-            tsAction.doLinkExtAuth(ctx, req, resp, userID, provider, token);
+            tsAction.doLinkExtAuth(ctx, req, resp, userID, provider, uid, token);
         } else {
             System.out.println("TradeAppServlet: Invalid Action=" + action);
             tsAction.doWelcome(ctx, req, resp,

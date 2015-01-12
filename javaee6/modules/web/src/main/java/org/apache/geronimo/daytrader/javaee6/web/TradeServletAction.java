@@ -414,8 +414,8 @@ public class TradeServletAction {
      *
      * @param provider
      *            The external authentication provider name
-     * @param token
-     *            The authentication token
+     * @param uid
+     *            The external identifier
      * @param ctx
      *            the servlet context
      * @param req
@@ -430,22 +430,30 @@ public class TradeServletAction {
      *
      */
     void doLoginExt(ServletContext ctx, HttpServletRequest req,
-                 HttpServletResponse resp, ExternalAuthProvider provider, String token)
+                 HttpServletResponse resp, ExternalAuthProvider provider, String uid)
             throws javax.servlet.ServletException, java.io.IOException {
 
         String results = "";
         try {
             // Got a valid userID and passwd, attempt login
 
-            AccountDataBean accountData = tAction.loginExt(provider, token);
-            
-            doLogin(ctx, req, resp, accountData, accountData.getProfile().getUserID());
+            AccountDataBean accountData = tAction.loginExt(provider, uid);
+
+            if(accountData != null && accountData.getProfile() != null) {
+                doLogin(ctx, req, resp, accountData, accountData.getProfile().getUserID());
+            } else {
+                // log the exception with error page
+                throw new ServletException("TradeServletAction.doLoginExt(...)"
+                        + "No account found logging in provider=" + provider + " with uid="
+                        + uid + "; ");
+
+            }
 
         } catch (Exception e) {
             // log the exception with error page
             throw new ServletException("TradeServletAction.doLoginExt(...)"
-                    + "Exception logging in provider=" + provider + " with token="
-                    + token + "; " + e.getMessage(), e);
+                    + "Exception logging in provider=" + provider + " with uid="
+                    + uid + "; " + e.getMessage(), e);
         }
 
     }
@@ -833,12 +841,13 @@ public class TradeServletAction {
 
     public void doLinkExtAuth(ServletContext ctx, HttpServletRequest req,
                               HttpServletResponse resp, String userID,
-                              ExternalAuthProvider provider, String token)
+                              ExternalAuthProvider provider, String uid, String token)
             throws ServletException, IOException {
 
         String results;
 
-        ExternalAuthDataBean externalAuth = new ExternalAuthDataBean(new ExternalAuthKey(provider, token));
+        ExternalAuthDataBean externalAuth = new ExternalAuthDataBean(new ExternalAuthKey(provider, uid));
+        externalAuth.setToken(token);
 
         try {
             tAction.createExternalAuth(externalAuth, userID);

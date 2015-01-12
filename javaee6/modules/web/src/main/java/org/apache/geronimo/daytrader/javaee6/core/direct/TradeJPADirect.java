@@ -848,15 +848,15 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
         return account;
     }
 
-    public AccountDataBean loginExt(ExternalAuthProvider provider, String token)
+    public AccountDataBean loginExt(ExternalAuthProvider provider, String uid)
             throws Exception {
 
         EntityManager entityManager = emf.createEntityManager();
 
-        ExternalAuthDataBean externalAuth = entityManager.find(ExternalAuthDataBean.class, new ExternalAuthKey(provider, token));
+        ExternalAuthDataBean externalAuth = entityManager.find(ExternalAuthDataBean.class, new ExternalAuthKey(provider, uid));
 
         if (externalAuth == null) {
-            throw new RuntimeException("No such externalAuth: " + provider + ", " + token);
+            throw new RuntimeException("No such externalAuth: " + provider + ", " + uid);
         }
         /*
          * Managed Transaction
@@ -868,12 +868,12 @@ public class TradeJPADirect implements TradeServices, TradeDBServices {
         AccountDataBean account = externalAuth.getProfile().getAccount();
 
         if (Log.doTrace())
-            Log.trace("TradeJPADirect:loginExt", provider, token, profile.getUserID());
+            Log.trace("TradeJPADirect:loginExt", provider, uid, profile.getUserID());
 
-        account.login(provider, token);
+        account.login(provider, uid);
         entityManager.getTransaction().commit();
         if (Log.doTrace())
-            Log.trace("TradeJPADirect:loginExt (" + provider + "," + token + ", "+ profile.getUserID() + ") success" + account);
+            Log.trace("TradeJPADirect:loginExt (" + provider + "," + uid + ", "+ profile.getUserID() + ") success" + account);
         entityManager.close();
         return account;
     }

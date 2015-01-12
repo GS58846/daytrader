@@ -1405,22 +1405,24 @@ public class TradeJEEDirect implements TradeServices, TradeDBServices {
     }
 
     @Override
-    public AccountDataBean loginExt(ExternalAuthProvider provider, String token) throws Exception, RemoteException {
+    public AccountDataBean loginExt(ExternalAuthProvider provider, String uid) throws Exception, RemoteException {
         AccountDataBean accountData = null;
+        AccountProfileDataBean profileData = null;
         Connection conn = null;
         try {
             if (Log.doTrace())
-                Log.trace("TradeDirect:loginExt - inSession(" + this.inSession + ")", provider, token);
+                Log.trace("TradeDirect:loginExt - inSession(" + this.inSession + ")", provider, uid);
 
             conn = getConn();
             PreparedStatement stmt = getStatement(conn, getExternalAuthSQL);
             stmt.setString(1, provider.name());
-            stmt.setString(2, token);
+            stmt.setString(2, uid);
+
 
             ResultSet rs = stmt.executeQuery();
             if (!rs.next()) {
-                Log.error("TradeDirect:login -- failure to find external auth for" + provider + ", "+token);
-                throw new javax.ejb.FinderException("Cannot find external auth for" + provider + ", "+token);
+                Log.error("TradeDirect:login -- failure to find external auth for" + provider + ", "+uid);
+                throw new javax.ejb.FinderException("Cannot find external auth for" + provider + ", "+uid);
             }
 
             String userId = rs.getString("profile_userid");
@@ -1439,6 +1441,16 @@ public class TradeJEEDirect implements TradeServices, TradeDBServices {
             rs = stmt.executeQuery();
 
             accountData = getAccountDataFromResultSet(rs);
+
+            stmt.close();
+
+            stmt = getStatement(conn, getAccountProfileSQL);
+            stmt.setString(1, userId);
+            rs = stmt.executeQuery();
+
+            profileData = getAccountProfileDataFromResultSet(rs);
+
+            accountData.setProfile(profileData);
 
             stmt.close();
 
@@ -1882,8 +1894,9 @@ public class TradeJEEDirect implements TradeServices, TradeDBServices {
             PreparedStatement stmt = getStatement(conn, createExternalAuthSQL);
 
             stmt.setString(1, externalAuth.getExternalAuthKey().getProvider().name());
-            stmt.setString(2, externalAuth.getExternalAuthKey().getToken());
-            stmt.setString(3, userID);
+            stmt.setString(2, externalAuth.getExternalAuthKey().getUid());
+            stmt.setString(3, externalAuth.getToken());
+            stmt.setString(4, userID);
             stmt.executeUpdate();
             stmt.close();
 
@@ -2007,8 +2020,8 @@ public class TradeJEEDirect implements TradeServices, TradeDBServices {
             + "VALUES (  ?  ,  ?  ,  ?  ,  ?  ,  ?  ,  ?  ,  ?  , ? , ? , ?)";
 
     private static final String createExternalAuthSQL =
-            "insert into externalauthejb " + "( provider, token, profile_userid ) "
-                    + "VALUES (  ?  ,  ?  ,  ?  )";
+            "insert into externalauthejb " + "( provider, uid, token, profile_userid ) "
+                    + "VALUES (  ?  ,  ?  ,  ?  ,  ?  )";
 
     private static final String removeHoldingSQL = "delete from holdingejb where holdingid = ?";
 
@@ -2095,7 +2108,7 @@ public class TradeJEEDirect implements TradeServices, TradeDBServices {
         "update quoteejb set " + "price = ?, change1 = ? - open1, volume = ? " + "where symbol = ?";
 
     private final static String getExternalAuthSQL =
-            "select * from externalauthejb ea where ea.provider = ? and ea.token = ?";
+            "select * from externalauthejb ea where ea.provider = ? and ea.uid = ?";
 
 
     private static boolean initialized = false;

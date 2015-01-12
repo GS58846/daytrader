@@ -517,11 +517,11 @@ public class TradeAction implements TradeServices {
     }
 
     @Override
-    public AccountDataBean loginExt(ExternalAuthProvider provider, String token) throws Exception, RemoteException {
+    public AccountDataBean loginExt(ExternalAuthProvider provider, String uid) throws Exception, RemoteException {
         if (Log.doActionTrace())
-            Log.trace("TradeAction:loginExt", provider, token);
+            Log.trace("TradeAction:loginExt", provider, uid);
         AccountDataBean accountData;
-        accountData = trade.loginExt(provider, token);
+        accountData = trade.loginExt(provider, uid);
         return accountData;
     }
 

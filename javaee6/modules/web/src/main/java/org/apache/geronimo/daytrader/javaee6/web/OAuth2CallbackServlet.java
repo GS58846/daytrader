@@ -75,12 +75,13 @@ public class OAuth2CallbackServlet extends HttpServlet {
             //Save the user details somewhere or associate it with
             sess.setAttribute("name", profile.getString("name"));
             sess.setAttribute("email", profile.getString("email"));
-            sess.setAttribute("id", profile.getString("id"));
+
+            String uid = profile.getString("id");
 
             try {
                 //req.getRequestDispatcher("app").forward(req, resp);
                 resp.getWriter().println("<script>");
-                resp.getWriter().println("window.opener.location.href = 'app?action="+req.getParameter("state")+"&provider="+ ExternalAuthProvider.GOOGLE.name() +"&token="+token.getToken()+"';");
+                resp.getWriter().println("window.opener.location.href = 'app?action="+req.getParameter("state")+"&provider="+ ExternalAuthProvider.GOOGLE.name() +"&token="+token.getToken()+"&uid="+uid+"';");
                 resp.getWriter().println("window.close();");
                 resp.getWriter().println("</script>");
             } catch (IOException e) {

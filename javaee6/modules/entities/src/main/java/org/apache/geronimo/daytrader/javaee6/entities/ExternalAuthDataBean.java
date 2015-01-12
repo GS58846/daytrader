@@ -11,6 +11,9 @@ public class ExternalAuthDataBean implements Serializable {
     @EmbeddedId
     private ExternalAuthKey externalAuthKey;
 
+    @Column(name="TOKEN")
+    private String token;
+
     @ManyToOne(fetch= FetchType.LAZY)
     @JoinColumn(name="PROFILE_USERID")
     private AccountProfileDataBean profile;
@@ -25,6 +28,14 @@ public class ExternalAuthDataBean implements Serializable {
 
     public void setExternalAuthKey(ExternalAuthKey externalAuthKey) {
         this.externalAuthKey = externalAuthKey;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public AccountProfileDataBean getProfile() {
@@ -57,6 +68,7 @@ public class ExternalAuthDataBean implements Serializable {
     public String toString() {
         return "ExternalAuthDataBean{" +
                 "externalAuthKey=" + externalAuthKey +
+                ", token='" + token + '\'' +
                 ", profile=" + profile +
                 '}';
     }

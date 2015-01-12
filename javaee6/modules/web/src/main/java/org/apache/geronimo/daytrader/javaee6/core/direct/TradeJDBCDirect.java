@@ -1255,7 +1255,7 @@ public class TradeJDBCDirect implements TradeServices, TradeDBServices {
     }
 
     @Override
-    public AccountDataBean loginExt(ExternalAuthProvider provider, String token) throws Exception, RemoteException {
+    public AccountDataBean loginExt(ExternalAuthProvider provider, String uid) throws Exception, RemoteException {
         throw new UnsupportedOperationException("External Logins are not implemented.");
     }
 

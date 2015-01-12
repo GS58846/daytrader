@@ -238,10 +238,10 @@ public interface TradeServices extends Remote {
      * Attempt to authenticate and login a user with the given external auth
      *
      * @param provider the external authentication provider
-     * @param token the authentication token
+     * @param uid the external uid
      * @return User account data in AccountDataBean
      */
-    public AccountDataBean loginExt(ExternalAuthProvider provider, String token) throws Exception, RemoteException;
+    public AccountDataBean loginExt(ExternalAuthProvider provider, String uid) throws Exception, RemoteException;
 
     /**
      * Logout the given user

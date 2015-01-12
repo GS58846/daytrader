@@ -564,21 +564,21 @@ public class TradeSLSBBean implements TradeSLSBRemote, TradeSLSBLocal {
     }
 
     @Override
-    public AccountDataBean loginExt(ExternalAuthProvider provider, String token) throws Exception, RemoteException {
-        ExternalAuthDataBean externalAuth = entityManager.find(ExternalAuthDataBean.class, new ExternalAuthKey(provider, token));
+    public AccountDataBean loginExt(ExternalAuthProvider provider, String uid) throws Exception, RemoteException {
+        ExternalAuthDataBean externalAuth = entityManager.find(ExternalAuthDataBean.class, new ExternalAuthKey(provider, uid));
 
         if (externalAuth == null) {
-            throw new EJBException("No such token: " + provider + ", " + token);
+            throw new EJBException("No such token: " + provider + ", " + uid);
         }
         entityManager.merge(externalAuth);
         AccountProfileDataBean profile = externalAuth.getProfile();
         AccountDataBean account = profile.getAccount();
 
         if (Log.doTrace())
-            Log.trace("TradeSLSBBean:loginExt", provider, token);
-        account.login(provider, token);
+            Log.trace("TradeSLSBBean:loginExt", provider, uid);
+        account.login(provider, uid);
         if (Log.doTrace())
-            Log.trace("TradeSLSBBean:loginExt(" + provider + "," + token + ") success" + account);
+            Log.trace("TradeSLSBBean:loginExt(" + provider + "," + uid + ") success" + account);
 
         return account;
     }

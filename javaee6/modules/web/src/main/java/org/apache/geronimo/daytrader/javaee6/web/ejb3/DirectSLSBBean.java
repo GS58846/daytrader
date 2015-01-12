@@ -115,8 +115,8 @@ public class DirectSLSBBean implements DirectSLSBRemote, DirectSLSBLocal {
     }
 
     @Override
-    public AccountDataBean loginExt(ExternalAuthProvider provider, String token) throws Exception, RemoteException {
-        return (new TradeJEEDirect(true)).loginExt(provider, token);
+    public AccountDataBean loginExt(ExternalAuthProvider provider, String uid) throws Exception, RemoteException {
+        return (new TradeJEEDirect(true)).loginExt(provider, uid);
     }
 
     public void logout(String userID) throws Exception {

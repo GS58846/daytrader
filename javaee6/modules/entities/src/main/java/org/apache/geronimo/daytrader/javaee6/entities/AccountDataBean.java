@@ -300,13 +300,13 @@ public class AccountDataBean implements Serializable {
         setLoginCount(getLoginCount() + 1);
     }
 
-    public void login(ExternalAuthProvider provider, String token) {
+    public void login(ExternalAuthProvider provider, String uid) {
         AccountProfileDataBean profile = getProfile();
         boolean tokenMatches = false;
         if(profile != null) {
             for (ExternalAuthDataBean externalAuth : profile.getExternalAuths()) {
                 if(externalAuth.getExternalAuthKey().getProvider() == provider &&
-                        externalAuth.getExternalAuthKey().getToken().equals(token)) {
+                        externalAuth.getExternalAuthKey().getUid().equals(uid)) {
                     tokenMatches = true;
                     break;
                 }
@@ -315,7 +315,7 @@ public class AccountDataBean implements Serializable {
         if (!tokenMatches) {
             String error = "AccountBean:Login failure for account: " + getAccountID() +
                     ((profile == null) ? "null AccountProfile" :
-                            "\n\tIncorrect token-->" + provider + ":" + token);
+                            "\n\tIncorrect token-->" + provider + ":" + uid);
             throw new RuntimeException(error);
 
         }
